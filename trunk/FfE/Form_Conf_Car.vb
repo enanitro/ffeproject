@@ -3,16 +3,13 @@
 
     Private Sub CarBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CarBindingNavigatorSaveItem.Click
         Try
-            If NameTextBox.Text = "" Or License_plateTextBox.Text = "" Then
-                MessageBox.Show("Car name and License plate ", "Car configuration error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Else
-                Me.Validate()
-                Me.CarBindingSource.EndEdit()
-                Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
-                CarDataGridView.Sort(CarDataGridView.Columns.Item(0), _
-                                    System.ComponentModel.ListSortDirection.Ascending)
-                rows = CarDataGridView.Rows.Count
-            End If
+            Me.Validate()
+            Me.CarBindingSource.EndEdit()
+            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Ffe_databaseDataSet.car.AcceptChanges()
+            CarDataGridView.Sort(CarDataGridView.Columns.Item(0), _
+                                System.ComponentModel.ListSortDirection.Ascending)
+            rows = CarDataGridView.Rows.Count
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -22,6 +19,7 @@
         Try
             If Me.Ffe_databaseDataSet.HasChanges() Or rows <> CarDataGridView.Rows.Count Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
                     Me.Validate()
                     Me.CarBindingSource.EndEdit()
                     Me.CarTableAdapter.Update(Me.Ffe_databaseDataSet.car)
@@ -108,5 +106,6 @@
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 End Class
