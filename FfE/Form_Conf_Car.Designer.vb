@@ -57,6 +57,7 @@ Partial Class Form_Conf_Car
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         NameLabel = New System.Windows.Forms.Label
@@ -70,6 +71,7 @@ Partial Class Form_Conf_Car
         Me.Panel1.SuspendLayout()
         CType(Me.PhotoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NameLabel
@@ -387,6 +389,11 @@ Partial Class Form_Conf_Car
         '
         Me.OpenFileDialog.FileName = "OpenFileDialog"
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'CarTableAdapter
         '
         Me.CarTableAdapter.ClearBeforeFill = True
@@ -424,6 +431,7 @@ Partial Class Form_Conf_Car
         Me.Panel1.PerformLayout()
         CType(Me.PhotoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -458,5 +466,6 @@ Partial Class Form_Conf_Car
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 
 End Class
