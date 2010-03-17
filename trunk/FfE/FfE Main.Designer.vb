@@ -30,7 +30,6 @@ Partial Class FfE_Main
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.DriveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.HistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.UserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.CarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -78,7 +77,7 @@ Partial Class FfE_Main
         '
         'DriveToolStripMenuItem
         '
-        Me.DriveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.HistoryToolStripMenuItem})
+        Me.DriveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem})
         Me.DriveToolStripMenuItem.Name = "DriveToolStripMenuItem"
         Me.DriveToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.DriveToolStripMenuItem.Text = "Drive"
@@ -86,14 +85,8 @@ Partial Class FfE_Main
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NewToolStripMenuItem.Text = "View"
-        '
-        'HistoryToolStripMenuItem
-        '
-        Me.HistoryToolStripMenuItem.Name = "HistoryToolStripMenuItem"
-        Me.HistoryToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.HistoryToolStripMenuItem.Text = "History"
         '
         'OptionsToolStripMenuItem
         '
@@ -237,7 +230,6 @@ Partial Class FfE_Main
     Public WithEvents StatusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents DriveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents HistoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConnectionToolStripMenuItem As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ConnectionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MeasureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
