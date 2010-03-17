@@ -428,9 +428,6 @@ Public Class Form_drive
                 DriveBindingNavigator.Items(3).Visible = True
                 DriveBindingNavigator.Items(3).PerformClick()
                 DriveBindingNavigator.Items(3).Visible = False
-                Me.Validate()
-                Me.DriveBindingSource.EndEdit()
-                Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
                 rows = Ffe_databaseDataSet.drive.Count
                 If rows = 0 Then Drive_idLabel1.Visible = False
             End If
