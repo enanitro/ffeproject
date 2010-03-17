@@ -6,6 +6,7 @@
             Me.Validate()
             Me.Usage_typeBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Ffe_databaseDataSet.usage_type.AcceptChanges()
             Usage_typeDataGridView.Sort(Usage_typeDataGridView.Columns.Item(0), _
                                                       System.ComponentModel.ListSortDirection.Ascending)
             rows = Usage_typeDataGridView.Rows.Count
