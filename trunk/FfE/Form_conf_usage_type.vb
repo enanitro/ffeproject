@@ -47,11 +47,7 @@
                 Usage_typeBindingNavigator.Items(3).Visible = True
                 Usage_typeBindingNavigator.Items(3).PerformClick()
                 Usage_typeBindingNavigator.Items(3).Visible = False
-                Me.Validate()
-                Me.Usage_typeBindingSource.EndEdit()
-                Me.Usage_typeTableAdapter.Update(Me.Ffe_databaseDataSet.usage_type)
-                Usage_typeDataGridView.Sort(Usage_typeDataGridView.Columns.Item(0), _
-                                          System.ComponentModel.ListSortDirection.Ascending)
+ 
                 rows = Usage_typeDataGridView.Rows.Count
             End If
         Catch ex As Exception
