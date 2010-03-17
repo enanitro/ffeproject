@@ -6,6 +6,7 @@
             Me.Validate()
             Me.MeasureBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Ffe_databaseDataSet.measure.AcceptChanges()
             MeasureDataGridView.Sort(MeasureDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
             rows = MeasureDataGridView.Rows.Count

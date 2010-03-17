@@ -264,6 +264,7 @@ Public Class Form_drive
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
             Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet)
+            Ffe_databaseDataSet.drive.AcceptChanges()
             DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
 

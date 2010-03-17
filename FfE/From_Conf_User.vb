@@ -6,6 +6,7 @@
             Me.Validate()
             Me.UserBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Ffe_databaseDataSet.user.AcceptChanges()
             UserDataGridView.Sort(UserDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
             rows = UserDataGridView.Rows.Count
