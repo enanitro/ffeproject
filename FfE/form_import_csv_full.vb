@@ -77,7 +77,7 @@ Public Class form_import_csv_full
             Panel4.Visible = True
             logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
             TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
-            GroupBox_fluke.Enabled = False
+            'GroupBox_CANBUS.Enabled = False
         End If
     End Sub
 
