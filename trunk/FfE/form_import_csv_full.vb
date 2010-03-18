@@ -74,10 +74,10 @@ Public Class form_import_csv_full
 
         If path_canbus <> "" And GroupBox_CANBUS.Enabled _
         And CheckedListBox4.CheckedItems.Count <> 0 Then
-            'Panel3.Visible = True
-            'logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
-            'textbox4, textbox11, textbox12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
-            'GroupBox_fluke.Enabled = False
+            Panel4.Visible = True
+            logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
+            TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
+            GroupBox_fluke.Enabled = False
         End If
     End Sub
 
@@ -135,7 +135,7 @@ Public Class form_import_csv_full
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
         Dim logger As New logger
         logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
-        'id_logger = 3
+        'id_logger = 4
         path_canbus = logger.logger_dialog(OpenFileDialog, CheckedListBox4, FfE_Main.id_canbus, _
                                            TextBox4, long_canbus, id_measure_canbus)
     End Sub
