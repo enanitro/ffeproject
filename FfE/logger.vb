@@ -31,6 +31,8 @@ Public Class logger
             Else
                 If id = FfE_Main.id_fluke Then
                     analyze_logger_fluke(path, list, text, id, long_file, measure)
+                ElseIf id = FfE_Main.id_canbus Then
+                    analyze_logger_canbus(path, list, text, id, long_file, measure)
                 End If
             End If
         End If
@@ -140,7 +142,8 @@ Public Class logger
 
             'introducir los canales en checklistbox
             For i = 4 To datos1.Length - 2
-                name = "CH" & (i - 3) & " (" & datos1(i) & ")"
+                'name = "CH" & (i - 3) & " (" & datos1(i) & ")"
+                name = datos1(i)
                 list.Items.Add(name)
             Next
             Array.Resize(measure, list.Items.Count)
@@ -245,6 +248,58 @@ Public Class logger
 
             'escribo cabecera
             text.Text += "Total data points: " & long_file
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'analisis del archivo cvs del logger CANBUS
+    Public Sub analyze_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
+                                    ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
+        Dim fichero As New System.IO.StreamReader(path)
+        Dim linea1, linea2, name As String
+        Dim datos1(), datos2() As String
+        Dim interval As String = ""
+        Dim i, st, ft As Integer
+
+        Try
+            'leer cabecera, hacer comprobaciones, mostrarla por pantalla
+            linea1 = fichero.ReadLine
+            datos1 = linea1.Split(",")
+            'st = datos1(0).IndexOf("[")
+            'ft = datos1(0).IndexOf("]")
+            interval = datos1(0)
+
+            'introducir los canales en checklistbox
+            For i = 1 To datos1.Length - 1
+                'name = "CH" & (i) & " (" & datos1(i) & ")"
+                name = datos1(i)
+                list.Items.Add(name)
+            Next
+            Array.Resize(measure, list.Items.Count)
+
+            linea1 = fichero.ReadLine
+            datos1 = linea1.Split(",")
+
+            'contamos el numero de registros
+            i = 1
+            Do
+                linea2 = fichero.ReadLine
+                If linea2 <> Nothing Then
+                    datos2 = linea2.Split(",")
+                    datos2.CopyTo(datos1, 0)
+                    i += 1
+                End If
+            Loop Until linea2 Is Nothing
+
+            'asigno la longitud real del archivo
+            long_file = i
+
+            'escribo cabecera
+            text.Text = "Columbus GPS" & vbCrLf & _
+                        "Sampling interval: " & interval & " (trigger)" & _
+                        "Total data points: " & i
+         
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -431,6 +486,64 @@ Public Class logger
         End Try
     End Sub
 
+    'inserta los datos del fichero en la tabla data (logger CANBUS)
+    Public Sub insert_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
+                                    ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
+                                    ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
+                                    ByVal measure() As Integer)
+        Dim fichero As New System.IO.StreamReader(path)
+        Dim linea, aux, val As String
+        Dim datos() As String
+        Dim num_lines As Integer = 0
+        Dim clock As Integer = 1
+        Dim value As Double
+
+        Try
+            'leo la primera linea que pertenece a la cabecera
+            linea = fichero.ReadLine
+
+            Dim ins As New insert_Data
+            ins.init_string()
+            clock = 0
+
+            config_progressbar(bar, long_file, list)
+
+            Do
+                linea = fichero.ReadLine
+                If linea <> Nothing Then
+                    Application.DoEvents()
+                    datos = linea.Split(",")
+
+                    For i = 0 To list.CheckedIndices.Count - 1
+                        num_lines += 1
+                        clock += 1
+                        val = ""
+                        'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                        val = datos(list.CheckedIndices.Item(i) + 1) '.Replace(".", ",")
+
+                        If val <> "" Then
+                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
+                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            & "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
+                            & val & ")"
+                            ins.set_string(aux)
+                        End If
+                    Next
+                    If clock > 1000 Then
+                        ins.insert_into_string()
+                        ins.init_string()
+                        clock = 1
+                    End If
+                    progressbar(num_lines, bar, percent, n_data)
+                End If
+            Loop Until linea Is Nothing
+
+            ins.insert_into_string()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
                             ByRef path As String, ByRef long_file As Integer)
         panel.Visible = False
@@ -451,11 +564,34 @@ Public Class logger
     End Function
 
     Function make_time(ByVal time As String) As String
-        Dim hh, nn, ss As String
+        Dim hh, mm, ss As String
         hh = time(0) & time(1)
-        nn = time(2) & time(3)
+        mm = time(2) & time(3)
         ss = time(4) & time(5)
-        make_time = hh & ":" & nn & ":" & ss
+        make_time = hh & ":" & mm & ":" & ss
+    End Function
+
+    Function format_time(ByVal time As String, ByVal unit As Integer)
+        Dim res As String
+        Dim h, m, s As Integer
+        h = m = s = 0
+        s = CType(time, Integer)
+        s = s / unit
+
+        Do While (s > 60)
+            s = s - 60
+            m += 1
+            If m > 60 Then
+                Do While (m > 60)
+                    m = m - 60
+                    h += 1
+                Loop
+            End If
+        Loop
+
+        res = h & ":" & m & ":" & s
+
+        Return res
     End Function
 
     'configuracion del progressbar y labels que le acompañan
