@@ -419,6 +419,70 @@ Public Class Form_drive
         Me.Data_fullTableAdapter.FillBydatafull _
         (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_graphtec)
         grid_configuration(Data_fullDataGridView)
+        data_summary(Label19.Text, Label20.Text, Label21.Text, Label22.Text, Label23.Text)
+    End Sub
+
+
+    Private Sub data_summary(ByRef graphtec As String, ByRef gps As String, ByRef fluke As String, _
+                             ByRef canbus As String, ByRef total As String)
+        Dim x, y, tot_p, tot_ch As Integer
+        tot_p = tot_ch = x = y = 0
+        data_points_channels(x, y, FfE_Main.id_graphtec)
+        tot_p += x
+        tot_ch += y
+        graphtec = x & " data points" & " (" & y & " channels)"
+        x = y = 0
+        data_points_channels(x, y, FfE_Main.id_gps)
+        tot_p += x
+        tot_ch += y
+        gps = x & " data points" & " (" & y & " channels)"
+        x = y = 0
+        data_points_channels(x, y, FfE_Main.id_fluke)
+        tot_p += x
+        tot_ch += y
+        fluke = x & " data points" & " (" & y & " channels)"
+        x = y = 0
+        data_points_channels(x, y, FfE_Main.id_canbus)
+        tot_p += x
+        tot_ch += y
+        canbus = x & " data points" & " (" & y & " channels)"
+        x = y = 0
+        total = tot_p & " data points" & " (" & tot_ch & " channels)"
+    End Sub
+
+    Private Sub data_points_channels(ByRef points As Integer, ByRef channels As Integer, ByVal logger As Integer)
+        execute_query("select count(*) from data where drive_id = " & Drive_idLabel1.Text _
+                      & " and logger_id = " & logger, points)
+        execute_query("select count(distinct data_id) from data where drive_id = " & Drive_idLabel1.Text _
+                      & " and logger_id = " & logger, channels)
+    End Sub
+
+    Private Sub execute_query(ByVal sql As String, ByRef res As Integer)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            ' Pasar la consulta sql y la conexión al Sql Command
+            cmd.Connection = cn
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+            query.Read()
+            res = query.GetString(0)
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
     End Sub
 
 
@@ -463,7 +527,4 @@ Public Class Form_drive
         End Try
     End Sub
 
-    Private Sub Drive_idLabel1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.Click
-
-    End Sub
 End Class

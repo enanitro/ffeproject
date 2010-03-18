@@ -117,6 +117,16 @@ Partial Class Form_drive
         Me.Button1 = New System.Windows.Forms.Button
         Me.btn_import = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.Label23 = New System.Windows.Forms.Label
+        Me.Label22 = New System.Windows.Forms.Label
+        Me.Label21 = New System.Windows.Forms.Label
+        Me.Label20 = New System.Windows.Forms.Label
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.Label16 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.Label14 = New System.Windows.Forms.Label
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.TabPage2 = New System.Windows.Forms.TabPage
@@ -185,6 +195,7 @@ Partial Class Form_drive
         CType(Me.UsagetypeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -1127,6 +1138,16 @@ Partial Class Form_drive
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label23)
+        Me.GroupBox1.Controls.Add(Me.Label22)
+        Me.GroupBox1.Controls.Add(Me.Label21)
+        Me.GroupBox1.Controls.Add(Me.Label20)
+        Me.GroupBox1.Controls.Add(Me.Label19)
+        Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.Label17)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox1.Name = "GroupBox1"
@@ -1134,6 +1155,95 @@ Partial Class Form_drive
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data summary"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label23.Location = New System.Drawing.Point(147, 119)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(0, 18)
+        Me.Label23.TabIndex = 9
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(147, 96)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(0, 15)
+        Me.Label22.TabIndex = 8
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(147, 72)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(0, 15)
+        Me.Label21.TabIndex = 7
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(147, 50)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(0, 15)
+        Me.Label20.TabIndex = 6
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(147, 27)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(0, 15)
+        Me.Label19.TabIndex = 5
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label18.Location = New System.Drawing.Point(87, 119)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(51, 18)
+        Me.Label18.TabIndex = 4
+        Me.Label18.Text = "Total:"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(65, 96)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(71, 15)
+        Me.Label17.TabIndex = 3
+        Me.Label17.Text = "CAN-BUS:"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(90, 73)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(46, 15)
+        Me.Label16.TabIndex = 2
+        Me.Label16.Text = "Fluke:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(29, 50)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(107, 15)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "Columbus GPS:"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(21, 27)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(115, 15)
+        Me.Label14.TabIndex = 0
+        Me.Label14.Text = "Graphtec GL800:"
         '
         'GroupBox3
         '
@@ -1499,6 +1609,8 @@ Partial Class Form_drive
         CType(Me.UsagetypeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
@@ -1611,4 +1723,14 @@ Partial Class Form_drive
     Friend WithEvents DataGridViewTextBoxColumn10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
 End Class
