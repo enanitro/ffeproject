@@ -285,6 +285,7 @@ Partial Class form_import_csv_full
         '
         'ProgressBar4
         '
+        Me.ProgressBar4.ForeColor = System.Drawing.SystemColors.GrayText
         resources.ApplyResources(Me.ProgressBar4, "ProgressBar4")
         Me.ProgressBar4.Name = "ProgressBar4"
         '

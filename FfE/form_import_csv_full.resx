@@ -178,7 +178,7 @@
     <value>True</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 10</value>
+    <value>95, 10</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
@@ -204,17 +204,17 @@
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 62</value>
+    <value>27, 62</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Label6</value>
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -232,7 +232,7 @@
     <value>18, 433</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 89</value>
+    <value>246, 100</value>
   </data>
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -261,8 +261,8 @@
   <data name="Button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCQAA
-        CwkBEvpHPgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -425,7 +425,7 @@
     <value>22, 12</value>
   </data>
   <data name="GroupBox_graphtec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 539</value>
+    <value>281, 547</value>
   </data>
   <data name="GroupBox_graphtec.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -503,7 +503,7 @@
     <value>True</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 10</value>
+    <value>95, 10</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
@@ -529,17 +529,17 @@
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label8.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 62</value>
+    <value>27, 62</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Label8</value>
   </data>
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
@@ -557,7 +557,7 @@
     <value>19, 433</value>
   </data>
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 89</value>
+    <value>245, 100</value>
   </data>
   <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -659,7 +659,7 @@
     <value>318, 12</value>
   </data>
   <data name="GroupBox_columbusGPS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 539</value>
+    <value>281, 547</value>
   </data>
   <data name="GroupBox_columbusGPS.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -737,7 +737,7 @@
     <value>True</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 10</value>
+    <value>95, 10</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
@@ -763,17 +763,17 @@
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 62</value>
+    <value>27, 62</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="Label10.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Label10</value>
   </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
@@ -791,7 +791,7 @@
     <value>18, 433</value>
   </data>
   <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 89</value>
+    <value>245, 100</value>
   </data>
   <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -817,8 +817,8 @@
   <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCQAA
-        CwkBEvpHPgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -950,8 +950,8 @@
   <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCQAA
-        CwkBEvpHPgAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT
@@ -1057,7 +1057,7 @@
     <value>614, 12</value>
   </data>
   <data name="GroupBox_fluke.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 539</value>
+    <value>281, 547</value>
   </data>
   <data name="GroupBox_fluke.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1162,7 +1162,7 @@
     <value>True</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 10</value>
+    <value>95, 10</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 15</value>
@@ -1188,17 +1188,17 @@
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label12.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 62</value>
+    <value>30, 62</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="Label12.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Label12</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -1216,7 +1216,7 @@
     <value>18, 433</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 89</value>
+    <value>244, 100</value>
   </data>
   <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1242,8 +1242,8 @@
   <data name="Button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCQAA
-        CwkBEvpHPgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -1375,8 +1375,8 @@
   <data name="Button9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCQAA
-        CwkBEvpHPgAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT
@@ -1482,7 +1482,7 @@
     <value>915, 12</value>
   </data>
   <data name="GroupBox_CANBUS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 539</value>
+    <value>281, 547</value>
   </data>
   <data name="GroupBox_CANBUS.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>

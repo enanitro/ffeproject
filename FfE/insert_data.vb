@@ -30,4 +30,12 @@ Public Class insert_Data
         insert_string += cadena & ","
     End Sub
 
+    Function is_empty() As Boolean
+        If insert_string = "insert high_priority into data (data_id, drive_id, logger_id, measure_id, time, value) VALUES " Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 End Class

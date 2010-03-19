@@ -314,7 +314,8 @@ Public Class logger
         Dim linea, aux As String
         Dim datos() As String
         Dim num_lines As Integer = 0
-        Dim clock As Integer = 1
+        Dim data_points As Integer = 0
+        Dim clock As Integer = 0
         Dim value As Double
 
         Try
@@ -335,16 +336,19 @@ Public Class logger
                     datos = linea.Split(",")
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
-                        clock += 1
+
                         'En caso de que el valor sea numerico
                         If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                            data_points += 1
+                            clock += 1
+
                             aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
                             & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             & datos(list.CheckedIndices.Item(i) + 2) & ")"
                             ins.set_string(aux)
-                            progressbar(num_lines, bar, percent, n_data)
                         End If
+                        progressbar(num_lines, bar, percent)
                     Next
                     If clock > 1000 Then
                         ins.insert_into_string()
@@ -353,8 +357,10 @@ Public Class logger
                     End If
                 End If
             Loop Until linea Is Nothing
-
-            ins.insert_into_string()
+            If Not ins.is_empty Then
+                ins.insert_into_string()
+            End If
+            data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -369,7 +375,8 @@ Public Class logger
         Dim linea, aux, val As String
         Dim datos() As String
         Dim num_lines As Integer = 0
-        Dim clock As Integer = 1
+        Dim data_points As Integer = 0
+        Dim clock As Integer = 0
         Dim value As Double
 
         Try
@@ -378,7 +385,6 @@ Public Class logger
 
             Dim ins As New insert_Data
             ins.init_string()
-            clock = 0
 
             config_progressbar(bar, long_file, list)
 
@@ -390,7 +396,6 @@ Public Class logger
 
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
-                        clock += 1
                         'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
                         val = datos(list.CheckedIndices.Item(i) + 4) '.Replace(".", ",")
                         If val.Last = "N" Or val.Last = "E" Then
@@ -408,23 +413,29 @@ Public Class logger
                                 val = val.Remove(val.Count - 1)
                             Loop Until val(val.Count - 1) <> Nothing
                         End If
+                        If val <> "" Then
+                            data_points += 1
+                            clock += 1
 
-                        aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
-                        & measure(list.CheckedIndices.Item(i)) & "," _
-                        & "'" & FormatDateTime(make_time(datos(3)), DateFormat.LongTime) & "'" & "," _
-                        & val & ")"
-                        ins.set_string(aux)
+                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
+                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            & "'" & FormatDateTime(make_time(datos(3)), DateFormat.LongTime) & "'" & "," _
+                            & val & ")"
+                            ins.set_string(aux)
+                        End If
+                        progressbar(num_lines, bar, percent)
                     Next
                     If clock > 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
                     End If
-                    progressbar(num_lines, bar, percent, n_data)
                 End If
             Loop Until linea Is Nothing
-
-            ins.insert_into_string()
+            If Not ins.is_empty Then
+                ins.insert_into_string()
+            End If
+            data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -439,7 +450,8 @@ Public Class logger
         Dim linea, aux, val As String
         Dim datos() As String
         Dim num_lines As Integer = 0
-        Dim clock As Integer = 1
+        Dim data_points As Integer = 0
+        Dim clock As Integer = 0
         Dim value As Double
 
         Try
@@ -450,7 +462,6 @@ Public Class logger
 
             Dim ins As New insert_Data
             ins.init_string()
-            clock = 0
 
             config_progressbar(bar, long_file, list)
 
@@ -461,9 +472,11 @@ Public Class logger
                     datos = linea.Split(";")
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
-                        clock += 1
 
                         If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                            data_points += 1
+                            clock += 1
+
                             val = datos(list.CheckedIndices.Item(i) + 2).Replace(",", ".")
                             aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
                             & measure(list.CheckedIndices.Item(i)) & "," _
@@ -471,16 +484,19 @@ Public Class logger
                             & val & ")"
                             ins.set_string(aux)
                         End If
+                        progressbar(num_lines, bar, percent)
                     Next
                     If clock > 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
                     End If
-                    progressbar(num_lines, bar, percent, n_data)
                 End If
             Loop Until linea Is Nothing
-            ins.insert_into_string()
+            If Not ins.is_empty Then
+                ins.insert_into_string()
+            End If
+            data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -495,7 +511,8 @@ Public Class logger
         Dim linea, aux, val As String
         Dim datos() As String
         Dim num_lines As Integer = 0
-        Dim clock As Integer = 1
+        Dim data_points As Integer = 0
+        Dim clock As Integer = 0
         Dim value As Double
 
         Try
@@ -504,7 +521,6 @@ Public Class logger
 
             Dim ins As New insert_Data
             ins.init_string()
-            clock = 0
 
             config_progressbar(bar, long_file, list)
 
@@ -516,29 +532,34 @@ Public Class logger
 
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
-                        clock += 1
+
                         val = ""
                         'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
                         val = datos(list.CheckedIndices.Item(i) + 1) '.Replace(".", ",")
 
                         If val <> "" Then
+                            data_points += 1
+                            clock += 1
+
                             aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
                             & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
                         End If
+                        progressbar(num_lines, bar, percent)
                     Next
                     If clock > 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
                     End If
-                    progressbar(num_lines, bar, percent, n_data)
                 End If
             Loop Until linea Is Nothing
-
-            ins.insert_into_string()
+            If Not ins.is_empty Then
+                ins.insert_into_string()
+            End If
+            data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -601,13 +622,17 @@ Public Class logger
     End Sub
 
     'controla el objeto progressbar
-    Private Sub progressbar(ByVal val As Integer, ByRef bar As ProgressBar, ByRef percent As Label, ByRef n_data As Label)
+    Private Sub progressbar(ByVal val As Integer, ByRef bar As ProgressBar, ByRef percent As Label)
         bar.Value = val
 
         ' Visualizamos el porcentaje en el Label
         percent.Text = CLng((bar.Value * 100) / bar.Maximum) & " %"
-        n_data.Text = val & " of " & bar.Maximum & " data points"
         Application.DoEvents()
+    End Sub
+
+    Private Sub data_summary(ByVal val As Integer, ByRef n_data As Label, ByVal data_points As Integer)
+        n_data.Text = val & " data points were read" & vbCrLf & vbCrLf
+        n_data.Text += data_points & " data points were imported"
     End Sub
 
     Function get_logger_id(ByVal logger_name As String) As Integer

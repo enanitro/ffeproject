@@ -6,11 +6,12 @@ Public Class Form_drive
     Dim estado_car As Boolean = False
     Dim estado_importer As Boolean = False
     Dim binding_complete As Integer = 0
-    Private rows As Integer
+    Dim rows As Integer
+    Dim combo As Boolean = False
 
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
-            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Then
+            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     Me.Validate()
                     Me.DriveBindingSource.EndEdit()
@@ -47,6 +48,7 @@ Public Class Form_drive
                                       System.ComponentModel.ListSortDirection.Ascending)
 
             rows = DriveDataGridView.Rows.Count
+            combo = False
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -191,18 +193,21 @@ Public Class Form_drive
     Private Sub cmb_climate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_climate.SelectedIndexChanged
         If cmb_climate.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
             Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(2) = Me.cmb_climate.SelectedItem
+            combo = True
         End If
     End Sub
 
     Private Sub cmb_status_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_status.SelectedIndexChanged
         If cmb_status.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
             Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(1) = Me.cmb_status.SelectedItem
+            combo = True
         End If
     End Sub
 
     Private Sub cmb_drive_type_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_drive_type.SelectedIndexChanged
         If cmb_drive_type.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
             Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(9) = Me.cmb_drive_type.SelectedItem
+            combo = True
         End If
     End Sub
 
@@ -269,6 +274,7 @@ Public Class Form_drive
                                       System.ComponentModel.ListSortDirection.Ascending)
 
             rows = DriveDataGridView.Rows.Count
+            combo = False
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -328,6 +334,7 @@ Public Class Form_drive
     Private Sub DriveBindingSource_PositionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DriveBindingSource.PositionChanged
         'Mostrar datos en combo
         data_2_combo()
+        combo = False
     End Sub
 
     'Private Sub View_data_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles View_data.CellClick
@@ -426,27 +433,26 @@ Public Class Form_drive
     Private Sub data_summary(ByRef graphtec As String, ByRef gps As String, ByRef fluke As String, _
                              ByRef canbus As String, ByRef total As String)
         Dim x, y, tot_p, tot_ch As Integer
-        tot_p = tot_ch = x = y = 0
+        tot_ch = 0
+        tot_p = 0
+        x = 0
+        y = 0
         data_points_channels(x, y, FfE_Main.id_graphtec)
         tot_p += x
         tot_ch += y
         graphtec = x & " data points" & " (" & y & " channels)"
-        x = y = 0
         data_points_channels(x, y, FfE_Main.id_gps)
         tot_p += x
         tot_ch += y
         gps = x & " data points" & " (" & y & " channels)"
-        x = y = 0
         data_points_channels(x, y, FfE_Main.id_fluke)
         tot_p += x
         tot_ch += y
         fluke = x & " data points" & " (" & y & " channels)"
-        x = y = 0
         data_points_channels(x, y, FfE_Main.id_canbus)
         tot_p += x
         tot_ch += y
         canbus = x & " data points" & " (" & y & " channels)"
-        x = y = 0
         total = tot_p & " data points" & " (" & tot_ch & " channels)"
     End Sub
 
@@ -527,4 +533,63 @@ Public Class Form_drive
         End Try
     End Sub
 
+    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
+        Try
+            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Me.Validate()
+                    Me.DriveBindingSource.EndEdit()
+                    Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
+        Try
+            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Me.Validate()
+                    Me.DriveBindingSource.EndEdit()
+                    Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
+        Try
+            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Me.Validate()
+                    Me.DriveBindingSource.EndEdit()
+                    Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
+        Try
+            If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Me.Validate()
+                    Me.DriveBindingSource.EndEdit()
+                    Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub Drive_idLabel1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.Click
+
+    End Sub
 End Class
