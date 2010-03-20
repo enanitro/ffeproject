@@ -659,4 +659,30 @@ Public Class logger
         End Try
     End Function
 
+    Public Sub delete_rows(ByVal list As CheckedListBox, ByVal drive_id As Integer, ByVal logger_id As Integer)
+        Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
+        Try
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            Dim s As String
+            ' Pasar la consulta sql y la conexión al Sql Command   
+            Dim cmd As New MySqlCommand
+
+            For i = 0 To list.CheckedIndices.Count - 1
+
+                s = "delete from data where drive_id = " & drive_id & _
+                    " and logger_id = " & logger_id & _
+                    " and data_id = '" & list.CheckedItems.Item(i) & "';"
+                cmd.Connection = cn
+                cmd.CommandText = s
+                cmd.ExecuteNonQuery()
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
+    End Sub
+
 End Class

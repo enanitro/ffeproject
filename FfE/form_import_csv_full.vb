@@ -5,8 +5,8 @@ Public Class form_import_csv_full
     Public long_graphtec, long_gps, long_fluke, long_canbus, id_drive As Integer
     Public id_measure_graphtec(), id_measure_gps(), id_measure_fluke(), id_measure_canbus() As Integer
     Public path_graphtec, path_gps, path_fluke, path_canbus As String
+    Public abort As Boolean = False
     
-
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim logger As New logger
         logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
@@ -49,6 +49,7 @@ Public Class form_import_csv_full
         Dim logger As New logger
         Dim imp As Boolean = False
         Try
+            Button7.Enabled = False
             If path_graphtec <> "" And GroupBox_graphtec.Enabled _
             And CheckedListBox1.CheckedItems.Count <> 0 Then
                 Panel1.Visible = True
@@ -84,14 +85,23 @@ Public Class form_import_csv_full
                 'GroupBox_CANBUS.Enabled = False
                 imp = True
             End If
-            If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
+
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
-            logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
-            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
-            logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+            If abort = True Then
+                logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
+                logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
+                logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
+                logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+            Else
+                logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
+                logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
+                logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+                logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+                Button7.Enabled = True
+                MsgBox("Files were imported successfully", MsgBoxStyle.Information)
+            End If
         End Try
     End Sub
 
@@ -197,4 +207,14 @@ Public Class form_import_csv_full
         End Try
     End Function
 
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            If CheckedListBox1.Visible = True Then path_graphtec = ""
+            If CheckedListBox2.Visible = True Then path_gps = ""
+            If CheckedListBox3.Visible = True Then path_fluke = ""
+            If CheckedListBox4.Visible = True Then path_canbus = ""
+            abort = True
+            Throw New Exception("Import process aborted")
+        End If
+    End Sub
 End Class
