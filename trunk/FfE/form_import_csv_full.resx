@@ -153,6 +153,9 @@
   <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ProgressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 31</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 10</value>
@@ -206,6 +212,9 @@
   </data>
   <data name="Label6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 62</value>
@@ -261,8 +270,8 @@
   <data name="Button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
+        CwMBSY6M0gAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -339,6 +348,9 @@
         cc+fvyDXO1+QPOZqyZ24xDviDh9d7x87Avw/itYcb7P27vWApubMbA5ca/gM8YKuHm8HP4b7eY9/EgEB
         oWnTpj3Eu2J+nEETjan+r0g/Bod/SoAYRD0XdV0AF43p49T3epL7P9CdudUEX4AaAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="Button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 22</value>
@@ -397,6 +409,9 @@
   <data name="Button1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Calibri, 9.75pt, style=Bold</value>
   </data>
+  <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 22</value>
   </data>
@@ -443,7 +458,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox_graphtec.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="TextBox2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -478,6 +493,9 @@
   <data name="&gt;&gt;TextBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ProgressBar2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ProgressBar2.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 31</value>
   </data>
@@ -501,6 +519,9 @@
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 10</value>
@@ -531,6 +552,9 @@
   </data>
   <data name="Label8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 62</value>
@@ -579,6 +603,9 @@
   </data>
   <data name="Button3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Calibri, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 22</value>
@@ -631,6 +658,9 @@
   <data name="Button6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Calibri, 9.75pt, style=Bold</value>
   </data>
+  <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 22</value>
   </data>
@@ -677,7 +707,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox_columbusGPS.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="TextBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -712,6 +742,9 @@
   <data name="&gt;&gt;TextBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ProgressBar3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ProgressBar3.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 31</value>
   </data>
@@ -735,6 +768,9 @@
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 10</value>
@@ -765,6 +801,9 @@
   </data>
   <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 62</value>
@@ -817,8 +856,8 @@
   <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
+        CwMBSY6M0gAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -895,6 +934,9 @@
         cc+fvyDXO1+QPOZqyZ24xDviDh9d7x87Avw/itYcb7P27vWApubMbA5ca/gM8YKuHm8HP4b7eY9/EgEB
         oWnTpj3Eu2J+nEETjan+r0g/Bod/SoAYRD0XdV0AF43p49T3epL7P9CdudUEX4AaAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 22</value>
@@ -950,8 +992,8 @@
   <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
+        CwMBSY6M0gAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT
@@ -1029,6 +1071,9 @@
         IToAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 22</value>
   </data>
@@ -1075,35 +1120,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox_fluke.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="OpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="Button7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Calibri, 9.75pt, style=Bold</value>
-  </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 566</value>
-  </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 109</value>
-  </data>
-  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
-    <value>Button7</value>
-  </data>
-  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="TextBox4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
@@ -1137,6 +1158,9 @@
   <data name="&gt;&gt;TextBox4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ProgressBar4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ProgressBar4.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 31</value>
   </data>
@@ -1160,6 +1184,9 @@
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 10</value>
@@ -1190,6 +1217,9 @@
   </data>
   <data name="Label12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 62</value>
@@ -1242,8 +1272,8 @@
   <data name="Button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
+        CwMBSY6M0gAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -1321,6 +1351,9 @@
         oWnTpj3Eu2J+nEETjan+r0g/Bod/SoAYRD0XdV0AF43p49T3epL7P9CdudUEX4AaAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="Button8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 22</value>
   </data>
@@ -1375,8 +1408,8 @@
   <data name="Button9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
+        CwMBSY6M0gAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT
@@ -1454,6 +1487,9 @@
         IToAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="Button9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button9.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 22</value>
   </data>
@@ -1500,7 +1536,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox_CANBUS.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Button10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Calibri, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>614, 565</value>
+  </data>
+  <data name="Button10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 109</value>
+  </data>
+  <data name="Button10.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;Button10.Name" xml:space="preserve">
+    <value>Button10</value>
+  </data>
+  <data name="&gt;&gt;Button10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="Button7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Calibri, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>472, 565</value>
+  </data>
+  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 109</value>
+  </data>
+  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
+    <value>Button7</value>
+  </data>
+  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1516,6 +1606,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1221, 687</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
