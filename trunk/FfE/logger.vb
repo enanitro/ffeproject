@@ -350,7 +350,7 @@ Public Class logger
                         End If
                         progressbar(num_lines, bar, percent)
                     Next
-                    If clock > 1000 Then
+                    If clock >= 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
@@ -425,7 +425,7 @@ Public Class logger
                         End If
                         progressbar(num_lines, bar, percent)
                     Next
-                    If clock > 1000 Then
+                    If clock >= 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
@@ -486,7 +486,7 @@ Public Class logger
                         End If
                         progressbar(num_lines, bar, percent)
                     Next
-                    If clock > 1000 Then
+                    If clock >= 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
@@ -549,7 +549,7 @@ Public Class logger
                         End If
                         progressbar(num_lines, bar, percent)
                     Next
-                    If clock > 1000 Then
+                    If clock >= 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
                         clock = 1
