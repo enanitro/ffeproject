@@ -142,7 +142,7 @@ Public Class logger
 
             'introducir los canales en checklistbox
             For i = 4 To datos1.Length - 2
-                'name = "CH" & (i - 3) & " (" & datos1(i) & ")"
+                'name = (i - 3) & " (" & datos1(i) & ")"
                 name = datos1(i)
                 list.Items.Add(name)
             Next
@@ -232,8 +232,10 @@ Public Class logger
             'introducir los canales en checklistbox
             For i = 2 To datos1.Length - 1
                 If datos2(i) <> "" Then
+                    'name = (i - 1) & " " & datos1(i) & " (" & datos2(i) & ")"
                     name = datos1(i) & " (" & datos2(i) & ")"
                 Else
+                    'name = (i - 1) & " " & datos1(i)
                     name = datos1(i)
                 End If
                 list.Items.Add(name)
@@ -272,7 +274,7 @@ Public Class logger
 
             'introducir los canales en checklistbox
             For i = 1 To datos1.Length - 1
-                'name = "CH" & (i) & " (" & datos1(i) & ")"
+                'name = i & " (" & datos1(i) & ")"
                 name = datos1(i)
                 list.Items.Add(name)
             Next
