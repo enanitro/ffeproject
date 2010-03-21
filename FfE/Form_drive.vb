@@ -723,44 +723,40 @@ Public Class Form_drive
             cmd.Connection = cn
 
             ' Pasar la consulta sql y la conexión al Sql Command
-            sql = "select count(distinct data_id) from data_full where drive_id = " & Drive_idLabel1.Text & _
-              " and logger_id = " & FfE_Main.id_canbus
-            execute_query(sql, distinct)
-            sql = "select distinct data_id, unit from data_full where drive_id = " & Drive_idLabel1.Text & _
-              " and logger_id = " & FfE_Main.id_canbus
-            cmd.CommandText = sql
-            query = cmd.ExecuteReader()
+            'sql = "select count(distinct data_id) from data_full where drive_id = " & Drive_idLabel1.Text & _
+            ' " and logger_id = " & FfE_Main.id_canbus
+            'execute_query(sql, distinct)
+            'sql = "select distinct data_id, unit from data_full where drive_id = " & Drive_idLabel1.Text & _
+            '  " and logger_id = " & FfE_Main.id_canbus
+            'cmd.CommandText = sql
+            'query = cmd.ExecuteReader()
 
-            res = "INDEX,TIME"
-            For i = 1 To distinct
-                query.Read()
-                res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
-            Next
+            res = "INDEX,TIME,CHANNEL,UNIT,VALUE"
+            'For i = 1 To distinct
+            'query.Read()
+            'res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
+            'Next
             res += vbCrLf
-            cn.Close()
+            'cn.Close()
 
-            cn.Open()
+            'cn.Open()
             sql = "select count(value) from data_full where drive_id = " & Drive_idLabel1.Text & _
               " and logger_id = " & FfE_Main.id_canbus & " order by data_index"
             execute_query(sql, count)
-            sql = "select time,value from data_full where drive_id = " & Drive_idLabel1.Text & _
+            sql = "select time,data_id,unit,value from data_full where drive_id = " & Drive_idLabel1.Text & _
               " and logger_id = " & FfE_Main.id_canbus & " order by data_index"
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
             i = 1
-            count = count / distinct
+            'count = count / distinct
             Label25.Text = "Exporting CAN-BUS logger"
             query.Read()
             Do While i <= count
-                res += i & "," & query.GetString(0)
-                For j = 1 To distinct
-                    If query.GetString(1) = i Then
-                        res += "," & query.GetString(1).Replace(",", ".")
-                    End If
-                    query.Read()
+                res += i & "," & query.GetString(0) & "," & query.GetString(1) & _
+                "," & query.GetString(2) & "," & query.GetString(3).Replace(",", ".")
+                query.Read()
 
-                Next
                 progressbar(i)
                 i += 1
                 res += vbCrLf
