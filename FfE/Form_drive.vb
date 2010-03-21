@@ -456,19 +456,20 @@ Public Class Form_drive
         total = tot_p & " data points" & " (" & tot_ch & " channels)"
     End Sub
 
-    Private Sub data_points_channels(ByRef points As Integer, ByRef channels As Integer, ByVal logger As Integer)
+    Private Sub data_points_channels(ByRef points As String, ByRef channels As String, ByVal logger As Integer)
         execute_query("select count(*) from data where drive_id = " & Drive_idLabel1.Text _
                       & " and logger_id = " & logger, points)
         execute_query("select count(distinct data_id) from data where drive_id = " & Drive_idLabel1.Text _
                       & " and logger_id = " & logger, channels)
     End Sub
 
-    Private Sub execute_query(ByVal sql As String, ByRef res As Integer)
+    Private Sub execute_query(ByVal sql As String, ByRef res As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
+        Dim text As String = ""
 
         Try
 
@@ -480,7 +481,7 @@ Public Class Form_drive
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
             query.Read()
-            res = query.GetString(0)
+            If query.HasRows() Then res = query.GetString(0)
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -535,6 +536,98 @@ Public Class Form_drive
 
     
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
-        SaveFileDialog.ShowDialog()
+        Try
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                head_csv_file(SaveFileDialog.FileName)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_graphtec)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_gps)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_fluke)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus)
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub head_csv_file(ByVal path As String)
+        Dim text As String
+        Dim sw As New System.IO.StreamWriter(path)
+        Text = "DRIVE ID: " & Drive_idLabel1.Text & vbCrLf & _
+                       "CAR: " & cmb_car.Text & vbCrLf & _
+                       "CLIMATE: " & cmb_climate.Text & vbCrLf & _
+                       "STATUS: " & cmb_status.Text & vbCrLf & _
+                       "DRIVE TYPE: " & cmb_drive_type.Text & vbCrLf & _
+                       "USAGE TYPE: " & cmb_usage.Text & vbCrLf & _
+                       "DRIVER: " & cmb_driver.Text & vbCrLf & _
+                       "IMPORTER: " & cmb_importer.Text & vbCrLf & _
+                       "DATE: " & date_driver.Text & vbCrLf & _
+                       "DESCRIPTION: " & txt_description.Text & vbCrLf & vbCrLf
+        sw.WriteLine(Text)
+        sw.Close()
+    End Sub
+
+    Private Sub logger_csv_file(ByVal path As String, ByVal logger As Integer)
+        Dim text, sql, res As String
+        Dim count As Integer
+        Dim sw As New System.IO.StreamWriter(path, True)
+
+        res = ""
+        sql = "select timestep from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & logger
+        execute_query(sql, res)
+        If res <> "" Then
+            text = "GRAPHTEC GL800" & vbCrLf & _
+                    Label19.Text & vbCrLf & _
+                    "TIME STEP: " & res & vbCrLf & vbCrLf
+            sw.WriteLine(text)
+
+            text = ""
+            res = ""
+            sql = "select data_id,unit,time,value from data_full where drive_id = " & Drive_idLabel1.Text & _
+                  " and logger_id = " & logger
+            execute_query_logger(sql, res)
+            sw.WriteLine(res)
+            
+        End If
+        sw.Close()
+
+    End Sub
+
+    Private Sub execute_query_logger(ByVal sql As String, ByRef res As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim text As String = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            ' Pasar la consulta sql y la conexión al Sql Command
+            text = "CHANNEL,UNIT,TIME,VALUE"
+
+            cmd.Connection = cn
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            Dim i As Integer = 0
+            Do While query.HasRows() And i < 4000
+                query.Read()
+                res += query.GetString(0) & "," & query.GetString(1) & "," & query.GetString(2) & "," & _
+                query.GetString(3).Replace(",", ".") & vbCrLf
+                i += 1
+            Loop
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
     End Sub
 End Class
