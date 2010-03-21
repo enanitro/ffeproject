@@ -95,13 +95,13 @@ Public Class form_import_csv_full
                 logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
                 logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
             Else
-                logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
-                logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
-                logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
-                logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
-                Button7.Enabled = True
                 MsgBox("Files were imported successfully", MsgBoxStyle.Information)
             End If
+            logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
+            logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
+            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+            logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+            Button7.Enabled = True
         End Try
     End Sub
 
@@ -208,13 +208,15 @@ Public Class form_import_csv_full
     End Function
 
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
-        If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            If CheckedListBox1.Visible = True Then path_graphtec = ""
-            If CheckedListBox2.Visible = True Then path_gps = ""
-            If CheckedListBox3.Visible = True Then path_fluke = ""
-            If CheckedListBox4.Visible = True Then path_canbus = ""
-            abort = True
-            Throw New Exception("Import process aborted")
+        If Button7.Enabled = False Then
+            If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                If CheckedListBox1.Visible = True Then path_graphtec = ""
+                If CheckedListBox2.Visible = True Then path_gps = ""
+                If CheckedListBox3.Visible = True Then path_fluke = ""
+                If CheckedListBox4.Visible = True Then path_canbus = ""
+                abort = True
+                Throw New Exception("Import process aborted")
+            End If
         End If
     End Sub
 End Class
