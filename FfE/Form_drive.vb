@@ -9,6 +9,7 @@ Public Class Form_drive
     Dim rows As Integer
     Dim combo As Boolean = False
 
+
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
             If Me.Ffe_databaseDataSet.HasChanges() Or rows <> DriveDataGridView.Rows.Count Or combo = True Then
@@ -539,88 +540,161 @@ Public Class Form_drive
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                export.Visible = True
                 head_csv_file(SaveFileDialog.FileName)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_graphtec)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_gps)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_fluke)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_graphtec, "GRAPHTEC GL800", Label19.Text)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_gps, "COLUMBUS GPS", Label20.Text)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_fluke, "FLUKE", Label21.Text)
+                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
+                MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
             End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            export.Visible = False
+        End Try
+    End Sub
+
+    'configuracion del progressbar y labels que le acompañan
+    Public Sub config_progressbar(ByVal max As Integer)
+        ProgressBar1.Minimum = 0
+        ProgressBar1.Maximum = max
+    End Sub
+
+    'controla el objeto progressbar
+    Public Sub progressbar(ByVal val As Integer)
+        ProgressBar1.Value = val
+
+        ' Visualizamos el porcentaje en el Label
+        Label24.Text = CLng((ProgressBar1.Value * 100) / ProgressBar1.Maximum) & " %"
+    End Sub
+
+    Private Sub calculate_max(ByRef max As Integer, ByVal logger_id As Integer)
+        Try
+            Dim points, channels As Integer
+            data_points_channels(points, channels, logger_id)
+            max = points / channels
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub head_csv_file(ByVal path As String)
-        Dim text As String
-        Dim sw As New System.IO.StreamWriter(path)
-        Text = "DRIVE ID: " & Drive_idLabel1.Text & vbCrLf & _
-                       "CAR: " & cmb_car.Text & vbCrLf & _
-                       "CLIMATE: " & cmb_climate.Text & vbCrLf & _
-                       "STATUS: " & cmb_status.Text & vbCrLf & _
-                       "DRIVE TYPE: " & cmb_drive_type.Text & vbCrLf & _
-                       "USAGE TYPE: " & cmb_usage.Text & vbCrLf & _
-                       "DRIVER: " & cmb_driver.Text & vbCrLf & _
-                       "IMPORTER: " & cmb_importer.Text & vbCrLf & _
-                       "DATE: " & date_driver.Text & vbCrLf & _
-                       "DESCRIPTION: " & txt_description.Text & vbCrLf & vbCrLf
-        sw.WriteLine(Text)
-        sw.Close()
-    End Sub
-
-    Private Sub logger_csv_file(ByVal path As String, ByVal logger As Integer)
-        Dim text, sql, res As String
-        Dim count As Integer
-        Dim sw As New System.IO.StreamWriter(path, True)
-
-        res = ""
-        sql = "select timestep from data_full where drive_id = " & Drive_idLabel1.Text & _
-              " and logger_id = " & logger
-        execute_query(sql, res)
-        If res <> "" Then
-            text = "GRAPHTEC GL800" & vbCrLf & _
-                    Label19.Text & vbCrLf & _
-                    "TIME STEP: " & res & vbCrLf & vbCrLf
+        Try
+            Dim text As String
+            Dim sw As New System.IO.StreamWriter(path)
+            text = "DRIVE ID: " & Drive_idLabel1.Text & vbCrLf & _
+                           "CAR: " & cmb_car.Text & vbCrLf & _
+                           "CLIMATE: " & cmb_climate.Text & vbCrLf & _
+                           "STATUS: " & cmb_status.Text & vbCrLf & _
+                           "DRIVE TYPE: " & cmb_drive_type.Text & vbCrLf & _
+                           "USAGE TYPE: " & cmb_usage.Text & vbCrLf & _
+                           "DRIVER: " & cmb_driver.Text & vbCrLf & _
+                           "IMPORTER: " & cmb_importer.Text & vbCrLf & _
+                           "DATE: " & date_driver.Text & vbCrLf & _
+                           "DESCRIPTION: " & txt_description.Text & vbCrLf & vbCrLf
             sw.WriteLine(text)
-
-            text = ""
-            res = ""
-            sql = "select data_id,unit,time,value from data_full where drive_id = " & Drive_idLabel1.Text & _
-                  " and logger_id = " & logger
-            execute_query_logger(sql, res)
-            sw.WriteLine(res)
-            
-        End If
-        sw.Close()
-
+            sw.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub execute_query_logger(ByVal sql As String, ByRef res As String)
+    Private Sub logger_csv_file(ByVal path As String, ByVal logger_id As Integer, _
+                                ByVal logger As String, ByVal points As String)
+        Try
+            Dim text, sql, res As String
+            Dim sw As New System.IO.StreamWriter(path, True)
+
+            res = ""
+            sql = "select timestep from data_full where drive_id = " & Drive_idLabel1.Text & _
+                  " and logger_id = " & logger_id
+            execute_query(sql, res)
+            If res <> "" Then
+                text = logger & vbCrLf & _
+                        points & vbCrLf & _
+                        "TIME STEP: " & res & vbCrLf
+                sw.WriteLine(text)
+
+                Select Case logger_id
+                    Case FfE_Main.id_graphtec : execute_query_graphtec_gps_fluke(res, logger_id, logger)
+                    Case FfE_Main.id_gps : execute_query_graphtec_gps_fluke(res, logger_id, logger)
+                    Case FfE_Main.id_fluke : execute_query_graphtec_gps_fluke(res, logger_id, logger)
+                    Case FfE_Main.id_canbus : execute_query_canbus(res)
+                End Select
+                sw.WriteLine(res)
+
+            End If
+            sw.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub execute_query_graphtec_gps_fluke(ByRef res As String, ByVal logger_id As Integer, _
+                                                 ByVal logger As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
-        Dim text As String = ""
+        Dim sql As String
+        Dim count, distinct, i, max As Integer
+        res = ""
 
         Try
 
             ' Abrir la conexión a Sql  
             cn.Open()
+            cmd.Connection = cn
 
             ' Pasar la consulta sql y la conexión al Sql Command
-            text = "CHANNEL,UNIT,TIME,VALUE"
-
-            cmd.Connection = cn
+            sql = "select count(distinct data_id) from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & logger_id
+            execute_query(sql, distinct)
+            sql = "select distinct data_id, unit from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & logger_id
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-            Dim i As Integer = 0
-            Do While query.HasRows() And i < 4000
+            res = "INDEX,TIME"
+            For i = 1 To distinct
                 query.Read()
-                res += query.GetString(0) & "," & query.GetString(1) & "," & query.GetString(2) & "," & _
-                query.GetString(3).Replace(",", ".") & vbCrLf
+                res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
+            Next
+            res += vbCrLf
+            cn.Close()
+
+            cn.Open()
+            sql = "select count(value) from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & logger_id & " order by data_index"
+            execute_query(sql, count)
+            sql = "select time,value from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & logger_id & " order by data_index"
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+
+            Label25.Text = "Exporting " & logger & " logger"
+            calculate_max(max, logger_id)
+            config_progressbar(max)
+            i = 1
+            count = count / distinct
+            query.Read()
+            Do While i <= count
+                res += i & "," & query.GetString(0)
+                For j = 1 To distinct
+                    res += "," & query.GetString(1).Replace(",", ".")
+                    query.Read()
+                Next
+                progressbar(i)
                 i += 1
+                res += vbCrLf
+                Application.DoEvents()
             Loop
+            res += vbCrLf
+            cn.Close()
+
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -630,4 +704,78 @@ Public Class Form_drive
             End If
         End Try
     End Sub
+
+
+    Private Sub execute_query_canbus(ByRef res As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim text, sql As String
+        Dim count, distinct, i As Integer
+        res = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            ' Pasar la consulta sql y la conexión al Sql Command
+            sql = "select count(distinct data_id) from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & FfE_Main.id_canbus
+            execute_query(sql, distinct)
+            sql = "select distinct data_id, unit from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & FfE_Main.id_canbus
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            res = "INDEX,TIME"
+            For i = 1 To distinct
+                query.Read()
+                res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
+            Next
+            res += vbCrLf
+            cn.Close()
+
+            cn.Open()
+            sql = "select count(value) from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & FfE_Main.id_canbus & " order by data_index"
+            execute_query(sql, count)
+            sql = "select time,value from data_full where drive_id = " & Drive_idLabel1.Text & _
+              " and logger_id = " & FfE_Main.id_canbus & " order by data_index"
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            i = 1
+            count = count / distinct
+            Label25.Text = "Exporting CAN-BUS logger"
+            query.Read()
+            Do While i <= count
+                res += i & "," & query.GetString(0)
+                For j = 1 To distinct
+                    If query.GetString(1) = i Then
+                        res += "," & query.GetString(1).Replace(",", ".")
+                    End If
+                    query.Read()
+
+                Next
+                progressbar(i)
+                i += 1
+                res += vbCrLf
+                Application.DoEvents()
+            Loop
+            cn.Close()
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
 End Class

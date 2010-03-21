@@ -940,6 +940,8 @@ Partial Public Class ffe_databaseDataSet
         
         Private columnvalue As Global.System.Data.DataColumn
         
+        Private columndata_index As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -1014,6 +1016,13 @@ Partial Public Class ffe_databaseDataSet
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property data_indexColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndata_index
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1043,9 +1052,9 @@ Partial Public Class ffe_databaseDataSet
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AdddataRow(ByVal data_id As String, ByVal parentdriveRowBydata_ibfk_1 As driveRow, ByVal parentloggerRowBydata_ibfk_2 As loggerRow, ByVal parentmeasureRowBydata_ibfk_3 As measureRow, ByVal time As System.TimeSpan, ByVal value As Decimal) As dataRow
+        Public Overloads Function AdddataRow(ByVal data_id As String, ByVal parentdriveRowBydata_ibfk_1 As driveRow, ByVal parentloggerRowBydata_ibfk_2 As loggerRow, ByVal parentmeasureRowBydata_ibfk_3 As measureRow, ByVal time As System.TimeSpan, ByVal value As Decimal, ByVal data_index As Integer) As dataRow
             Dim rowdataRow As dataRow = CType(Me.NewRow,dataRow)
-            Dim columnValuesArray() As Object = New Object() {data_id, Nothing, Nothing, Nothing, time, value}
+            Dim columnValuesArray() As Object = New Object() {data_id, Nothing, Nothing, Nothing, time, value, data_index}
             If (Not (parentdriveRowBydata_ibfk_1) Is Nothing) Then
                 columnValuesArray(1) = parentdriveRowBydata_ibfk_1(0)
             End If
@@ -1080,6 +1089,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnmeasure_id = MyBase.Columns("measure_id")
             Me.columntime = MyBase.Columns("time")
             Me.columnvalue = MyBase.Columns("value")
+            Me.columndata_index = MyBase.Columns("data_index")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -1096,6 +1106,8 @@ Partial Public Class ffe_databaseDataSet
             MyBase.Columns.Add(Me.columntime)
             Me.columnvalue = New Global.System.Data.DataColumn("value", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnvalue)
+            Me.columndata_index = New Global.System.Data.DataColumn("data_index", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndata_index)
             Me.columndata_id.AllowDBNull = false
             Me.columndata_id.MaxLength = 50
             Me.columndrive_id.AllowDBNull = false
@@ -3106,6 +3118,8 @@ Partial Public Class ffe_databaseDataSet
         
         Private columntimestep As Global.System.Data.DataColumn
         
+        Private columndata_index As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -3201,6 +3215,13 @@ Partial Public Class ffe_databaseDataSet
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property data_indexColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndata_index
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3230,9 +3251,9 @@ Partial Public Class ffe_databaseDataSet
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function Adddata_fullRow(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As System.TimeSpan, ByVal value As Decimal, ByVal name As String, ByVal unit As String, ByVal timestep As String) As data_fullRow
+        Public Overloads Function Adddata_fullRow(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As System.TimeSpan, ByVal value As Decimal, ByVal name As String, ByVal unit As String, ByVal timestep As String, ByVal data_index As Integer) As data_fullRow
             Dim rowdata_fullRow As data_fullRow = CType(Me.NewRow,data_fullRow)
-            Dim columnValuesArray() As Object = New Object() {data_id, drive_id, logger_id, measure_id, time, value, name, unit, timestep}
+            Dim columnValuesArray() As Object = New Object() {data_id, drive_id, logger_id, measure_id, time, value, name, unit, timestep, data_index}
             rowdata_fullRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowdata_fullRow)
             Return rowdata_fullRow
@@ -3261,6 +3282,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnname = MyBase.Columns("name")
             Me.columnunit = MyBase.Columns("unit")
             Me.columntimestep = MyBase.Columns("timestep")
+            Me.columndata_index = MyBase.Columns("data_index")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -3283,6 +3305,8 @@ Partial Public Class ffe_databaseDataSet
             MyBase.Columns.Add(Me.columnunit)
             Me.columntimestep = New Global.System.Data.DataColumn("timestep", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntimestep)
+            Me.columndata_index = New Global.System.Data.DataColumn("data_index", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndata_index)
             Me.columndata_id.AllowDBNull = false
             Me.columndata_id.MaxLength = 50
             Me.columnname.MaxLength = 30
@@ -4225,6 +4249,20 @@ Partial Public Class ffe_databaseDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property data_index() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tabledata.data_indexColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'data_index' in table 'data' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledata.data_indexColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property driveRow() As driveRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("data_ibfk_1")),driveRow)
@@ -4262,6 +4300,16 @@ Partial Public Class ffe_databaseDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetvalueNull()
             Me(Me.tabledata.valueColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Isdata_indexNull() As Boolean
+            Return Me.IsNull(Me.tabledata.data_indexColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub Setdata_indexNull()
+            Me(Me.tabledata.data_indexColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -5445,6 +5493,20 @@ Partial Public Class ffe_databaseDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property data_index() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tabledata_full.data_indexColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'data_index' in table 'data_full' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledata_full.data_indexColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function Isdrive_idNull() As Boolean
             Return Me.IsNull(Me.tabledata_full.drive_idColumn)
         End Function
@@ -5522,6 +5584,16 @@ Partial Public Class ffe_databaseDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SettimestepNull()
             Me(Me.tabledata_full.timestepColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Isdata_indexNull() As Boolean
+            Return Me.IsNull(Me.tabledata_full.data_indexColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub Setdata_indexNull()
+            Me(Me.tabledata_full.data_indexColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

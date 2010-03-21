@@ -23,7 +23,7 @@ Public Class insert_Data
     End Sub
 
     Public Sub init_string()
-        insert_string = "insert high_priority into data (data_id, drive_id, logger_id, measure_id, time, value) VALUES "
+        insert_string = "insert high_priority into data (data_index, data_id, drive_id, logger_id, measure_id, time, value) VALUES "
     End Sub
 
     Public Sub set_string(ByVal cadena As String)
@@ -31,7 +31,7 @@ Public Class insert_Data
     End Sub
 
     Function is_empty() As Boolean
-        If insert_string = "insert high_priority into data (data_id, drive_id, logger_id, measure_id, time, value) VALUES " Then
+        If insert_string = "insert high_priority into data (data_index, data_id, drive_id, logger_id, measure_id, time, value) VALUES " Then
             Return True
         Else
             Return False

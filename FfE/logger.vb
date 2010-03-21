@@ -342,8 +342,8 @@ Public Class logger
                             data_points += 1
                             clock += 1
 
-                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
-                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             & datos(list.CheckedIndices.Item(i) + 2) & ")"
                             ins.set_string(aux)
@@ -417,8 +417,8 @@ Public Class logger
                             data_points += 1
                             clock += 1
 
-                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
-                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(make_time(datos(3)), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
@@ -478,8 +478,8 @@ Public Class logger
                             clock += 1
 
                             val = datos(list.CheckedIndices.Item(i) + 2).Replace(",", ".")
-                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
-                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
@@ -537,12 +537,13 @@ Public Class logger
                         'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
                         val = datos(list.CheckedIndices.Item(i) + 1) '.Replace(".", ",")
 
+
                         If val <> "" Then
                             data_points += 1
                             clock += 1
 
-                            aux = "('" & list.CheckedItems.Item(i) & "'," & id_drive & "," & id_logger & "," _
-                            & measure(list.CheckedIndices.Item(i)) & "," _
+                            aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
