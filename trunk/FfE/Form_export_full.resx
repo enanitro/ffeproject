@@ -121,8 +121,8 @@
   <data name="btn_export.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAABdCAYAAABtnm46AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAAAA
-        CwAB5DetvwAAOhZJREFUeF7tfQVYVuf//qGsGTNRsR0GtqIIqFhzTr9zOjtmzq4ZM2ZgFxZ2t86Zs2dg
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/wAA
+        Cv8BNGKaggAAOhZJREFUeF7tfQVYVuf//qGsGTNRsR0GtqIIqFhzTr9zOjtmzq4ZM2ZgFxZ2t86Zs2dg
         YBe2gigWHQKKTjf1/n/uw/uwI74I23Tz99/Odd3XOZz31Pt87k8/58UCgPbf8i8eARLgP/x7x+A/4f/L
         FeA/AvxHgH+v+fvP9Un8998g/LsV4D8C/OcC/t0a8G+3gAkWoE2bNprCkSNH9P0vX75MWP/222/q2Izy
         WX6Bs6Cl4HvBLMEPgl2CI69evToruCLnX5Xzbhrx66+/3nzx4sU1+fyy4KIc7y3YI9goWChwF7QXuAns
@@ -373,4 +373,7 @@
         P3ZWqtG+mED0AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="SaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
