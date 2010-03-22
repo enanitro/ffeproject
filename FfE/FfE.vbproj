@@ -102,6 +102,12 @@
     <Compile Include="Form_drive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_export_full.Designer.vb">
+      <DependentUpon>Form_export_full.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_export_full.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_find_drive.Designer.vb">
       <DependentUpon>Form_find_drive.vb</DependentUpon>
     </Compile>
@@ -197,6 +203,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_drive.resx">
       <DependentUpon>Form_drive.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_export_full.resx">
+      <DependentUpon>Form_export_full.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_find_drive.resx">
