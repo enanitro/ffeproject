@@ -538,20 +538,33 @@ Public Class Form_drive
     
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
-            If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                export.Visible = True
-                head_csv_file(SaveFileDialog.FileName)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_graphtec, "GRAPHTEC GL800", Label19.Text)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_gps, "COLUMBUS GPS", Label20.Text)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_fluke, "FLUKE", Label21.Text)
-                logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
-                MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
-            End If
+            Dim form_export As New Form_export_full
+            form_export.drive_id.Text = Drive_idLabel1.Text
+            form_export.datef.Text = date_driver.Text
+            form_export.climate.Text = cmb_climate.Text
+            form_export.status.Text = cmb_status.Text
+            form_export.drive_type.Text = cmb_drive_type.Text
+            form_export.usage_type.Text = cmb_usage.Text
+            form_export.driver.Text = cmb_driver.Text
+            form_export.car.Text = cmb_car.Text
+            form_export.importer.Text = cmb_importer.Text
+            form_export.description.Text = txt_description.Text
+            form_export.ShowDialog()
+
+            'SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            'If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            ' export.Visible = True
+            ' head_csv_file(SaveFileDialog.FileName)
+            ' logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_graphtec, "GRAPHTEC GL800", Label19.Text)
+            ' logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_gps, "COLUMBUS GPS", Label20.Text)
+            ' logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_fluke, "FLUKE", Label21.Text)
+            ' logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
+            ' MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
+            ' End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            export.Visible = False
+            'export.Visible = False
         End Try
     End Sub
 
