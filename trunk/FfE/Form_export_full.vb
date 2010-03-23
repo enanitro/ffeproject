@@ -2,31 +2,34 @@
 Imports MySql.Data.MySqlClient
 
 Public Class Form_export_full
+    Dim abort As Boolean = False
 
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
-            If path_graphtec.Text <> "" Then
+            btn_export.Enabled = False
+            If path_graphtec.Text <> "" And abort = False Then
                 ProgressBar1.Visible = True
                 percent_graphtec.Visible = True
                 logger_csv_file(path_graphtec.Text, FfE_Main.id_graphtec, "GRAPHTEC GL800")
             End If
-            If path_graphtec.Text <> "" Then
+            If path_graphtec.Text <> "" And abort = False Then
                 ProgressBar2.Visible = True
                 percent_gps.Visible = True
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
             End If
-            If path_graphtec.Text <> "" Then
+            If path_graphtec.Text <> "" And abort = False Then
                 ProgressBar3.Visible = True
                 percent_fluke.Visible = True
                 logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "FLUKE")
             End If
             'logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
-            MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
-            clean_groups()
-        Catch ex As Exception
+            If abort <> True Then MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
+        Catch ex As Exception       
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-
+            clean_groups()
+            btn_export.Enabled = True
+            abort = False
         End Try
     End Sub
 
@@ -120,10 +123,10 @@ Public Class Form_export_full
 
     Private Sub logger_csv_file(ByVal path As String, ByVal logger_id As Integer, _
                                 ByVal logger As String)
-        Try
-            Dim text, sql, res, points, channels As String
-            Dim sw As New System.IO.StreamWriter(path)
 
+        Dim text, sql, res, points, channels As String
+        Dim sw As New System.IO.StreamWriter(path)
+        Try
             data_points_channels(points, channels, logger_id)
             head_csv_file(text)
             res = ""
@@ -150,7 +153,28 @@ Public Class Form_export_full
             End If
             sw.Close()
         Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If ex.Message = "Export process aborted" Then
+                sw.Close()
+                If My.Computer.FileSystem.FileExists(path_graphtec.Text) Then
+                    My.Computer.FileSystem.DeleteFile(path_graphtec.Text)
+                End If
+                If My.Computer.FileSystem.FileExists(path_gps.Text) Then
+                    My.Computer.FileSystem.DeleteFile(path_gps.Text)
+                End If
+                If My.Computer.FileSystem.FileExists(path_fluke.Text) Then
+                    My.Computer.FileSystem.DeleteFile(path_fluke.Text)
+                End If
+                If My.Computer.FileSystem.FileExists(path_canbus.Text) Then
+                    My.Computer.FileSystem.DeleteFile(path_canbus.Text)
+                End If
+                path_graphtec.Text = ""
+                path_gps.Text = ""
+                path_fluke.Text = ""
+                path_canbus.Text = ""
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End Try
     End Sub
 
@@ -220,7 +244,11 @@ Public Class Form_export_full
 
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         Finally
             If cn.State = ConnectionState.Open Then
                 cn.Close()
@@ -344,5 +372,21 @@ Public Class Form_export_full
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        If btn_export.Enabled = False Then
+            If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                abort = True
+                Throw New Exception("Export process aborted")
+            End If
+        End If
+    End Sub
+
+    Private Sub Form_export_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        path_graphtec.Text = ""
+        path_gps.Text = ""
+        path_fluke.Text = ""
+        path_canbus.Text = ""
     End Sub
 End Class
