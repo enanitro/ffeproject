@@ -27,7 +27,8 @@ Public Class Form_find_drive
             query = analyze_query(query, ComboBox5, "usage_type")
             query = analyze_query(query, ComboBox6, "importer")
             query = analyze_query(query, ComboBox7, "driver")
-            query = analyze_query(query, ComboBox9, "date")
+            query = analyze_query_date1(query, DateTimePicker1, "date")
+            query = analyze_query_date2(query, DateTimePicker2, "date")
             Drive_fullBindingSource.Filter = query
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -42,13 +43,28 @@ Public Class Form_find_drive
         analyze_query = query
     End Function
 
+    Function analyze_query_date1(ByVal query As String, ByVal value As DateTimePicker, ByVal field As String) As String
+        If value.Enabled Then
+            If query <> "" Then query += " AND "
+            query += field & " >= " & "'" & value.Text & "'"
+        End If
+        analyze_query_date1 = query
+    End Function
+
+    Function analyze_query_date2(ByVal query As String, ByVal value As DateTimePicker, ByVal field As String) As String
+        If value.Enabled Then
+            If query <> "" Then query += " AND "
+            query += field & " <= " & "'" & value.Text & "'"
+        End If
+        analyze_query_date2 = query
+    End Function
+
     'añade los items a los combobox
     Private Sub add_combobox_items()
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         load_combobox(ComboBox1, "select distinct status from drive_full", connection)
         load_combobox(ComboBox2, "select distinct climate from drive_full", connection)
         load_combobox(ComboBox3, "select distinct drive_type from drive_full", connection)
-        load_combobox(ComboBox9, "select distinct date from drive_full", connection)
         load_combobox(ComboBox4, "select distinct car from drive_full", connection)
         load_combobox(ComboBox5, "select distinct usage_type from drive_full", connection)
         load_combobox(ComboBox7, "select distinct driver from drive_full", connection)
@@ -101,7 +117,8 @@ Public Class Form_find_drive
         CheckBox5.Enabled = value
         CheckBox6.Enabled = value
         CheckBox7.Enabled = value
-        CheckBox9.Enabled = value
+        DateTimePicker1.Enabled = value
+        DateTimePicker2.Enabled = value
     End Sub
 
     'desactiva los combobox
@@ -113,7 +130,8 @@ Public Class Form_find_drive
         CheckBox5.Checked = False
         CheckBox6.Checked = False
         CheckBox7.Checked = False
-        CheckBox9.Checked = False
+        CheckBox8.Checked = False
+        CheckBox10.Checked = False
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
@@ -140,10 +158,6 @@ Public Class Form_find_drive
         ComboBox7.Enabled = CheckBox7.Checked
     End Sub
 
-    Private Sub CheckBox9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox9.CheckedChanged
-        ComboBox9.Enabled = CheckBox9.Checked
-    End Sub
-
     Private Sub CheckBox5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox5.CheckedChanged
         ComboBox5.Enabled = CheckBox5.Checked
     End Sub
@@ -152,4 +166,25 @@ Public Class Form_find_drive
         Me.Close()
     End Sub
 
+    Private Sub CheckBox8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox8.CheckedChanged
+        DateTimePicker1.Enabled = CheckBox8.Checked
+    End Sub
+
+    Private Sub CheckBox10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox10.CheckedChanged
+        DateTimePicker2.Enabled = CheckBox10.Checked
+    End Sub
+
+    Private Sub DateTimePicker1_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DateTimePicker1.ValueChanged
+        If DateTimePicker2.Enabled And DateTimePicker2.Value < DateTimePicker1.Value Then
+            MsgBox("Start date should be less than final date", MsgBoxStyle.Information)
+            DateTimePicker1.Value = DateTimePicker2.Value
+        End If
+    End Sub
+
+    Private Sub DateTimePicker2_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DateTimePicker2.ValueChanged
+        If DateTimePicker1.Enabled And DateTimePicker2.Value < DateTimePicker1.Value Then
+            MsgBox("Start date should be less than or equal to end date", MsgBoxStyle.Information)
+            DateTimePicker2.Value = DateTimePicker1.Value
+        End If
+    End Sub
 End Class
