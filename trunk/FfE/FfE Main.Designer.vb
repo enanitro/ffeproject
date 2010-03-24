@@ -37,16 +37,7 @@ Partial Class FfE_Main
         Me.MeasureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator
         Me.ConnectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.OperationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AverageEnergyConsumptionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AverageSpeedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ChargedEnergyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NChargerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NSystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.BRecuperationSystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.EToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.VtDxdtdxGPSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AtDvdtToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -68,7 +59,7 @@ Partial Class FfE_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.OperationsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(632, 24)
@@ -77,7 +68,7 @@ Partial Class FfE_Main
         '
         'DriveToolStripMenuItem
         '
-        Me.DriveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem})
+        Me.DriveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.DataToolStripMenuItem})
         Me.DriveToolStripMenuItem.Name = "DriveToolStripMenuItem"
         Me.DriveToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.DriveToolStripMenuItem.Text = "Drive"
@@ -130,66 +121,11 @@ Partial Class FfE_Main
         Me.ConnectionToolStripMenuItem1.Size = New System.Drawing.Size(136, 22)
         Me.ConnectionToolStripMenuItem1.Text = "Connection"
         '
-        'OperationsToolStripMenuItem
+        'DataToolStripMenuItem
         '
-        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AverageEnergyConsumptionToolStripMenuItem, Me.AverageSpeedToolStripMenuItem, Me.ChargedEnergyToolStripMenuItem, Me.NChargerToolStripMenuItem, Me.NSystemToolStripMenuItem, Me.BRecuperationSystemToolStripMenuItem, Me.EToolStripMenuItem, Me.VtDxdtdxGPSToolStripMenuItem, Me.AtDvdtToolStripMenuItem})
-        Me.OperationsToolStripMenuItem.Name = "OperationsToolStripMenuItem"
-        Me.OperationsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
-        Me.OperationsToolStripMenuItem.Text = "Operations"
-        '
-        'AverageEnergyConsumptionToolStripMenuItem
-        '
-        Me.AverageEnergyConsumptionToolStripMenuItem.Name = "AverageEnergyConsumptionToolStripMenuItem"
-        Me.AverageEnergyConsumptionToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.AverageEnergyConsumptionToolStripMenuItem.Text = "Average energy consumption"
-        '
-        'AverageSpeedToolStripMenuItem
-        '
-        Me.AverageSpeedToolStripMenuItem.Name = "AverageSpeedToolStripMenuItem"
-        Me.AverageSpeedToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.AverageSpeedToolStripMenuItem.Text = "Average speed"
-        '
-        'ChargedEnergyToolStripMenuItem
-        '
-        Me.ChargedEnergyToolStripMenuItem.Name = "ChargedEnergyToolStripMenuItem"
-        Me.ChargedEnergyToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.ChargedEnergyToolStripMenuItem.Text = "Charged energy"
-        '
-        'NChargerToolStripMenuItem
-        '
-        Me.NChargerToolStripMenuItem.Name = "NChargerToolStripMenuItem"
-        Me.NChargerToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.NChargerToolStripMenuItem.Text = "n charger"
-        '
-        'NSystemToolStripMenuItem
-        '
-        Me.NSystemToolStripMenuItem.Name = "NSystemToolStripMenuItem"
-        Me.NSystemToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.NSystemToolStripMenuItem.Text = "n system"
-        '
-        'BRecuperationSystemToolStripMenuItem
-        '
-        Me.BRecuperationSystemToolStripMenuItem.Name = "BRecuperationSystemToolStripMenuItem"
-        Me.BRecuperationSystemToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.BRecuperationSystemToolStripMenuItem.Text = "n recuperation system"
-        '
-        'EToolStripMenuItem
-        '
-        Me.EToolStripMenuItem.Name = "EToolStripMenuItem"
-        Me.EToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.EToolStripMenuItem.Text = "Energy recuperated/100Km"
-        '
-        'VtDxdtdxGPSToolStripMenuItem
-        '
-        Me.VtDxdtdxGPSToolStripMenuItem.Name = "VtDxdtdxGPSToolStripMenuItem"
-        Me.VtDxdtdxGPSToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.VtDxdtdxGPSToolStripMenuItem.Text = "V(t) = dx/dt (dx · GPS)"
-        '
-        'AtDvdtToolStripMenuItem
-        '
-        Me.AtDvdtToolStripMenuItem.Name = "AtDvdtToolStripMenuItem"
-        Me.AtDvdtToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.AtDvdtToolStripMenuItem.Text = "A(t) = dv/dt"
+        Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
+        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DataToolStripMenuItem.Text = "Data"
         '
         'FfE_Main
         '
@@ -216,16 +152,6 @@ Partial Class FfE_Main
     Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents OperationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AverageEnergyConsumptionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AverageSpeedToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ChargedEnergyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NChargerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NSystemToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents BRecuperationSystemToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents VtDxdtdxGPSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AtDvdtToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FahrprofileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents StatusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents DriveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -233,5 +159,6 @@ Partial Class FfE_Main
     Friend WithEvents ConnectionToolStripMenuItem As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ConnectionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MeasureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

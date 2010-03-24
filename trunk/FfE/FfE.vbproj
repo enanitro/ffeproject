@@ -84,6 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ffe_databaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Form_data.Designer.vb">
+      <DependentUpon>Form_data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_data.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_car_photos.Designer.vb">
       <DependentUpon>Form_car_photos.vb</DependentUpon>
     </Compile>
@@ -199,6 +205,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Connection.resx">
       <DependentUpon>Form_Connection.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_data.resx">
+      <DependentUpon>Form_data.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_drive.resx">

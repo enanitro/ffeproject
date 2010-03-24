@@ -74,4 +74,10 @@ Public Class FfE_Main
             conf_conection.ShowDialog()
         End Try
     End Sub
+
+    Private Sub DataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DataToolStripMenuItem.Click
+        Dim form_data As New Form_data
+        form_data.MdiParent = Me
+        form_data.Show()
+    End Sub
 End Class

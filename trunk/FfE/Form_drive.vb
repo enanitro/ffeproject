@@ -376,27 +376,31 @@ Public Class Form_drive
     End Sub
 
     Private Sub TabControl1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.Click
-        If Drive_idLabel1.Text <> "" Then
-            Dim index As Integer = TabControl1.SelectedIndex + 1
-            Select Case index
-                Case FfE_Main.id_graphtec
-                    Me.Data_fullTableAdapter.FillBydatafull _
-                    (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_graphtec)
-                    grid_configuration(Data_fullDataGridView)
-                Case FfE_Main.id_gps
-                    Me.Data_fullTableAdapter.FillBydatafull _
-                    (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_gps)
-                    grid_configuration(DataGridView1)
-                Case FfE_Main.id_fluke
-                    Me.Data_fullTableAdapter.FillBydatafull _
-                    (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_fluke)
-                    grid_configuration(DataGridView2)
-                Case FfE_Main.id_canbus
-                    Me.Data_fullTableAdapter.FillBydatafull _
-                    (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_canbus)
-                    grid_configuration(DataGridView3)
-            End Select
-        End If
+        Try
+            If Drive_idLabel1.Text <> "" Then
+                Dim index As Integer = TabControl1.SelectedIndex + 1
+                Select Case index
+                    Case FfE_Main.id_graphtec
+                        Me.Data_fullTableAdapter.FillBydatafull _
+                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_graphtec)
+                        grid_configuration(Data_fullDataGridView)
+                    Case FfE_Main.id_gps
+                        Me.Data_fullTableAdapter.FillBydatafull _
+                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_gps)
+                        grid_configuration(DataGridView1)
+                    Case FfE_Main.id_fluke
+                        Me.Data_fullTableAdapter.FillBydatafull _
+                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_fluke)
+                        grid_configuration(DataGridView2)
+                    Case FfE_Main.id_canbus
+                        Me.Data_fullTableAdapter.FillBydatafull _
+                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_canbus)
+                        grid_configuration(DataGridView3)
+                End Select
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub grid_configuration(ByRef grid As DataGridView)
