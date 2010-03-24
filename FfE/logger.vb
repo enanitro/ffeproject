@@ -317,6 +317,7 @@ Public Class logger
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
+        Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
 
@@ -336,6 +337,7 @@ Public Class logger
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
+                    index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
 
@@ -344,7 +346,7 @@ Public Class logger
                             data_points += 1
                             clock += 1
 
-                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             & datos(list.CheckedIndices.Item(i) + 2) & ")"
@@ -378,6 +380,7 @@ Public Class logger
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
+        Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
 
@@ -395,7 +398,7 @@ Public Class logger
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
-
+                    index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
                         'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
@@ -419,7 +422,7 @@ Public Class logger
                             data_points += 1
                             clock += 1
 
-                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(make_time(datos(3)), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
@@ -453,6 +456,7 @@ Public Class logger
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
+        Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
 
@@ -472,6 +476,7 @@ Public Class logger
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(";")
+                    index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
 
@@ -480,7 +485,7 @@ Public Class logger
                             clock += 1
 
                             val = datos(list.CheckedIndices.Item(i) + 2).Replace(",", ".")
-                            aux = "(" & data_points & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
@@ -514,6 +519,7 @@ Public Class logger
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
+        Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
 
@@ -531,7 +537,7 @@ Public Class logger
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
-
+                    index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
 

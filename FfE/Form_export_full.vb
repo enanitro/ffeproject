@@ -12,12 +12,12 @@ Public Class Form_export_full
                 percent_graphtec.Visible = True
                 logger_csv_file(path_graphtec.Text, FfE_Main.id_graphtec, "GRAPHTEC GL800")
             End If
-            If path_graphtec.Text <> "" And abort = False Then
+            If path_gps.Text <> "" And abort = False Then
                 ProgressBar2.Visible = True
                 percent_gps.Visible = True
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
             End If
-            If path_graphtec.Text <> "" And abort = False Then
+            If path_fluke.Text <> "" And abort = False Then
                 ProgressBar3.Visible = True
                 percent_fluke.Visible = True
                 logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "FLUKE")
@@ -36,12 +36,16 @@ Public Class Form_export_full
     Private Sub clean_groups()
         ProgressBar1.Visible = False
         percent_graphtec.Visible = False
+        path_graphtec.Text = ""
         ProgressBar2.Visible = False
         percent_gps.Visible = False
+        path_gps.Text = ""
         ProgressBar4.Visible = False
         percent_fluke.Visible = False
+        path_fluke.Text = ""
         ProgressBar3.Visible = False
         percent_canbus.Visible = False
+        path_canbus.Text = ""
     End Sub
 
     'configuracion del progressbar y labels que le acompañan
@@ -205,23 +209,29 @@ Public Class Form_export_full
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+
+            sql = "select concat(data_index,',',time"
             res = "INDEX,TIME"
             For i = 1 To distinct
                 query.Read()
                 res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
+                sql += ",',',sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             Next
+            sql += ") as format_row from data" & _
+                " where drive_id = " & drive_id.Text & _
+                " and logger_id = " & logger_id & _
+                " group by data_index;"
             res += vbCrLf
             cn.Close()
 
+
             cn.Open()
-            sql = "select count(value) from data_full where drive_id = " & drive_id.Text & _
-              " and logger_id = " & logger_id & " order by data_index"
-            execute_query(sql, count)
-            sql = "select time,value from data_full where drive_id = " & drive_id.Text & _
-              " and logger_id = " & logger_id & " order by data_index"
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+            sql = "select count(value) from data_full where drive_id = " & drive_id.Text & _
+              " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql, count)
 
             calculate_max(max, logger_id)
             config_progressbar(max, bar)
@@ -229,11 +239,8 @@ Public Class Form_export_full
             count = count / distinct
             query.Read()
             Do While i <= count
-                res += i & "," & query.GetString(0)
-                For j = 1 To distinct
-                    res += "," & query.GetString(1).Replace(",", ".")
-                    query.Read()
-                Next
+                res += query.GetString(0)
+                query.Read()
                 progressbar(i, percent.Text, bar)
                 i += 1
                 res += vbCrLf
@@ -363,15 +370,15 @@ Public Class Form_export_full
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
-            If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                path_canbus.Text = SaveFileDialog.FileName
-                path_canbus.Visible = True
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        'Try
+        'SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+        'If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        'path_canbus.Text = SaveFileDialog.FileName
+        'path_canbus.Visible = True
+        'End If
+        'Catch ex As Exception
+        ' MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'End Try
     End Sub
 
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
