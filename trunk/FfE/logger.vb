@@ -2,7 +2,98 @@
 Imports MySql.Data.MySqlClient
 
 Public Class logger
+
+    Private Class str_canbus
+        Public tam As Integer
+        Public Startbit() As Integer
+        Public lange() As Integer
+        Public Byteanordnung() As Integer
+        Public Wertetyp() As Boolean
+        Public name() As String
+
+        Public Sub New(ByVal canbus_long As Integer, ByVal sb() As Integer, ByVal lg() As Integer, _
+                       ByVal bd() As Integer, ByVal wt() As Boolean, ByVal n() As String)
+            tam = canbus_long
+            Startbit = sb
+            lange = lg
+            Byteanordnung = bd
+            Wertetyp = wt
+            name = n
+        End Sub
+
+        Public Function get_tam() As Integer
+            Return tam
+        End Function
+
+        Public Function get_startbit(ByVal index As Integer) As Integer
+            Return Startbit(index)
+        End Function
+
+        Public Function get_lange(ByVal index As Integer) As Integer
+            Return lange(index)
+        End Function
+
+        Public Function get_Byteanordnung(ByVal index As Integer) As Integer
+            Return Byteanordnung(index)
+        End Function
+
+        Public Function get_Wertetyp(ByVal index As Integer) As Boolean
+            Return Wertetyp(index)
+        End Function
+
+        Public Function get_name(ByVal index As Integer) As String
+            Return name(index)
+        End Function
+    End Class
+
     Public unit As String
+    Dim table_canbus As Dictionary(Of Integer, str_canbus)
+
+
+    Private Sub Load_table_canbus()
+        Dim aux As New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
+                                  New Boolean() {False, True, True}, _
+                                  New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"})
+        table_canbus.Add(971, aux)
+
+        aux = New str_canbus(2, New Integer() {16, 0}, New Integer() {16, 12}, New Integer() {24, 8}, _
+                             New Boolean() {False, True}, New String() {"Batteriespannung", "HV-Batterie Stromfluss"})
+        table_canbus.Add(59, aux)
+
+        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
+                             New String() {"Bremspedalstellung"})
+        table_canbus.Add(49, aux)
+
+        aux = New str_canbus(1, New Integer() {16}, New Integer() {8}, New Integer() {16}, New Boolean() {False}, _
+                             New String() {"Fahrzeuggeschwindigkeit"})
+        table_canbus.Add(970, aux)
+
+        aux = New str_canbus(1, New Integer() {8}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
+                             New String() {"Motor-Kühlmitteltemeratur"})
+        table_canbus.Add(1324, aux)
+
+        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {32}, New Boolean() {False}, _
+                             New String() {"EV Modus"})
+        table_canbus.Add(1321, aux)
+
+        aux = New str_canbus(1, New Integer() {8}, New Integer() {16}, New Integer() {16}, New Boolean() {False}, _
+                             New String() {"Einspritzung"})
+        table_canbus.Add(1312, aux)
+
+        aux = New str_canbus(1, New Integer() {8}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
+                             New String() {"Tankfüllstand"})
+        table_canbus.Add(1444, aux)
+
+        aux = New str_canbus(1, New Integer() {48}, New Integer() {8}, New Integer() {48}, New Boolean() {False}, _
+                             New String() {"Gaspedalstellung"})
+        table_canbus.Add(580, aux)
+
+        aux = New str_canbus(1, New Integer() {16}, New Integer() {16}, New Integer() {16}, New Boolean() {False}, _
+                             New String() {"ICE Drehzahl"})
+        table_canbus.Add(980, aux)
+    End Sub
+
+
     Function logger_dialog(ByVal filedialog As OpenFileDialog, ByRef list As CheckedListBox, ByVal id As Integer, _
                              ByRef text As TextBox, ByRef long_file As Integer, ByRef measure() As Integer) As String
         filedialog.FileName = ""
@@ -267,9 +358,11 @@ Public Class logger
         Try
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
             linea1 = fichero.ReadLine
-            datos1 = linea1.Split(",")
-            'st = datos1(0).IndexOf("[")
-            'ft = datos1(0).IndexOf("]")
+            For i = 1 To 6
+                linea1 = fichero.ReadLine
+                text.Text = linea1
+            Next
+
             interval = datos1(0)
 
             'introducir los canales en checklistbox
@@ -301,7 +394,7 @@ Public Class logger
             text.Text = "Columbus GPS" & vbCrLf & _
                         "Sampling interval: " & interval & " (trigger)" & _
                         "Total data points: " & i
-         
+
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
