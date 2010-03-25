@@ -229,6 +229,7 @@ Public Class Form_export_full
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+
             sql = "select count(value) from data_full where drive_id = " & drive_id.Text & _
               " and logger_id = " & logger_id & " order by data_index, time"
             execute_query(sql, count)
@@ -238,6 +239,7 @@ Public Class Form_export_full
             i = 1
             count = count / distinct
             query.Read()
+
             Do While i <= count
                 res += query.GetString(0)
                 query.Read()
