@@ -221,10 +221,15 @@ Public Class Form_data
     End Sub
 
     Private Sub format_grid(ByRef grid As DataGridView)
-        grid.Columns(0).Width = 80
-        grid.Columns(1).Width = 80
+        grid.ReadOnly = False
+        grid.AllowUserToAddRows = False
+        grid.AllowUserToDeleteRows = False
+        grid.AllowUserToOrderColumns = False
+        grid.Columns(0).ReadOnly = True
+        grid.Columns(1).ReadOnly = True
+        grid.Columns(0).Width = 60
+        grid.Columns(1).Width = 60
         For i = 2 To grid.Columns.Count - 1
-            grid.Columns(i).Width = grid.Columns(i).HeaderText.Length * 9
             grid.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         Next
     End Sub
@@ -253,9 +258,13 @@ Public Class Form_data
             da.Fill(ds)
 
             Dim tbl As DataTable = ds.Tables(0) ' data table prepara la estructura de la tabla
-            grid.DataSource = tbl
-            format_grid(grid)
-            
+            If tbl.Rows.Count > 0 Then
+                grid.DataSource = tbl
+                format_grid(grid)
+            Else
+                grid.DataSource = ""
+            End If
+
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -321,16 +330,16 @@ Public Class Form_data
             query = cmd.ExecuteReader()
 
 
-            sql = "select data_index as 'INDEX',time as TIME"
+            sql = "select data_index as 'Index',time as Time"
             For i = 1 To distinct
                 query.Read()
-                sql += ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & _
+                sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
                 query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "[" & query.GetString(1) & "]'"
             Next
             sql += " from data_full" & _
                 " where drive_id = " & drive_id & _
                 " and logger_id = " & logger_id & _
-                " group by data_index;"
+                " group by data_index,time;"
 
             cn.Close()
 
