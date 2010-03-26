@@ -10,6 +10,7 @@ Public Class logger
         Public Byteanordnung() As Integer
         Public Wertetyp() As Boolean
         Public name() As String
+        Public checklist() As Boolean
 
         Public Sub New(ByVal canbus_long As Integer, ByVal sb() As Integer, ByVal lg() As Integer, _
                        ByVal bd() As Integer, ByVal wt() As Boolean, ByVal n() As String)
@@ -19,6 +20,7 @@ Public Class logger
             Byteanordnung = bd
             Wertetyp = wt
             name = n
+            checklist = New Boolean() {False, False, False}
         End Sub
 
         Public Function get_tam() As Integer
@@ -44,6 +46,16 @@ Public Class logger
         Public Function get_name(ByVal index As Integer) As String
             Return name(index)
         End Function
+
+        Public Sub checked_channel(ByVal ch As String, ByVal state As Boolean)
+            Dim index As Integer
+            For i As Integer = 0 To tam
+                If name(i) = ch Then
+                    index = i
+                End If
+            Next
+            checklist(index) = state
+        End Sub
     End Class
 
     Public unit As String
@@ -62,7 +74,7 @@ Public Class logger
 
         aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
                              New String() {"Bremspedalstellung"})
-        table_canbus.Add(49, aux)
+        table_canbus.Add(48, aux)
 
         aux = New str_canbus(1, New Integer() {16}, New Integer() {8}, New Integer() {16}, New Boolean() {False}, _
                              New String() {"Fahrzeuggeschwindigkeit"})
@@ -354,6 +366,7 @@ Public Class logger
         Dim datos1(), datos2() As String
         Dim interval As String = ""
         Dim i, st, ft As Integer
+        Dim chlist As New ArrayList
 
         Try
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
@@ -363,44 +376,35 @@ Public Class logger
                 text.Text = linea1
             Next
 
-            interval = datos1(0)
+            chlist.Add(New ValueDescriptionPair("Bremspedalstellung", 48))
+            chlist.Add(New ValueDescriptionPair("Batteriespannung", 59))
+            chlist.Add(New ValueDescriptionPair("HV-Batterie Stromfluss", 59))
+            chlist.Add(New ValueDescriptionPair("Gaspedalstellung", 580))
+            chlist.Add(New ValueDescriptionPair("ICE Drehzahl", 968))
+            chlist.Add(New ValueDescriptionPair("Fahrzeuggeschwindigkeit", 970))
+            chlist.Add(New ValueDescriptionPair("SOC", 971))
+            chlist.Add(New ValueDescriptionPair("max. Batterietemperatur", 971))
+            chlist.Add(New ValueDescriptionPair("min. Batterietemperatur", 971))
+            chlist.Add(New ValueDescriptionPair("Einspritzung", 1312))
+            chlist.Add(New ValueDescriptionPair("EV Modus", 1321))
+            chlist.Add(New ValueDescriptionPair("Motor-Kühlmitteltemeratur", 1324))
+            chlist.Add(New ValueDescriptionPair("Tankfüllstand", 1444))
 
-            'introducir los canales en checklistbox
-            For i = 1 To datos1.Length - 1
-                'name = i & " (" & datos1(i) & ")"
-                name = datos1(i)
-                list.Items.Add(name)
-            Next
-            Array.Resize(measure, list.Items.Count)
+            With list
+                .SelectedValue = "Value"
+                .SelectedItem = "Description"
+                .DataSource = chlist
+            End With
 
-            linea1 = fichero.ReadLine
-            datos1 = linea1.Split(",")
-
-            'contamos el numero de registros
-            i = 1
-            Do
-                linea2 = fichero.ReadLine
-                If linea2 <> Nothing Then
-                    datos2 = linea2.Split(",")
-                    datos2.CopyTo(datos1, 0)
-                    i += 1
-                End If
-            Loop Until linea2 Is Nothing
-
-            'asigno la longitud real del archivo
-            long_file = i
-
-            'escribo cabecera
-            text.Text = "Columbus GPS" & vbCrLf & _
-                        "Sampling interval: " & interval & " (trigger)" & _
-                        "Total data points: " & i
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    'inserta los datos del fichero en la tabla data (logger graphtec GL800)
+    Public Sub 
+
+        'inserta los datos del fichero en la tabla data (logger graphtec GL800)
     Public Sub insert_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
