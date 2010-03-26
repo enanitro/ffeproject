@@ -652,61 +652,62 @@ Public Class logger
         Dim value As Integer
 
         init_Dictionary()
-        Try
-            'leo las 7 primeras lineas que pertenecen a la cabecera
-            For i = 0 To 6
-                linea = fichero.ReadLine
-            Next
+        Load_table_canbus()
+        'Try
+        'leo las 7 primeras lineas que pertenecen a la cabecera
+        For i = 0 To 6
+            linea = fichero.ReadLine
+        Next
 
-            Dim ins As New insert_Data
-            ins.init_string()
+        Dim ins As New insert_Data
+        ins.init_string()
 
-            config_progressbar(bar, long_file, list)
-            count_channels(list)
+        config_progressbar(bar, long_file, list)
+        count_channels(list)
 
-            Do
-                linea = fichero.ReadLine
-                If linea <> Nothing Then
-                    Application.DoEvents()
-                    datos = linea.Split(vbTab)
-                    index += 1
-                    'For i = 0 To list.CheckedIndices.Count - 1
-                    num_lines += 1
+        Do
+            linea = fichero.ReadLine
+            If linea <> Nothing Then
+                Application.DoEvents()
+                datos = linea.Split(vbTab)
+                index += 1
+                'For i = 0 To list.CheckedIndices.Count - 1
+                num_lines += 1
 
-                    value = Val(datos(6))
+                value = Val(datos(6))
 
-                    For i = 0 To table_canbus(value).tam
-                        If table_canbus(value).checklist(i) = True Then
+                For i = 0 To table_canbus(value).tam
+                    If table_canbus(value).checklist(i) = True Then
 
-                        End If
-                    Next
-
-                    'If Val() <> "" Then
-                    data_points += 1
-                    clock += 1
-
-                    'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                    '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                    '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
-                    '& Val() & ")"
-                    'ins.set_string(aux)
-                    'End If
-                    progressbar(num_lines, bar, percent)
-                    'Next
-                    If clock >= 1000 Then
-                        ins.insert_into_string()
-                        ins.init_string()
-                        clock = 1
                     End If
+                Next
+
+                'If Val() <> "" Then
+                data_points += 1
+                clock += 1
+
+                'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
+                '& Val() & ")"
+                'ins.set_string(aux)
+                'End If
+                progressbar(num_lines, bar, percent)
+                'Next
+                If clock >= 1000 Then
+                    ins.insert_into_string()
+                    ins.init_string()
+                    clock = 1
                 End If
-            Loop Until linea Is Nothing
-            If Not ins.is_empty Then
-                ins.insert_into_string()
             End If
-            data_summary(num_lines, n_data, data_points)
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        Loop Until linea Is Nothing
+        If Not ins.is_empty Then
+            ins.insert_into_string()
+        End If
+        data_summary(num_lines, n_data, data_points)
+        'Catch ex As Exception
+        'MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'End Try
     End Sub
 
     Private Function hex_to_dec(ByVal data As String) As String
