@@ -50,7 +50,7 @@ Public Class logger
 
         Public Sub checked_channel(ByVal ch As String, ByVal state As Boolean)
             Dim index As Integer
-            For i As Integer = 0 To tam
+            For i = 0 To tam - 1
                 If name(i) = ch Then
                     index = i
                 End If
@@ -62,22 +62,20 @@ Public Class logger
     
 
     Public unit As String
-    Dim table_canbus As Dictionary(Of Integer, str_canbus)
+    Dim table_canbus As New Dictionary(Of Integer, str_canbus)
 
 
     Private Sub Load_table_canbus()
         Dim aux As New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
                                   New Boolean() {False, True, True}, _
                                   New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"})
-        table_canbus.Add(971, New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
-                                  New Boolean() {False, True, True}, _
-                                  New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"}))
+        table_canbus.Add(971, aux)
 
         aux = New str_canbus(2, New Integer() {16, 0}, New Integer() {16, 12}, New Integer() {24, 8}, _
                              New Boolean() {False, True}, New String() {"Batteriespannung", "HV-Batterie Stromfluss"})
         table_canbus.Add(59, aux)
 
-        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
+        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {32}, New Boolean() {False}, _
                              New String() {"Bremspedalstellung"})
         table_canbus.Add(48, aux)
 
@@ -652,6 +650,7 @@ Public Class logger
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Integer
+        Dim str As str_canbus
 
         init_Dictionary()
         Load_table_canbus()
@@ -675,14 +674,20 @@ Public Class logger
                 index += 1
                 'For i = 0 To list.CheckedIndices.Count - 1
                 num_lines += 1
+                If datos(5).Split(":")(0) = "Dlc" Then
 
-                value = Val(datos(6))
+                    value = datos(6).Split(":")(1)
 
-                For i = 0 To table_canbus(value).tam
-                    If table_canbus(value).checklist(i) = True Then
-
+                    If table_canbus.TryGetValue(value, str) Then
+                        aux = hex_to_dec(datos(7).Split(":")(1))
+                        For i = 0 To table_canbus(value).tam - 1
+                            If table_canbus(value).checklist(i) = True Then
+                                read_string(aux, table_canbus(value).Startbit(i), _
+                                            table_canbus(value).lange(i), table_canbus(value).Byteanordnung(i))
+                            End If
+                        Next
                     End If
-                Next
+                End If
 
                 'If Val() <> "" Then
                 data_points += 1
@@ -694,17 +699,17 @@ Public Class logger
                 '& Val() & ")"
                 'ins.set_string(aux)
                 'End If
-                progressbar(num_lines, bar, percent)
+                'progressbar(num_lines, bar, percent)
                 'Next
-                If clock >= 1000 Then
-                    ins.insert_into_string()
-                    ins.init_string()
-                    clock = 1
-                End If
+                'If clock >= 1000 Then
+                'ins.insert_into_string()
+                'ins.init_string()
+                'clock = 1
+                'End If
             End If
         Loop Until linea Is Nothing
         If Not ins.is_empty Then
-            ins.insert_into_string()
+            'ins.insert_into_string()
         End If
         data_summary(num_lines, n_data, data_points)
         'Catch ex As Exception
@@ -712,16 +717,58 @@ Public Class logger
         'End Try
     End Sub
 
+    Private Function read_string(ByVal str As String, ByVal start As Integer, _
+                                 ByVal lg As Integer, ByVal ord As Integer) As Integer
+        Dim i, res As Integer
+        Dim aux As String = ""
+        If start = ord Then
+            aux = str.Substring(ord, lg)
+        Else
+            i = Math.Abs(lg - ord)
+            aux = str.Substring(ord, lg - i) & str.Substring(start, i)
+        End If
+        res = bin_to_dec(aux)
+        read_string = res
+
+    End Function
+
     Private Function hex_to_dec(ByVal data As String) As String
-        Dim values() As String
-        values = data.Split(" ")
-        dec_to_bin(values(5))
-        hex_to_dec = values(5)
+        Dim res As String = ""
+        For Each values In data.Split(" ")
+            If values <> "" Then
+                res += dec_to_bin(values)
+            End If
+        Next
+        hex_to_dec = res
+    End Function
+
+    Public Function bin_to_dec(ByVal BinStr As String) As Double
+        Dim mult As Double
+        Dim DecNum As Double
+        mult = 1
+        DecNum = 0
+
+        Dim i As Integer
+        For i = Len(BinStr) To 1 Step -1
+            If Mid(BinStr, i, 1) = "1" Then
+                DecNum = DecNum + mult
+            End If
+            mult = mult * 2
+        Next i
+        bin_to_dec = DecNum
     End Function
 
     Private Function dec_to_bin(ByVal value As String) As String
         Dim BinStr As String
-        BinStr = CBool(value)
+        BinStr = ""
+        Do While value <> 0
+            If (value Mod 2) = 1 Then
+                BinStr = "1" & BinStr
+            Else
+                BinStr = "0" & BinStr
+            End If
+            value = value \ 2
+        Loop
         BinStr = "00000000" & BinStr
         BinStr = BinStr.Substring(BinStr.Length - 8)
         dec_to_bin = BinStr
