@@ -150,6 +150,9 @@
   <metadata name="Ffe_databaseDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>13, 13</value>
   </metadata>
+  <metadata name="Ffe_databaseDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>13, 13</value>
+  </metadata>
   <metadata name="Drive_fullTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>334, 18</value>
   </metadata>
@@ -163,8 +166,8 @@
   <data name="Button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBgAA
-        CwYBZDTpJAAAFIlJREFUaEO1WgdUFmfTXarSFCESIdi7ghUUsRCxRI012AVLjFGjEdFosMUuiqCAPQoY
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
+        CwIBm8luNgAAFIlJREFUaEO1WgdUFmfTXarSFCESIdi7ghUUsRCxRI012AVLjFGjEdFosMUuiqCAPQoY
         e0EpgnSRXgWkKlVQOgIqKCIy/52Nb6KIkeQ7P+fM2bfs7jt35s6deZ5FioiEd39Skhfvjn990ejzT74t
         LS0VamqqhTdv3givX78WpKQ+vCX/VkNDg2j8vZKSkqCr26+5t2/6PL7pO5PCkU3yvtnHt2/fCs+fP9d4
         9Ch3Wlpa6p6UlOQzSUn3L8GuwC7DzsNO3L+fuCUxMWFEfPy9FpGREQI+a/ZvfMqv/+kGb54/F8pKS0Ym

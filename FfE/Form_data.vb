@@ -189,6 +189,7 @@ Public Class Form_data
     Private Sub Drive_fullDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Drive_fullDataGridView.CellContentClick
         Try
             drive_id = Drive_fullDataGridView.CurrentRow.Cells.Item(0).Value
+            clean_lists()
             show_loggers()
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -196,28 +197,23 @@ Public Class Form_data
     End Sub
 
     Private Sub show_loggers()
-        show_data(DataGridView, FfE_Main.id_graphtec)
+        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
+        show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
+        CheckBox9.CheckState = CheckState.Checked
+        execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
+        show_data(DataGridView1, FfE_Main.id_gps, CheckedListBox2)
+        CheckBox11.CheckState = CheckState.Checked
+        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
+        show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
+        CheckBox12.CheckState = CheckState.Checked
         TabControl1.SelectTab(0)
     End Sub
 
-    Private Sub TabControl1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.Click
-        Try
-            If drive_id <> -1 Then
-                Dim index As Integer = TabControl1.SelectedIndex + 1
-                Select Case index
-                    Case FfE_Main.id_graphtec
-                        show_data(DataGridView, FfE_Main.id_graphtec)
-                    Case FfE_Main.id_gps
-                        show_data(DataGridView1, FfE_Main.id_gps)
-                    Case FfE_Main.id_fluke
-                        show_data(DataGridView2, FfE_Main.id_fluke)
-                    Case FfE_Main.id_canbus
-
-                End Select
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+    Private Sub clean_lists()
+        CheckedListBox1.Items.Clear()
+        CheckedListBox2.Items.Clear()
+        CheckedListBox3.Items.Clear()
+        CheckedListBox4.Items.Clear()
     End Sub
 
     Private Sub format_grid(ByRef grid As DataGridView)
@@ -234,7 +230,7 @@ Public Class Form_data
         Next
     End Sub
 
-    Private Sub show_data(ByRef grid As DataGridView, ByVal logger_id As Integer)
+    Private Sub show_data(ByRef grid As DataGridView, ByVal logger_id As Integer, ByVal list As CheckedListBox)
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
@@ -242,7 +238,7 @@ Public Class Form_data
 
         Try
 
-            execute_query_loggers(sql, logger_id)
+            execute_query_loggers(sql, logger_id, list)
 
             ' Abrir la conexión a Sql  
             cn.Open()
@@ -304,7 +300,7 @@ Public Class Form_data
         End Try
     End Sub
 
-    Private Sub execute_query_loggers(ByRef sql As String, ByVal logger_id As Integer)
+    Private Sub execute_query_loggers(ByRef sql As String, ByVal logger_id As Integer, ByVal list As CheckedListBox)
 
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
@@ -324,17 +320,19 @@ Public Class Form_data
             sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
               " and logger_id = " & logger_id
             execute_query(sql, distinct)
-            Sql = "select distinct data_id, unit from data_full where drive_id = " & drive_id & _
+            sql = "select distinct data_id, unit from data_full where drive_id = " & drive_id & _
              " and logger_id = " & logger_id
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
 
             sql = "select data_index as 'Index',time as Time"
-            For i = 1 To distinct
+            For i = 0 To distinct - 1
                 query.Read()
-                sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
-                query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "[" & query.GetString(1) & "]'"
+                If list.GetItemChecked(i) = True Then
+                    sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
+                    query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "[" & query.GetString(1) & "]'"
+                End If
             Next
             sql += " from data_full" & _
                 " where drive_id = " & drive_id & _
@@ -356,4 +354,134 @@ Public Class Form_data
         End Try
     End Sub
 
+    Private Sub execute_list_channels(ByVal logger_id As Integer, ByVal list As CheckedListBox)
+
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim distinct, i As Integer
+        Dim sql As String = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            ' Pasar la consulta sql y la conexión al Sql Command
+            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
+              " and logger_id = " & logger_id
+            execute_query(sql, distinct)
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+             " and logger_id = " & logger_id
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            For i = 0 To distinct - 1
+                query.Read()
+                list.Items.Add(query.GetString(0))
+                list.SetItemChecked(i, True)
+            Next
+
+            cn.Close()
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub delete_channel(ByVal logger_id As Integer, ByVal list As CheckedListBox)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim i As Integer
+        Dim sql As String = ""
+
+        Try
+            If MsgBox("Are yo sure to delete the selected channels?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                ' Abrir la conexión a Sql  
+                cn.Open()
+                cmd.Connection = cn
+                For Each i In list.CheckedIndices
+                    sql = "delete from data where logger_id = " & logger_id & _
+                         " and drive_id = " & drive_id & _
+                         " and data_id like '" & list.Items(i) & "';"
+                    cmd.CommandText = sql
+                    cmd.ExecuteNonQuery()
+                Next
+
+                cn.Close()
+
+            End If
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub select_all_channels(ByRef list As CheckedListBox, ByVal state As Boolean)
+        For i = 0 To list.Items.Count - 1
+            list.SetItemChecked(i, state)
+        Next
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        delete_channel(FfE_Main.id_graphtec, CheckedListBox1)
+        show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
+    End Sub
+
+    Private Sub CheckBox9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox9.CheckedChanged
+        select_all_channels(CheckedListBox1, CheckBox9.CheckState)
+    End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        show_data(DataGridView, FfE_Main.id_gps, CheckedListBox2)
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        delete_channel(FfE_Main.id_gps, CheckedListBox2)
+        show_data(DataGridView, FfE_Main.id_gps, CheckedListBox2)
+    End Sub
+
+    Private Sub CheckBox11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox11.CheckedChanged
+        select_all_channels(CheckedListBox2, CheckBox11.CheckState)
+    End Sub
+
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+        show_data(DataGridView, FfE_Main.id_fluke, CheckedListBox3)
+    End Sub
+
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+        delete_channel(FfE_Main.id_fluke, CheckedListBox3)
+        show_data(DataGridView, FfE_Main.id_fluke, CheckedListBox3)
+    End Sub
+
+    Private Sub CheckBox12_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox12.CheckedChanged
+        select_all_channels(CheckedListBox3, CheckBox12.CheckState)
+    End Sub
 End Class
