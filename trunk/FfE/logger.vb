@@ -377,14 +377,14 @@ Public Class logger
                 text.Text += linea1
             Next
 
-            chlist.Add(New ValueDescriptionPair(48, "Bremspedalstellung"))
-            chlist.Add(New ValueDescriptionPair(59, "Batteriespannung"))
-            chlist.Add(New ValueDescriptionPair(59, "HV-Batterie Stromfluss"))
-            chlist.Add(New ValueDescriptionPair(580, "Gaspedalstellung"))
-            chlist.Add(New ValueDescriptionPair(968, "ICE Drehzahl"))
-            chlist.Add(New ValueDescriptionPair(970, "Fahrzeuggeschwindigkeit"))
-            chlist.Add(New ValueDescriptionPair(971, "SOC"))
-            chlist.Add(New ValueDescriptionPair(971, "max. Batterietemperatur"))
+            ids_ch_canbus.Add(48, "Bremspedalstellung")
+            ids_ch_canbus.Add(59, "Batteriespannung")
+            ids_ch_canbus.Add(59, "HV-Batterie Stromfluss")
+            ids_ch_canbus.Add(580, "Gaspedalstellung")
+            ids_ch_canbus.Add(968, "ICE Drehzahl")
+            ids_ch_canbus.Add(970, "Fahrzeuggeschwindigkeit")
+            ids_ch_canbus.Add(971, "SOC")
+            ids_ch_canbus.Add(971, "max. Batterietemperatur"))
             chlist.Add(New ValueDescriptionPair(971, "min. Batterietemperatur"))
             chlist.Add(New ValueDescriptionPair(1312, "Einspritzung"))
             chlist.Add(New ValueDescriptionPair(1321, "EV Modus"))
@@ -392,31 +392,18 @@ Public Class logger
             chlist.Add(New ValueDescriptionPair(1444, "Tankfüllstand"))
 
             list.Items.Add("Bremspedalstellung")
-            list.Items(0).tag = 48
             list.Items.Add("Batteriespannung")
-            list.Items(1).tag = 59
             list.Items.Add("HV-Batterie Stromfluss")
-            list.Items(2).tag = 59
             list.Items.Add("Gaspedalstellung")
-            list.Items(3).tag = 580
             list.Items.Add("ICE Drehzahl")
-            list.Items(4).tag = 968
             list.Items.Add("Fahrzeuggeschwindigkeit")
-            list.Items(5).tag = 970
             list.Items.Add("SOC")
-            list.Items(6).tag = 971
             list.Items.Add("max. Batterietemperatur")
-            list.Items(7).tag = 971
             list.Items.Add("min. Batterietemperatur")
-            list.Items(8).tag = 971
             list.Items.Add("Einspritzung")
-            list.Items(9).tag = 1312
             list.Items.Add("EV Modus")
-            list.Items(10).tag = 1321
             list.Items.Add("Motor-Kühlmitteltemeratur")
-            list.Items(11).tag = 1324
             list.Items.Add("Tankfüllstand")
-            list.Items(13).tag = 1444
 
 
 
