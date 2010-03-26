@@ -59,6 +59,8 @@ Public Class logger
         End Sub
     End Class
 
+    
+
     Public unit As String
     Dim table_canbus As Dictionary(Of Integer, str_canbus)
 
@@ -390,19 +392,7 @@ Public Class logger
                 text.Text += linea1
             Next
 
-            ids_ch_canbus.Add("Bremspedalstellung", 48)
-            ids_ch_canbus.Add("Batteriespannung", 59)
-            ids_ch_canbus.Add("HV-Batterie Stromfluss", 59)
-            ids_ch_canbus.Add("Gaspedalstellung", 580)
-            ids_ch_canbus.Add("ICE Drehzahl", 968)
-            ids_ch_canbus.Add("Fahrzeuggeschwindigkeit", 970)
-            ids_ch_canbus.Add("SOC", 971)
-            ids_ch_canbus.Add("max. Batterietemperatur", 971)
-            ids_ch_canbus.Add("min. Batterietemperatur", 971)
-            ids_ch_canbus.Add("Einspritzung", 1312)
-            ids_ch_canbus.Add("EV Modus", 1321)
-            ids_ch_canbus.Add("Motor-Kühlmitteltemeratur", 1324)
-            ids_ch_canbus.Add("Tankfüllstand", 1444)
+
 
             list.Items.Add("Bremspedalstellung")
             list.Items.Add("Batteriespannung")
@@ -631,6 +621,22 @@ Public Class logger
         End Try
     End Sub
 
+    Private Sub init_Dictionary()
+        ids_ch_canbus.Add("Bremspedalstellung", 48)
+        ids_ch_canbus.Add("Batteriespannung", 59)
+        ids_ch_canbus.Add("HV-Batterie Stromfluss", 59)
+        ids_ch_canbus.Add("Gaspedalstellung", 580)
+        ids_ch_canbus.Add("ICE Drehzahl", 968)
+        ids_ch_canbus.Add("Fahrzeuggeschwindigkeit", 970)
+        ids_ch_canbus.Add("SOC", 971)
+        ids_ch_canbus.Add("max. Batterietemperatur", 971)
+        ids_ch_canbus.Add("min. Batterietemperatur", 971)
+        ids_ch_canbus.Add("Einspritzung", 1312)
+        ids_ch_canbus.Add("EV Modus", 1321)
+        ids_ch_canbus.Add("Motor-Kühlmitteltemeratur", 1324)
+        ids_ch_canbus.Add("Tankfüllstand", 1444)
+    End Sub
+
     'inserta los datos del fichero en la tabla data (logger CANBUS)
     Public Sub insert_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
@@ -645,7 +651,7 @@ Public Class logger
         Dim clock As Integer = 0
         Dim value As Integer
 
-
+        init_Dictionary()
         Try
             'leo las 7 primeras lineas que pertenecen a la cabecera
             For i = 0 To 6
