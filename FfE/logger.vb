@@ -69,7 +69,9 @@ Public Class logger
         Dim aux As New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
                                   New Boolean() {False, True, True}, _
                                   New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"})
-        table_canbus.Add(971, aux)
+        table_canbus.Add(971, New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
+                                  New Boolean() {False, True, True}, _
+                                  New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"}))
 
         aux = New str_canbus(2, New Integer() {16, 0}, New Integer() {16, 12}, New Integer() {24, 8}, _
                              New Boolean() {False, True}, New String() {"Batteriespannung", "HV-Batterie Stromfluss"})
