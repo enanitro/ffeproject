@@ -370,25 +370,26 @@ Public Class logger
 
         Try
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
+            text.Text = ""
             linea1 = fichero.ReadLine
             For i = 1 To 6
                 linea1 = fichero.ReadLine
-                text.Text = linea1
+                text.Text += linea1
             Next
 
-            chlist.Add(New ValueDescriptionPair("Bremspedalstellung", 48))
-            chlist.Add(New ValueDescriptionPair("Batteriespannung", 59))
-            chlist.Add(New ValueDescriptionPair("HV-Batterie Stromfluss", 59))
-            chlist.Add(New ValueDescriptionPair("Gaspedalstellung", 580))
-            chlist.Add(New ValueDescriptionPair("ICE Drehzahl", 968))
-            chlist.Add(New ValueDescriptionPair("Fahrzeuggeschwindigkeit", 970))
-            chlist.Add(New ValueDescriptionPair("SOC", 971))
-            chlist.Add(New ValueDescriptionPair("max. Batterietemperatur", 971))
-            chlist.Add(New ValueDescriptionPair("min. Batterietemperatur", 971))
-            chlist.Add(New ValueDescriptionPair("Einspritzung", 1312))
-            chlist.Add(New ValueDescriptionPair("EV Modus", 1321))
-            chlist.Add(New ValueDescriptionPair("Motor-Kühlmitteltemeratur", 1324))
-            chlist.Add(New ValueDescriptionPair("Tankfüllstand", 1444))
+            chlist.Add(New ValueDescriptionPair(48, "Bremspedalstellung"))
+            chlist.Add(New ValueDescriptionPair(59, "Batteriespannung"))
+            chlist.Add(New ValueDescriptionPair(59, "HV-Batterie Stromfluss"))
+            chlist.Add(New ValueDescriptionPair(580, "Gaspedalstellung"))
+            chlist.Add(New ValueDescriptionPair(968, "ICE Drehzahl"))
+            chlist.Add(New ValueDescriptionPair(970, "Fahrzeuggeschwindigkeit"))
+            chlist.Add(New ValueDescriptionPair(971, "SOC"))
+            chlist.Add(New ValueDescriptionPair(971, "max. Batterietemperatur"))
+            chlist.Add(New ValueDescriptionPair(971, "min. Batterietemperatur"))
+            chlist.Add(New ValueDescriptionPair(1312, "Einspritzung"))
+            chlist.Add(New ValueDescriptionPair(1321, "EV Modus"))
+            chlist.Add(New ValueDescriptionPair(1324, "Motor-Kühlmitteltemeratur"))
+            chlist.Add(New ValueDescriptionPair(1444, "Tankfüllstand"))
 
             With list
                 .SelectedValue = "Value"
@@ -402,9 +403,9 @@ Public Class logger
         End Try
     End Sub
 
-    Public Sub 
+    'Public Sub 
 
-        'inserta los datos del fichero en la tabla data (logger graphtec GL800)
+    'inserta los datos del fichero en la tabla data (logger graphtec GL800)
     Public Sub insert_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
