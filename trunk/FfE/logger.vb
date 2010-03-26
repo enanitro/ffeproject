@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class logger
+    Dim ids_ch_canbus As Dictionary(Of String, Integer)
 
     Private Class str_canbus
         Public tam As Integer
@@ -366,7 +367,6 @@ Public Class logger
         Dim datos1(), datos2() As String
         Dim interval As String = ""
         Dim i, st, ft As Integer
-        Dim chlist As New ArrayList
 
         Try
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
@@ -377,25 +377,32 @@ Public Class logger
                 text.Text += linea1
             Next
 
-            chlist.Add(New ValueDescriptionPair(48, "Bremspedalstellung"))
-            chlist.Add(New ValueDescriptionPair(59, "Batteriespannung"))
-            chlist.Add(New ValueDescriptionPair(59, "HV-Batterie Stromfluss"))
-            chlist.Add(New ValueDescriptionPair(580, "Gaspedalstellung"))
-            chlist.Add(New ValueDescriptionPair(968, "ICE Drehzahl"))
-            chlist.Add(New ValueDescriptionPair(970, "Fahrzeuggeschwindigkeit"))
-            chlist.Add(New ValueDescriptionPair(971, "SOC"))
-            chlist.Add(New ValueDescriptionPair(971, "max. Batterietemperatur"))
-            chlist.Add(New ValueDescriptionPair(971, "min. Batterietemperatur"))
-            chlist.Add(New ValueDescriptionPair(1312, "Einspritzung"))
-            chlist.Add(New ValueDescriptionPair(1321, "EV Modus"))
-            chlist.Add(New ValueDescriptionPair(1324, "Motor-Kühlmitteltemeratur"))
-            chlist.Add(New ValueDescriptionPair(1444, "Tankfüllstand"))
-
-            With list
-                .SelectedValue = "Value"
-                .SelectedItem = "Description"
-                .DataSource = chlist
-            End With
+            list.Items.Add("Bremspedalstellung")
+            list.Items(0).tag = 48
+            list.Items.Add("Batteriespannung")
+            list.Items(1).tag = 59
+            list.Items.Add("HV-Batterie Stromfluss")
+            list.Items(2).tag = 59
+            list.Items.Add("Gaspedalstellung")
+            list.Items(3).tag = 580
+            list.Items.Add("ICE Drehzahl")
+            list.Items(4).tag = 968
+            list.Items.Add("Fahrzeuggeschwindigkeit")
+            list.Items(5).tag = 970
+            list.Items.Add("SOC")
+            list.Items(6).tag = 971
+            list.Items.Add("max. Batterietemperatur")
+            list.Items(7).tag = 971
+            list.Items.Add("min. Batterietemperatur")
+            list.Items(8).tag = 971
+            list.Items.Add("Einspritzung")
+            list.Items(9).tag = 1312
+            list.Items.Add("EV Modus")
+            list.Items(10).tag = 1321
+            list.Items.Add("Motor-Kühlmitteltemeratur")
+            list.Items(11).tag = 1324
+            list.Items.Add("Tankfüllstand")
+            list.Items(13).tag = 1444
 
 
         Catch ex As Exception
