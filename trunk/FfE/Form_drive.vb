@@ -344,21 +344,21 @@ Public Class Form_drive
 
 
     Private Sub btn_import_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_import.Click
-        Try
-            Me.Validate()
-            Me.DriveBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
-            Dim import_full As New form_import_csv_full
-            If Me.DriveBindingSource.Position <> -1 Then
-                If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
-                    import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
-                    import_full.ShowDialog()
-                    show_Data()
-                End If
+        'Try
+        Me.Validate()
+        Me.DriveBindingSource.EndEdit()
+        Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+        Dim import_full As New form_import_csv_full
+        If Me.DriveBindingSource.Position <> -1 Then
+            If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
+                import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
+                import_full.ShowDialog()
+                show_Data()
             End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        End If
+        'Catch ex As Exception
+        'MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'End Try
     End Sub
 
     Private Sub Drive_idLabel1_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.TextChanged
