@@ -95,6 +95,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property add_rule() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("add_rule", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property barra() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("barra", resourceCulture)
@@ -154,6 +161,13 @@ Namespace My.Resources
         Friend ReadOnly Property del_img() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("del_img", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property del_rule() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("del_rule", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -273,6 +287,13 @@ Namespace My.Resources
         Friend ReadOnly Property save_img() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("save_img", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property save_rule() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("save_rule", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
