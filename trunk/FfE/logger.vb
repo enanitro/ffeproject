@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class logger
-    Dim ids_ch_canbus As Dictionary(Of String, Integer)
+    Dim ids_ch_canbus As New Dictionary(Of String, Integer)
 
     Private Class str_canbus
         Public tam As Integer
@@ -104,6 +104,19 @@ Public Class logger
         aux = New str_canbus(1, New Integer() {16}, New Integer() {16}, New Integer() {16}, New Boolean() {False}, _
                              New String() {"ICE Drehzahl"})
         table_canbus.Add(980, aux)
+    End Sub
+
+    Private Sub count_channels(ByVal list As CheckedListBox)
+        For Each name In list.CheckedItems
+            name = CType(name, String).Substring(0, CType(name, String).IndexOf(" ->"))
+            checked_list_canbus(name, True)
+        Next
+    End Sub
+
+    Private Sub checked_list_canbus(ByVal name As String, ByVal state As Boolean)
+        Dim ch As Integer
+        ch = ids_ch_canbus(name)
+        table_canbus(ch).checked_channel(name, state)
     End Sub
 
 
@@ -386,7 +399,6 @@ Public Class logger
             ids_ch_canbus.Add("SOC", 971)
             ids_ch_canbus.Add("max. Batterietemperatur", 971)
             ids_ch_canbus.Add("min. Batterietemperatur", 971)
-            ids_ch_canbus.Add("min. Batterietemperatur", 971)
             ids_ch_canbus.Add("Einspritzung", 1312)
             ids_ch_canbus.Add("EV Modus", 1321)
             ids_ch_canbus.Add("Motor-Kühlmitteltemeratur", 1324)
@@ -405,6 +417,8 @@ Public Class logger
             list.Items.Add("EV Modus")
             list.Items.Add("Motor-Kühlmitteltemeratur")
             list.Items.Add("Tankfüllstand")
+
+            Array.Resize(measure, 13)
 
 
 
@@ -623,49 +637,56 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val As String
+        Dim linea, aux As String
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value As Double
+        Dim value As Integer
+
 
         Try
-            'leo la primera linea que pertenece a la cabecera
-            linea = fichero.ReadLine
+            'leo las 7 primeras lineas que pertenecen a la cabecera
+            For i = 0 To 6
+                linea = fichero.ReadLine
+            Next
 
             Dim ins As New insert_Data
             ins.init_string()
 
             config_progressbar(bar, long_file, list)
+            count_channels(list)
 
             Do
                 linea = fichero.ReadLine
                 If linea <> Nothing Then
                     Application.DoEvents()
-                    datos = linea.Split(",")
+                    datos = linea.Split(vbTab)
                     index += 1
-                    For i = 0 To list.CheckedIndices.Count - 1
-                        num_lines += 1
+                    'For i = 0 To list.CheckedIndices.Count - 1
+                    num_lines += 1
 
-                        val = ""
-                        'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
-                        val = datos(list.CheckedIndices.Item(i) + 1) '.Replace(".", ",")
+                    value = Val(datos(6))
 
+                    For i = 0 To table_canbus(value).tam
+                        If table_canbus(value).checklist(i) = True Then
 
-                        If val <> "" Then
-                            data_points += 1
-                            clock += 1
-
-                            aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
-                            & val & ")"
-                            ins.set_string(aux)
                         End If
-                        progressbar(num_lines, bar, percent)
                     Next
+
+                    'If Val() <> "" Then
+                    data_points += 1
+                    clock += 1
+
+                    'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                    '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                    '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
+                    '& Val() & ")"
+                    'ins.set_string(aux)
+                    'End If
+                    progressbar(num_lines, bar, percent)
+                    'Next
                     If clock >= 1000 Then
                         ins.insert_into_string()
                         ins.init_string()
@@ -681,6 +702,21 @@ Public Class logger
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Function hex_to_dec(ByVal data As String) As String
+        Dim values() As String
+        values = data.Split(" ")
+        dec_to_bin(values(5))
+        hex_to_dec = values(5)
+    End Function
+
+    Private Function dec_to_bin(ByVal value As String) As String
+        Dim BinStr As String
+        BinStr = CBool(value)
+        BinStr = "00000000" & BinStr
+        BinStr = BinStr.Substring(BinStr.Length - 8)
+        dec_to_bin = BinStr
+    End Function
 
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
                             ByRef path As String, ByRef long_file As Integer)
