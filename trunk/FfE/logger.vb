@@ -377,6 +377,20 @@ Public Class logger
                 text.Text += linea1
             Next
 
+            chlist.Add(New ValueDescriptionPair(48, "Bremspedalstellung"))
+            chlist.Add(New ValueDescriptionPair(59, "Batteriespannung"))
+            chlist.Add(New ValueDescriptionPair(59, "HV-Batterie Stromfluss"))
+            chlist.Add(New ValueDescriptionPair(580, "Gaspedalstellung"))
+            chlist.Add(New ValueDescriptionPair(968, "ICE Drehzahl"))
+            chlist.Add(New ValueDescriptionPair(970, "Fahrzeuggeschwindigkeit"))
+            chlist.Add(New ValueDescriptionPair(971, "SOC"))
+            chlist.Add(New ValueDescriptionPair(971, "max. Batterietemperatur"))
+            chlist.Add(New ValueDescriptionPair(971, "min. Batterietemperatur"))
+            chlist.Add(New ValueDescriptionPair(1312, "Einspritzung"))
+            chlist.Add(New ValueDescriptionPair(1321, "EV Modus"))
+            chlist.Add(New ValueDescriptionPair(1324, "Motor-Kühlmitteltemeratur"))
+            chlist.Add(New ValueDescriptionPair(1444, "Tankfüllstand"))
+
             list.Items.Add("Bremspedalstellung")
             list.Items(0).tag = 48
             list.Items.Add("Batteriespannung")
@@ -403,6 +417,7 @@ Public Class logger
             list.Items(11).tag = 1324
             list.Items.Add("Tankfüllstand")
             list.Items(13).tag = 1444
+
 
 
         Catch ex As Exception
