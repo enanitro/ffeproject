@@ -321,7 +321,7 @@ Public Class Form_data
             sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
               " and logger_id = " & logger_id
             execute_query(sql, distinct)
-            sql = "select distinct data_id, unit from data_full where drive_id = " & drive_id & _
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
              " and logger_id = " & logger_id
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -332,7 +332,7 @@ Public Class Form_data
                 query.Read()
                 If list.GetItemChecked(i) = True Then
                     sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
-                    query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "[" & query.GetString(1) & "]'"
+                    query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "'"
                 End If
             Next
             sql += " from data_full" & _

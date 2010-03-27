@@ -357,10 +357,14 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub put_ch_list(ByVal list As CheckedListBox, ByVal logger_id As Integer, ByVal ch() As String)
-        Dim str As String
+        Dim str As String = ""
         Dim x As Integer
         For Each i In list.CheckedIndices
             str = search_measure(logger_id, "name", ch(i), "channel", x)
+            If str = "" Then
+                str = ch(i)
+                list.SetItemChecked(i, False)
+            End If
             list.Items(i) = str
         Next
     End Sub
