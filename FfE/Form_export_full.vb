@@ -204,7 +204,7 @@ Public Class Form_export_full
             sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id.Text & _
               " and logger_id = " & logger_id
             execute_query(sql, distinct)
-            sql = "select distinct data_id, unit from data_full where drive_id = " & drive_id.Text & _
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
              " and logger_id = " & logger_id
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -214,7 +214,7 @@ Public Class Form_export_full
             res = "INDEX,TIME"
             For i = 1 To distinct
                 query.Read()
-                res += "," & query.GetString(0) & "[" & query.GetString(1) & "]"
+                res += "," & query.GetString(0)
                 sql += ",',',sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             Next
             sql += ") as format_row from data" & _

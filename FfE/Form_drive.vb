@@ -410,6 +410,7 @@ Public Class Form_drive
         grid.Columns.Remove(grid.Columns.Item(1))
         grid.Columns.Remove(grid.Columns.Item(1))
         grid.Columns.Remove(grid.Columns.Item(3))
+        grid.Columns.Remove(grid.Columns.Item(5))
         grid.Columns.Item(0).HeaderText = "Data id"
         grid.Columns.Item(0).Width = 250
         grid.Columns.Item(1).HeaderText = "Time"
