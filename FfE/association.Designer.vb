@@ -58,7 +58,7 @@ Partial Class association
         Me.Label1.Size = New System.Drawing.Size(249, 86)
         Me.Label1.TabIndex = 29
         Me.Label1.Text = "These channels can be associated or disassociated with the measure. Select the as" & _
-            "sociations/disassociation and press the correct button." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+            "sociations/disassociations and press the correct button." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Button1
         '

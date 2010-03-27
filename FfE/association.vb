@@ -44,14 +44,19 @@ Public Class association
 
     Private Sub load_checkedlistbox()
         Dim name() As String
+        Dim str, ch As String
         Try
-            For Each ch In list.CheckedItems
+            For Each i In list.CheckedIndices
+                ch = list.Items(i)
                 name = ch.split("->")
-                If name.Length = 0 Then
+                str = ch
+                If name.Length <= 1 Then
                     ch = search_measure(logger, "channel", ch, "name") & " -> " & ch
                 End If
                 CheckedListBox1.Items.Add(ch)
+                list.Items.Item(i) = str
             Next
+
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -93,7 +98,7 @@ Public Class association
 
     Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
         Dim name() As String
-        Dim str As String
+        Dim str, s1, s2 As String
         Dim msg As String = "The following associations already exist:"
         Dim id As Integer
         Try
