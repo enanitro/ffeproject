@@ -1,124 +1,70 @@
 ﻿Imports MySql.Data
 Imports MySql.Data.MySqlClient
 
+'0 Bremspedalstellung
+'1 "Batteriespannung
+'2 HV-Batterie Stromfluss
+'3 Gaspedalstellung
+'4 ICE Drehzahl
+'5 Fahrzeuggeschwindigkeit
+'6 SOC
+'7 max. Batterietemperatur
+'8 min. Batterietemperatur
+'9 Einspritzung
+'10 EV Modus
+'11 Motor-Kühlmitteltemeratur
+'12 Tankfüllstand
+
+
 Public Class logger
-    Dim ids_ch_canbus As New Dictionary(Of String, Integer)
 
     Private Class str_canbus
-        Public tam As Integer
-        Public Startbit() As Integer
-        Public lange() As Integer
-        Public Byteanordnung() As Integer
-        Public Wertetyp() As Boolean
-        Public name() As String
-        Public checklist() As Boolean
+        Public Startbit As Integer
+        Public lange As Integer
+        Public Byteanordnung As Integer
+        Public Wertetyp As Boolean
+        Public faktor As Double
+        Public id As Integer
 
-        Public Sub New(ByVal canbus_long As Integer, ByVal sb() As Integer, ByVal lg() As Integer, _
-                       ByVal bd() As Integer, ByVal wt() As Boolean, ByVal n() As String)
-            tam = canbus_long
+        Public Sub New(ByVal i As Integer, ByVal sb As Integer, ByVal lg As Integer, _
+                       ByVal bd As Integer, ByVal wt As Boolean, ByVal dec As Double)
+            id = i
             Startbit = sb
             lange = lg
             Byteanordnung = bd
             Wertetyp = wt
-            name = n
-            checklist = New Boolean() {False, False, False}
+            faktor = dec
         End Sub
 
-        Public Function get_tam() As Integer
-            Return tam
-        End Function
-
-        Public Function get_startbit(ByVal index As Integer) As Integer
-            Return Startbit(index)
-        End Function
-
-        Public Function get_lange(ByVal index As Integer) As Integer
-            Return lange(index)
-        End Function
-
-        Public Function get_Byteanordnung(ByVal index As Integer) As Integer
-            Return Byteanordnung(index)
-        End Function
-
-        Public Function get_Wertetyp(ByVal index As Integer) As Boolean
-            Return Wertetyp(index)
-        End Function
-
-        Public Function get_name(ByVal index As Integer) As String
-            Return name(index)
-        End Function
-
-        Public Sub checked_channel(ByVal ch As String, ByVal state As Boolean)
-            Dim index As Integer
-            For i = 0 To tam - 1
-                If name(i) = ch Then
-                    index = i
-                End If
-            Next
-            checklist(index) = state
-        End Sub
     End Class
-
-    
 
     Public unit As String
     Dim table_canbus As New Dictionary(Of Integer, str_canbus)
+    Dim ids_chs As New Dictionary(Of Integer, Integer)
+    Dim ini As Integer
 
-
-    Private Sub Load_table_canbus()
-        Dim aux As New str_canbus(3, New Integer() {16, 40, 32}, New Integer() {16, 8, 8}, New Integer() {24, 40, 32}, _
-                                  New Boolean() {False, True, True}, _
-                                  New String() {"SOC", "max. Batterietemperatur", "min. Batterietemperatur"})
-        table_canbus.Add(971, aux)
-
-        aux = New str_canbus(2, New Integer() {16, 0}, New Integer() {16, 12}, New Integer() {24, 8}, _
-                             New Boolean() {False, True}, New String() {"Batteriespannung", "HV-Batterie Stromfluss"})
-        table_canbus.Add(59, aux)
-
-        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {32}, New Boolean() {False}, _
-                             New String() {"Bremspedalstellung"})
-        table_canbus.Add(48, aux)
-
-        aux = New str_canbus(1, New Integer() {16}, New Integer() {8}, New Integer() {16}, New Boolean() {False}, _
-                             New String() {"Fahrzeuggeschwindigkeit"})
-        table_canbus.Add(970, aux)
-
-        aux = New str_canbus(1, New Integer() {8}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
-                             New String() {"Motor-Kühlmitteltemeratur"})
-        table_canbus.Add(1324, aux)
-
-        aux = New str_canbus(1, New Integer() {32}, New Integer() {8}, New Integer() {32}, New Boolean() {False}, _
-                             New String() {"EV Modus"})
-        table_canbus.Add(1321, aux)
-
-        aux = New str_canbus(1, New Integer() {8}, New Integer() {16}, New Integer() {16}, New Boolean() {False}, _
-                             New String() {"Einspritzung"})
-        table_canbus.Add(1312, aux)
-
-        aux = New str_canbus(1, New Integer() {8}, New Integer() {8}, New Integer() {8}, New Boolean() {False}, _
-                             New String() {"Tankfüllstand"})
-        table_canbus.Add(1444, aux)
-
-        aux = New str_canbus(1, New Integer() {48}, New Integer() {8}, New Integer() {48}, New Boolean() {False}, _
-                             New String() {"Gaspedalstellung"})
-        table_canbus.Add(580, aux)
-
-        aux = New str_canbus(1, New Integer() {16}, New Integer() {16}, New Integer() {16}, New Boolean() {False}, _
-                             New String() {"ICE Drehzahl"})
-        table_canbus.Add(980, aux)
-    End Sub
-
-    Private Sub count_channels(ByVal list As CheckedListBox)
-        For Each name In list.CheckedItems
-            name = CType(name, String).Substring(0, CType(name, String).IndexOf(" ->"))
-            checked_list_canbus(name, True)
+    Private Sub load_ids_chs(ByVal list As CheckedListBox)
+        For i = 0 To 12
+            If list.GetItemChecked(i) Then
+                ids_chs.Add(table_canbus(i).id, i)
+            End If
         Next
     End Sub
 
-    Private Sub checked_list_canbus(ByVal name As String, ByVal state As Boolean)
-        Dim ch As Integer
-        ch = ids_ch_canbus(name)
-        table_canbus(ch).checked_channel(name, state)
+    Private Sub Load_table_canbus()
+        table_canbus.Add(0, New str_canbus(48, 32, 8, 32, False, 1))
+        table_canbus.Add(1, New str_canbus(59, 16, 16, 24, False, 1))
+        table_canbus.Add(2, New str_canbus(59, 0, 12, 8, True, 0.1))
+        table_canbus.Add(3, New str_canbus(580, 48, 8, 48, False, 0.5))
+        table_canbus.Add(4, New str_canbus(968, 16, 16, 16, False, 32))
+        table_canbus.Add(5, New str_canbus(970, 16, 8, 16, False, 1))
+        table_canbus.Add(6, New str_canbus(971, 16, 16, 24, False, 0.5))
+        table_canbus.Add(7, New str_canbus(971, 40, 8, 40, True, 1))
+        table_canbus.Add(8, New str_canbus(971, 32, 8, 32, True, 1))
+        table_canbus.Add(9, New str_canbus(1312, 8, 16, 16, False, 1))
+        table_canbus.Add(10, New str_canbus(1321, 32, 8, 32, False, 1))
+        table_canbus.Add(11, New str_canbus(1324, 8, 8, 8, False, 1))
+        table_canbus.Add(12, New str_canbus(1444, 8, 8, 8, False, 2.5))
     End Sub
 
 
@@ -174,10 +120,7 @@ Public Class logger
             'comprobar si es un archivo del logger graphtec gl800
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
-            If datos1(1) <> """" & "GRAPHTEC Corporation" & """" Then
-                MsgBox("error", MsgBoxStyle.Critical)
-                Exit Sub
-            End If
+
             text.Text = datos1(1) + vbCrLf
 
             'leer cabecera y mostrarla por pantalla
@@ -254,10 +197,6 @@ Public Class logger
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
-            If datos1(0) <> "INDEX" Or datos1(datos1.Length - 1) <> "VOX" Or datos1.Length <> 15 Then
-                MsgBox("error", MsgBoxStyle.Critical)
-                Exit Sub
-            End If
 
             'introducir los canales en checklistbox
             For i = 4 To datos1.Length - 2
@@ -378,21 +317,39 @@ Public Class logger
     Public Sub analyze_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea1, linea2, name As String
+        Dim linea1 As String
         Dim datos1(), datos2() As String
         Dim interval As String = ""
-        Dim i, st, ft As Integer
+        Dim i As Integer
 
         Try
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
-            text.Text = ""
+            text.Text = "CAN-BUS" & vbCrLf
             linea1 = fichero.ReadLine
-            For i = 1 To 6
+            datos1 = linea1.Split(vbTab)
+            linea1 = fichero.ReadLine
+            datos2 = linea1.Split(vbTab)
+            text.Text += datos1(0).Trim(";") & ": " & datos2(0) & vbCrLf
+            text.Text += datos1(1).Trim(";") & ": " & datos2(1) & vbCrLf
+            text.Text += "Date/Time: " & datos2(4) & vbCrLf
+
+            linea1 = fichero.ReadLine
+            linea1 = fichero.ReadLine
+            linea1 = fichero.ReadLine
+            datos1 = linea1.Split(vbTab)
+            ini = 5
+            Do While datos1(5).Split(":")(0) <> "Dlc"
                 linea1 = fichero.ReadLine
-                text.Text += linea1
-            Next
+                datos1 = linea1.Split(vbTab)
+                ini += 1
+            Loop
 
-
+            long_file = 1
+            Do
+                linea1 = fichero.ReadLine
+                long_file += 1
+            Loop While linea1 <> Nothing
+            text.Text += "Data points: " & long_file & vbCrLf
 
             list.Items.Add("Bremspedalstellung")
             list.Items.Add("Batteriespannung")
@@ -409,8 +366,6 @@ Public Class logger
             list.Items.Add("Tankfüllstand")
 
             Array.Resize(measure, 13)
-
-
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -621,21 +576,6 @@ Public Class logger
         End Try
     End Sub
 
-    Private Sub init_Dictionary()
-        ids_ch_canbus.Add("Bremspedalstellung", 48)
-        ids_ch_canbus.Add("Batteriespannung", 59)
-        ids_ch_canbus.Add("HV-Batterie Stromfluss", 59)
-        ids_ch_canbus.Add("Gaspedalstellung", 580)
-        ids_ch_canbus.Add("ICE Drehzahl", 968)
-        ids_ch_canbus.Add("Fahrzeuggeschwindigkeit", 970)
-        ids_ch_canbus.Add("SOC", 971)
-        ids_ch_canbus.Add("max. Batterietemperatur", 971)
-        ids_ch_canbus.Add("min. Batterietemperatur", 971)
-        ids_ch_canbus.Add("Einspritzung", 1312)
-        ids_ch_canbus.Add("EV Modus", 1321)
-        ids_ch_canbus.Add("Motor-Kühlmitteltemeratur", 1324)
-        ids_ch_canbus.Add("Tankfüllstand", 1444)
-    End Sub
 
     'inserta los datos del fichero en la tabla data (logger CANBUS)
     Public Sub insert_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
@@ -649,85 +589,84 @@ Public Class logger
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value As Integer
+        Dim value, id_ch As Integer
+        Dim res As Double
         Dim str As str_canbus
 
-        init_Dictionary()
+
         Load_table_canbus()
-        'Try
-        'leo las 7 primeras lineas que pertenecen a la cabecera
-        For i = 0 To 6
-            linea = fichero.ReadLine
-        Next
+        load_ids_chs(list)
+        Try
+            'leo las 7 primeras lineas que pertenecen a la cabecera
+            For i = 0 To 6
+                linea = fichero.ReadLine
+            Next
 
-        Dim ins As New insert_Data
-        ins.init_string()
+            Dim ins As New insert_Data
+            ins.init_string()
 
-        config_progressbar(bar, long_file, list)
-        count_channels(list)
+            config_progressbar(bar, long_file, list)
 
-        Do
-            linea = fichero.ReadLine
-            If linea <> Nothing Then
-                Application.DoEvents()
-                datos = linea.Split(vbTab)
-                index += 1
-                'For i = 0 To list.CheckedIndices.Count - 1
-                num_lines += 1
-                If datos(5).Split(":")(0) = "Dlc" Then
+            Do
+                linea = fichero.ReadLine
+                If linea <> Nothing Then
+                    Application.DoEvents()
+                    datos = linea.Split(vbTab)
+                    index += 1
 
-                    value = datos(6).Split(":")(1)
+                    num_lines += 1
+                    If datos.Length >= 8 Then
+                        If datos(5).Split(":")(0) = "Dlc" Then
 
-                    If table_canbus.TryGetValue(value, str) Then
-                        aux = hex_to_dec(datos(7).Split(":")(1))
-                        For i = 0 To table_canbus(value).tam - 1
-                            If table_canbus(value).checklist(i) = True Then
-                                read_string(aux, table_canbus(value).Startbit(i), _
-                                            table_canbus(value).lange(i), table_canbus(value).Byteanordnung(i))
+                            value = datos(6).Split(":")(1)
+                            If ids_chs.TryGetValue(value, id_ch) Then
+                                aux = hex_to_dec(datos(7).Split(":")(1))
+                                res = read_string(aux, table_canbus(id_ch))
                             End If
-                        Next
+
+                        End If
                     End If
+
+                    'If Val() <> "" Then
+                    data_points += 1
+                    clock += 1
+
+                    'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                    '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                    '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
+                    '& Val() & ")"
+                    'ins.set_string(aux)
+                    'End If
+                    'progressbar(num_lines, bar, percent)
+                    'Next
+                    'If clock >= 1000 Then
+                    'ins.insert_into_string()
+                    'ins.init_string()
+                    'clock = 1
+                    'End If
                 End If
-
-                'If Val() <> "" Then
-                data_points += 1
-                clock += 1
-
-                'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
-                '& Val() & ")"
-                'ins.set_string(aux)
-                'End If
-                'progressbar(num_lines, bar, percent)
-                'Next
-                'If clock >= 1000 Then
+            Loop Until linea Is Nothing
+            If Not ins.is_empty Then
                 'ins.insert_into_string()
-                'ins.init_string()
-                'clock = 1
-                'End If
             End If
-        Loop Until linea Is Nothing
-        If Not ins.is_empty Then
-            'ins.insert_into_string()
-        End If
-        data_summary(num_lines, n_data, data_points)
-        'Catch ex As Exception
-        'MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
+            'data_summary(num_lines, n_data, data_points)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Function read_string(ByVal str As String, ByVal start As Integer, _
-                                 ByVal lg As Integer, ByVal ord As Integer) As Integer
-        Dim i, res As Integer
+    Private Function read_string(ByVal str As String, ByVal tb As str_canbus) As Double
+        Dim i As Integer
+        Dim res As Double
         Dim aux As String = ""
-        If start = ord Then
-            aux = str.Substring(ord, lg)
+        If tb.Startbit = tb.Byteanordnung Then
+            aux = str.Substring(tb.Byteanordnung, tb.lange)
         Else
-            i = Math.Abs(lg - ord)
-            aux = str.Substring(ord, lg - i) & str.Substring(start, i)
+            i = Math.Abs(tb.lange - tb.Byteanordnung)
+            aux = str.Substring(tb.Byteanordnung, tb.lange - i) & str.Substring(tb.Startbit, i)
         End If
-        res = bin_to_dec(aux)
+        res = bin_to_dec(aux, tb.Wertetyp)
+        res = res * tb.faktor
         read_string = res
 
     End Function
@@ -742,20 +681,23 @@ Public Class logger
         hex_to_dec = res
     End Function
 
-    Public Function bin_to_dec(ByVal BinStr As String) As Double
-        Dim mult As Double
-        Dim DecNum As Double
-        mult = 1
-        DecNum = 0
+    Private Function bin_to_dec(ByVal BinStr As String, ByVal sign As Boolean) As Double
+        Dim mult As Double = 1
+        Dim DecNum As Double = 0
+        Dim s As String = 0
+        If sign = True Then
+            s = BinStr(0)
+            BinStr = BinStr.Substring(1, BinStr.Length - 1)
+        End If
 
-        Dim i As Integer
         For i = Len(BinStr) To 1 Step -1
             If Mid(BinStr, i, 1) = "1" Then
                 DecNum = DecNum + mult
             End If
             mult = mult * 2
         Next i
-        bin_to_dec = DecNum
+        s = s & DecNum
+        bin_to_dec = s
     End Function
 
     Private Function dec_to_bin(ByVal value As String) As String
