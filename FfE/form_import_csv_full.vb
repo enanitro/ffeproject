@@ -67,61 +67,61 @@ Public Class form_import_csv_full
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
         Dim logger As New logger
         Dim imp As Boolean = False
-        'Try
-        Button7.Enabled = False
-        If path_graphtec <> "" And GroupBox_graphtec.Enabled _
-        And CheckedListBox1.CheckedItems.Count <> 0 Then
-            Panel1.Visible = True
-            logger.insert_logger_graphtec_gl800(path_graphtec, CheckedListBox1, _
-            TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, long_graphtec, id_measure_graphtec)
-            'GroupBox_graphtec.Enabled = False
-            imp = True
-        End If
+        Try
+            Button7.Enabled = False
+            If path_graphtec <> "" And GroupBox_graphtec.Enabled _
+            And CheckedListBox1.CheckedItems.Count <> 0 Then
+                Panel1.Visible = True
+                logger.insert_logger_graphtec_gl800(path_graphtec, CheckedListBox1, _
+                TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, long_graphtec, id_measure_graphtec)
+                'GroupBox_graphtec.Enabled = False
+                imp = True
+            End If
 
-        If path_gps <> "" And GroupBox_columbusGPS.Enabled _
-        And CheckedListBox2.CheckedItems.Count <> 0 Then
-            Panel2.Visible = True
-            logger.insert_logger_columbus_gps(path_gps, CheckedListBox2, _
-            TextBox2, Label7, Label8, ProgressBar2, FfE_Main.id_gps, id_drive, long_gps, id_measure_gps)
-            'GroupBox_columbusGPS.Enabled = False
-            imp = True
-        End If
+            If path_gps <> "" And GroupBox_columbusGPS.Enabled _
+            And CheckedListBox2.CheckedItems.Count <> 0 Then
+                Panel2.Visible = True
+                logger.insert_logger_columbus_gps(path_gps, CheckedListBox2, _
+                TextBox2, Label7, Label8, ProgressBar2, FfE_Main.id_gps, id_drive, long_gps, id_measure_gps)
+                'GroupBox_columbusGPS.Enabled = False
+                imp = True
+            End If
 
-        If path_fluke <> "" And GroupBox_fluke.Enabled _
-        And CheckedListBox3.CheckedItems.Count <> 0 Then
-            Panel3.Visible = True
-            logger.insert_logger_fluke(path_fluke, CheckedListBox3, _
-            TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_fluke, id_drive, long_fluke, id_measure_fluke)
-            'GroupBox_fluke.Enabled = False
-            imp = True
-        End If
+            If path_fluke <> "" And GroupBox_fluke.Enabled _
+            And CheckedListBox3.CheckedItems.Count <> 0 Then
+                Panel3.Visible = True
+                logger.insert_logger_fluke(path_fluke, CheckedListBox3, _
+                TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_fluke, id_drive, long_fluke, id_measure_fluke)
+                'GroupBox_fluke.Enabled = False
+                imp = True
+            End If
 
-        If path_canbus <> "" And GroupBox_CANBUS.Enabled _
-        And CheckedListBox4.CheckedItems.Count <> 0 Then
-            Panel4.Visible = True
-            logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
-            TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
-            'GroupBox_CANBUS.Enabled = False
-            imp = True
-        End If
+            If path_canbus <> "" And GroupBox_CANBUS.Enabled _
+            And CheckedListBox4.CheckedItems.Count <> 0 Then
+                Panel4.Visible = True
+                logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
+                TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
+                'GroupBox_CANBUS.Enabled = False
+                imp = True
+            End If
 
-        'Catch ex As Exception
-        'MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'Finally
-        If abort = True Then
-            logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
-            logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
-            logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
-            logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
-        Else
-            MsgBox("Files were imported successfully", MsgBoxStyle.Information)
-        End If
-        logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
-        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
-        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
-        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
-        Button7.Enabled = True
-        ' End Try
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If abort = True Then
+                logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
+                logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
+                logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
+                logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+            Else
+                MsgBox("Files were imported successfully", MsgBoxStyle.Information)
+            End If
+            logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
+            logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
+            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+            logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+            Button7.Enabled = True
+        End Try
     End Sub
 
     Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox1.SelectedIndexChanged
