@@ -197,6 +197,7 @@ Public Class Form_data
     End Sub
 
     Private Sub show_loggers()
+        GroupBox2.Visible = False
         execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
         show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
         CheckBox9.CheckState = CheckState.Checked
@@ -206,7 +207,7 @@ Public Class Form_data
         execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
         show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
         CheckBox12.CheckState = CheckState.Checked
-        TabControl1.SelectTab(0)
+        GroupBox2.Visible = True
     End Sub
 
     Private Sub clean_lists()
@@ -217,12 +218,12 @@ Public Class Form_data
     End Sub
 
     Private Sub format_grid(ByRef grid As DataGridView)
-        grid.ReadOnly = False
+        grid.ReadOnly = True
         grid.AllowUserToAddRows = False
         grid.AllowUserToDeleteRows = False
-        grid.AllowUserToOrderColumns = False
-        grid.Columns(0).ReadOnly = True
-        grid.Columns(1).ReadOnly = True
+        'grid.AllowUserToOrderColumns = False
+        'grid.Columns(0).ReadOnly = True
+        'grid.Columns(1).ReadOnly = True
         grid.Columns(0).Width = 60
         grid.Columns(1).Width = 60
         For i = 2 To grid.Columns.Count - 1
@@ -378,6 +379,7 @@ Public Class Form_data
              " and logger_id = " & logger_id
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
+            list.Items.Clear()
 
             For i = 0 To distinct - 1
                 query.Read()
@@ -410,21 +412,23 @@ Public Class Form_data
         Dim sql As String = ""
 
         Try
-            If MsgBox("Are yo sure to delete the selected channels?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            If list.Items.Count <> 0 And list.CheckedItems.Count <> 0 Then
+                If MsgBox("Are yo sure to delete the selected channels?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                ' Abrir la conexión a Sql  
-                cn.Open()
-                cmd.Connection = cn
-                For Each i In list.CheckedIndices
-                    sql = "delete from data where logger_id = " & logger_id & _
-                         " and drive_id = " & drive_id & _
-                         " and data_id like '" & list.Items(i) & "';"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-                Next
+                    ' Abrir la conexión a Sql  
+                    cn.Open()
+                    cmd.Connection = cn
+                    For Each i In list.CheckedIndices
+                        sql = "delete from data where logger_id = " & logger_id & _
+                             " and drive_id = " & drive_id & _
+                             " and data_id like '" & list.Items(i) & "';"
+                        cmd.CommandText = sql
+                        cmd.ExecuteNonQuery()
+                    Next
 
-                cn.Close()
+                    cn.Close()
 
+                End If
             End If
 
         Catch ex As Exception
@@ -440,10 +444,24 @@ Public Class Form_data
         End Try
     End Sub
 
-    Private Sub select_all_channels(ByRef list As CheckedListBox, ByVal state As Boolean)
-        For i = 0 To list.Items.Count - 1
-            list.SetItemChecked(i, state)
-        Next
+    Private Sub select_all_channels(ByRef list As CheckedListBox, ByVal check As CheckBox)
+        If check.CheckState <> CheckState.Indeterminate Then
+            For i = 0 To list.Items.Count - 1
+                list.SetItemChecked(i, check.CheckState)
+            Next
+        End If
+    End Sub
+
+    Private Sub no_select_all_channels(ByRef check As CheckBox, ByVal list As CheckedListBox)
+        If list.CheckedItems.Count = list.Items.Count Then
+            check.CheckState = CheckState.Checked
+        Else
+            If list.CheckedItems.Count = 0 Then
+                check.CheckState = CheckState.Unchecked
+            Else
+                check.CheckState = CheckState.Indeterminate
+            End If
+        End If
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -452,11 +470,14 @@ Public Class Form_data
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         delete_channel(FfE_Main.id_graphtec, CheckedListBox1)
+        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
+        show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
+        CheckBox9.CheckState = CheckState.Checked
         show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
     End Sub
 
     Private Sub CheckBox9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox9.CheckedChanged
-        select_all_channels(CheckedListBox1, CheckBox9.CheckState)
+        select_all_channels(CheckedListBox1, CheckBox9)
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
@@ -465,11 +486,14 @@ Public Class Form_data
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         delete_channel(FfE_Main.id_gps, CheckedListBox2)
+        execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
+        show_data(DataGridView1, FfE_Main.id_gps, CheckedListBox2)
+        CheckBox11.CheckState = CheckState.Checked
         show_data(DataGridView, FfE_Main.id_gps, CheckedListBox2)
     End Sub
 
     Private Sub CheckBox11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox11.CheckedChanged
-        select_all_channels(CheckedListBox2, CheckBox11.CheckState)
+        select_all_channels(CheckedListBox2, CheckBox11)
     End Sub
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
@@ -478,10 +502,25 @@ Public Class Form_data
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         delete_channel(FfE_Main.id_fluke, CheckedListBox3)
+        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
+        show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
+        CheckBox12.CheckState = CheckState.Checked
         show_data(DataGridView, FfE_Main.id_fluke, CheckedListBox3)
     End Sub
 
     Private Sub CheckBox12_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox12.CheckedChanged
-        select_all_channels(CheckedListBox3, CheckBox12.CheckState)
+        select_all_channels(CheckedListBox3, CheckBox12)
+    End Sub
+
+    Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+        no_select_all_channels(CheckBox9, CheckedListBox1)
+    End Sub
+
+    Private Sub CheckedListBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox2.SelectedIndexChanged
+        no_select_all_channels(CheckBox11, CheckedListBox2)
+    End Sub
+
+    Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
+        no_select_all_channels(CheckBox12, CheckedListBox3)
     End Sub
 End Class
