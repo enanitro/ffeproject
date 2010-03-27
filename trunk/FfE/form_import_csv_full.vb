@@ -223,4 +223,22 @@ Public Class form_import_csv_full
     Private Sub TextBox3_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox3.TextChanged
 
     End Sub
+
+    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
+        associations(CheckedListBox1, FfE_Main.id_graphtec, id_measure_graphtec)
+    End Sub
+
+    Private Sub associations(ByRef list As CheckedListBox, ByVal logger_id As Integer, ByVal measure() As Integer)
+        Try
+            If list.Items.Count <> 0 And list.CheckedItems.Count <> 0 Then
+                Dim asc As New association
+                asc.logger = logger_id
+                asc.measure = measure
+                asc.list = list
+                asc.ShowDialog()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class

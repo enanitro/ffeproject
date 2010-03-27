@@ -117,18 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button11.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button11.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Calibri, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 60</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button11.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;Button11.Name" xml:space="preserve">
+    <value>Button11</value>
+  </data>
+  <data name="&gt;&gt;Button11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
+    <value>GroupBox_graphtec</value>
+  </data>
+  <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="TextBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 88</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBox1.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBox1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Both</value>
   </data>
@@ -151,7 +181,7 @@
     <value>GroupBox_graphtec</value>
   </data>
   <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ProgressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -259,7 +289,7 @@
     <value>GroupBox_graphtec</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Button5.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -270,8 +300,8 @@
   <data name="Button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
-        CwIBm8luNgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -353,10 +383,10 @@
     <value>NoControl</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 22</value>
+    <value>105, 22</value>
   </data>
   <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 60</value>
+    <value>69, 60</value>
   </data>
   <data name="Button5.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -371,7 +401,7 @@
     <value>GroupBox_graphtec</value>
   </data>
   <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="CheckedListBox1.ColumnWidth" type="System.Int32, mscorlib">
     <value>3</value>
@@ -401,7 +431,7 @@
     <value>GroupBox_graphtec</value>
   </data>
   <data name="&gt;&gt;CheckedListBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -416,7 +446,7 @@
     <value>18, 22</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 60</value>
+    <value>69, 60</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -431,7 +461,7 @@
     <value>GroupBox_graphtec</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="GroupBox_graphtec.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt, style=Bold</value>
@@ -856,8 +886,8 @@
   <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
-        CwIBm8luNgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -992,8 +1022,8 @@
   <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
-        CwIBm8luNgAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT
@@ -1272,8 +1302,8 @@
   <data name="Button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
-        CwIBm8luNgAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAEbFJREFUaEPVWnlcTnn7PipFljG2sb1MGMtgjBlj32ZsY8ZSpFC0L5ZQ0WbNFDIZea1R
         2ibSYmvRqqS9UEKRxNh3KZWW5/pd30e8Zl6mGO8fv/P53J/zVOc557ru+7qX7/fUAID0//oQBP6ORPPm
         zZv26dNnyOjRoxcaGRltsbS0DLC2tg63srI6amZm5vHDDz/Y9urVa6SysnKT93VEgwYNpA4dOr7v1/58
         /d8RaMTD1NQ02cvLC2FhYUhISEBOTg6Kiopw//59uV27dg2xsbFYt27dxREjRiwlkWb1RfQ/JyAeMHTo
@@ -1408,8 +1438,8 @@
   <data name="Button9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
-        CwIBm8luNgAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAEYNJREFUaEPVWmd4lNW2/iB0wqWDUlRAOoZexHpVjkQ8OcIRRL2C6PEIglcQuApKkaJ0
         UgmQhIT03ntvk8mETJLJzKQnk8xkMikzSUhv5D1r7xgOevBewp/L2c/zPt+e+b6ZrHevd6299poMEn4d
         s2fP7p/ya3Vb5YynVo3Z9tS8SeueeWHawmHDhk0cJAweRLcGA4OMhvWMNBrSNcKop6138DjjCUJ7R7vQ
         eq8VRqMH97YKzfd6hB70QhAYwK697Ao+v8fnffd6acLudRv1CMWBBTYTa8Yd/40hj/qCEWAYamxkvPiT

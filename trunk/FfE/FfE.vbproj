@@ -72,6 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="association.Designer.vb">
+      <DependentUpon>association.vb</DependentUpon>
+    </Compile>
+    <Compile Include="association.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="cAppConfig.vb" />
     <Compile Include="FfE Main.Designer.vb">
       <DependentUpon>FfE Main.vb</DependentUpon>
@@ -183,6 +189,10 @@
     <Compile Include="ValueDescriptionPair.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="association.resx">
+      <DependentUpon>association.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FfE Main.resx">
       <DependentUpon>FfE Main.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -373,6 +383,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\del_rule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\NetByte Design Studio - 0072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\NetByte Design Studio - 0058.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
