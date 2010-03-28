@@ -1,7 +1,7 @@
 ﻿Public Class Form_Conf_Measure
     Private rows As Integer
 
-    Private Sub MeasureBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub MeasureBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MeasureBindingNavigatorSaveItem.Click
         Try
             Me.Validate()
             Me.MeasureBindingSource.EndEdit()
@@ -41,7 +41,7 @@
         End Try
     End Sub
 
-    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete.Click
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then

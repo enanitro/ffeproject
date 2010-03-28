@@ -64,6 +64,36 @@ Partial Class Form_conf_usage_type
         CType(Me.Usage_typeDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
+        'Usage_in_projectLabel
+        '
+        Usage_in_projectLabel.AutoSize = True
+        Usage_in_projectLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Usage_in_projectLabel.Location = New System.Drawing.Point(19, 68)
+        Usage_in_projectLabel.Name = "Usage_in_projectLabel"
+        Usage_in_projectLabel.Size = New System.Drawing.Size(116, 15)
+        Usage_in_projectLabel.TabIndex = 15
+        Usage_in_projectLabel.Text = "Usage in project:"
+        '
+        'DescriptionLabel
+        '
+        DescriptionLabel.AutoSize = True
+        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DescriptionLabel.Location = New System.Drawing.Point(294, 33)
+        DescriptionLabel.Name = "DescriptionLabel"
+        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.TabIndex = 13
+        DescriptionLabel.Text = "Description:"
+        '
+        'NameLabel
+        '
+        NameLabel.AutoSize = True
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        NameLabel.Location = New System.Drawing.Point(86, 32)
+        NameLabel.Name = "NameLabel"
+        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.TabIndex = 11
+        NameLabel.Text = "Name:"
+        '
         'Ffe_databaseDataSet
         '
         Me.Ffe_databaseDataSet.DataSetName = "ffe_databaseDataSet"
@@ -289,16 +319,6 @@ Partial Class Form_conf_usage_type
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.Width = 175
         '
-        'Usage_in_projectLabel
-        '
-        Usage_in_projectLabel.AutoSize = True
-        Usage_in_projectLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Usage_in_projectLabel.Location = New System.Drawing.Point(19, 68)
-        Usage_in_projectLabel.Name = "Usage_in_projectLabel"
-        Usage_in_projectLabel.Size = New System.Drawing.Size(116, 15)
-        Usage_in_projectLabel.TabIndex = 15
-        Usage_in_projectLabel.Text = "Usage in project:"
-        '
         'Usage_in_projectTextBox
         '
         Me.Usage_in_projectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "usage_in_project", True))
@@ -307,16 +327,6 @@ Partial Class Form_conf_usage_type
         Me.Usage_in_projectTextBox.Name = "Usage_in_projectTextBox"
         Me.Usage_in_projectTextBox.Size = New System.Drawing.Size(123, 20)
         Me.Usage_in_projectTextBox.TabIndex = 16
-        '
-        'DescriptionLabel
-        '
-        DescriptionLabel.AutoSize = True
-        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(294, 33)
-        DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
-        DescriptionLabel.TabIndex = 13
-        DescriptionLabel.Text = "Description:"
         '
         'DescriptionTextBox
         '
@@ -327,16 +337,6 @@ Partial Class Form_conf_usage_type
         Me.DescriptionTextBox.Name = "DescriptionTextBox"
         Me.DescriptionTextBox.Size = New System.Drawing.Size(176, 56)
         Me.DescriptionTextBox.TabIndex = 14
-        '
-        'NameLabel
-        '
-        NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(86, 32)
-        NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
-        NameLabel.TabIndex = 11
-        NameLabel.Text = "Name:"
         '
         'NameTextBox
         '
