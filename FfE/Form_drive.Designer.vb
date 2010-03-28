@@ -537,6 +537,7 @@ Partial Class Form_drive
         '
         'Panel1
         '
+        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
@@ -1097,6 +1098,7 @@ Partial Class Form_drive
         '
         'Panel3
         '
+        Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel3.Controls.Add(Me.GroupBox4)
         Me.Panel3.Controls.Add(Me.GroupBox1)
         Me.Panel3.Controls.Add(Me.GroupBox3)

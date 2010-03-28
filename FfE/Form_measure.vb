@@ -60,7 +60,7 @@ Public Class Form_measure
     End Sub
 
     'actualiza la busqueda segun el filtrado de los datos
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If CheckBox1.Checked Then
                 MeasureBindingSource.Filter = "measure_id = " & ComboBox1.Text
@@ -84,21 +84,21 @@ Public Class Form_measure
         analyze_query = query
     End Function
 
-    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ComboBox1.Enabled = CheckBox1.CheckState
         check_combobox()
         enable_checkbox(Not CheckBox1.Checked)
     End Sub
 
-    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
+    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ComboBox2.Enabled = CheckBox2.Checked
     End Sub
 
-    Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox3.CheckedChanged
+    Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ComboBox3.Enabled = CheckBox3.Checked
     End Sub
 
-    Private Sub CheckBox4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox4.CheckedChanged
+    Private Sub CheckBox4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ComboBox4.Enabled = CheckBox4.Checked
     End Sub
     Private Sub enable_checkbox(ByVal value As Boolean)
@@ -114,13 +114,13 @@ Public Class Form_measure
         CheckBox4.Checked = False
     End Sub
 
-    Private Sub MeasureDataGridView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MeasureDataGridView.MouseDoubleClick
+    Private Sub MeasureDataGridView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If MeasureDataGridView.RowCount > 0 Then
             Me.Close()
         End If
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim form_conf_measure As New Form_Conf_Measure
             form_conf_measure.MeasureBindingNavigator.Items(2).Visible = False
@@ -132,7 +132,7 @@ Public Class Form_measure
         End Try
     End Sub
 
-    Private Sub MeasureDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles MeasureDataGridView.CellContentClick
+    Private Sub MeasureDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
 End Class

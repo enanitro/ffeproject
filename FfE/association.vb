@@ -96,7 +96,7 @@ Public Class association
         End Try
     End Sub
 
-    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
+    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim name() As String
         Dim str, s1, s2 As String
         Dim msg As String = "The following associations already exist:"
@@ -160,7 +160,7 @@ Public Class association
         End Try
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim name() As String
         Dim str As String = ""
         Try
@@ -199,11 +199,11 @@ Public Class association
         End If
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         select_all_channels(CheckedListBox1, CheckBox1)
     End Sub
 
-    Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+    Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         no_select_all_channels(CheckBox1, CheckedListBox1)
     End Sub
 End Class

@@ -1,7 +1,7 @@
 ﻿Public Class Form_Conf_Measure
     Private rows As Integer
 
-    Private Sub MeasureBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MeasureBindingNavigatorSaveItem.Click
+    Private Sub MeasureBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Me.Validate()
             Me.MeasureBindingSource.EndEdit()
@@ -41,14 +41,14 @@
         End Try
     End Sub
 
-    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete.Click
+    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 MeasureBindingNavigator.Items(3).Visible = True
                 MeasureBindingNavigator.Items(3).PerformClick()
                 MeasureBindingNavigator.Items(3).Visible = False
- 
+
                 rows = MeasureDataGridView.Rows.Count
             End If
         Catch ex As Exception
@@ -56,7 +56,7 @@
         End Try
     End Sub
 
-    Private Sub BindingNavigatorAddNewItem_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles BindingNavigatorAddNewItem.MouseUp
+    Private Sub BindingNavigatorAddNewItem_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         sort_index()
         NameTextBox.Focus()
     End Sub
