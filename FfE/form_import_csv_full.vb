@@ -249,7 +249,7 @@ Public Class form_import_csv_full
                             name_measure = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(1).Value
                             unit = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(3).Value
                             list.Items.Remove(item)
-                            text = "CH" & (index + 1)
+                            text = (index + 1) & ". "
                             text += " " & name_measure & " [" & unit & "]"
                             list.Items.Insert(index, item & " -> " & text)
                             list.SetItemChecked(index, True)
