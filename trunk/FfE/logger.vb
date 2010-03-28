@@ -41,7 +41,6 @@ Public Class logger
     Public unit As String
     Dim table_canbus As New Dictionary(Of Integer, str_canbus)
     Dim ids_chs As New Dictionary(Of Integer, Integer)
-    Dim ini As Integer
 
     Private Sub load_ids_chs(ByVal list As CheckedListBox)
         For i = 0 To 12
@@ -334,14 +333,8 @@ Public Class logger
             text.Text += "Date/Time: " & datos2(4) & vbCrLf
 
             linea1 = fichero.ReadLine
-            linea1 = fichero.ReadLine
-            linea1 = fichero.ReadLine
-            datos1 = linea1.Split(vbTab)
-            ini = 5
-            Do While datos1(5).Split(":")(0) <> "Dlc"
+            Do While linea1(0) = "0"
                 linea1 = fichero.ReadLine
-                datos1 = linea1.Split(vbTab)
-                ini += 1
             Loop
 
             long_file = 1
@@ -583,73 +576,80 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux As String
+        Dim linea, aux, time, tm As String
         Dim datos() As String
+        Dim div As Int64 = 0
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value, id_ch As Integer
-        Dim res As Double
+        Dim res, t As Double
         Dim str As str_canbus
 
-
-        Load_table_canbus()
-        load_ids_chs(list)
         Try
-            'leo las 7 primeras lineas que pertenecen a la cabecera
-            For i = 0 To 6
+            Load_table_canbus()
+            load_ids_chs(list)
+
+            linea = fichero.ReadLine
+            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then div = 1000000000
+            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
+            linea = fichero.ReadLine
+            datos = linea.Split(vbTab)
+            time = datos(4)
+            time = time.Split(" ")(3)
+
+            linea = fichero.ReadLine
+            Do While linea(0) = "0"
                 linea = fichero.ReadLine
-            Next
+            Loop
+
 
             Dim ins As New insert_Data
             ins.init_string()
 
+            long_file = long_file / list.CheckedIndices.Count
             config_progressbar(bar, long_file, list)
 
             Do
-                linea = fichero.ReadLine
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(vbTab)
                     index += 1
 
                     num_lines += 1
-                    If datos.Length >= 8 Then
+                    If datos.Length = 8 Then
                         If datos(5).Split(":")(0) = "Dlc" Then
-
                             value = datos(6).Split(":")(1)
                             If ids_chs.TryGetValue(value, id_ch) Then
+                                data_points += 1
+                                clock += 1
                                 aux = hex_to_dec(datos(7).Split(":")(1))
                                 res = read_string(aux, table_canbus(id_ch))
+                                t = CType(datos(0), Double)
+                                tm = format_time(t, div, time)
+                                aux = "(" & num_lines & ",'" & list.CheckedItems.Item(id_ch) & "'," & id_drive _
+                                & "," & id_logger & "," & measure(list.CheckedIndices.Item(id_ch)) & "," _
+                                & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
+                                & res & ")"
+                                ins.set_string(aux)
+                                progressbar(num_lines, bar, percent)
                             End If
 
                         End If
                     End If
-
-                    'If Val() <> "" Then
-                    data_points += 1
-                    clock += 1
-
-                    'aux = "(" & num_lines & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                    '& "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                    '& "'" & FormatDateTime(format_time(datos(0), 10000000), DateFormat.LongTime) & "'" & "," _
-                    '& Val() & ")"
-                    'ins.set_string(aux)
-                    'End If
-                    'progressbar(num_lines, bar, percent)
-                    'Next
-                    'If clock >= 1000 Then
-                    'ins.insert_into_string()
-                    'ins.init_string()
-                    'clock = 1
-                    'End If
+                    If clock >= 1000 Then
+                        ins.insert_into_string()
+                        ins.init_string()
+                        clock = 1
+                    End If
                 End If
+                linea = fichero.ReadLine
             Loop Until linea Is Nothing
             If Not ins.is_empty Then
-                'ins.insert_into_string()
+                ins.insert_into_string()
             End If
-            'data_summary(num_lines, n_data, data_points)
+            data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -727,7 +727,7 @@ Public Class logger
         long_file = 0
     End Sub
 
-    Function make_date(ByVal day As String) As String
+    Private Function make_date(ByVal day As String) As String
         Dim yyyy, mm, dd As String
         yyyy = "20" & day(0) & day(1)
         mm = day(2) & day(3)
@@ -735,7 +735,7 @@ Public Class logger
         make_date = yyyy & "-" & mm & "-" & dd
     End Function
 
-    Function make_time(ByVal time As String) As String
+    Private Function make_time(ByVal time As String) As String
         Dim hh, mm, ss As String
         hh = time(0) & time(1)
         mm = time(2) & time(3)
@@ -743,18 +743,25 @@ Public Class logger
         make_time = hh & ":" & mm & ":" & ss
     End Function
 
-    Function format_time(ByVal time As String, ByVal unit As Integer)
+    Private Function format_time(ByVal time As Double, ByVal unit As Integer, ByVal ini As String) As String
         Dim res As String
-        Dim h, m, s As Integer
+        Dim h, m, s, ss As Integer
+        Dim format() As String
         h = m = s = 0
-        s = CType(time, Integer)
-        s = s / unit
+        format = ini.Split(":")
+        h = format(0)
+        m = format(1)
+        ss = format(2)
 
-        Do While (s > 60)
+        time = time / unit
+        s = Math.Truncate(time)
+        s = s + ss
+
+        Do While (s >= 60)
             s = s - 60
             m += 1
-            If m > 60 Then
-                Do While (m > 60)
+            If m >= 60 Then
+                Do While (m >= 60)
                     m = m - 60
                     h += 1
                 Loop
@@ -763,11 +770,11 @@ Public Class logger
 
         res = h & ":" & m & ":" & s
 
-        Return res
+        format_time = res
     End Function
 
     'configuracion del progressbar y labels que le acompañan
-    Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Integer, ByVal list As CheckedListBox)
+    Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double, ByVal list As CheckedListBox)
         bar.Minimum = 0
         bar.Maximum = max * list.CheckedIndices.Count
     End Sub
