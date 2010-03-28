@@ -110,8 +110,8 @@ Public Class association
                         i = list.CheckedIndices.Count
                     End If
                 Next
-                name = ch.split("->")
-                name(0) = name(0).TrimEnd
+                name = ch.split(">")
+                name(0) = name(0).TrimEnd("-").TrimEnd
                 name(1) = name(1).Trim(">").TrimStart
                 str = search_measure(logger, "name", name(0), "channel")
                 If str <> name(1) Then
@@ -200,12 +200,11 @@ Public Class association
         End If
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
         select_all_channels(CheckedListBox1, CheckBox1)
     End Sub
 
-    Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox1.SelectedIndexChanged
         no_select_all_channels(CheckBox1, CheckedListBox1)
     End Sub
-
 End Class

@@ -161,7 +161,8 @@ Public Class Form_export_full
                         execute_query_loggers(res, logger_id, logger, ProgressBar2, percent_gps)
                     Case FfE_Main.id_fluke
                         execute_query_loggers(res, logger_id, logger, ProgressBar3, percent_fluke)
-                        'Case FfE_Main.id_canbus : execute_query_canbus(res)
+                    Case FfE_Main.id_canbus
+                        execute_query_loggers(res, logger_id, logger, ProgressBar4, percent_canbus)
                 End Select
                 sw.WriteLine(res)
 

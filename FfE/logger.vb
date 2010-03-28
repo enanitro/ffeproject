@@ -396,7 +396,7 @@ Public Class logger
                 linea = fichero.ReadLine
             Next
 
-            config_progressbar(bar, long_file, list)
+            config_progressbar(bar, long_file, list, n_data)
 
             Dim ins As New insert_Data
             ins.init_string()
@@ -460,7 +460,7 @@ Public Class logger
             Dim ins As New insert_Data
             ins.init_string()
 
-            config_progressbar(bar, long_file, list)
+            config_progressbar(bar, long_file, list, n_data)
 
             Do
                 linea = fichero.ReadLine
@@ -538,7 +538,7 @@ Public Class logger
             Dim ins As New insert_Data
             ins.init_string()
 
-            config_progressbar(bar, long_file, list)
+            config_progressbar(bar, long_file, list, n_data)
 
             Do
                 linea = fichero.ReadLine
@@ -618,7 +618,7 @@ Public Class logger
             ins.init_string()
 
             long_file = long_file / list.CheckedIndices.Count
-            config_progressbar(bar, long_file, list)
+            config_progressbar(bar, long_file, list, n_data)
 
             Do
                 If linea <> Nothing Then
@@ -675,11 +675,11 @@ Public Class logger
         If tb.Startbit = tb.Byteanordnung Then
             aux = str.Substring(tb.Byteanordnung, tb.lange)
         Else
-            i = Math.Abs(tb.lange - tb.Byteanordnung)
-            aux = str.Substring(tb.Byteanordnung, tb.lange - i) & str.Substring(tb.Startbit, i)
+            i = Math.Abs(tb.Byteanordnung - tb.Startbit)
+            aux = str.Substring(tb.Byteanordnung, i) & str.Substring(tb.Startbit, tb.lange - i)
         End If
         res = bin_to_dec(aux, tb.Wertetyp)
-        res = res * tb.faktor
+        'res = res * tb.faktor
         read_string = res
 
     End Function
@@ -787,7 +787,9 @@ Public Class logger
     End Function
 
     'configuracion del progressbar y labels que le acompañan
-    Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double, ByVal list As CheckedListBox)
+    Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double, _
+                                   ByVal list As CheckedListBox, ByRef n_data As Label)
+        n_data.Text = ""
         bar.Minimum = 0
         bar.Maximum = max * list.CheckedIndices.Count
     End Sub
