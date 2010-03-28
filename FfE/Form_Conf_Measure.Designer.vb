@@ -363,6 +363,7 @@ Partial Class Form_Conf_Measure
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "measure_id"
         Me.DataGridViewTextBoxColumn1.HeaderText = "Measure id"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'DataGridViewTextBoxColumn2
         '
