@@ -628,8 +628,8 @@ Public Class logger
                                 res = read_string(aux, table_canbus(id_ch))
                                 t = CType(datos(0), Double)
                                 tm = format_time(t, div, time)
-                                aux = "(" & num_lines & ",'" & list.CheckedItems.Item(id_ch) & "'," & id_drive _
-                                & "," & id_logger & "," & measure(list.CheckedIndices.Item(id_ch)) & "," _
+                                aux = "(" & num_lines & ",'" & list.Items(id_ch) & "'," & id_drive _
+                                & "," & id_logger & "," & measure(id_ch) & "," _
                                 & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
                                 & res & ")"
                                 ins.set_string(aux)
