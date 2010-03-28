@@ -60,7 +60,7 @@ Public Class Form_measure
     End Sub
 
     'actualiza la busqueda segun el filtrado de los datos
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             If CheckBox1.Checked Then
                 MeasureBindingSource.Filter = "measure_id = " & ComboBox1.Text
@@ -114,13 +114,13 @@ Public Class Form_measure
         CheckBox4.Checked = False
     End Sub
 
-    Private Sub MeasureDataGridView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub MeasureDataGridView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MeasureDataGridView.MouseDoubleClick
         If MeasureDataGridView.RowCount > 0 Then
             Me.Close()
         End If
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Try
             Dim form_conf_measure As New Form_Conf_Measure
             form_conf_measure.MeasureBindingNavigator.Items(2).Visible = False
@@ -132,7 +132,4 @@ Public Class Form_measure
         End Try
     End Sub
 
-    Private Sub MeasureDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
-
-    End Sub
 End Class

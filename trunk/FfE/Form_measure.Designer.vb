@@ -58,6 +58,46 @@ Partial Class Form_measure
         CType(Me.MeasureDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
+        'UnitLabel
+        '
+        UnitLabel.AutoSize = True
+        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        UnitLabel.Location = New System.Drawing.Point(467, 51)
+        UnitLabel.Name = "UnitLabel"
+        UnitLabel.Size = New System.Drawing.Size(37, 15)
+        UnitLabel.TabIndex = 57
+        UnitLabel.Text = "Unit:"
+        '
+        'SteptimeLabel
+        '
+        SteptimeLabel.AutoSize = True
+        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        SteptimeLabel.Location = New System.Drawing.Point(430, 17)
+        SteptimeLabel.Name = "SteptimeLabel"
+        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
+        SteptimeLabel.TabIndex = 56
+        SteptimeLabel.Text = "Time step:"
+        '
+        'NameLabel
+        '
+        NameLabel.AutoSize = True
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        NameLabel.Location = New System.Drawing.Point(202, 52)
+        NameLabel.Name = "NameLabel"
+        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.TabIndex = 55
+        NameLabel.Text = "Name:"
+        '
+        'Measure_idLabel
+        '
+        Measure_idLabel.AutoSize = True
+        Measure_idLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Measure_idLabel.Location = New System.Drawing.Point(168, 17)
+        Measure_idLabel.Name = "Measure_idLabel"
+        Measure_idLabel.Size = New System.Drawing.Size(83, 15)
+        Measure_idLabel.TabIndex = 54
+        Measure_idLabel.Text = "Measure id:"
+        '
         'Ffe_databaseDataSet
         '
         Me.Ffe_databaseDataSet.DataSetName = "ffe_databaseDataSet"
@@ -262,46 +302,6 @@ Partial Class Form_measure
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
         Me.DataGridViewTextBoxColumn5.Width = 200
-        '
-        'UnitLabel
-        '
-        UnitLabel.AutoSize = True
-        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        UnitLabel.Location = New System.Drawing.Point(467, 51)
-        UnitLabel.Name = "UnitLabel"
-        UnitLabel.Size = New System.Drawing.Size(37, 15)
-        UnitLabel.TabIndex = 57
-        UnitLabel.Text = "Unit:"
-        '
-        'SteptimeLabel
-        '
-        SteptimeLabel.AutoSize = True
-        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        SteptimeLabel.Location = New System.Drawing.Point(430, 17)
-        SteptimeLabel.Name = "SteptimeLabel"
-        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
-        SteptimeLabel.TabIndex = 56
-        SteptimeLabel.Text = "Time step:"
-        '
-        'NameLabel
-        '
-        NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(202, 52)
-        NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
-        NameLabel.TabIndex = 55
-        NameLabel.Text = "Name:"
-        '
-        'Measure_idLabel
-        '
-        Measure_idLabel.AutoSize = True
-        Measure_idLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Measure_idLabel.Location = New System.Drawing.Point(168, 17)
-        Measure_idLabel.Name = "Measure_idLabel"
-        Measure_idLabel.Size = New System.Drawing.Size(83, 15)
-        Measure_idLabel.TabIndex = 54
-        Measure_idLabel.Text = "Measure id:"
         '
         'Form_measure
         '

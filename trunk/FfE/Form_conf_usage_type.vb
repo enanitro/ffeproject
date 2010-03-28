@@ -1,7 +1,7 @@
 ﻿Public Class Form_conf_usage_type
     Private rows As Integer
 
-    Private Sub Usage_typeBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Usage_typeBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Usage_typeBindingNavigatorSaveItem.Click
         Try
             Me.Validate()
             Me.Usage_typeBindingSource.EndEdit()
@@ -41,7 +41,7 @@
         End Try
     End Sub
 
-    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete.Click
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
@@ -95,4 +95,5 @@
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 End Class

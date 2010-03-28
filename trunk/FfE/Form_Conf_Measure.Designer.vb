@@ -70,6 +70,46 @@ Partial Class Form_Conf_Measure
         CType(Me.MeasureDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
+        'DescriptionLabel
+        '
+        DescriptionLabel.AutoSize = True
+        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DescriptionLabel.Location = New System.Drawing.Point(400, 69)
+        DescriptionLabel.Name = "DescriptionLabel"
+        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.TabIndex = 20
+        DescriptionLabel.Text = "Description:"
+        '
+        'UnitLabel
+        '
+        UnitLabel.AutoSize = True
+        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        UnitLabel.Location = New System.Drawing.Point(450, 30)
+        UnitLabel.Name = "UnitLabel"
+        UnitLabel.Size = New System.Drawing.Size(37, 15)
+        UnitLabel.TabIndex = 18
+        UnitLabel.Text = "Unit:"
+        '
+        'SteptimeLabel
+        '
+        SteptimeLabel.AutoSize = True
+        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        SteptimeLabel.Location = New System.Drawing.Point(38, 68)
+        SteptimeLabel.Name = "SteptimeLabel"
+        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
+        SteptimeLabel.TabIndex = 16
+        SteptimeLabel.Text = "Time step:"
+        '
+        'NameLabel
+        '
+        NameLabel.AutoSize = True
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        NameLabel.Location = New System.Drawing.Point(62, 34)
+        NameLabel.Name = "NameLabel"
+        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.TabIndex = 14
+        NameLabel.Text = "Name:"
+        '
         'Ffe_databaseDataSet
         '
         Me.Ffe_databaseDataSet.DataSetName = "ffe_databaseDataSet"
@@ -258,16 +298,6 @@ Partial Class Form_Conf_Measure
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 49)
         Me.BindingNavigatorMoveLastItem.Text = "Last"
         '
-        'DescriptionLabel
-        '
-        DescriptionLabel.AutoSize = True
-        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(400, 69)
-        DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
-        DescriptionLabel.TabIndex = 20
-        DescriptionLabel.Text = "Description:"
-        '
         'DescriptionTextBox
         '
         Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "description", True))
@@ -278,16 +308,6 @@ Partial Class Form_Conf_Measure
         Me.DescriptionTextBox.Size = New System.Drawing.Size(203, 20)
         Me.DescriptionTextBox.TabIndex = 21
         '
-        'UnitLabel
-        '
-        UnitLabel.AutoSize = True
-        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        UnitLabel.Location = New System.Drawing.Point(450, 30)
-        UnitLabel.Name = "UnitLabel"
-        UnitLabel.Size = New System.Drawing.Size(37, 15)
-        UnitLabel.TabIndex = 18
-        UnitLabel.Text = "Unit:"
-        '
         'UnitTextBox
         '
         Me.UnitTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "unit", True))
@@ -297,16 +317,6 @@ Partial Class Form_Conf_Measure
         Me.UnitTextBox.Size = New System.Drawing.Size(203, 20)
         Me.UnitTextBox.TabIndex = 19
         '
-        'SteptimeLabel
-        '
-        SteptimeLabel.AutoSize = True
-        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        SteptimeLabel.Location = New System.Drawing.Point(38, 68)
-        SteptimeLabel.Name = "SteptimeLabel"
-        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
-        SteptimeLabel.TabIndex = 16
-        SteptimeLabel.Text = "Time step:"
-        '
         'SteptimeTextBox
         '
         Me.SteptimeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "timestep", True))
@@ -315,16 +325,6 @@ Partial Class Form_Conf_Measure
         Me.SteptimeTextBox.Name = "SteptimeTextBox"
         Me.SteptimeTextBox.Size = New System.Drawing.Size(203, 20)
         Me.SteptimeTextBox.TabIndex = 17
-        '
-        'NameLabel
-        '
-        NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(62, 34)
-        NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
-        NameLabel.TabIndex = 14
-        NameLabel.Text = "Name:"
         '
         'NameTextBox
         '
