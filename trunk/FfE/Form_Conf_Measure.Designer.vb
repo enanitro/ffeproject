@@ -23,90 +23,52 @@ Partial Class Form_Conf_Measure
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim NameLabel As System.Windows.Forms.Label
-        Dim SteptimeLabel As System.Windows.Forms.Label
-        Dim UnitLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
+        Dim UnitLabel As System.Windows.Forms.Label
+        Dim SteptimeLabel As System.Windows.Forms.Label
+        Dim NameLabel As System.Windows.Forms.Label
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.MeasureBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MeasureTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.measureTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
+        Me.Panel1 = New System.Windows.Forms.Panel
         Me.MeasureBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
+        Me.MeasureBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
         Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
+        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
+        Me.UnitTextBox = New System.Windows.Forms.TextBox
+        Me.SteptimeTextBox = New System.Windows.Forms.TextBox
+        Me.NameTextBox = New System.Windows.Forms.TextBox
         Me.MeasureDataGridView = New System.Windows.Forms.DataGridView
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.timestep = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.NameTextBox = New System.Windows.Forms.TextBox
-        Me.SteptimeTextBox = New System.Windows.Forms.TextBox
-        Me.UnitTextBox = New System.Windows.Forms.TextBox
-        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.MeasureBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.Delete = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-        NameLabel = New System.Windows.Forms.Label
-        SteptimeLabel = New System.Windows.Forms.Label
-        UnitLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
+        UnitLabel = New System.Windows.Forms.Label
+        SteptimeLabel = New System.Windows.Forms.Label
+        NameLabel = New System.Windows.Forms.Label
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MeasureBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         CType(Me.MeasureBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MeasureBindingNavigator.SuspendLayout()
         CType(Me.MeasureDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'NameLabel
-        '
-        NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(70, 54)
-        NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
-        NameLabel.TabIndex = 4
-        NameLabel.Text = "Name:"
-        '
-        'SteptimeLabel
-        '
-        SteptimeLabel.AutoSize = True
-        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        SteptimeLabel.Location = New System.Drawing.Point(46, 88)
-        SteptimeLabel.Name = "SteptimeLabel"
-        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
-        SteptimeLabel.TabIndex = 6
-        SteptimeLabel.Text = "Time step:"
-        '
-        'UnitLabel
-        '
-        UnitLabel.AutoSize = True
-        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        UnitLabel.Location = New System.Drawing.Point(458, 50)
-        UnitLabel.Name = "UnitLabel"
-        UnitLabel.Size = New System.Drawing.Size(37, 15)
-        UnitLabel.TabIndex = 8
-        UnitLabel.Text = "Unit:"
-        '
-        'DescriptionLabel
-        '
-        DescriptionLabel.AutoSize = True
-        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(408, 89)
-        DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
-        DescriptionLabel.TabIndex = 10
-        DescriptionLabel.Text = "Description:"
         '
         'Ffe_databaseDataSet
         '
@@ -137,17 +99,34 @@ Partial Class Form_Conf_Measure
         Me.TableAdapterManager.usage_typeTableAdapter = Nothing
         Me.TableAdapterManager.userTableAdapter = Nothing
         '
+        'Panel1
+        '
+        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel1.Controls.Add(Me.MeasureBindingNavigator)
+        Me.Panel1.Controls.Add(DescriptionLabel)
+        Me.Panel1.Controls.Add(Me.DescriptionTextBox)
+        Me.Panel1.Controls.Add(UnitLabel)
+        Me.Panel1.Controls.Add(Me.UnitTextBox)
+        Me.Panel1.Controls.Add(SteptimeLabel)
+        Me.Panel1.Controls.Add(Me.SteptimeTextBox)
+        Me.Panel1.Controls.Add(NameLabel)
+        Me.Panel1.Controls.Add(Me.NameTextBox)
+        Me.Panel1.Controls.Add(Me.MeasureDataGridView)
+        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(735, 364)
+        Me.Panel1.TabIndex = 0
+        '
         'MeasureBindingNavigator
         '
         Me.MeasureBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
         Me.MeasureBindingNavigator.AutoSize = False
         Me.MeasureBindingNavigator.BindingSource = Me.MeasureBindingSource
         Me.MeasureBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.MeasureBindingNavigator.CountItemFormat = "of {0}"
         Me.MeasureBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
         Me.MeasureBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.MeasureBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.MeasureBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
-        Me.MeasureBindingNavigator.Location = New System.Drawing.Point(123, 306)
+        Me.MeasureBindingNavigator.Location = New System.Drawing.Point(115, 286)
         Me.MeasureBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.MeasureBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.MeasureBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -156,8 +135,19 @@ Partial Class Form_Conf_Measure
         Me.MeasureBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
         Me.MeasureBindingNavigator.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.MeasureBindingNavigator.Size = New System.Drawing.Size(504, 54)
-        Me.MeasureBindingNavigator.TabIndex = 0
+        Me.MeasureBindingNavigator.TabIndex = 12
         Me.MeasureBindingNavigator.Text = "BindingNavigator1"
+        '
+        'BindingNavigatorAddNewItem
+        '
+        Me.BindingNavigatorAddNewItem.AutoSize = False
+        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem.Image = Global.FfE.My.Resources.Resources.add_rule
+        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
+        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorAddNewItem.Text = "Add new"
         '
         'BindingNavigatorCountItem
         '
@@ -179,10 +169,52 @@ Partial Class Form_Conf_Measure
         Me.BindingNavigatorDeleteItem.Text = "Eliminar"
         Me.BindingNavigatorDeleteItem.Visible = False
         '
+        'MeasureBindingNavigatorSaveItem
+        '
+        Me.MeasureBindingNavigatorSaveItem.AutoSize = False
+        Me.MeasureBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.MeasureBindingNavigatorSaveItem.Image = Global.FfE.My.Resources.Resources.save_rule
+        Me.MeasureBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.MeasureBindingNavigatorSaveItem.Name = "MeasureBindingNavigatorSaveItem"
+        Me.MeasureBindingNavigatorSaveItem.Size = New System.Drawing.Size(52, 49)
+        Me.MeasureBindingNavigatorSaveItem.Text = "Save"
+        '
+        'Delete
+        '
+        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Delete.Image = Global.FfE.My.Resources.Resources.del_rule
+        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
+        Me.Delete.Name = "Delete"
+        Me.Delete.Size = New System.Drawing.Size(52, 51)
+        Me.Delete.Text = "Delete"
+        '
         'BindingNavigatorSeparator2
         '
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.AutoSize = False
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = Global.FfE.My.Resources.Resources.img_first
+        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveFirstItem.Text = "First"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.AutoSize = False
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = Global.FfE.My.Resources.Resources.img_back
+        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMovePreviousItem.Text = "Back"
         '
         'BindingNavigatorSeparator
         '
@@ -204,6 +236,105 @@ Partial Class Form_Conf_Measure
         Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
         Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 54)
         '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.AutoSize = False
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = Global.FfE.My.Resources.Resources.img_next
+        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveNextItem.Text = "Next"
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.AutoSize = False
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = Global.FfE.My.Resources.Resources.img_last
+        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveLastItem.Text = "Last"
+        '
+        'DescriptionLabel
+        '
+        DescriptionLabel.AutoSize = True
+        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DescriptionLabel.Location = New System.Drawing.Point(400, 69)
+        DescriptionLabel.Name = "DescriptionLabel"
+        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.TabIndex = 20
+        DescriptionLabel.Text = "Description:"
+        '
+        'DescriptionTextBox
+        '
+        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "description", True))
+        Me.DescriptionTextBox.Location = New System.Drawing.Point(490, 68)
+        Me.DescriptionTextBox.MaxLength = 250
+        Me.DescriptionTextBox.Multiline = True
+        Me.DescriptionTextBox.Name = "DescriptionTextBox"
+        Me.DescriptionTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.DescriptionTextBox.TabIndex = 21
+        '
+        'UnitLabel
+        '
+        UnitLabel.AutoSize = True
+        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        UnitLabel.Location = New System.Drawing.Point(450, 30)
+        UnitLabel.Name = "UnitLabel"
+        UnitLabel.Size = New System.Drawing.Size(37, 15)
+        UnitLabel.TabIndex = 18
+        UnitLabel.Text = "Unit:"
+        '
+        'UnitTextBox
+        '
+        Me.UnitTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "unit", True))
+        Me.UnitTextBox.Location = New System.Drawing.Point(490, 29)
+        Me.UnitTextBox.MaxLength = 20
+        Me.UnitTextBox.Name = "UnitTextBox"
+        Me.UnitTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.UnitTextBox.TabIndex = 19
+        '
+        'SteptimeLabel
+        '
+        SteptimeLabel.AutoSize = True
+        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        SteptimeLabel.Location = New System.Drawing.Point(38, 68)
+        SteptimeLabel.Name = "SteptimeLabel"
+        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
+        SteptimeLabel.TabIndex = 16
+        SteptimeLabel.Text = "Time step:"
+        '
+        'SteptimeTextBox
+        '
+        Me.SteptimeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "timestep", True))
+        Me.SteptimeTextBox.Location = New System.Drawing.Point(115, 67)
+        Me.SteptimeTextBox.MaxLength = 20
+        Me.SteptimeTextBox.Name = "SteptimeTextBox"
+        Me.SteptimeTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.SteptimeTextBox.TabIndex = 17
+        '
+        'NameLabel
+        '
+        NameLabel.AutoSize = True
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        NameLabel.Location = New System.Drawing.Point(62, 34)
+        NameLabel.Name = "NameLabel"
+        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.TabIndex = 14
+        NameLabel.Text = "Name:"
+        '
+        'NameTextBox
+        '
+        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "name", True))
+        Me.NameTextBox.Location = New System.Drawing.Point(115, 31)
+        Me.NameTextBox.MaxLength = 30
+        Me.NameTextBox.Name = "NameTextBox"
+        Me.NameTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.NameTextBox.TabIndex = 15
+        '
         'MeasureDataGridView
         '
         Me.MeasureDataGridView.AllowUserToAddRows = False
@@ -222,10 +353,10 @@ Partial Class Form_Conf_Measure
         Me.MeasureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.MeasureDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.timestep, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.MeasureDataGridView.DataSource = Me.MeasureBindingSource
-        Me.MeasureDataGridView.Location = New System.Drawing.Point(49, 146)
+        Me.MeasureDataGridView.Location = New System.Drawing.Point(41, 126)
         Me.MeasureDataGridView.Name = "MeasureDataGridView"
         Me.MeasureDataGridView.Size = New System.Drawing.Size(653, 136)
-        Me.MeasureDataGridView.TabIndex = 1
+        Me.MeasureDataGridView.TabIndex = 13
         '
         'DataGridViewTextBoxColumn1
         '
@@ -258,156 +389,41 @@ Partial Class Form_Conf_Measure
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.Width = 1500
         '
-        'NameTextBox
-        '
-        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(123, 51)
-        Me.NameTextBox.MaxLength = 30
-        Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(203, 20)
-        Me.NameTextBox.TabIndex = 5
-        '
-        'SteptimeTextBox
-        '
-        Me.SteptimeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "timestep", True))
-        Me.SteptimeTextBox.Location = New System.Drawing.Point(123, 87)
-        Me.SteptimeTextBox.MaxLength = 20
-        Me.SteptimeTextBox.Name = "SteptimeTextBox"
-        Me.SteptimeTextBox.Size = New System.Drawing.Size(203, 20)
-        Me.SteptimeTextBox.TabIndex = 7
-        '
-        'UnitTextBox
-        '
-        Me.UnitTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "unit", True))
-        Me.UnitTextBox.Location = New System.Drawing.Point(498, 49)
-        Me.UnitTextBox.MaxLength = 20
-        Me.UnitTextBox.Name = "UnitTextBox"
-        Me.UnitTextBox.Size = New System.Drawing.Size(203, 20)
-        Me.UnitTextBox.TabIndex = 9
-        '
-        'DescriptionTextBox
-        '
-        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "description", True))
-        Me.DescriptionTextBox.Location = New System.Drawing.Point(498, 88)
-        Me.DescriptionTextBox.MaxLength = 250
-        Me.DescriptionTextBox.Multiline = True
-        Me.DescriptionTextBox.Name = "DescriptionTextBox"
-        Me.DescriptionTextBox.Size = New System.Drawing.Size(203, 20)
-        Me.DescriptionTextBox.TabIndex = 11
-        '
-        'BindingNavigatorAddNewItem
-        '
-        Me.BindingNavigatorAddNewItem.AutoSize = False
-        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Image = Global.FfE.My.Resources.Resources.add_rule
-        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
-        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorAddNewItem.Text = "Add new"
-        '
-        'MeasureBindingNavigatorSaveItem
-        '
-        Me.MeasureBindingNavigatorSaveItem.AutoSize = False
-        Me.MeasureBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.MeasureBindingNavigatorSaveItem.Image = Global.FfE.My.Resources.Resources.save_rule
-        Me.MeasureBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.MeasureBindingNavigatorSaveItem.Name = "MeasureBindingNavigatorSaveItem"
-        Me.MeasureBindingNavigatorSaveItem.Size = New System.Drawing.Size(52, 49)
-        Me.MeasureBindingNavigatorSaveItem.Text = "Save"
-        '
-        'Delete
-        '
-        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Delete.Image = Global.FfE.My.Resources.Resources.del_rule
-        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
-        Me.Delete.Name = "Delete"
-        Me.Delete.Size = New System.Drawing.Size(52, 51)
-        Me.Delete.Text = "Delete"
-        '
-        'BindingNavigatorMoveFirstItem
-        '
-        Me.BindingNavigatorMoveFirstItem.AutoSize = False
-        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = Global.FfE.My.Resources.Resources.img_first
-        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveFirstItem.Text = "First"
-        '
-        'BindingNavigatorMovePreviousItem
-        '
-        Me.BindingNavigatorMovePreviousItem.AutoSize = False
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = Global.FfE.My.Resources.Resources.img_back
-        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMovePreviousItem.Text = "Back"
-        '
-        'BindingNavigatorMoveNextItem
-        '
-        Me.BindingNavigatorMoveNextItem.AutoSize = False
-        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = Global.FfE.My.Resources.Resources.img_next
-        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveNextItem.Text = "Next"
-        '
-        'BindingNavigatorMoveLastItem
-        '
-        Me.BindingNavigatorMoveLastItem.AutoSize = False
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = Global.FfE.My.Resources.Resources.img_last
-        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveLastItem.Text = "Last"
-        '
         'Form_Conf_Measure
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(759, 460)
-        Me.Controls.Add(Me.MeasureBindingNavigator)
-        Me.Controls.Add(DescriptionLabel)
-        Me.Controls.Add(Me.DescriptionTextBox)
-        Me.Controls.Add(UnitLabel)
-        Me.Controls.Add(Me.UnitTextBox)
-        Me.Controls.Add(SteptimeLabel)
-        Me.Controls.Add(Me.SteptimeTextBox)
-        Me.Controls.Add(NameLabel)
-        Me.Controls.Add(Me.NameTextBox)
-        Me.Controls.Add(Me.MeasureDataGridView)
+        Me.ClientSize = New System.Drawing.Size(759, 396)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "Form_Conf_Measure"
         Me.ShowInTaskbar = False
         Me.Text = "Measure configuration"
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MeasureBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.MeasureBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MeasureBindingNavigator.ResumeLayout(False)
         Me.MeasureBindingNavigator.PerformLayout()
         CType(Me.MeasureDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Ffe_databaseDataSet As FfE.ffe_databaseDataSet
     Friend WithEvents MeasureBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents MeasureTableAdapter As FfE.ffe_databaseDataSetTableAdapters.measureTableAdapter
     Friend WithEvents TableAdapterManager As FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents MeasureBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
     Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents MeasureBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
@@ -415,15 +431,11 @@ Partial Class Form_Conf_Measure
     Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
-    Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MeasureBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
-    Friend WithEvents MeasureDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents NameTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents SteptimeTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents UnitTextBox As System.Windows.Forms.TextBox
     Friend WithEvents DescriptionTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents UnitTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents SteptimeTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents NameTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents MeasureDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents timestep As System.Windows.Forms.DataGridViewTextBoxColumn

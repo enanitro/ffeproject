@@ -4,7 +4,7 @@ Imports MySql.Data.MySqlClient
 Public Class Form_export_full
     Dim abort As Boolean = False
 
-    Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
+    Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             btn_export.Enabled = False
             If path_graphtec.Text <> "" And abort = False Then
@@ -24,7 +24,7 @@ Public Class Form_export_full
             End If
             'logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
             If abort <> True Then MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
-        Catch ex As Exception       
+        Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             clean_groups()
@@ -335,7 +335,7 @@ Public Class Form_export_full
     End Sub
 
     
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -347,7 +347,7 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -359,7 +359,7 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -371,7 +371,7 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Try
         'SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
         'If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -383,7 +383,7 @@ Public Class Form_export_full
         'End Try
     End Sub
 
-    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If btn_export.Enabled = False Then
             If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 abort = True
