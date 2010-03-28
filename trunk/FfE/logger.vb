@@ -40,12 +40,21 @@ Public Class logger
 
     Public unit As String
     Dim table_canbus As New Dictionary(Of Integer, str_canbus)
-    Dim ids_chs As New Dictionary(Of Integer, Integer)
+    Dim ids_chs As New Dictionary(Of Integer, Integer())
 
     Private Sub load_ids_chs(ByVal list As CheckedListBox)
+        Dim v() As Integer
         For i = 0 To 12
             If list.GetItemChecked(i) Then
-                ids_chs.Add(table_canbus(i).id, i)
+                If ids_chs.TryGetValue(table_canbus(i).id, v) Then
+                    Array.Resize(v, v.Length + 1)
+                    v(v.Length - 1) = i
+                    ids_chs.Item(table_canbus(i).id) = v
+                Else
+                    ReDim v(0)
+                    v(0) = i
+                    ids_chs.Add(table_canbus(i).id, v)
+                End If
             End If
         Next
     End Sub
@@ -576,14 +585,14 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, time, tm As String
+        Dim linea, aux, time, tm, val As String
         Dim datos() As String
         Dim div As Int64 = 0
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value, id_ch As Integer
+        Dim value, id_ch() As Integer
         Dim res, t As Double
         Dim str As str_canbus
 
@@ -624,15 +633,19 @@ Public Class logger
                             If ids_chs.TryGetValue(value, id_ch) Then
                                 data_points += 1
                                 clock += 1
-                                aux = hex_to_dec(datos(7).Split(":")(1))
-                                res = read_string(aux, table_canbus(id_ch))
-                                t = CType(datos(0), Double)
-                                tm = format_time(t, div, time)
-                                aux = "(" & num_lines & ",'" & list.Items(id_ch) & "'," & id_drive _
-                                & "," & id_logger & "," & measure(id_ch) & "," _
-                                & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
-                                & res & ")"
-                                ins.set_string(aux)
+                                For Each x In id_ch
+                                    aux = hex_to_dec(datos(7).Split(":")(1))
+                                    res = read_string(aux, table_canbus(x))
+                                    val = CType(res, String)
+                                    val = val.Replace(",", ".")
+                                    t = CType(datos(0), Double)
+                                    tm = format_time(t, div, time)
+                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                    & "," & id_logger & "," & measure(x) & "," _
+                                    & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
+                                    & val & ")"
+                                    ins.set_string(aux)
+                                Next
                                 progressbar(num_lines, bar, percent)
                             End If
 
