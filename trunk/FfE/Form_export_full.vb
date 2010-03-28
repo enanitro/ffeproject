@@ -4,26 +4,37 @@ Imports MySql.Data.MySqlClient
 Public Class Form_export_full
     Dim abort As Boolean = False
 
-    Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
+        Dim into As Boolean = False
         Try
             btn_export.Enabled = False
             If path_graphtec.Text <> "" And abort = False Then
                 ProgressBar1.Visible = True
                 percent_graphtec.Visible = True
                 logger_csv_file(path_graphtec.Text, FfE_Main.id_graphtec, "GRAPHTEC GL800")
+                into = True
             End If
             If path_gps.Text <> "" And abort = False Then
                 ProgressBar2.Visible = True
                 percent_gps.Visible = True
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
+                into = True
             End If
             If path_fluke.Text <> "" And abort = False Then
                 ProgressBar3.Visible = True
                 percent_fluke.Visible = True
                 logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "FLUKE")
+                into = True
             End If
-            'logger_csv_file(SaveFileDialog.FileName, FfE_Main.id_canbus, "CAN-BUS", Label22.Text)
-            If abort <> True Then MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
+            If path_canbus.Text <> "" And abort = False Then
+                ProgressBar4.Visible = True
+                percent_canbus.Visible = True
+                logger_csv_file(path_canbus.Text, FfE_Main.id_canbus, "CAN-BUS")
+                into = True
+            End If
+            If abort <> True And into <> False Then
+                MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -335,7 +346,8 @@ Public Class Form_export_full
     End Sub
 
     
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -347,7 +359,8 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -359,7 +372,8 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -371,19 +385,20 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'Try
-        'SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
-        'If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-        'path_canbus.Text = SaveFileDialog.FileName
-        'path_canbus.Visible = True
-        'End If
-        'Catch ex As Exception
-        ' MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        Try
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                path_canbus.Text = SaveFileDialog.FileName
+                path_canbus.Visible = True
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+
         If btn_export.Enabled = False Then
             If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 abort = True
@@ -398,4 +413,5 @@ Public Class Form_export_full
         path_fluke.Text = ""
         path_canbus.Text = ""
     End Sub
+
 End Class

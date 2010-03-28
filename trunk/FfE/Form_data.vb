@@ -198,15 +198,23 @@ Public Class Form_data
 
     Private Sub show_loggers()
         GroupBox2.Visible = False
+
         execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
         show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
         CheckBox9.CheckState = CheckState.Checked
+
         execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
         show_data(DataGridView1, FfE_Main.id_gps, CheckedListBox2)
         CheckBox11.CheckState = CheckState.Checked
+
         execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
         show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
         CheckBox12.CheckState = CheckState.Checked
+
+        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
+        show_data(DataGridView3, FfE_Main.id_canbus, CheckedListBox4)
+        CheckBox13.CheckState = CheckState.Checked
+
         GroupBox2.Visible = True
     End Sub
 
@@ -473,7 +481,6 @@ Public Class Form_data
         execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
         show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
         CheckBox9.CheckState = CheckState.Checked
-        show_data(DataGridView, FfE_Main.id_graphtec, CheckedListBox1)
     End Sub
 
     Private Sub CheckBox9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox9.CheckedChanged
@@ -489,7 +496,6 @@ Public Class Form_data
         execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
         show_data(DataGridView1, FfE_Main.id_gps, CheckedListBox2)
         CheckBox11.CheckState = CheckState.Checked
-        show_data(DataGridView, FfE_Main.id_gps, CheckedListBox2)
     End Sub
 
     Private Sub CheckBox11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox11.CheckedChanged
@@ -505,7 +511,6 @@ Public Class Form_data
         execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
         show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
         CheckBox12.CheckState = CheckState.Checked
-        show_data(DataGridView, FfE_Main.id_fluke, CheckedListBox3)
     End Sub
 
     Private Sub CheckBox12_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox12.CheckedChanged
@@ -524,11 +529,22 @@ Public Class Form_data
         no_select_all_channels(CheckBox12, CheckedListBox3)
     End Sub
 
-    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+    Private Sub CheckedListBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox4.SelectedIndexChanged
+        no_select_all_channels(CheckBox13, CheckedListBox4)
+    End Sub
 
+    Private Sub CheckBox13_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox13.CheckedChanged
+        select_all_channels(CheckedListBox4, CheckBox13)
+    End Sub
+
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        show_data(DataGridView3, FfE_Main.id_fluke, CheckedListBox4)
     End Sub
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
-
+        delete_channel(FfE_Main.id_canbus, CheckedListBox4)
+        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
+        show_data(DataGridView3, FfE_Main.id_canbus, CheckedListBox4)
+        CheckBox13.CheckState = CheckState.Checked
     End Sub
 End Class
