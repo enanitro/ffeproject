@@ -133,6 +133,8 @@ Partial Class Form_Connection
         '
         'btn_aceptar
         '
+        Me.btn_aceptar.Image = Global.FfE.My.Resources.Resources.test
+        Me.btn_aceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btn_aceptar.Location = New System.Drawing.Point(163, 277)
         Me.btn_aceptar.Name = "btn_aceptar"
         Me.btn_aceptar.Size = New System.Drawing.Size(98, 39)
