@@ -87,6 +87,8 @@ Public Class Form_export_full
             cn.Open()
 
             ' Pasar la consulta sql y la conexión al Sql Command
+            'He añadido esto: por defecto commandTimeOut vale 30, pero si le pones cero espera indefinidamente, supongo que con esto funcionará
+            cmd.CommandTimeout = 0
             cmd.Connection = cn
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
