@@ -25,28 +25,22 @@ Partial Class Form_export_full
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_export_full))
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Button10 = New System.Windows.Forms.Button
-        Me.btn_export = New System.Windows.Forms.Button
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.percent_canbus = New System.Windows.Forms.Label
         Me.path_canbus = New System.Windows.Forms.Label
         Me.ProgressBar4 = New System.Windows.Forms.ProgressBar
-        Me.Button3 = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
         Me.percent_gps = New System.Windows.Forms.Label
         Me.path_gps = New System.Windows.Forms.Label
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar
-        Me.Button2 = New System.Windows.Forms.Button
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
         Me.percent_fluke = New System.Windows.Forms.Label
         Me.path_fluke = New System.Windows.Forms.Label
         Me.ProgressBar3 = New System.Windows.Forms.ProgressBar
-        Me.Button4 = New System.Windows.Forms.Button
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.percent_graphtec = New System.Windows.Forms.Label
         Me.path_graphtec = New System.Windows.Forms.Label
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.Button1 = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.description = New System.Windows.Forms.Label
         Me.importer = New System.Windows.Forms.Label
@@ -68,6 +62,12 @@ Partial Class Form_export_full
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
+        Me.Button10 = New System.Windows.Forms.Button
+        Me.btn_export = New System.Windows.Forms.Button
+        Me.Button3 = New System.Windows.Forms.Button
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.Button1 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -90,27 +90,6 @@ Partial Class Form_export_full
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(987, 516)
         Me.Panel1.TabIndex = 0
-        '
-        'Button10
-        '
-        Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.Button10.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___00072
-        Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button10.Location = New System.Drawing.Point(506, 403)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(144, 105)
-        Me.Button10.TabIndex = 33
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'btn_export
-        '
-        Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
-        Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(337, 403)
-        Me.btn_export.Name = "btn_export"
-        Me.btn_export.Size = New System.Drawing.Size(144, 105)
-        Me.btn_export.TabIndex = 30
-        Me.btn_export.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -155,15 +134,6 @@ Partial Class Form_export_full
         Me.ProgressBar4.TabIndex = 4
         Me.ProgressBar4.Visible = False
         '
-        'Button3
-        '
-        Me.Button3.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button3.Location = New System.Drawing.Point(9, 20)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 77)
-        Me.Button3.TabIndex = 3
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.percent_gps)
@@ -206,15 +176,6 @@ Partial Class Form_export_full
         Me.ProgressBar2.Size = New System.Drawing.Size(356, 23)
         Me.ProgressBar2.TabIndex = 4
         Me.ProgressBar2.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button2.Location = New System.Drawing.Point(9, 20)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 77)
-        Me.Button2.TabIndex = 3
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
@@ -259,15 +220,6 @@ Partial Class Form_export_full
         Me.ProgressBar3.TabIndex = 4
         Me.ProgressBar3.Visible = False
         '
-        'Button4
-        '
-        Me.Button4.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button4.Location = New System.Drawing.Point(9, 20)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 77)
-        Me.Button4.TabIndex = 3
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.percent_graphtec)
@@ -310,15 +262,6 @@ Partial Class Form_export_full
         Me.ProgressBar1.Size = New System.Drawing.Size(356, 23)
         Me.ProgressBar1.TabIndex = 4
         Me.ProgressBar1.Visible = False
-        '
-        'Button1
-        '
-        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button1.Location = New System.Drawing.Point(9, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 77)
-        Me.Button1.TabIndex = 3
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -539,6 +482,63 @@ Partial Class Form_export_full
         Me.Label1.Size = New System.Drawing.Size(62, 15)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Drive ID:"
+        '
+        'Button10
+        '
+        Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Button10.Image = Global.FfE.My.Resources.Resources.exit1
+        Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button10.Location = New System.Drawing.Point(506, 403)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(144, 105)
+        Me.Button10.TabIndex = 33
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'btn_export
+        '
+        Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
+        Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btn_export.Location = New System.Drawing.Point(337, 403)
+        Me.btn_export.Name = "btn_export"
+        Me.btn_export.Size = New System.Drawing.Size(144, 105)
+        Me.btn_export.TabIndex = 30
+        Me.btn_export.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button3.Location = New System.Drawing.Point(9, 20)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 77)
+        Me.Button3.TabIndex = 3
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button2.Location = New System.Drawing.Point(9, 20)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 77)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button4.Location = New System.Drawing.Point(9, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 77)
+        Me.Button4.TabIndex = 3
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button1.Location = New System.Drawing.Point(9, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 77)
+        Me.Button1.TabIndex = 3
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form_export_full
         '
