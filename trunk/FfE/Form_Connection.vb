@@ -34,7 +34,7 @@
             Dim get_id As New logger
             FfE_Main.id_graphtec = get_id.get_logger_id("GRAPHTEC GL800")
             FfE_Main.id_gps = get_id.get_logger_id("COLUMBUS GPS")
-            FfE_Main.id_fluke = get_id.get_logger_id("FLUKE")
+            FfE_Main.id_fluke = get_id.get_logger_id("LMG 500")
             FfE_Main.id_canbus = get_id.get_logger_id("CAN-BUS")
         End If
     End Sub

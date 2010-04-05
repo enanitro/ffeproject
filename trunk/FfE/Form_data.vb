@@ -229,9 +229,6 @@ Public Class Form_data
         grid.ReadOnly = True
         grid.AllowUserToAddRows = False
         grid.AllowUserToDeleteRows = False
-        'grid.AllowUserToOrderColumns = False
-        'grid.Columns(0).ReadOnly = True
-        'grid.Columns(1).ReadOnly = True
         grid.Columns(0).Width = 60
         grid.Columns(1).Width = 60
         For i = 2 To grid.Columns.Count - 1
@@ -247,6 +244,7 @@ Public Class Form_data
 
         Try
 
+            grid.DataSource = ""
             execute_query_loggers(sql, logger_id, list)
 
             ' Abrir la conexión a Sql  
@@ -254,21 +252,22 @@ Public Class Form_data
 
             ' Pasar la consulta sql y la conexión al Sql Command   
             Dim cmd As New MySqlCommand(sql, cn)
+            cmd.CommandTimeout = 1000
 
             ' Inicializar un nuevo SqlDataAdapter   
             Dim da As New MySqlDataAdapter(cmd)
 
             'Crear y Llenar un Dataset  
             Dim ds As New DataSet
+
             da.Fill(ds)
 
             Dim tbl As DataTable = ds.Tables(0) ' data table prepara la estructura de la tabla
             If tbl.Rows.Count > 0 Then
                 grid.DataSource = tbl
                 format_grid(grid)
-            Else
-                grid.DataSource = ""
             End If
+
 
 
         Catch ex As Exception
@@ -294,6 +293,7 @@ Public Class Form_data
             cn.Open()
 
             ' Pasar la consulta sql y la conexión al Sql Command
+            cmd.CommandTimeout = 0
             cmd.Connection = cn
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -316,33 +316,30 @@ Public Class Form_data
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
-        Dim distinct, i As Integer
+        Dim i As Integer
         sql = ""
 
         Try
-
             ' Abrir la conexión a Sql  
             cn.Open()
             cmd.Connection = cn
 
-            ' Pasar la consulta sql y la conexión al Sql Command
-            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
-              " and logger_id = " & logger_id
-            execute_query(sql, distinct)
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+            sql = "select distinct data_id from data where drive_id = " & drive_id & _
              " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
 
             sql = "select data_index as 'Index',time as Time"
-            For i = 0 To distinct - 1
-                query.Read()
+            i = 0
+            While query.Read()
                 If list.GetItemChecked(i) = True Then
                     sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
                     query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "'"
+                    i += 1
                 End If
-            Next
+            End While
             sql += " from data_full" & _
                 " where drive_id = " & drive_id & _
                 " and logger_id = " & logger_id & _
@@ -370,7 +367,7 @@ Public Class Form_data
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
-        Dim distinct, i As Integer
+        Dim i As Integer
         Dim sql As String = ""
 
         Try
@@ -379,21 +376,18 @@ Public Class Form_data
             cn.Open()
             cmd.Connection = cn
 
-            ' Pasar la consulta sql y la conexión al Sql Command
-            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
-              " and logger_id = " & logger_id
-            execute_query(sql, distinct)
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+            sql = "select distinct data_id from data where drive_id = " & drive_id & _
              " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
             list.Items.Clear()
-
-            For i = 0 To distinct - 1
-                query.Read()
+            i = 0
+            While query.Read()
                 list.Items.Add(query.GetString(0))
                 list.SetItemChecked(i, True)
-            Next
+                i += 1
+            End While
 
             cn.Close()
 
@@ -415,7 +409,6 @@ Public Class Form_data
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
-        Dim query As MySqlDataReader
         Dim i As Integer
         Dim sql As String = ""
 

@@ -43,14 +43,9 @@ Partial Class Form_drive
         Dim Label9 As System.Windows.Forms.Label
         Dim Label11 As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_drive))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
@@ -128,26 +123,7 @@ Partial Class Form_drive
         Me.Label15 = New System.Windows.Forms.Label
         Me.Label14 = New System.Windows.Forms.Label
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage2 = New System.Windows.Forms.TabPage
         Me.DriveDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Data_fullDataGridView = New System.Windows.Forms.DataGridView
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.TabPage4 = New System.Windows.Forms.TabPage
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView
-        Me.TabPage5 = New System.Windows.Forms.TabPage
-        Me.DataGridView3 = New System.Windows.Forms.DataGridView
         Me.Data_fullBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DriveTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.driveTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
@@ -158,6 +134,16 @@ Partial Class Form_drive
         Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Data_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -198,16 +184,7 @@ Partial Class Form_drive
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Data_fullDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage3.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage4.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage5.SuspendLayout()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -1250,272 +1227,47 @@ Partial Class Form_drive
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.TabControl1)
+        Me.GroupBox3.Controls.Add(Me.DriveDataGridView)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.GroupBox3.Location = New System.Drawing.Point(13, 175)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(785, 424)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Data View"
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Location = New System.Drawing.Point(24, 32)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(742, 375)
-        Me.TabControl1.TabIndex = 0
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.DriveDataGridView)
-        Me.TabPage2.Controls.Add(Me.Data_fullDataGridView)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(734, 347)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Graphtec GL800"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.GroupBox3.Text = "Drives"
         '
         'DriveDataGridView
         '
         Me.DriveDataGridView.AllowUserToAddRows = False
+        Me.DriveDataGridView.AllowUserToDeleteRows = False
         Me.DriveDataGridView.AutoGenerateColumns = False
-        Me.DriveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DriveDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
-        Me.DriveDataGridView.DataSource = Me.DriveBindingSource
-        Me.DriveDataGridView.Location = New System.Drawing.Point(142, 54)
-        Me.DriveDataGridView.Name = "DriveDataGridView"
-        Me.DriveDataGridView.Size = New System.Drawing.Size(442, 132)
-        Me.DriveDataGridView.TabIndex = 3
-        Me.DriveDataGridView.Visible = False
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "drive_id"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "drive_id"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "status"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "status"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "climate"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "climate"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "date"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "date"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "description"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "description"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "usage_type_id"
-        Me.DataGridViewTextBoxColumn6.HeaderText = "usage_type_id"
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        '
-        'DataGridViewTextBoxColumn7
-        '
-        Me.DataGridViewTextBoxColumn7.DataPropertyName = "driver_id"
-        Me.DataGridViewTextBoxColumn7.HeaderText = "driver_id"
-        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        '
-        'DataGridViewTextBoxColumn8
-        '
-        Me.DataGridViewTextBoxColumn8.DataPropertyName = "importer_id"
-        Me.DataGridViewTextBoxColumn8.HeaderText = "importer_id"
-        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-        '
-        'DataGridViewTextBoxColumn9
-        '
-        Me.DataGridViewTextBoxColumn9.DataPropertyName = "car_id"
-        Me.DataGridViewTextBoxColumn9.HeaderText = "car_id"
-        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
-        '
-        'DataGridViewTextBoxColumn10
-        '
-        Me.DataGridViewTextBoxColumn10.DataPropertyName = "drive_type"
-        Me.DataGridViewTextBoxColumn10.HeaderText = "drive_type"
-        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
-        '
-        'Data_fullDataGridView
-        '
-        Me.Data_fullDataGridView.AllowUserToAddRows = False
-        Me.Data_fullDataGridView.AllowUserToDeleteRows = False
-        Me.Data_fullDataGridView.BackgroundColor = System.Drawing.Color.White
-        Me.Data_fullDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.Data_fullDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Data_fullDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.Data_fullDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Data_fullDataGridView.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Data_fullDataGridView.GridColor = System.Drawing.Color.DarkGray
-        Me.Data_fullDataGridView.Location = New System.Drawing.Point(20, 16)
-        Me.Data_fullDataGridView.Name = "Data_fullDataGridView"
-        Me.Data_fullDataGridView.ReadOnly = True
-        Me.Data_fullDataGridView.RowHeadersVisible = False
-        Me.Data_fullDataGridView.Size = New System.Drawing.Size(695, 314)
-        Me.Data_fullDataGridView.TabIndex = 0
-        '
-        'TabPage3
-        '
-        Me.TabPage3.Controls.Add(Me.DataGridView1)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(734, 347)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Columbus GPS"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DriveDataGridView.BackgroundColor = System.Drawing.Color.White
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridView1.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView1.Location = New System.Drawing.Point(20, 16)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(695, 314)
-        Me.DataGridView1.TabIndex = 1
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.DataGridView2)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(734, 347)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Fluke"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.BackgroundColor = System.Drawing.Color.White
-        Me.DataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.DriveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DriveDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.DriveDataGridView.DataSource = Me.DriveBindingSource
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DataGridView2.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView2.Location = New System.Drawing.Point(20, 16)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.RowHeadersVisible = False
-        Me.DataGridView2.Size = New System.Drawing.Size(695, 314)
-        Me.DataGridView2.TabIndex = 1
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Controls.Add(Me.DataGridView3)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(734, 347)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "CAN-BUS"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'DataGridView3
-        '
-        Me.DataGridView3.AllowUserToAddRows = False
-        Me.DataGridView3.AllowUserToDeleteRows = False
-        Me.DataGridView3.BackgroundColor = System.Drawing.Color.White
-        Me.DataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DataGridView3.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView3.DefaultCellStyle = DataGridViewCellStyle8
-        Me.DataGridView3.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView3.Location = New System.Drawing.Point(20, 16)
-        Me.DataGridView3.Name = "DataGridView3"
-        Me.DataGridView3.ReadOnly = True
-        Me.DataGridView3.RowHeadersVisible = False
-        Me.DataGridView3.Size = New System.Drawing.Size(695, 314)
-        Me.DataGridView3.TabIndex = 1
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DriveDataGridView.Location = New System.Drawing.Point(15, 23)
+        Me.DriveDataGridView.Name = "DriveDataGridView"
+        Me.DriveDataGridView.ReadOnly = True
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.DriveDataGridView.Size = New System.Drawing.Size(753, 384)
+        Me.DriveDataGridView.TabIndex = 3
         '
         'Data_fullBindingSource
         '
@@ -1576,6 +1328,76 @@ Partial Class Form_drive
         '
         Me.Data_fullTableAdapter.ClearBeforeFill = True
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "drive_id"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Drive ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "date"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Date"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "status"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Status"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "climate"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Climate"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn10
+        '
+        Me.DataGridViewTextBoxColumn10.DataPropertyName = "drive_type"
+        Me.DataGridViewTextBoxColumn10.HeaderText = "Drive Type"
+        Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+        Me.DataGridViewTextBoxColumn10.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "description"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Description"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "usage_type_id"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "Usage type ID"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "driver_id"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Driver ID"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "importer_id"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "Importer ID"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.DataPropertyName = "car_id"
+        Me.DataGridViewTextBoxColumn9.HeaderText = "Car ID"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
+        '
         'Form_drive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1615,16 +1437,7 @@ Partial Class Form_drive
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Data_fullDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage3.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage4.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage5.ResumeLayout(False)
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1701,29 +1514,10 @@ Partial Class Form_drive
     Friend WithEvents cmb_importer As System.Windows.Forms.ComboBox
     Friend WithEvents ImporterBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents Data_fullBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Data_fullTableAdapter As FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
-    Friend WithEvents Data_fullDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridView3 As System.Windows.Forms.DataGridView
     Friend WithEvents delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents DriveDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
@@ -1737,4 +1531,14 @@ Partial Class Form_drive
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents SaveFileDialog As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn10 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
