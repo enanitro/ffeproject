@@ -13,27 +13,31 @@ Imports MySql.Data.MySqlClient
 '9 Einspritzung
 '10 EV Modus
 '11 Motor-Kühlmitteltemeratur
-'12 Tankfüllstand
+'12 Scheinwerfer
+'13 Tankfüllstand
 
 
 Public Class logger
 
     Private Class str_canbus
-        Public Startbit As Integer
-        Public lange As Integer
-        Public Byteanordnung As Integer
-        Public Wertetyp As Boolean
-        Public faktor As Double
         Public id As Integer
+        Public startbit As Integer
+        Public longbits As Integer
+        Public sequence As String
+        Public signed As Boolean
+        Public factor As Double
+        Public offset As Integer
 
         Public Sub New(ByVal i As Integer, ByVal sb As Integer, ByVal lg As Integer, _
-                       ByVal bd As Integer, ByVal wt As Boolean, ByVal dec As Double)
+                       ByVal sq As String, ByVal sg As Boolean, ByVal dec As Double, _
+                       ByVal os As Integer)
             id = i
-            Startbit = sb
-            lange = lg
-            Byteanordnung = bd
-            Wertetyp = wt
-            faktor = dec
+            startbit = sb
+            longbits = lg
+            sequence = sq
+            signed = sg
+            factor = dec
+            offset = os
         End Sub
 
     End Class
@@ -44,35 +48,42 @@ Public Class logger
 
     Private Sub load_ids_chs(ByVal list As CheckedListBox)
         Dim v() As Integer
-        For i = 0 To 12
-            If list.GetItemChecked(i) Then
-                If ids_chs.TryGetValue(table_canbus(i).id, v) Then
-                    Array.Resize(v, v.Length + 1)
-                    v(v.Length - 1) = i
-                    ids_chs.Item(table_canbus(i).id) = v
-                Else
-                    ReDim v(0)
-                    v(0) = i
-                    ids_chs.Add(table_canbus(i).id, v)
-                End If
+        For Each i In list.CheckedIndices
+            If ids_chs.TryGetValue(table_canbus(i).id, v) Then
+                Array.Resize(v, v.Length + 1)
+                v(v.Length - 1) = i
+                ids_chs.Item(table_canbus(i).id) = v
+            Else
+                ReDim v(0)
+                v(0) = i
+                ids_chs.Add(table_canbus(i).id, v)
             End If
         Next
     End Sub
 
-    Private Sub Load_table_canbus()
-        table_canbus.Add(0, New str_canbus(48, 32, 8, 32, False, 1))
-        table_canbus.Add(1, New str_canbus(59, 16, 16, 24, False, 1))
-        table_canbus.Add(2, New str_canbus(59, 0, 12, 8, True, 0.1))
-        table_canbus.Add(3, New str_canbus(580, 48, 8, 48, False, 0.5))
-        table_canbus.Add(4, New str_canbus(968, 16, 16, 16, False, 32))
-        table_canbus.Add(5, New str_canbus(970, 16, 8, 16, False, 1))
-        table_canbus.Add(6, New str_canbus(971, 16, 16, 24, False, 0.5))
-        table_canbus.Add(7, New str_canbus(971, 40, 8, 40, True, 1))
-        table_canbus.Add(8, New str_canbus(971, 32, 8, 32, True, 1))
-        table_canbus.Add(9, New str_canbus(1312, 8, 16, 16, False, 1))
-        table_canbus.Add(10, New str_canbus(1321, 32, 8, 32, False, 1))
-        table_canbus.Add(11, New str_canbus(1324, 8, 8, 8, False, 1))
-        table_canbus.Add(12, New str_canbus(1444, 8, 8, 8, False, 2.5))
+    Private Sub Load_table_canbus(ByVal list As CheckedListBox)
+        Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
+        Dim s As String
+        Dim cmd As New MySqlCommand
+        Dim dr As MySqlDataReader
+        Try
+
+            For Each i In list.CheckedIndices
+                cn.Open()
+                cmd.Connection = cn
+                s = "select channel_id, dec_id, startbit, longbits, sequence, signed, factor, offset " & _
+                    " from ids_canbus where channel_id = " & i & ";"
+                cmd.CommandText = s
+                dr = cmd.ExecuteReader
+                dr.Read()
+                table_canbus.Add(i, New str_canbus(dr(1), dr(2), dr(3), dr(4), dr(5), dr(6), dr(7)))
+                cn.Close()
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
     End Sub
 
 
@@ -353,24 +364,37 @@ Public Class logger
             Loop While linea1 <> Nothing
             text.Text += "Data points: " & long_file & vbCrLf
 
-            list.Items.Add("Bremspedalstellung")
-            list.Items.Add("Batteriespannung")
-            list.Items.Add("HV-Batterie Stromfluss")
-            list.Items.Add("Gaspedalstellung")
-            list.Items.Add("ICE Drehzahl")
-            list.Items.Add("Fahrzeuggeschwindigkeit")
-            list.Items.Add("SOC")
-            list.Items.Add("max. Batterietemperatur")
-            list.Items.Add("min. Batterietemperatur")
-            list.Items.Add("Einspritzung")
-            list.Items.Add("EV Modus")
-            list.Items.Add("Motor-Kühlmitteltemeratur")
-            list.Items.Add("Tankfüllstand")
+            load_channels_canbus(list)
 
-            Array.Resize(measure, 13)
+            Array.Resize(measure, list.Items.Count)
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub load_channels_canbus(ByRef list As CheckedListBox)
+        Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
+        Try
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            Dim s As String
+            s = "select name from ids_canbus group by channel_id;"
+
+            ' Pasar la consulta sql y la conexión al Sql Command   
+            Dim cmd As New MySqlCommand(s, cn)
+            Dim dr As MySqlDataReader
+            dr = cmd.ExecuteReader()
+            While dr.Read()
+                list.Items.Add(dr.GetString(0))
+            End While
+
+            cn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
 
@@ -597,12 +621,15 @@ Public Class logger
         Dim str As str_canbus
 
         Try
-            Load_table_canbus()
+            Load_table_canbus(list)
             load_ids_chs(list)
 
             linea = fichero.ReadLine
-            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then div = 1000000000
-            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
+            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
+                div = 1000000000
+            Else
+                If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
+            End If
             linea = fichero.ReadLine
             datos = linea.Split(vbTab)
             time = datos(4)
@@ -671,15 +698,16 @@ Public Class logger
     Private Function read_string(ByVal str As String, ByVal tb As str_canbus) As Double
         Dim i As Integer
         Dim res As Double
+        Dim sq() As String
         Dim aux As String = ""
-        If tb.Startbit = tb.Byteanordnung Then
-            aux = str.Substring(tb.Byteanordnung, tb.lange)
-        Else
-            i = Math.Abs(tb.Byteanordnung - tb.Startbit)
-            aux = str.Substring(tb.Byteanordnung, i) & str.Substring(tb.Startbit, tb.lange - i)
-        End If
-        res = bin_to_dec(aux, tb.Wertetyp)
-        'res = res * tb.faktor
+
+        sq = tb.sequence.Split("-")
+        For Each i In sq
+            aux += str(i)
+        Next
+
+        res = bin_to_dec(aux, tb.signed)
+        res = res * tb.factor
         read_string = res
 
     End Function
@@ -819,7 +847,7 @@ Public Class logger
 
             ' Pasar la consulta sql y la conexión al Sql Command   
             Dim cmd As New MySqlCommand(s, cn)
-            Dim dr As System.Data.IDataReader
+            Dim dr As MySqlDataReader
             dr = cmd.ExecuteReader()
             dr.Read()
             get_logger_id = dr(0)

@@ -23,7 +23,7 @@ Public Class Form_export_full
             If path_fluke.Text <> "" And abort = False Then
                 ProgressBar3.Visible = True
                 percent_fluke.Visible = True
-                logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "FLUKE")
+                logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "LMG 500")
                 into = True
             End If
             If path_canbus.Text <> "" And abort = False Then
@@ -33,7 +33,7 @@ Public Class Form_export_full
                 into = True
             End If
             If abort <> True And into <> False Then
-                MsgBox("Data-loggers were imported successfully", MsgBoxStyle.Information)
+                MsgBox("Data-loggers were exported successfully", MsgBoxStyle.Information)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -200,12 +200,12 @@ Public Class Form_export_full
                                       ByVal logger As String, ByRef bar As ProgressBar, _
                                       ByRef percent As Label)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
-        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String
-        Dim count, distinct, i, max As Integer
+        Dim i, max As Integer
         res = ""
 
         Try
@@ -214,23 +214,20 @@ Public Class Form_export_full
             cn.Open()
             cmd.Connection = cn
 
-            ' Pasar la consulta sql y la conexión al Sql Command
-            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id.Text & _
-              " and logger_id = " & logger_id
-            execute_query(sql, distinct)
             sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
              " and logger_id = " & logger_id
+            cmd.CommandTimeout = 0
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-
             sql = "select concat(data_index,',',time"
             res = "INDEX,TIME"
-            For i = 1 To distinct
-                query.Read()
+
+            While query.Read()
                 res += "," & query.GetString(0)
                 sql += ",',',sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
-            Next
+            End While
+
             sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
@@ -240,28 +237,26 @@ Public Class Form_export_full
 
 
             cn.Open()
+            cmd.CommandTimeout = 0
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
 
-            sql = "select count(value) from data_full where drive_id = " & drive_id.Text & _
-              " and logger_id = " & logger_id & " order by data_index, time"
-            execute_query(sql, count)
+            sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
+             " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql, max)
 
-            calculate_max(max, logger_id)
             config_progressbar(max, bar)
             i = 1
-            count = count / distinct
-            query.Read()
-
-            Do While i <= count
+            While query.Read()
                 res += query.GetString(0)
-                query.Read()
+                i = query.GetString(0).Split(",")(0)
                 progressbar(i, percent.Text, bar)
-                i += 1
+                'i += 1
                 res += vbCrLf
                 Application.DoEvents()
-            Loop
+            End While
+
             res += vbCrLf
             cn.Close()
 

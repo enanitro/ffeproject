@@ -362,7 +362,7 @@ Public Class Form_drive
     End Sub
 
     Private Sub Drive_idLabel1_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.TextChanged
-        show_Data()
+        'show_Data()
     End Sub
 
     Private Sub btn_find_drive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_find_drive.Click
@@ -375,33 +375,7 @@ Public Class Form_drive
         End Try
     End Sub
 
-    Private Sub TabControl1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.Click
-        Try
-            If Drive_idLabel1.Text <> "" Then
-                Dim index As Integer = TabControl1.SelectedIndex + 1
-                Select Case index
-                    Case FfE_Main.id_graphtec
-                        Me.Data_fullTableAdapter.FillBydatafull _
-                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_graphtec)
-                        grid_configuration(Data_fullDataGridView)
-                    Case FfE_Main.id_gps
-                        Me.Data_fullTableAdapter.FillBydatafull _
-                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_gps)
-                        grid_configuration(DataGridView1)
-                    Case FfE_Main.id_fluke
-                        Me.Data_fullTableAdapter.FillBydatafull _
-                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_fluke)
-                        grid_configuration(DataGridView2)
-                    Case FfE_Main.id_canbus
-                        Me.Data_fullTableAdapter.FillBydatafull _
-                        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_canbus)
-                        grid_configuration(DataGridView3)
-                End Select
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
+   
 
     Private Sub grid_configuration(ByRef grid As DataGridView)
         grid.DataSource = ""
@@ -424,14 +398,6 @@ Public Class Form_drive
     End Sub
 
     Private Sub show_Data()
-        clear_grid(Data_fullDataGridView)
-        clear_grid(DataGridView1)
-        clear_grid(DataGridView2)
-        clear_grid(DataGridView3)
-        TabControl1.SelectedIndex = 0
-        Me.Data_fullTableAdapter.FillBydatafull _
-        (Me.Ffe_databaseDataSet.data_full, Drive_idLabel1.Text, FfE_Main.id_graphtec)
-        grid_configuration(Data_fullDataGridView)
         data_summary(Label19.Text, Label20.Text, Label21.Text, Label22.Text, Label23.Text)
     End Sub
 

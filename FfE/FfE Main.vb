@@ -67,7 +67,7 @@ Public Class FfE_Main
             Dim get_id As New logger
             id_graphtec = get_id.get_logger_id("GRAPHTEC GL800")
             id_gps = get_id.get_logger_id("COLUMBUS GPS")
-            id_fluke = get_id.get_logger_id("FLUKE")
+            id_fluke = get_id.get_logger_id("LMG 500")
             id_canbus = get_id.get_logger_id("CAN-BUS")
         Catch ex As Exception
             Dim conf_conection As New Form_Connection
