@@ -110,6 +110,7 @@ Partial Class association
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "association"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Channel-measure association"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

@@ -111,29 +111,8 @@ Partial Class Form_drive
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.btn_export = New System.Windows.Forms.Button
         Me.btn_import = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.Label21 = New System.Windows.Forms.Label
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.Label14 = New System.Windows.Forms.Label
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
         Me.DriveDataGridView = New System.Windows.Forms.DataGridView
-        Me.Data_fullBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DriveTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.driveTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
-        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
-        Me.Usage_typeTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.usage_typeTableAdapter
-        Me.UserTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.userTableAdapter
-        Me.TableAdapterManager1 = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
-        Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Data_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
-        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -144,6 +123,16 @@ Partial Class Form_drive
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Data_fullBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DriveTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.driveTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
+        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
+        Me.Usage_typeTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.usage_typeTableAdapter
+        Me.UserTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.userTableAdapter
+        Me.TableAdapterManager1 = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
+        Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Data_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
+        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -182,7 +171,6 @@ Partial Class Form_drive
         CType(Me.UsagetypeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1077,7 +1065,6 @@ Partial Class Form_drive
         '
         Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel3.Controls.Add(Me.GroupBox4)
-        Me.Panel3.Controls.Add(Me.GroupBox1)
         Me.Panel3.Controls.Add(Me.GroupBox3)
         Me.Panel3.Location = New System.Drawing.Point(418, 12)
         Me.Panel3.Name = "Panel3"
@@ -1089,7 +1076,7 @@ Partial Class Form_drive
         Me.GroupBox4.Controls.Add(Me.btn_export)
         Me.GroupBox4.Controls.Add(Me.btn_import)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox4.Location = New System.Drawing.Point(491, 13)
+        Me.GroupBox4.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(307, 149)
         Me.GroupBox4.TabIndex = 2
@@ -1115,115 +1102,6 @@ Partial Class Form_drive
         Me.btn_import.Size = New System.Drawing.Size(144, 105)
         Me.btn_import.TabIndex = 0
         Me.btn_import.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Label23)
-        Me.GroupBox1.Controls.Add(Me.Label22)
-        Me.GroupBox1.Controls.Add(Me.Label21)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(472, 149)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Data summary"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label23.Location = New System.Drawing.Point(147, 119)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(0, 18)
-        Me.Label23.TabIndex = 9
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(147, 96)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(0, 15)
-        Me.Label22.TabIndex = 8
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(147, 72)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(0, 15)
-        Me.Label21.TabIndex = 7
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(147, 50)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(0, 15)
-        Me.Label20.TabIndex = 6
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(147, 27)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(0, 15)
-        Me.Label19.TabIndex = 5
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label18.Location = New System.Drawing.Point(87, 119)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(51, 18)
-        Me.Label18.TabIndex = 4
-        Me.Label18.Text = "Total:"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(65, 96)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(71, 15)
-        Me.Label17.TabIndex = 3
-        Me.Label17.Text = "CAN-BUS:"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(90, 73)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(46, 15)
-        Me.Label16.TabIndex = 2
-        Me.Label16.Text = "Fluke:"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(29, 50)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(107, 15)
-        Me.Label15.TabIndex = 1
-        Me.Label15.Text = "Columbus GPS:"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(21, 27)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(115, 15)
-        Me.Label14.TabIndex = 0
-        Me.Label14.Text = "Graphtec GL800:"
         '
         'GroupBox3
         '
@@ -1268,65 +1146,6 @@ Partial Class Form_drive
         Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DriveDataGridView.Size = New System.Drawing.Size(753, 384)
         Me.DriveDataGridView.TabIndex = 3
-        '
-        'Data_fullBindingSource
-        '
-        Me.Data_fullBindingSource.DataMember = "data_full"
-        Me.Data_fullBindingSource.DataSource = Me.Ffe_databaseDataSet
-        '
-        'DriveTableAdapter
-        '
-        Me.DriveTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.carTableAdapter = Me.CarTableAdapter
-        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager.dataTableAdapter = Nothing
-        Me.TableAdapterManager.driveTableAdapter = Me.DriveTableAdapter
-        Me.TableAdapterManager.loggerTableAdapter = Nothing
-        Me.TableAdapterManager.measureTableAdapter = Nothing
-        Me.TableAdapterManager.photosTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.usage_typeTableAdapter = Me.Usage_typeTableAdapter
-        Me.TableAdapterManager.userTableAdapter = Me.UserTableAdapter
-        '
-        'CarTableAdapter
-        '
-        Me.CarTableAdapter.ClearBeforeFill = True
-        '
-        'Usage_typeTableAdapter
-        '
-        Me.Usage_typeTableAdapter.ClearBeforeFill = True
-        '
-        'UserTableAdapter
-        '
-        Me.UserTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager1
-        '
-        Me.TableAdapterManager1.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager1.carTableAdapter = Nothing
-        Me.TableAdapterManager1.Connection = Nothing
-        Me.TableAdapterManager1.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager1.dataTableAdapter = Nothing
-        Me.TableAdapterManager1.driveTableAdapter = Nothing
-        Me.TableAdapterManager1.loggerTableAdapter = Nothing
-        Me.TableAdapterManager1.measureTableAdapter = Nothing
-        Me.TableAdapterManager1.photosTableAdapter = Nothing
-        Me.TableAdapterManager1.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager1.usage_typeTableAdapter = Nothing
-        Me.TableAdapterManager1.userTableAdapter = Nothing
-        '
-        'FfedatabaseDataSetBindingSource
-        '
-        Me.FfedatabaseDataSetBindingSource.DataSource = Me.Ffe_databaseDataSet
-        Me.FfedatabaseDataSetBindingSource.Position = 0
-        '
-        'Data_fullTableAdapter
-        '
-        Me.Data_fullTableAdapter.ClearBeforeFill = True
         '
         'DataGridViewTextBoxColumn1
         '
@@ -1398,6 +1217,69 @@ Partial Class Form_drive
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         Me.DataGridViewTextBoxColumn9.ReadOnly = True
         '
+        'Data_fullBindingSource
+        '
+        Me.Data_fullBindingSource.DataMember = "data_full"
+        Me.Data_fullBindingSource.DataSource = Me.Ffe_databaseDataSet
+        '
+        'DriveTableAdapter
+        '
+        Me.DriveTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.carTableAdapter = Me.CarTableAdapter
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager.dataTableAdapter = Nothing
+        Me.TableAdapterManager.driveTableAdapter = Me.DriveTableAdapter
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
+        Me.TableAdapterManager.loggerTableAdapter = Nothing
+        Me.TableAdapterManager.measureTableAdapter = Nothing
+        Me.TableAdapterManager.photosTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.usage_typeTableAdapter = Me.Usage_typeTableAdapter
+        Me.TableAdapterManager.userTableAdapter = Me.UserTableAdapter
+        '
+        'CarTableAdapter
+        '
+        Me.CarTableAdapter.ClearBeforeFill = True
+        '
+        'Usage_typeTableAdapter
+        '
+        Me.Usage_typeTableAdapter.ClearBeforeFill = True
+        '
+        'UserTableAdapter
+        '
+        Me.UserTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager1
+        '
+        Me.TableAdapterManager1.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager1.carTableAdapter = Nothing
+        Me.TableAdapterManager1.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager1.Connection = Nothing
+        Me.TableAdapterManager1.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager1.dataTableAdapter = Nothing
+        Me.TableAdapterManager1.driveTableAdapter = Nothing
+        Me.TableAdapterManager1.ids_canbusTableAdapter = Nothing
+        Me.TableAdapterManager1.loggerTableAdapter = Nothing
+        Me.TableAdapterManager1.measureTableAdapter = Nothing
+        Me.TableAdapterManager1.photosTableAdapter = Nothing
+        Me.TableAdapterManager1.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager1.usage_typeTableAdapter = Nothing
+        Me.TableAdapterManager1.userTableAdapter = Nothing
+        '
+        'FfedatabaseDataSetBindingSource
+        '
+        Me.FfedatabaseDataSetBindingSource.DataSource = Me.Ffe_databaseDataSet
+        Me.FfedatabaseDataSetBindingSource.Position = 0
+        '
+        'Data_fullTableAdapter
+        '
+        Me.Data_fullTableAdapter.ClearBeforeFill = True
+        '
         'Form_drive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1408,7 +1290,7 @@ Partial Class Form_drive
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Form_drive"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Drive configuration"
         CType(Me.DriveBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1434,8 +1316,6 @@ Partial Class Form_drive
         CType(Me.UsagetypeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1518,18 +1398,7 @@ Partial Class Form_drive
     Friend WithEvents Data_fullTableAdapter As FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
     Friend WithEvents delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents DriveDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents SaveFileDialog As System.Windows.Forms.SaveFileDialog
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn

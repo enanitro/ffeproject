@@ -549,6 +549,7 @@ Partial Class Form_export_full
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "Form_export_full"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export data drive"
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)

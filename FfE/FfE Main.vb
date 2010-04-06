@@ -37,7 +37,7 @@ Public Class FfE_Main
         drive.Show()
     End Sub
 
-    Private Sub ConnectionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem1.Click
+    Private Sub ConnectionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim form_conn As New Form_Connection
 
         'form_conn.MdiParent = Me
@@ -79,5 +79,18 @@ Public Class FfE_Main
         Dim form_data As New Form_data
         form_data.MdiParent = Me
         form_data.Show()
+    End Sub
+
+    Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
+        Dim form_conn As New Form_Connection
+
+        'form_conn.MdiParent = Me
+        form_conn.ShowDialog()
+    End Sub
+
+    Private Sub IDTableToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IDTableToolStripMenuItem.Click
+        Dim form_canbus As New form_canbus_ids
+        form_canbus.MdiParent = Me
+        form_canbus.Show()
     End Sub
 End Class

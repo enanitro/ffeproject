@@ -303,8 +303,8 @@ Partial Class From_Conf_User
         '
         Me.BindingNavigatorCountItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(60, 49)
-        Me.BindingNavigatorCountItem.Text = "de {0}"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 49)
+        Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
         '
         'BindingNavigatorDeleteItem
@@ -418,9 +418,11 @@ Partial Class From_Conf_User
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
         Me.TableAdapterManager.copy_dataTableAdapter = Nothing
         Me.TableAdapterManager.dataTableAdapter = Nothing
         Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
         Me.TableAdapterManager.loggerTableAdapter = Nothing
         Me.TableAdapterManager.measureTableAdapter = Nothing
         Me.TableAdapterManager.photosTableAdapter = Nothing
@@ -437,6 +439,7 @@ Partial Class From_Conf_User
         Me.ClientSize = New System.Drawing.Size(690, 564)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "From_Conf_User"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "User configuration"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

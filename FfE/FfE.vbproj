@@ -44,6 +44,7 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
@@ -89,6 +90,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ffe_databaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form_canbus_ids.Designer.vb">
+      <DependentUpon>Form_canbus_ids.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_canbus_ids.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_data.Designer.vb">
       <DependentUpon>Form_data.vb</DependentUpon>
@@ -195,6 +202,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FfE Main.resx">
       <DependentUpon>FfE Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_canbus_ids.resx">
+      <DependentUpon>Form_canbus_ids.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_car_photos.resx">

@@ -48,6 +48,10 @@ Partial Public Class ffe_databaseDataSet
     
     Private tablecopy_data As copy_dataDataTable
     
+    Private tablechannel_name As channel_nameDataTable
+    
+    Private tableids_canbus As ids_canbusDataTable
+    
     Private relationdata_ibfk_1 As Global.System.Data.DataRelation
     
     Private relationdata_ibfk_2 As Global.System.Data.DataRelation
@@ -63,6 +67,8 @@ Partial Public Class ffe_databaseDataSet
     Private relationdrive_ibfk_4 As Global.System.Data.DataRelation
     
     Private relationphoto_car_fk As Global.System.Data.DataRelation
+    
+    Private relationchannel_measure_fk As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -123,6 +129,12 @@ Partial Public Class ffe_databaseDataSet
             End If
             If (Not (ds.Tables("copy_data")) Is Nothing) Then
                 MyBase.Tables.Add(New copy_dataDataTable(ds.Tables("copy_data")))
+            End If
+            If (Not (ds.Tables("channel_name")) Is Nothing) Then
+                MyBase.Tables.Add(New channel_nameDataTable(ds.Tables("channel_name")))
+            End If
+            If (Not (ds.Tables("ids_canbus")) Is Nothing) Then
+                MyBase.Tables.Add(New ids_canbusDataTable(ds.Tables("ids_canbus")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -241,6 +253,24 @@ Partial Public Class ffe_databaseDataSet
     End Property
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property channel_name() As channel_nameDataTable
+        Get
+            Return Me.tablechannel_name
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property ids_canbus() As ids_canbusDataTable
+        Get
+            Return Me.tableids_canbus
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.ComponentModel.BrowsableAttribute(true),  _
      Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Visible)>  _
     Public Overrides Property SchemaSerializationMode() As Global.System.Data.SchemaSerializationMode
@@ -331,6 +361,12 @@ Partial Public Class ffe_databaseDataSet
             End If
             If (Not (ds.Tables("copy_data")) Is Nothing) Then
                 MyBase.Tables.Add(New copy_dataDataTable(ds.Tables("copy_data")))
+            End If
+            If (Not (ds.Tables("channel_name")) Is Nothing) Then
+                MyBase.Tables.Add(New channel_nameDataTable(ds.Tables("channel_name")))
+            End If
+            If (Not (ds.Tables("ids_canbus")) Is Nothing) Then
+                MyBase.Tables.Add(New ids_canbusDataTable(ds.Tables("ids_canbus")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -427,6 +463,18 @@ Partial Public Class ffe_databaseDataSet
                 Me.tablecopy_data.InitVars
             End If
         End If
+        Me.tablechannel_name = CType(MyBase.Tables("channel_name"),channel_nameDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tablechannel_name) Is Nothing) Then
+                Me.tablechannel_name.InitVars
+            End If
+        End If
+        Me.tableids_canbus = CType(MyBase.Tables("ids_canbus"),ids_canbusDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableids_canbus) Is Nothing) Then
+                Me.tableids_canbus.InitVars
+            End If
+        End If
         Me.relationdata_ibfk_1 = Me.Relations("data_ibfk_1")
         Me.relationdata_ibfk_2 = Me.Relations("data_ibfk_2")
         Me.relationdata_ibfk_3 = Me.Relations("data_ibfk_3")
@@ -435,6 +483,7 @@ Partial Public Class ffe_databaseDataSet
         Me.relationdrive_ibfk_3 = Me.Relations("drive_ibfk_3")
         Me.relationdrive_ibfk_4 = Me.Relations("drive_ibfk_4")
         Me.relationphoto_car_fk = Me.Relations("photo_car_fk")
+        Me.relationchannel_measure_fk = Me.Relations("channel_measure_fk")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -466,6 +515,10 @@ Partial Public Class ffe_databaseDataSet
         MyBase.Tables.Add(Me.tablephotos)
         Me.tablecopy_data = New copy_dataDataTable
         MyBase.Tables.Add(Me.tablecopy_data)
+        Me.tablechannel_name = New channel_nameDataTable
+        MyBase.Tables.Add(Me.tablechannel_name)
+        Me.tableids_canbus = New ids_canbusDataTable
+        MyBase.Tables.Add(Me.tableids_canbus)
         Me.relationdata_ibfk_1 = New Global.System.Data.DataRelation("data_ibfk_1", New Global.System.Data.DataColumn() {Me.tabledrive.drive_idColumn}, New Global.System.Data.DataColumn() {Me.tabledata.drive_idColumn}, false)
         Me.Relations.Add(Me.relationdata_ibfk_1)
         Me.relationdata_ibfk_2 = New Global.System.Data.DataRelation("data_ibfk_2", New Global.System.Data.DataColumn() {Me.tablelogger.logger_idColumn}, New Global.System.Data.DataColumn() {Me.tabledata.logger_idColumn}, false)
@@ -482,6 +535,8 @@ Partial Public Class ffe_databaseDataSet
         Me.Relations.Add(Me.relationdrive_ibfk_4)
         Me.relationphoto_car_fk = New Global.System.Data.DataRelation("photo_car_fk", New Global.System.Data.DataColumn() {Me.tablecar.car_idColumn}, New Global.System.Data.DataColumn() {Me.tablephotos.car_idColumn}, false)
         Me.Relations.Add(Me.relationphoto_car_fk)
+        Me.relationchannel_measure_fk = New Global.System.Data.DataRelation("channel_measure_fk", New Global.System.Data.DataColumn() {Me.tablemeasure.measure_idColumn}, New Global.System.Data.DataColumn() {Me.tablechannel_name.measure_idColumn}, false)
+        Me.Relations.Add(Me.relationchannel_measure_fk)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -536,6 +591,16 @@ Partial Public Class ffe_databaseDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Private Function ShouldSerializecopy_data() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializechannel_name() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeids_canbus() As Boolean
         Return false
     End Function
     
@@ -616,6 +681,10 @@ Partial Public Class ffe_databaseDataSet
     Public Delegate Sub photosRowChangeEventHandler(ByVal sender As Object, ByVal e As photosRowChangeEvent)
     
     Public Delegate Sub copy_dataRowChangeEventHandler(ByVal sender As Object, ByVal e As copy_dataRowChangeEvent)
+    
+    Public Delegate Sub channel_nameRowChangeEventHandler(ByVal sender As Object, ByVal e As channel_nameRowChangeEvent)
+    
+    Public Delegate Sub ids_canbusRowChangeEventHandler(ByVal sender As Object, ByVal e As ids_canbusRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -3732,6 +3801,8 @@ Partial Public Class ffe_databaseDataSet
         
         Private columnvalue As Global.System.Data.DataColumn
         
+        Private columndata_index As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -3806,6 +3877,13 @@ Partial Public Class ffe_databaseDataSet
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property data_indexColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndata_index
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3835,9 +3913,9 @@ Partial Public Class ffe_databaseDataSet
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function Addcopy_dataRow(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As System.TimeSpan, ByVal value As Decimal) As copy_dataRow
+        Public Overloads Function Addcopy_dataRow(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As System.TimeSpan, ByVal value As Decimal, ByVal data_index As Integer) As copy_dataRow
             Dim rowcopy_dataRow As copy_dataRow = CType(Me.NewRow,copy_dataRow)
-            Dim columnValuesArray() As Object = New Object() {data_id, drive_id, logger_id, measure_id, time, value}
+            Dim columnValuesArray() As Object = New Object() {data_id, drive_id, logger_id, measure_id, time, value, data_index}
             rowcopy_dataRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowcopy_dataRow)
             Return rowcopy_dataRow
@@ -3863,6 +3941,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnmeasure_id = MyBase.Columns("measure_id")
             Me.columntime = MyBase.Columns("time")
             Me.columnvalue = MyBase.Columns("value")
+            Me.columndata_index = MyBase.Columns("data_index")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -3879,12 +3958,15 @@ Partial Public Class ffe_databaseDataSet
             MyBase.Columns.Add(Me.columntime)
             Me.columnvalue = New Global.System.Data.DataColumn("value", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnvalue)
+            Me.columndata_index = New Global.System.Data.DataColumn("data_index", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndata_index)
             Me.columndata_id.AllowDBNull = false
             Me.columndata_id.MaxLength = 50
             Me.columndrive_id.AllowDBNull = false
             Me.columnlogger_id.AllowDBNull = false
             Me.columnmeasure_id.AllowDBNull = false
             Me.columntime.AllowDBNull = false
+            Me.columndata_index.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -3962,6 +4044,635 @@ Partial Public Class ffe_databaseDataSet
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
             attribute2.Name = "tableTypeName"
             attribute2.FixedValue = "copy_dataDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class channel_nameDataTable
+        Inherits Global.System.Data.TypedTableBase(Of channel_nameRow)
+        
+        Private columnlogger_id As Global.System.Data.DataColumn
+        
+        Private columnchannel As Global.System.Data.DataColumn
+        
+        Private columnname As Global.System.Data.DataColumn
+        
+        Private columnmeasure_id As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "channel_name"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property logger_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnlogger_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property channelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnchannel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property nameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnname
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property measure_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnmeasure_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As channel_nameRow
+            Get
+                Return CType(Me.Rows(index),channel_nameRow)
+            End Get
+        End Property
+        
+        Public Event channel_nameRowChanging As channel_nameRowChangeEventHandler
+        
+        Public Event channel_nameRowChanged As channel_nameRowChangeEventHandler
+        
+        Public Event channel_nameRowDeleting As channel_nameRowChangeEventHandler
+        
+        Public Event channel_nameRowDeleted As channel_nameRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub Addchannel_nameRow(ByVal row As channel_nameRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function Addchannel_nameRow(ByVal logger_id As Integer, ByVal channel As String, ByVal name As String, ByVal parentmeasureRowBychannel_measure_fk As measureRow) As channel_nameRow
+            Dim rowchannel_nameRow As channel_nameRow = CType(Me.NewRow,channel_nameRow)
+            Dim columnValuesArray() As Object = New Object() {logger_id, channel, name, Nothing}
+            If (Not (parentmeasureRowBychannel_measure_fk) Is Nothing) Then
+                columnValuesArray(3) = parentmeasureRowBychannel_measure_fk(0)
+            End If
+            rowchannel_nameRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowchannel_nameRow)
+            Return rowchannel_nameRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As channel_nameDataTable = CType(MyBase.Clone,channel_nameDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New channel_nameDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnlogger_id = MyBase.Columns("logger_id")
+            Me.columnchannel = MyBase.Columns("channel")
+            Me.columnname = MyBase.Columns("name")
+            Me.columnmeasure_id = MyBase.Columns("measure_id")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnlogger_id = New Global.System.Data.DataColumn("logger_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnlogger_id)
+            Me.columnchannel = New Global.System.Data.DataColumn("channel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnchannel)
+            Me.columnname = New Global.System.Data.DataColumn("name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnname)
+            Me.columnmeasure_id = New Global.System.Data.DataColumn("measure_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnmeasure_id)
+            Me.columnlogger_id.AllowDBNull = false
+            Me.columnchannel.AllowDBNull = false
+            Me.columnchannel.MaxLength = 80
+            Me.columnname.AllowDBNull = false
+            Me.columnname.MaxLength = 80
+            Me.columnmeasure_id.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Newchannel_nameRow() As channel_nameRow
+            Return CType(Me.NewRow,channel_nameRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New channel_nameRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(channel_nameRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.channel_nameRowChangedEvent) Is Nothing) Then
+                RaiseEvent channel_nameRowChanged(Me, New channel_nameRowChangeEvent(CType(e.Row,channel_nameRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.channel_nameRowChangingEvent) Is Nothing) Then
+                RaiseEvent channel_nameRowChanging(Me, New channel_nameRowChangeEvent(CType(e.Row,channel_nameRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.channel_nameRowDeletedEvent) Is Nothing) Then
+                RaiseEvent channel_nameRowDeleted(Me, New channel_nameRowChangeEvent(CType(e.Row,channel_nameRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.channel_nameRowDeletingEvent) Is Nothing) Then
+                RaiseEvent channel_nameRowDeleting(Me, New channel_nameRowChangeEvent(CType(e.Row,channel_nameRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub Removechannel_nameRow(ByVal row As channel_nameRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As ffe_databaseDataSet = New ffe_databaseDataSet
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "channel_nameDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ids_canbusDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ids_canbusRow)
+        
+        Private columnchannel_id As Global.System.Data.DataColumn
+        
+        Private columnhex_id As Global.System.Data.DataColumn
+        
+        Private columndec_id As Global.System.Data.DataColumn
+        
+        Private columnname As Global.System.Data.DataColumn
+        
+        Private columnstartbit As Global.System.Data.DataColumn
+        
+        Private columnlongbits As Global.System.Data.DataColumn
+        
+        Private columnsequence As Global.System.Data.DataColumn
+        
+        Private columnsigned As Global.System.Data.DataColumn
+        
+        Private columnfactor As Global.System.Data.DataColumn
+        
+        Private columnoffset As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "ids_canbus"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property channel_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnchannel_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property hex_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnhex_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property dec_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndec_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property nameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnname
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property startbitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnstartbit
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property longbitsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnlongbits
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property sequenceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsequence
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property signedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsigned
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property factorColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfactor
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property offsetColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnoffset
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ids_canbusRow
+            Get
+                Return CType(Me.Rows(index),ids_canbusRow)
+            End Get
+        End Property
+        
+        Public Event ids_canbusRowChanging As ids_canbusRowChangeEventHandler
+        
+        Public Event ids_canbusRowChanged As ids_canbusRowChangeEventHandler
+        
+        Public Event ids_canbusRowDeleting As ids_canbusRowChangeEventHandler
+        
+        Public Event ids_canbusRowDeleted As ids_canbusRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub Addids_canbusRow(ByVal row As ids_canbusRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function Addids_canbusRow(ByVal channel_id As Integer, ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Boolean, ByVal factor As Decimal, ByVal offset As Integer) As ids_canbusRow
+            Dim rowids_canbusRow As ids_canbusRow = CType(Me.NewRow,ids_canbusRow)
+            Dim columnValuesArray() As Object = New Object() {channel_id, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset}
+            rowids_canbusRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowids_canbusRow)
+            Return rowids_canbusRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function FindBychannel_id(ByVal channel_id As Integer) As ids_canbusRow
+            Return CType(Me.Rows.Find(New Object() {channel_id}),ids_canbusRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ids_canbusDataTable = CType(MyBase.Clone,ids_canbusDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ids_canbusDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnchannel_id = MyBase.Columns("channel_id")
+            Me.columnhex_id = MyBase.Columns("hex_id")
+            Me.columndec_id = MyBase.Columns("dec_id")
+            Me.columnname = MyBase.Columns("name")
+            Me.columnstartbit = MyBase.Columns("startbit")
+            Me.columnlongbits = MyBase.Columns("longbits")
+            Me.columnsequence = MyBase.Columns("sequence")
+            Me.columnsigned = MyBase.Columns("signed")
+            Me.columnfactor = MyBase.Columns("factor")
+            Me.columnoffset = MyBase.Columns("offset")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnchannel_id = New Global.System.Data.DataColumn("channel_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnchannel_id)
+            Me.columnhex_id = New Global.System.Data.DataColumn("hex_id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnhex_id)
+            Me.columndec_id = New Global.System.Data.DataColumn("dec_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndec_id)
+            Me.columnname = New Global.System.Data.DataColumn("name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnname)
+            Me.columnstartbit = New Global.System.Data.DataColumn("startbit", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnstartbit)
+            Me.columnlongbits = New Global.System.Data.DataColumn("longbits", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnlongbits)
+            Me.columnsequence = New Global.System.Data.DataColumn("sequence", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsequence)
+            Me.columnsigned = New Global.System.Data.DataColumn("signed", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsigned)
+            Me.columnfactor = New Global.System.Data.DataColumn("factor", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfactor)
+            Me.columnoffset = New Global.System.Data.DataColumn("offset", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnoffset)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnchannel_id}, true))
+            Me.columnchannel_id.AllowDBNull = false
+            Me.columnchannel_id.Unique = true
+            Me.columnhex_id.AllowDBNull = false
+            Me.columnhex_id.MaxLength = 5
+            Me.columndec_id.AllowDBNull = false
+            Me.columnname.AllowDBNull = false
+            Me.columnname.MaxLength = 40
+            Me.columnstartbit.AllowDBNull = false
+            Me.columnlongbits.AllowDBNull = false
+            Me.columnsequence.AllowDBNull = false
+            Me.columnsequence.MaxLength = 70
+            Me.columnsigned.AllowDBNull = false
+            Me.columnfactor.AllowDBNull = false
+            Me.columnoffset.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Newids_canbusRow() As ids_canbusRow
+            Return CType(Me.NewRow,ids_canbusRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ids_canbusRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ids_canbusRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ids_canbusRowChangedEvent) Is Nothing) Then
+                RaiseEvent ids_canbusRowChanged(Me, New ids_canbusRowChangeEvent(CType(e.Row,ids_canbusRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ids_canbusRowChangingEvent) Is Nothing) Then
+                RaiseEvent ids_canbusRowChanging(Me, New ids_canbusRowChangeEvent(CType(e.Row,ids_canbusRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ids_canbusRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ids_canbusRowDeleted(Me, New ids_canbusRowChangeEvent(CType(e.Row,ids_canbusRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ids_canbusRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ids_canbusRowDeleting(Me, New ids_canbusRowChangeEvent(CType(e.Row,ids_canbusRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub Removeids_canbusRow(ByVal row As ids_canbusRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As ffe_databaseDataSet = New ffe_databaseDataSet
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ids_canbusDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -4814,6 +5525,15 @@ Partial Public Class ffe_databaseDataSet
                 Return New dataRow(-1) {}
             Else
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("data_ibfk_3")),dataRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function Getchannel_nameRows() As channel_nameRow()
+            If (Me.Table.ChildRelations("channel_measure_fk") Is Nothing) Then
+                Return New channel_nameRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("channel_measure_fk")),channel_nameRow())
             End If
         End Function
     End Class
@@ -5771,6 +6491,16 @@ Partial Public Class ffe_databaseDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property data_index() As Integer
+            Get
+                Return CType(Me(Me.tablecopy_data.data_indexColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablecopy_data.data_indexColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsvalueNull() As Boolean
             Return Me.IsNull(Me.tablecopy_data.valueColumn)
         End Function
@@ -5779,6 +6509,188 @@ Partial Public Class ffe_databaseDataSet
         Public Sub SetvalueNull()
             Me(Me.tablecopy_data.valueColumn) = Global.System.Convert.DBNull
         End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class channel_nameRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tablechannel_name As channel_nameDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tablechannel_name = CType(Me.Table,channel_nameDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property logger_id() As Integer
+            Get
+                Return CType(Me(Me.tablechannel_name.logger_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablechannel_name.logger_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property channel() As String
+            Get
+                Return CType(Me(Me.tablechannel_name.channelColumn),String)
+            End Get
+            Set
+                Me(Me.tablechannel_name.channelColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property name() As String
+            Get
+                Return CType(Me(Me.tablechannel_name.nameColumn),String)
+            End Get
+            Set
+                Me(Me.tablechannel_name.nameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property measure_id() As Integer
+            Get
+                Return CType(Me(Me.tablechannel_name.measure_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablechannel_name.measure_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property measureRow() As measureRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("channel_measure_fk")),measureRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("channel_measure_fk"))
+            End Set
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class ids_canbusRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableids_canbus As ids_canbusDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableids_canbus = CType(Me.Table,ids_canbusDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property channel_id() As Integer
+            Get
+                Return CType(Me(Me.tableids_canbus.channel_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableids_canbus.channel_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property hex_id() As String
+            Get
+                Return CType(Me(Me.tableids_canbus.hex_idColumn),String)
+            End Get
+            Set
+                Me(Me.tableids_canbus.hex_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property dec_id() As Integer
+            Get
+                Return CType(Me(Me.tableids_canbus.dec_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableids_canbus.dec_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property name() As String
+            Get
+                Return CType(Me(Me.tableids_canbus.nameColumn),String)
+            End Get
+            Set
+                Me(Me.tableids_canbus.nameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property startbit() As Integer
+            Get
+                Return CType(Me(Me.tableids_canbus.startbitColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableids_canbus.startbitColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property longbits() As Integer
+            Get
+                Return CType(Me(Me.tableids_canbus.longbitsColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableids_canbus.longbitsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property sequence() As String
+            Get
+                Return CType(Me(Me.tableids_canbus.sequenceColumn),String)
+            End Get
+            Set
+                Me(Me.tableids_canbus.sequenceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property signed() As Boolean
+            Get
+                Return CType(Me(Me.tableids_canbus.signedColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableids_canbus.signedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property factor() As Decimal
+            Get
+                Return CType(Me(Me.tableids_canbus.factorColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableids_canbus.factorColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property offset() As Integer
+            Get
+                Return CType(Me(Me.tableids_canbus.offsetColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableids_canbus.offsetColumn) = value
+            End Set
+        End Property
     End Class
     
     '''<summary>
@@ -6131,6 +7043,72 @@ Partial Public Class ffe_databaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Row() As copy_dataRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class channel_nameRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As channel_nameRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As channel_nameRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As channel_nameRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class ids_canbusRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As ids_canbusRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As ids_canbusRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As ids_canbusRow
             Get
                 Return Me.eventRow
             End Get
@@ -11541,12 +12519,13 @@ Namespace ffe_databaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("measure_id", "measure_id")
             tableMapping.ColumnMappings.Add("time", "time")
             tableMapping.ColumnMappings.Add("value", "value")
+            tableMapping.ColumnMappings.Add("data_index", "data_index")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `ffe_database`.`copy_data` (`data_id`, `drive_id`, `logger_id`, `meas"& _ 
-                "ure_id`, `time`, `value`) VALUES (@data_id, @drive_id, @logger_id, @measure_id, "& _ 
-                "@time, @value)"
+                "ure_id`, `time`, `value`, `data_index`) VALUES (@data_id, @drive_id, @logger_id,"& _ 
+                " @measure_id, @time, @value, @data_index)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@data_id"
@@ -11589,6 +12568,13 @@ Namespace ffe_databaseDataSetTableAdapters
             param.IsNullable = true
             param.SourceColumn = "value"
             Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@data_index"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "data_index"
+            Me._adapter.InsertCommand.Parameters.Add(param)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -11602,8 +12588,8 @@ Namespace ffe_databaseDataSetTableAdapters
             Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT `data_id`, `drive_id`, `logger_id`, `measure_id`, `time`, `value` FROM `ff"& _ 
-                "e_database`.`copy_data`"
+            Me._commandCollection(0).CommandText = "SELECT data_id, drive_id, logger_id, measure_id, `time`, value, data_index FROM c"& _ 
+                "opy_data"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -11656,7 +12642,7 @@ Namespace ffe_databaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As Date, ByVal value As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal data_id As String, ByVal drive_id As Integer, ByVal logger_id As Integer, ByVal measure_id As Integer, ByVal time As Date, ByVal value As String, ByVal data_index As Integer) As Integer
             If (data_id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("data_id")
             Else
@@ -11671,6 +12657,7 @@ Namespace ffe_databaseDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = CType(value,String)
             End If
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(data_index,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -11684,6 +12671,1008 @@ Namespace ffe_databaseDataSetTableAdapters
                     Me.Adapter.InsertCommand.Connection.Close
                 End If
             End Try
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class channel_nameTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+        
+        Private _connection As Global.MySql.Data.MySqlClient.MySqlConnection
+        
+        Private _transaction As Global.MySql.Data.MySqlClient.MySqlTransaction
+        
+        Private _commandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Friend ReadOnly Property Adapter() As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Connection() As Global.MySql.Data.MySqlClient.MySqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.MySql.Data.MySqlClient.MySqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Transaction() As Global.MySql.Data.MySqlClient.MySqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected ReadOnly Property CommandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "channel_name"
+            tableMapping.ColumnMappings.Add("logger_id", "logger_id")
+            tableMapping.ColumnMappings.Add("channel", "channel")
+            tableMapping.ColumnMappings.Add("name", "name")
+            tableMapping.ColumnMappings.Add("measure_id", "measure_id")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `ffe_database`.`channel_name` (`logger_id`, `channel`, `name`, `measu"& _ 
+                "re_id`) VALUES (@logger_id, @channel, @name, @measure_id)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@logger_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "logger_id"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@channel"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "channel"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@name"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "name"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@measure_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "measure_id"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection
+            Me._connection.ConnectionString = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
+            Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT        logger_id, channel, name, measure_id"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            channel_name"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As ffe_databaseDataSet.channel_nameDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As ffe_databaseDataSet.channel_nameDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As ffe_databaseDataSet.channel_nameDataTable = New ffe_databaseDataSet.channel_nameDataTable
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As ffe_databaseDataSet.channel_nameDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As ffe_databaseDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "channel_name")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal logger_id As Integer, ByVal channel As String, ByVal name As String, ByVal measure_id As Integer) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(logger_id,Integer)
+            If (channel Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("channel")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(channel,String)
+            End If
+            If (name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("name")
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(name,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(measure_id,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class ids_canbusTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+        
+        Private _connection As Global.MySql.Data.MySqlClient.MySqlConnection
+        
+        Private _transaction As Global.MySql.Data.MySqlClient.MySqlTransaction
+        
+        Private _commandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Friend ReadOnly Property Adapter() As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Connection() As Global.MySql.Data.MySqlClient.MySqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.MySql.Data.MySqlClient.MySqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Transaction() As Global.MySql.Data.MySqlClient.MySqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected ReadOnly Property CommandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "ids_canbus"
+            tableMapping.ColumnMappings.Add("channel_id", "channel_id")
+            tableMapping.ColumnMappings.Add("hex_id", "hex_id")
+            tableMapping.ColumnMappings.Add("dec_id", "dec_id")
+            tableMapping.ColumnMappings.Add("name", "name")
+            tableMapping.ColumnMappings.Add("startbit", "startbit")
+            tableMapping.ColumnMappings.Add("longbits", "longbits")
+            tableMapping.ColumnMappings.Add("sequence", "sequence")
+            tableMapping.ColumnMappings.Add("signed", "signed")
+            tableMapping.ColumnMappings.Add("factor", "factor")
+            tableMapping.ColumnMappings.Add("offset", "offset")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (channel_id = @Original_channel_id) AND (hex"& _ 
+                "_id = @Original_hex_id) AND (dec_id = @Original_dec_id) AND (name = @Original_na"& _ 
+                "me) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (startbit = @Original_startbit) AND (longbits"& _ 
+                " = @Original_longbits) AND (sequence = @Original_sequence) AND (signed = @Origin"& _ 
+                "al_signed) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (factor = @Original_factor) AND (offse"& _ 
+                "t = @Original_offset)"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_channel_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "channel_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_hex_id"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 5
+            param.IsNullable = true
+            param.SourceColumn = "hex_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_dec_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "dec_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_name"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 40
+            param.IsNullable = true
+            param.SourceColumn = "name"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_startbit"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "startbit"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_longbits"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "longbits"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_sequence"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 70
+            param.IsNullable = true
+            param.SourceColumn = "sequence"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_signed"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "signed"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_factor"
+            param.DbType = Global.System.Data.DbType.[Decimal]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.NewDecimal
+            param.IsNullable = true
+            param.SourceColumn = "factor"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_offset"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "offset"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (channel_id, hex_id, dec_id, nam"& _ 
+                "e, startbit, longbits, sequence, signed, factor, offset)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@channe"& _ 
+                "l_id, @hex_id, @dec_id, @name, @startbit, @longbits, @sequence, @signed, @factor"& _ 
+                ", @offset)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@channel_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "channel_id"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@hex_id"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 5
+            param.IsNullable = true
+            param.SourceColumn = "hex_id"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@dec_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "dec_id"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@name"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 40
+            param.IsNullable = true
+            param.SourceColumn = "name"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@startbit"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "startbit"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@longbits"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "longbits"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@sequence"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 70
+            param.IsNullable = true
+            param.SourceColumn = "sequence"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@signed"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "signed"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@factor"
+            param.DbType = Global.System.Data.DbType.[Decimal]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.NewDecimal
+            param.IsNullable = true
+            param.SourceColumn = "factor"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@offset"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "offset"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                channel_id = @channel_id, hex_id = @h"& _ 
+                "ex_id, dec_id = @dec_id, name = @name, startbit = @startbit, longbits = @longbit"& _ 
+                "s, sequence = @sequence, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         signed = @signed, factor = @"& _ 
+                "factor, offset = @offset"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (channel_id = @Original_channel_id) AND ("& _ 
+                "hex_id = @Original_hex_id) AND (dec_id = @Original_dec_id) AND (name = @Original"& _ 
+                "_name) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (startbit = @Original_startbit) AND (longb"& _ 
+                "its = @Original_longbits) AND (sequence = @Original_sequence) AND (signed = @Ori"& _ 
+                "ginal_signed) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (factor = @Original_factor) AND (of"& _ 
+                "fset = @Original_offset)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@channel_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "channel_id"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@hex_id"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 5
+            param.IsNullable = true
+            param.SourceColumn = "hex_id"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@dec_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "dec_id"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@name"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 40
+            param.IsNullable = true
+            param.SourceColumn = "name"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@startbit"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "startbit"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@longbits"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "longbits"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@sequence"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 70
+            param.IsNullable = true
+            param.SourceColumn = "sequence"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@signed"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "signed"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@factor"
+            param.DbType = Global.System.Data.DbType.[Decimal]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.NewDecimal
+            param.IsNullable = true
+            param.SourceColumn = "factor"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@offset"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "offset"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_channel_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "channel_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_hex_id"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 5
+            param.IsNullable = true
+            param.SourceColumn = "hex_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_dec_id"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "dec_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_name"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 40
+            param.IsNullable = true
+            param.SourceColumn = "name"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_startbit"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "startbit"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_longbits"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "longbits"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_sequence"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.Size = 70
+            param.IsNullable = true
+            param.SourceColumn = "sequence"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_signed"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "signed"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_factor"
+            param.DbType = Global.System.Data.DbType.[Decimal]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.NewDecimal
+            param.IsNullable = true
+            param.SourceColumn = "factor"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_offset"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "offset"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection
+            Me._connection.ConnectionString = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
+            Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT `channel_id`, `hex_id`, `dec_id`, `name`, `startbit`, `longbits`, `sequenc"& _ 
+                "e`, `signed`, `factor`, `offset` FROM `ffe_database`.`ids_canbus`"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As ffe_databaseDataSet.ids_canbusDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As ffe_databaseDataSet.ids_canbusDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As ffe_databaseDataSet.ids_canbusDataTable = New ffe_databaseDataSet.ids_canbusDataTable
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As ffe_databaseDataSet.ids_canbusDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As ffe_databaseDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "ids_canbus")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_channel_id As Integer, ByVal Original_hex_id As String, ByVal Original_dec_id As Integer, ByVal Original_name As String, ByVal Original_startbit As Integer, ByVal Original_longbits As Integer, ByVal Original_sequence As String, ByVal Original_signed As Object, ByVal Original_factor As Decimal, ByVal Original_offset As Integer) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_channel_id,Integer)
+            If (Original_hex_id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_hex_id")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_hex_id,String)
+            End If
+            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_dec_id,Integer)
+            If (Original_name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_name")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_name,String)
+            End If
+            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_startbit,Integer)
+            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_longbits,Integer)
+            If (Original_sequence Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_sequence")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_sequence,String)
+            End If
+            If (Original_signed Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_signed")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_signed,Object)
+            End If
+            Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_factor,Decimal)
+            Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_offset,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal channel_id As Integer, ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Object, ByVal factor As Decimal, ByVal offset As Integer) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(channel_id,Integer)
+            If (hex_id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("hex_id")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(hex_id,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(dec_id,Integer)
+            If (name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("name")
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(name,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(startbit,Integer)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(longbits,Integer)
+            If (sequence Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("sequence")
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(sequence,String)
+            End If
+            If (signed Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("signed")
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(signed,Object)
+            End If
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(factor,Decimal)
+            Me.Adapter.InsertCommand.Parameters(9).Value = CType(offset,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal channel_id As Integer,  _
+                    ByVal hex_id As String,  _
+                    ByVal dec_id As Integer,  _
+                    ByVal name As String,  _
+                    ByVal startbit As Integer,  _
+                    ByVal longbits As Integer,  _
+                    ByVal sequence As String,  _
+                    ByVal signed As Object,  _
+                    ByVal factor As Decimal,  _
+                    ByVal offset As Integer,  _
+                    ByVal Original_channel_id As Integer,  _
+                    ByVal Original_hex_id As String,  _
+                    ByVal Original_dec_id As Integer,  _
+                    ByVal Original_name As String,  _
+                    ByVal Original_startbit As Integer,  _
+                    ByVal Original_longbits As Integer,  _
+                    ByVal Original_sequence As String,  _
+                    ByVal Original_signed As Object,  _
+                    ByVal Original_factor As Decimal,  _
+                    ByVal Original_offset As Integer) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(channel_id,Integer)
+            If (hex_id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("hex_id")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(hex_id,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(dec_id,Integer)
+            If (name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("name")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(name,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(startbit,Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(longbits,Integer)
+            If (sequence Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("sequence")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(sequence,String)
+            End If
+            If (signed Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("signed")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(signed,Object)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(factor,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(offset,Integer)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_channel_id,Integer)
+            If (Original_hex_id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_hex_id")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_hex_id,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_dec_id,Integer)
+            If (Original_name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_name")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_name,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_startbit,Integer)
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_longbits,Integer)
+            If (Original_sequence Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_sequence")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_sequence,String)
+            End If
+            If (Original_signed Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_signed")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_signed,Object)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_factor,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_offset,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal hex_id As String,  _
+                    ByVal dec_id As Integer,  _
+                    ByVal name As String,  _
+                    ByVal startbit As Integer,  _
+                    ByVal longbits As Integer,  _
+                    ByVal sequence As String,  _
+                    ByVal signed As Object,  _
+                    ByVal factor As Decimal,  _
+                    ByVal offset As Integer,  _
+                    ByVal Original_channel_id As Integer,  _
+                    ByVal Original_hex_id As String,  _
+                    ByVal Original_dec_id As Integer,  _
+                    ByVal Original_name As String,  _
+                    ByVal Original_startbit As Integer,  _
+                    ByVal Original_longbits As Integer,  _
+                    ByVal Original_sequence As String,  _
+                    ByVal Original_signed As Object,  _
+                    ByVal Original_factor As Decimal,  _
+                    ByVal Original_offset As Integer) As Integer
+            Return Me.Update(Original_channel_id, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset, Original_channel_id, Original_hex_id, Original_dec_id, Original_name, Original_startbit, Original_longbits, Original_sequence, Original_signed, Original_factor, Original_offset)
         End Function
     End Class
     
@@ -11718,6 +13707,10 @@ Namespace ffe_databaseDataSetTableAdapters
         Private _photosTableAdapter As photosTableAdapter
         
         Private _copy_dataTableAdapter As copy_dataTableAdapter
+        
+        Private _channel_nameTableAdapter As channel_nameTableAdapter
+        
+        Private _ids_canbusTableAdapter As ids_canbusTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -11850,6 +13843,32 @@ Namespace ffe_databaseDataSetTableAdapters
             End Set
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"& _ 
+            "", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property channel_nameTableAdapter() As channel_nameTableAdapter
+            Get
+                Return Me._channel_nameTableAdapter
+            End Get
+            Set
+                Me._channel_nameTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"& _ 
+            "", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property ids_canbusTableAdapter() As ids_canbusTableAdapter
+            Get
+                Return Me._ids_canbusTableAdapter
+            End Get
+            Set
+                Me._ids_canbusTableAdapter = value
+            End Set
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -11903,6 +13922,14 @@ Namespace ffe_databaseDataSetTableAdapters
                             AndAlso (Not (Me._copy_dataTableAdapter.Connection) Is Nothing)) Then
                     Return Me._copy_dataTableAdapter.Connection
                 End If
+                If ((Not (Me._channel_nameTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._channel_nameTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._channel_nameTableAdapter.Connection
+                End If
+                If ((Not (Me._ids_canbusTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._ids_canbusTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._ids_canbusTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -11940,6 +13967,12 @@ Namespace ffe_databaseDataSetTableAdapters
                     count = (count + 1)
                 End If
                 If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -12006,21 +14039,39 @@ Namespace ffe_databaseDataSetTableAdapters
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
-            If (Not (Me._photosTableAdapter) Is Nothing) Then
-                Dim updatedRows() As Global.System.Data.DataRow = dataSet.photos.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
-                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
-                If ((Not (updatedRows) Is Nothing)  _
-                            AndAlso (0 < updatedRows.Length)) Then
-                    result = (result + Me._photosTableAdapter.Update(updatedRows))
-                    allChangedRows.AddRange(updatedRows)
-                End If
-            End If
             If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.copy_data.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
                 If ((Not (updatedRows) Is Nothing)  _
                             AndAlso (0 < updatedRows.Length)) Then
                     result = (result + Me._copy_dataTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.channel_name.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._channel_nameTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.ids_canbus.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._ids_canbusTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._photosTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.photos.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._photosTableAdapter.Update(updatedRows))
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
@@ -12090,19 +14141,35 @@ Namespace ffe_databaseDataSetTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
-            If (Not (Me._photosTableAdapter) Is Nothing) Then
-                Dim addedRows() As Global.System.Data.DataRow = dataSet.photos.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
-                If ((Not (addedRows) Is Nothing)  _
-                            AndAlso (0 < addedRows.Length)) Then
-                    result = (result + Me._photosTableAdapter.Update(addedRows))
-                    allAddedRows.AddRange(addedRows)
-                End If
-            End If
             If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.copy_data.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
                             AndAlso (0 < addedRows.Length)) Then
                     result = (result + Me._copy_dataTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.channel_name.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._channel_nameTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.ids_canbus.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._ids_canbusTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._photosTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.photos.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._photosTableAdapter.Update(addedRows))
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
@@ -12131,19 +14198,35 @@ Namespace ffe_databaseDataSetTableAdapters
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
-            If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
-                Dim deletedRows() As Global.System.Data.DataRow = dataSet.copy_data.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
-                If ((Not (deletedRows) Is Nothing)  _
-                            AndAlso (0 < deletedRows.Length)) Then
-                    result = (result + Me._copy_dataTableAdapter.Update(deletedRows))
-                    allChangedRows.AddRange(deletedRows)
-                End If
-            End If
             If (Not (Me._photosTableAdapter) Is Nothing) Then
                 Dim deletedRows() As Global.System.Data.DataRow = dataSet.photos.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._photosTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.ids_canbus.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._ids_canbusTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.channel_name.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._channel_nameTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.copy_data.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._copy_dataTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -12279,6 +14362,16 @@ Namespace ffe_databaseDataSetTableAdapters
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
+            If ((Not (Me._channel_nameTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._channel_nameTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._ids_canbusTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._ids_canbusTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
             If (workConnection Is Nothing) Then
                 Throw New Global.System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana"& _ 
@@ -12392,6 +14485,24 @@ Namespace ffe_databaseDataSetTableAdapters
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._copy_dataTableAdapter.Adapter)
                     End If
                 End If
+                If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._channel_nameTableAdapter, Me._channel_nameTableAdapter.Connection)
+                    Me._channel_nameTableAdapter.Connection = CType(workConnection,Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._channel_nameTableAdapter.Transaction = CType(workTransaction,Global.MySql.Data.MySqlClient.MySqlTransaction)
+                    If Me._channel_nameTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._channel_nameTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._channel_nameTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._ids_canbusTableAdapter, Me._ids_canbusTableAdapter.Connection)
+                    Me._ids_canbusTableAdapter.Connection = CType(workConnection,Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._ids_canbusTableAdapter.Transaction = CType(workTransaction,Global.MySql.Data.MySqlClient.MySqlTransaction)
+                    If Me._ids_canbusTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._ids_canbusTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._ids_canbusTableAdapter.Adapter)
+                    End If
+                End If
                 '
                 '---- Perform updates -----------
                 '
@@ -12487,6 +14598,14 @@ Namespace ffe_databaseDataSetTableAdapters
                 If (Not (Me._copy_dataTableAdapter) Is Nothing) Then
                     Me._copy_dataTableAdapter.Connection = CType(revertConnections(Me._copy_dataTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
                     Me._copy_dataTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._channel_nameTableAdapter) Is Nothing) Then
+                    Me._channel_nameTableAdapter.Connection = CType(revertConnections(Me._channel_nameTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._channel_nameTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._ids_canbusTableAdapter) Is Nothing) Then
+                    Me._ids_canbusTableAdapter.Connection = CType(revertConnections(Me._ids_canbusTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._ids_canbusTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter
