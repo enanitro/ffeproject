@@ -88,7 +88,7 @@ Public Class FfE_Main
         form_conn.ShowDialog()
     End Sub
 
-    Private Sub IDTableToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IDTableToolStripMenuItem.Click
+    Private Sub ChannelsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChannelsToolStripMenuItem.Click
         Dim form_canbus As New form_canbus_ids
         form_canbus.MdiParent = Me
         form_canbus.Show()
