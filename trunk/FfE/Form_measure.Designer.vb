@@ -117,9 +117,11 @@ Partial Class Form_measure
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
         Me.TableAdapterManager.copy_dataTableAdapter = Nothing
         Me.TableAdapterManager.dataTableAdapter = Nothing
         Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
         Me.TableAdapterManager.loggerTableAdapter = Nothing
         Me.TableAdapterManager.measureTableAdapter = Me.MeasureTableAdapter
         Me.TableAdapterManager.photosTableAdapter = Nothing
@@ -316,6 +318,7 @@ Partial Class Form_measure
         Me.MinimizeBox = False
         Me.Name = "Form_measure"
         Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Select measure"
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MeasureBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

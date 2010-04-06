@@ -29,19 +29,27 @@ Partial Class Form_Conf_Car
         Dim OwnerLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Conf_Car))
         Me.CarBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.CarBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
+        Me.CarBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
         Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.NameTextBox = New System.Windows.Forms.TextBox
         Me.TypeTextBox = New System.Windows.Forms.TextBox
         Me.License_plateTextBox = New System.Windows.Forms.TextBox
         Me.OwnerTextBox = New System.Windows.Forms.TextBox
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.PhotoPictureBox = New System.Windows.Forms.PictureBox
         Me.CarDataGridView = New System.Windows.Forms.DataGridView
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -51,14 +59,6 @@ Partial Class Form_Conf_Car
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
         Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
-        Me.PhotoPictureBox = New System.Windows.Forms.PictureBox
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.CarBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.Delete = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         NameLabel = New System.Windows.Forms.Label
         TypeLabel = New System.Windows.Forms.Label
         License_plateLabel = New System.Windows.Forms.Label
@@ -68,8 +68,8 @@ Partial Class Form_Conf_Car
         CType(Me.CarBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PhotoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NameLabel
@@ -133,6 +133,19 @@ Partial Class Form_Conf_Car
         Me.CarBindingNavigator.TabIndex = 0
         Me.CarBindingNavigator.Text = "BindingNavigator1"
         '
+        'BindingNavigatorAddNewItem
+        '
+        Me.BindingNavigatorAddNewItem.AutoSize = False
+        Me.BindingNavigatorAddNewItem.BackColor = System.Drawing.Color.Transparent
+        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
+        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(80, 48)
+        Me.BindingNavigatorAddNewItem.Text = "Add new"
+        Me.BindingNavigatorAddNewItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
         'CarBindingSource
         '
         Me.CarBindingSource.DataMember = "car"
@@ -148,8 +161,8 @@ Partial Class Form_Conf_Car
         '
         Me.BindingNavigatorCountItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(60, 51)
-        Me.BindingNavigatorCountItem.Text = "de {0}"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 51)
+        Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
         '
         'BindingNavigatorDeleteItem
@@ -164,10 +177,54 @@ Partial Class Form_Conf_Car
         Me.BindingNavigatorDeleteItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         Me.BindingNavigatorDeleteItem.Visible = False
         '
+        'CarBindingNavigatorSaveItem
+        '
+        Me.CarBindingNavigatorSaveItem.AutoSize = False
+        Me.CarBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.CarBindingNavigatorSaveItem.Image = CType(resources.GetObject("CarBindingNavigatorSaveItem.Image"), System.Drawing.Image)
+        Me.CarBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.CarBindingNavigatorSaveItem.Name = "CarBindingNavigatorSaveItem"
+        Me.CarBindingNavigatorSaveItem.Size = New System.Drawing.Size(80, 48)
+        Me.CarBindingNavigatorSaveItem.Text = "Save"
+        Me.CarBindingNavigatorSaveItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
+        'Delete
+        '
+        Me.Delete.AutoSize = False
+        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Delete.Image = Global.FfE.My.Resources.Resources.delete_car
+        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
+        Me.Delete.Name = "Delete"
+        Me.Delete.RightToLeftAutoMirrorImage = True
+        Me.Delete.Size = New System.Drawing.Size(92, 48)
+        Me.Delete.Text = "Delete"
+        Me.Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
         'BindingNavigatorSeparator2
         '
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 51)
+        Me.BindingNavigatorMoveFirstItem.Text = "First"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 51)
+        Me.BindingNavigatorMovePreviousItem.Text = "Back"
         '
         'BindingNavigatorSeparator
         '
@@ -187,6 +244,28 @@ Partial Class Form_Conf_Car
         '
         Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
         Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 51)
+        Me.BindingNavigatorMoveNextItem.Text = "Next"
+        Me.BindingNavigatorMoveNextItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 51)
+        Me.BindingNavigatorMoveLastItem.Text = "Last"
+        Me.BindingNavigatorMoveLastItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
         'NameTextBox
         '
@@ -244,6 +323,19 @@ Partial Class Form_Conf_Car
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(662, 469)
         Me.Panel1.TabIndex = 0
+        '
+        'PhotoPictureBox
+        '
+        Me.PhotoPictureBox.BackgroundImage = CType(resources.GetObject("PhotoPictureBox.BackgroundImage"), System.Drawing.Image)
+        Me.PhotoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.PhotoPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PhotoPictureBox.DataBindings.Add(New System.Windows.Forms.Binding("Image", Me.CarBindingSource, "photo", True))
+        Me.PhotoPictureBox.Location = New System.Drawing.Point(450, 22)
+        Me.PhotoPictureBox.Name = "PhotoPictureBox"
+        Me.PhotoPictureBox.Size = New System.Drawing.Size(175, 121)
+        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PhotoPictureBox.TabIndex = 11
+        Me.PhotoPictureBox.TabStop = False
         '
         'CarDataGridView
         '
@@ -305,107 +397,17 @@ Partial Class Form_Conf_Car
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.carTableAdapter = Me.CarTableAdapter
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
         Me.TableAdapterManager.copy_dataTableAdapter = Nothing
         Me.TableAdapterManager.dataTableAdapter = Nothing
         Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
         Me.TableAdapterManager.loggerTableAdapter = Nothing
         Me.TableAdapterManager.measureTableAdapter = Nothing
         Me.TableAdapterManager.photosTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         Me.TableAdapterManager.usage_typeTableAdapter = Nothing
         Me.TableAdapterManager.userTableAdapter = Nothing
-        '
-        'PhotoPictureBox
-        '
-        Me.PhotoPictureBox.BackgroundImage = CType(resources.GetObject("PhotoPictureBox.BackgroundImage"), System.Drawing.Image)
-        Me.PhotoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.PhotoPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PhotoPictureBox.DataBindings.Add(New System.Windows.Forms.Binding("Image", Me.CarBindingSource, "photo", True))
-        Me.PhotoPictureBox.Location = New System.Drawing.Point(450, 22)
-        Me.PhotoPictureBox.Name = "PhotoPictureBox"
-        Me.PhotoPictureBox.Size = New System.Drawing.Size(175, 121)
-        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PhotoPictureBox.TabIndex = 11
-        Me.PhotoPictureBox.TabStop = False
-        '
-        'BindingNavigatorAddNewItem
-        '
-        Me.BindingNavigatorAddNewItem.AutoSize = False
-        Me.BindingNavigatorAddNewItem.BackColor = System.Drawing.Color.Transparent
-        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
-        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(80, 48)
-        Me.BindingNavigatorAddNewItem.Text = "Add new"
-        Me.BindingNavigatorAddNewItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'CarBindingNavigatorSaveItem
-        '
-        Me.CarBindingNavigatorSaveItem.AutoSize = False
-        Me.CarBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CarBindingNavigatorSaveItem.Image = CType(resources.GetObject("CarBindingNavigatorSaveItem.Image"), System.Drawing.Image)
-        Me.CarBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.CarBindingNavigatorSaveItem.Name = "CarBindingNavigatorSaveItem"
-        Me.CarBindingNavigatorSaveItem.Size = New System.Drawing.Size(80, 48)
-        Me.CarBindingNavigatorSaveItem.Text = "Save"
-        Me.CarBindingNavigatorSaveItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'Delete
-        '
-        Me.Delete.AutoSize = False
-        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Delete.Image = Global.FfE.My.Resources.Resources.delete_car
-        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
-        Me.Delete.Name = "Delete"
-        Me.Delete.RightToLeftAutoMirrorImage = True
-        Me.Delete.Size = New System.Drawing.Size(92, 48)
-        Me.Delete.Text = "Delete"
-        Me.Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'BindingNavigatorMoveFirstItem
-        '
-        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 51)
-        Me.BindingNavigatorMoveFirstItem.Text = "First"
-        '
-        'BindingNavigatorMovePreviousItem
-        '
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 51)
-        Me.BindingNavigatorMovePreviousItem.Text = "Back"
-        '
-        'BindingNavigatorMoveNextItem
-        '
-        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 51)
-        Me.BindingNavigatorMoveNextItem.Text = "Next"
-        Me.BindingNavigatorMoveNextItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'BindingNavigatorMoveLastItem
-        '
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 51)
-        Me.BindingNavigatorMoveLastItem.Text = "Last"
-        Me.BindingNavigatorMoveLastItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
         'Form_Conf_Car
         '
@@ -416,6 +418,7 @@ Partial Class Form_Conf_Car
         Me.ClientSize = New System.Drawing.Size(702, 496)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Form_Conf_Car"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Car configuration"
         CType(Me.CarBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CarBindingNavigator.ResumeLayout(False)
@@ -424,8 +427,8 @@ Partial Class Form_Conf_Car
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PhotoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CarDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

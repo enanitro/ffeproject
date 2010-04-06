@@ -338,31 +338,22 @@ Public Class Form_drive
         combo = False
     End Sub
 
-    'Private Sub View_data_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles View_data.CellClick
-    '    View_data.Rows(e.RowIndex).Selected = True
-    'End Sub
-
 
     Private Sub btn_import_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_import.Click
-        'Try
-        Me.Validate()
-        Me.DriveBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
-        Dim import_full As New form_import_csv_full
-        If Me.DriveBindingSource.Position <> -1 Then
-            If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
-                import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
-                import_full.ShowDialog()
-                show_Data()
+        Try
+            Me.Validate()
+            Me.DriveBindingSource.EndEdit()
+            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Dim import_full As New form_import_csv_full
+            If Me.DriveBindingSource.Position <> -1 Then
+                If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
+                    import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
+                    import_full.ShowDialog()
+                End If
             End If
-        End If
-        'Catch ex As Exception
-        'MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
-    End Sub
-
-    Private Sub Drive_idLabel1_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.TextChanged
-        'show_Data()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btn_find_drive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_find_drive.Click
@@ -396,11 +387,6 @@ Public Class Form_drive
     Private Sub clear_grid(ByRef grid As DataGridView)
         grid.DataSource = ""
     End Sub
-
-    Private Sub show_Data()
-        data_summary(Label19.Text, Label20.Text, Label21.Text, Label22.Text, Label23.Text)
-    End Sub
-
 
     Private Sub data_summary(ByRef graphtec As String, ByRef gps As String, ByRef fluke As String, _
                              ByRef canbus As String, ByRef total As String)
@@ -528,4 +514,7 @@ Public Class Form_drive
         End Try
     End Sub
 
+    Private Sub Drive_idLabel1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.Click
+
+    End Sub
 End Class

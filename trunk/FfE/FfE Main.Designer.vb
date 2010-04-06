@@ -30,14 +30,26 @@ Partial Class FfE_Main
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.DriveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.UserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.CarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.FahrprofileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MeasureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator
-        Me.ConnectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.DataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ConnectionToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
+        Me.DataToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.GraphtecGL800ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ColumbusGPSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.LMG500ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.CANBUSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.IDTableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AssociationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AssociationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.AssociationsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
+        Me.AssociationsToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem
+        Me.BackupDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RestoreDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -59,7 +71,7 @@ Partial Class FfE_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.DataToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.DatabaseToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(632, 24)
@@ -76,12 +88,18 @@ Partial Class FfE_Main
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.NewToolStripMenuItem.Text = "View"
+        '
+        'DataToolStripMenuItem
+        '
+        Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
+        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.DataToolStripMenuItem.Text = "Data"
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserToolStripMenuItem, Me.CarToolStripMenuItem, Me.FahrprofileToolStripMenuItem, Me.MeasureToolStripMenuItem, Me.ConnectionToolStripMenuItem, Me.ConnectionToolStripMenuItem1})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserToolStripMenuItem, Me.CarToolStripMenuItem, Me.FahrprofileToolStripMenuItem, Me.MeasureToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
         Me.OptionsToolStripMenuItem.Text = "Configuration"
@@ -89,43 +107,116 @@ Partial Class FfE_Main
         'UserToolStripMenuItem
         '
         Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
-        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UserToolStripMenuItem.Text = "User"
         '
         'CarToolStripMenuItem
         '
         Me.CarToolStripMenuItem.Name = "CarToolStripMenuItem"
-        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CarToolStripMenuItem.Text = "Car"
         '
         'FahrprofileToolStripMenuItem
         '
         Me.FahrprofileToolStripMenuItem.Name = "FahrprofileToolStripMenuItem"
-        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.FahrprofileToolStripMenuItem.Text = "Usage type"
         '
         'MeasureToolStripMenuItem
         '
         Me.MeasureToolStripMenuItem.Name = "MeasureToolStripMenuItem"
-        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MeasureToolStripMenuItem.Text = "Measure"
         '
-        'ConnectionToolStripMenuItem
+        'DatabaseToolStripMenuItem
         '
-        Me.ConnectionToolStripMenuItem.Name = "ConnectionToolStripMenuItem"
-        Me.ConnectionToolStripMenuItem.Size = New System.Drawing.Size(133, 6)
+        Me.DatabaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectionToolStripMenuItem2, Me.BackupDBToolStripMenuItem, Me.RestoreDBToolStripMenuItem})
+        Me.DatabaseToolStripMenuItem.Name = "DatabaseToolStripMenuItem"
+        Me.DatabaseToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.DatabaseToolStripMenuItem.Text = "Database"
         '
-        'ConnectionToolStripMenuItem1
+        'ConnectionToolStripMenuItem2
         '
-        Me.ConnectionToolStripMenuItem1.Name = "ConnectionToolStripMenuItem1"
-        Me.ConnectionToolStripMenuItem1.Size = New System.Drawing.Size(136, 22)
-        Me.ConnectionToolStripMenuItem1.Text = "Connection"
+        Me.ConnectionToolStripMenuItem2.Name = "ConnectionToolStripMenuItem2"
+        Me.ConnectionToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.ConnectionToolStripMenuItem2.Text = "Connection"
         '
-        'DataToolStripMenuItem
+        'DataToolStripMenuItem1
         '
-        Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
-        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DataToolStripMenuItem.Text = "Data"
+        Me.DataToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GraphtecGL800ToolStripMenuItem, Me.ColumbusGPSToolStripMenuItem, Me.LMG500ToolStripMenuItem, Me.CANBUSToolStripMenuItem})
+        Me.DataToolStripMenuItem1.Name = "DataToolStripMenuItem1"
+        Me.DataToolStripMenuItem1.Size = New System.Drawing.Size(43, 20)
+        Me.DataToolStripMenuItem1.Text = "Data"
+        '
+        'GraphtecGL800ToolStripMenuItem
+        '
+        Me.GraphtecGL800ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssociationsToolStripMenuItem3})
+        Me.GraphtecGL800ToolStripMenuItem.Name = "GraphtecGL800ToolStripMenuItem"
+        Me.GraphtecGL800ToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.GraphtecGL800ToolStripMenuItem.Text = "Graphtec GL800"
+        '
+        'ColumbusGPSToolStripMenuItem
+        '
+        Me.ColumbusGPSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssociationsToolStripMenuItem2})
+        Me.ColumbusGPSToolStripMenuItem.Name = "ColumbusGPSToolStripMenuItem"
+        Me.ColumbusGPSToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ColumbusGPSToolStripMenuItem.Text = "Columbus GPS"
+        '
+        'LMG500ToolStripMenuItem
+        '
+        Me.LMG500ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssociationsToolStripMenuItem1})
+        Me.LMG500ToolStripMenuItem.Name = "LMG500ToolStripMenuItem"
+        Me.LMG500ToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.LMG500ToolStripMenuItem.Text = "LMG 500"
+        '
+        'CANBUSToolStripMenuItem
+        '
+        Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssociationsToolStripMenuItem, Me.IDTableToolStripMenuItem})
+        Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
+        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
+        '
+        'IDTableToolStripMenuItem
+        '
+        Me.IDTableToolStripMenuItem.Name = "IDTableToolStripMenuItem"
+        Me.IDTableToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.IDTableToolStripMenuItem.Text = "ID Channels"
+        '
+        'AssociationsToolStripMenuItem
+        '
+        Me.AssociationsToolStripMenuItem.Name = "AssociationsToolStripMenuItem"
+        Me.AssociationsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AssociationsToolStripMenuItem.Text = "Associations"
+        '
+        'AssociationsToolStripMenuItem1
+        '
+        Me.AssociationsToolStripMenuItem1.Name = "AssociationsToolStripMenuItem1"
+        Me.AssociationsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.AssociationsToolStripMenuItem1.Text = "Associations"
+        '
+        'AssociationsToolStripMenuItem2
+        '
+        Me.AssociationsToolStripMenuItem2.Name = "AssociationsToolStripMenuItem2"
+        Me.AssociationsToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.AssociationsToolStripMenuItem2.Text = "Associations"
+        '
+        'AssociationsToolStripMenuItem3
+        '
+        Me.AssociationsToolStripMenuItem3.Name = "AssociationsToolStripMenuItem3"
+        Me.AssociationsToolStripMenuItem3.Size = New System.Drawing.Size(152, 22)
+        Me.AssociationsToolStripMenuItem3.Text = "Associations"
+        '
+        'BackupDBToolStripMenuItem
+        '
+        Me.BackupDBToolStripMenuItem.Name = "BackupDBToolStripMenuItem"
+        Me.BackupDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BackupDBToolStripMenuItem.Text = "Backup DB"
+        '
+        'RestoreDBToolStripMenuItem
+        '
+        Me.RestoreDBToolStripMenuItem.Name = "RestoreDBToolStripMenuItem"
+        Me.RestoreDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RestoreDBToolStripMenuItem.Text = "Restore DB"
         '
         'FfE_Main
         '
@@ -156,9 +247,21 @@ Partial Class FfE_Main
     Public WithEvents StatusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents DriveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ConnectionToolStripMenuItem As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ConnectionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MeasureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConnectionToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DataToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GraphtecGL800ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AssociationsToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ColumbusGPSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AssociationsToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LMG500ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AssociationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CANBUSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AssociationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IDTableToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BackupDBToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RestoreDBToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

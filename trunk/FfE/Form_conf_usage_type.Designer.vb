@@ -32,12 +32,19 @@ Partial Class Form_conf_usage_type
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.Usage_typeBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
+        Me.Usage_typeBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
+        Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
         Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Usage_typeDataGridView = New System.Windows.Forms.DataGridView
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -46,13 +53,6 @@ Partial Class Form_conf_usage_type
         Me.Usage_in_projectTextBox = New System.Windows.Forms.TextBox
         Me.DescriptionTextBox = New System.Windows.Forms.TextBox
         Me.NameTextBox = New System.Windows.Forms.TextBox
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.Usage_typeBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.Delete = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Usage_in_projectLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         NameLabel = New System.Windows.Forms.Label
@@ -112,9 +112,11 @@ Partial Class Form_conf_usage_type
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
         Me.TableAdapterManager.copy_dataTableAdapter = Nothing
         Me.TableAdapterManager.dataTableAdapter = Nothing
         Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
         Me.TableAdapterManager.loggerTableAdapter = Nothing
         Me.TableAdapterManager.measureTableAdapter = Nothing
         Me.TableAdapterManager.photosTableAdapter = Nothing
@@ -145,7 +147,6 @@ Partial Class Form_conf_usage_type
         Me.Usage_typeBindingNavigator.AutoSize = False
         Me.Usage_typeBindingNavigator.BindingSource = Me.Usage_typeBindingSource
         Me.Usage_typeBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.Usage_typeBindingNavigator.CountItemFormat = "of {0}"
         Me.Usage_typeBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
         Me.Usage_typeBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.Usage_typeBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.Usage_typeBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
@@ -159,6 +160,17 @@ Partial Class Form_conf_usage_type
         Me.Usage_typeBindingNavigator.Size = New System.Drawing.Size(505, 54)
         Me.Usage_typeBindingNavigator.TabIndex = 10
         Me.Usage_typeBindingNavigator.Text = "BindingNavigator1"
+        '
+        'BindingNavigatorAddNewItem
+        '
+        Me.BindingNavigatorAddNewItem.AutoSize = False
+        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorAddNewItem.Image = Global.FfE.My.Resources.Resources.add_usage
+        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
+        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorAddNewItem.Text = "Add new"
         '
         'BindingNavigatorCountItem
         '
@@ -180,10 +192,52 @@ Partial Class Form_conf_usage_type
         Me.BindingNavigatorDeleteItem.Text = "Eliminar"
         Me.BindingNavigatorDeleteItem.Visible = False
         '
+        'Usage_typeBindingNavigatorSaveItem
+        '
+        Me.Usage_typeBindingNavigatorSaveItem.AutoSize = False
+        Me.Usage_typeBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Usage_typeBindingNavigatorSaveItem.Image = Global.FfE.My.Resources.Resources.save_usage
+        Me.Usage_typeBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.Usage_typeBindingNavigatorSaveItem.Name = "Usage_typeBindingNavigatorSaveItem"
+        Me.Usage_typeBindingNavigatorSaveItem.Size = New System.Drawing.Size(52, 49)
+        Me.Usage_typeBindingNavigatorSaveItem.Text = "Save"
+        '
+        'Delete
+        '
+        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Delete.Image = Global.FfE.My.Resources.Resources.del_usage
+        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
+        Me.Delete.Name = "Delete"
+        Me.Delete.Size = New System.Drawing.Size(52, 51)
+        Me.Delete.Text = "Delete"
+        '
         'BindingNavigatorSeparator2
         '
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.AutoSize = False
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = Global.FfE.My.Resources.Resources.img_first
+        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveFirstItem.Text = "First"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.AutoSize = False
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = Global.FfE.My.Resources.Resources.img_back
+        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMovePreviousItem.Text = "Back"
         '
         'BindingNavigatorSeparator
         '
@@ -204,6 +258,28 @@ Partial Class Form_conf_usage_type
         '
         Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
         Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.AutoSize = False
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = Global.FfE.My.Resources.Resources.img_next
+        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveNextItem.Text = "Next"
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.AutoSize = False
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = Global.FfE.My.Resources.Resources.img_last
+        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 49)
+        Me.BindingNavigatorMoveLastItem.Text = "Last"
         '
         'Usage_typeDataGridView
         '
@@ -273,81 +349,6 @@ Partial Class Form_conf_usage_type
         Me.NameTextBox.Size = New System.Drawing.Size(123, 20)
         Me.NameTextBox.TabIndex = 12
         '
-        'BindingNavigatorAddNewItem
-        '
-        Me.BindingNavigatorAddNewItem.AutoSize = False
-        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Image = Global.FfE.My.Resources.Resources.add_usage
-        Me.BindingNavigatorAddNewItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
-        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorAddNewItem.Text = "Add new"
-        '
-        'Usage_typeBindingNavigatorSaveItem
-        '
-        Me.Usage_typeBindingNavigatorSaveItem.AutoSize = False
-        Me.Usage_typeBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Usage_typeBindingNavigatorSaveItem.Image = Global.FfE.My.Resources.Resources.save_usage
-        Me.Usage_typeBindingNavigatorSaveItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.Usage_typeBindingNavigatorSaveItem.Name = "Usage_typeBindingNavigatorSaveItem"
-        Me.Usage_typeBindingNavigatorSaveItem.Size = New System.Drawing.Size(52, 49)
-        Me.Usage_typeBindingNavigatorSaveItem.Text = "Save"
-        '
-        'Delete
-        '
-        Me.Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Delete.Image = Global.FfE.My.Resources.Resources.del_usage
-        Me.Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.Delete.ImageTransparentColor = System.Drawing.Color.White
-        Me.Delete.Name = "Delete"
-        Me.Delete.Size = New System.Drawing.Size(52, 51)
-        Me.Delete.Text = "Delete"
-        '
-        'BindingNavigatorMoveFirstItem
-        '
-        Me.BindingNavigatorMoveFirstItem.AutoSize = False
-        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = Global.FfE.My.Resources.Resources.img_first
-        Me.BindingNavigatorMoveFirstItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveFirstItem.Text = "First"
-        '
-        'BindingNavigatorMovePreviousItem
-        '
-        Me.BindingNavigatorMovePreviousItem.AutoSize = False
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = Global.FfE.My.Resources.Resources.img_back
-        Me.BindingNavigatorMovePreviousItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMovePreviousItem.Text = "Back"
-        '
-        'BindingNavigatorMoveNextItem
-        '
-        Me.BindingNavigatorMoveNextItem.AutoSize = False
-        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = Global.FfE.My.Resources.Resources.img_next
-        Me.BindingNavigatorMoveNextItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveNextItem.Text = "Next"
-        '
-        'BindingNavigatorMoveLastItem
-        '
-        Me.BindingNavigatorMoveLastItem.AutoSize = False
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = Global.FfE.My.Resources.Resources.img_last
-        Me.BindingNavigatorMoveLastItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 49)
-        Me.BindingNavigatorMoveLastItem.Text = "Last"
-        '
         'Form_conf_usage_type
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -357,6 +358,7 @@ Partial Class Form_conf_usage_type
         Me.ClientSize = New System.Drawing.Size(623, 401)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Form_conf_usage_type"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Usage type configuration"
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Usage_typeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

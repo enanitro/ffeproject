@@ -28,22 +28,22 @@ Partial Class Form_car_photos
         Me.Label1 = New System.Windows.Forms.Label
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
         Me.PhotosBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
+        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
         Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.PhotosBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.Car_idTextBox = New System.Windows.Forms.TextBox
         Me.PathTextBox = New System.Windows.Forms.TextBox
         Me.PhotosTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.photosTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-        Me.PhotosBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         CType(Me.PhotosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,7 +83,6 @@ Partial Class Form_car_photos
         Me.PhotosBindingNavigator.BackColor = System.Drawing.Color.Transparent
         Me.PhotosBindingNavigator.BindingSource = Me.PhotosBindingSource
         Me.PhotosBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.PhotosBindingNavigator.CountItemFormat = "of {0}"
         Me.PhotosBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
         Me.PhotosBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.PhotosBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.PhotosBindingNavigatorSaveItem})
@@ -98,76 +97,6 @@ Partial Class Form_car_photos
         Me.PhotosBindingNavigator.TabIndex = 2
         Me.PhotosBindingNavigator.Text = "BindingNavigator1"
         '
-        'BindingNavigatorCountItem
-        '
-        Me.BindingNavigatorCountItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 51)
-        Me.BindingNavigatorCountItem.Text = "of {0}"
-        Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
-        '
-        'BindingNavigatorSeparator
-        '
-        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 54)
-        '
-        'BindingNavigatorPositionItem
-        '
-        Me.BindingNavigatorPositionItem.AccessibleName = "Posición"
-        Me.BindingNavigatorPositionItem.AutoSize = False
-        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 33)
-        Me.BindingNavigatorPositionItem.Text = "0"
-        Me.BindingNavigatorPositionItem.ToolTipText = "Posición actual"
-        '
-        'BindingNavigatorSeparator1
-        '
-        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 54)
-        '
-        'BindingNavigatorSeparator2
-        '
-        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 54)
-        '
-        'Car_idTextBox
-        '
-        Me.Car_idTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PhotosBindingSource, "car_id", True))
-        Me.Car_idTextBox.Location = New System.Drawing.Point(85, 22)
-        Me.Car_idTextBox.Name = "Car_idTextBox"
-        Me.Car_idTextBox.ReadOnly = True
-        Me.Car_idTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Car_idTextBox.Size = New System.Drawing.Size(49, 20)
-        Me.Car_idTextBox.TabIndex = 4
-        '
-        'PathTextBox
-        '
-        Me.PathTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PhotosBindingSource, "path", True))
-        Me.PathTextBox.Location = New System.Drawing.Point(20, 522)
-        Me.PathTextBox.Name = "PathTextBox"
-        Me.PathTextBox.ReadOnly = True
-        Me.PathTextBox.Size = New System.Drawing.Size(789, 20)
-        Me.PathTextBox.TabIndex = 5
-        '
-        'PhotosTableAdapter
-        '
-        Me.PhotosTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.carTableAdapter = Nothing
-        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager.dataTableAdapter = Nothing
-        Me.TableAdapterManager.driveTableAdapter = Nothing
-        Me.TableAdapterManager.loggerTableAdapter = Nothing
-        Me.TableAdapterManager.measureTableAdapter = Nothing
-        Me.TableAdapterManager.photosTableAdapter = Me.PhotosTableAdapter
-        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
-        Me.TableAdapterManager.userTableAdapter = Nothing
-        '
         'BindingNavigatorAddNewItem
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -177,6 +106,14 @@ Partial Class Form_car_photos
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(52, 51)
         Me.BindingNavigatorAddNewItem.Text = "Agregar nuevo"
+        '
+        'BindingNavigatorCountItem
+        '
+        Me.BindingNavigatorCountItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 51)
+        Me.BindingNavigatorCountItem.Text = "of {0}"
+        Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
         '
         'BindingNavigatorDeleteItem
         '
@@ -209,6 +146,26 @@ Partial Class Form_car_photos
         Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(52, 51)
         Me.BindingNavigatorMovePreviousItem.Text = "Mover anterior"
         '
+        'BindingNavigatorSeparator
+        '
+        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
+        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 54)
+        '
+        'BindingNavigatorPositionItem
+        '
+        Me.BindingNavigatorPositionItem.AccessibleName = "Posición"
+        Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
+        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 33)
+        Me.BindingNavigatorPositionItem.Text = "0"
+        Me.BindingNavigatorPositionItem.ToolTipText = "Posición actual"
+        '
+        'BindingNavigatorSeparator1
+        '
+        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
+        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 54)
+        '
         'BindingNavigatorMoveNextItem
         '
         Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -229,6 +186,11 @@ Partial Class Form_car_photos
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 51)
         Me.BindingNavigatorMoveLastItem.Text = "Mover último"
         '
+        'BindingNavigatorSeparator2
+        '
+        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
+        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 54)
+        '
         'PhotosBindingNavigatorSaveItem
         '
         Me.PhotosBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -237,6 +199,45 @@ Partial Class Form_car_photos
         Me.PhotosBindingNavigatorSaveItem.Name = "PhotosBindingNavigatorSaveItem"
         Me.PhotosBindingNavigatorSaveItem.Size = New System.Drawing.Size(52, 51)
         Me.PhotosBindingNavigatorSaveItem.Text = "Guardar datos"
+        '
+        'Car_idTextBox
+        '
+        Me.Car_idTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PhotosBindingSource, "car_id", True))
+        Me.Car_idTextBox.Location = New System.Drawing.Point(85, 22)
+        Me.Car_idTextBox.Name = "Car_idTextBox"
+        Me.Car_idTextBox.ReadOnly = True
+        Me.Car_idTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Car_idTextBox.Size = New System.Drawing.Size(49, 20)
+        Me.Car_idTextBox.TabIndex = 4
+        '
+        'PathTextBox
+        '
+        Me.PathTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PhotosBindingSource, "path", True))
+        Me.PathTextBox.Location = New System.Drawing.Point(20, 522)
+        Me.PathTextBox.Name = "PathTextBox"
+        Me.PathTextBox.ReadOnly = True
+        Me.PathTextBox.Size = New System.Drawing.Size(789, 20)
+        Me.PathTextBox.TabIndex = 5
+        '
+        'PhotosTableAdapter
+        '
+        Me.PhotosTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager.dataTableAdapter = Nothing
+        Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
+        Me.TableAdapterManager.loggerTableAdapter = Nothing
+        Me.TableAdapterManager.measureTableAdapter = Nothing
+        Me.TableAdapterManager.photosTableAdapter = Me.PhotosTableAdapter
+        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
+        Me.TableAdapterManager.userTableAdapter = Nothing
         '
         'PictureBox1
         '
@@ -262,6 +263,7 @@ Partial Class Form_car_photos
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "Form_car_photos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Photos Car"
         CType(Me.PhotosBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
