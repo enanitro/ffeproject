@@ -94,9 +94,9 @@ Partial Class Form_export_full
         Me.Panel1.Controls.Add(Me.GroupBox5)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, -2)
+        Me.Panel1.Location = New System.Drawing.Point(12, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(987, 640)
+        Me.Panel1.Size = New System.Drawing.Size(987, 638)
         Me.Panel1.TabIndex = 0
         '
         'Button10
@@ -151,9 +151,9 @@ Partial Class Form_export_full
         Me.CheckBox4.AutoSize = True
         Me.CheckBox4.Location = New System.Drawing.Point(9, 83)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox4.Size = New System.Drawing.Size(127, 19)
         Me.CheckBox4.TabIndex = 16
-        Me.CheckBox4.Text = "Execute only SQL syntax"
+        Me.CheckBox4.Text = "SQL syntax only"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'percent_canbus
@@ -225,9 +225,9 @@ Partial Class Form_export_full
         Me.CheckBox2.AutoSize = True
         Me.CheckBox2.Location = New System.Drawing.Point(9, 83)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox2.Size = New System.Drawing.Size(127, 19)
         Me.CheckBox2.TabIndex = 16
-        Me.CheckBox2.Text = "Execute only SQL syntax"
+        Me.CheckBox2.Text = "SQL syntax only"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'percent_gps
@@ -299,9 +299,9 @@ Partial Class Form_export_full
         Me.CheckBox3.AutoSize = True
         Me.CheckBox3.Location = New System.Drawing.Point(9, 83)
         Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox3.Size = New System.Drawing.Size(127, 19)
         Me.CheckBox3.TabIndex = 16
-        Me.CheckBox3.Text = "Execute only SQL syntax"
+        Me.CheckBox3.Text = "SQL syntax only"
         Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'percent_fluke
@@ -373,9 +373,9 @@ Partial Class Form_export_full
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(9, 83)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox1.Size = New System.Drawing.Size(127, 19)
         Me.CheckBox1.TabIndex = 14
-        Me.CheckBox1.Text = "Execute only SQL syntax"
+        Me.CheckBox1.Text = "SQL syntax only"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'percent_graphtec
