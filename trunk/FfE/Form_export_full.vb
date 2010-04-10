@@ -9,18 +9,22 @@ Public Class Form_export_full
         Try
             btn_export.Enabled = False
             If path_graphtec.Text <> "" And abort = False And CheckBox1.CheckState = CheckState.Unchecked Then
+                TextBox1.Visible = False
                 logger_csv_file(path_graphtec.Text, FfE_Main.id_graphtec, "GRAPHTEC GL800")
                 into = True
             End If
             If path_gps.Text <> "" And abort = False And CheckBox2.CheckState = CheckState.Unchecked Then
+                TextBox2.Visible = False
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
                 into = True
             End If
             If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
+                TextBox3.Visible = False
                 logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "LMG 500")
                 into = True
             End If
             If path_canbus.Text <> "" And abort = False And CheckBox4.CheckState = CheckState.Unchecked Then
+                TextBox4.Visible = False
                 logger_csv_file(path_canbus.Text, FfE_Main.id_canbus, "CAN-BUS")
                 into = True
             End If
@@ -40,15 +44,19 @@ Public Class Form_export_full
         ProgressBar1.Visible = False
         percent_graphtec.Visible = False
         path_graphtec.Text = ""
+        TextBox1.Visible = False
         ProgressBar2.Visible = False
         percent_gps.Visible = False
         path_gps.Text = ""
+        TextBox2.Visible = False
         ProgressBar4.Visible = False
         percent_fluke.Visible = False
         path_fluke.Text = ""
+        TextBox3.Visible = False
         ProgressBar3.Visible = False
         percent_canbus.Visible = False
         path_canbus.Text = ""
+        TextBox4.Visible = False
     End Sub
 
     'configuracion del progressbar y labels que le acompañan
@@ -150,13 +158,13 @@ Public Class Form_export_full
 
                 Select Case logger_id
                     Case FfE_Main.id_graphtec
-                        execute_query_loggers(res, logger_id, logger, ProgressBar1, percent_graphtec)
+                        execute_query_loggers(res, logger_id, logger, ProgressBar1, percent_graphtec, TextBox1)
                     Case FfE_Main.id_gps
-                        execute_query_loggers(res, logger_id, logger, ProgressBar2, percent_gps)
+                        execute_query_loggers(res, logger_id, logger, ProgressBar2, percent_gps, TextBox2)
                     Case FfE_Main.id_fluke
-                        execute_query_loggers(res, logger_id, logger, ProgressBar3, percent_fluke)
+                        execute_query_loggers(res, logger_id, logger, ProgressBar3, percent_fluke, TextBox3)
                     Case FfE_Main.id_canbus
-                        execute_query_loggers(res, logger_id, logger, ProgressBar4, percent_canbus)
+                        execute_query_loggers(res, logger_id, logger, ProgressBar4, percent_canbus, TextBox4)
                 End Select
                 sw.WriteLine(res)
 
@@ -191,7 +199,7 @@ Public Class Form_export_full
 
     Private Sub execute_query_loggers(ByRef res As String, ByVal logger_id As Integer, _
                                       ByVal logger As String, ByRef bar As ProgressBar, _
-                                      ByRef percent As Label)
+                                      ByRef percent As Label, ByRef tb As TextBox)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
 
         Dim cn As New MySqlConnection(connection)
@@ -213,20 +221,24 @@ Public Class Form_export_full
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-            sql = "select convert(concat(data_index,',',time"
+            sql = "select concat(data_index,',',time"
             res = "INDEX,TIME"
 
             While query.Read()
                 res += "," & query.GetString(0)
-                sql += ",',',sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
+                sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             End While
 
-            sql += ") using utf8) as format_row from data" & _
+            sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
                 " group by data_index;"
             res += vbCrLf
             cn.Close()
+
+            tb.Text = sql
+            tb.Visible = True
+
 
             cn.Open()
             cmd.CommandTimeout = 1000
@@ -334,14 +346,14 @@ Public Class Form_export_full
         path_gps.Text = ""
         path_fluke.Text = ""
         path_canbus.Text = ""
-        SQL_channels()
-    End Sub
-
-    Private Sub SQL_channels()
-        SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
-        SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
-        SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
-        SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+        TextBox1.Visible = False
+        TextBox2.Visible = False
+        TextBox3.Visible = False
+        TextBox4.Visible = False
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
     End Sub
 
     Private Sub SQL_syntax(ByVal logger_id As Integer, ByVal logger As String, ByVal text As TextBox)
@@ -351,7 +363,6 @@ Public Class Form_export_full
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String
-        Dim head As String
 
         Try
 
@@ -366,14 +377,12 @@ Public Class Form_export_full
             query = cmd.ExecuteReader()
 
             sql = "select concat(data_index,',',time"
-            head = "INDEX,TIME"
 
             While query.Read()
-                head += "," & query.GetString(0)
                 sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             End While
 
-            sql += ") as '" & head & "' from data" & _
+            sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
                 " group by data_index;"
@@ -394,4 +403,54 @@ Public Class Form_export_full
         End Try
     End Sub
 
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.CheckState = CheckState.Checked Then
+            If TextBox1.Text = "" Then
+                SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
+            End If
+            TextBox1.Visible = True
+        Else
+            TextBox1.Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
+        If CheckBox2.CheckState = CheckState.Checked Then
+            If TextBox2.Text = "" Then
+                SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
+            End If
+            TextBox2.Visible = True
+        Else
+            TextBox2.Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox3.CheckedChanged
+        If CheckBox3.CheckState = CheckState.Checked Then
+            If TextBox3.Text = "" Then
+                SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
+            End If
+            TextBox3.Visible = True
+        Else
+            TextBox3.Visible = False
+        End If
+    End Sub
+
+    Private Sub CheckBox4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox4.CheckedChanged
+        If CheckBox4.CheckState = CheckState.Checked Then
+            If TextBox4.Text = "" Then
+                SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+            End If
+            TextBox4.Visible = True
+        Else
+            TextBox4.Visible = False
+        End If
+    End Sub
+
+    Private Sub SQL_channels()
+        SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
+        SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
+        SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
+        SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+    End Sub
 End Class
