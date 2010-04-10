@@ -5,7 +5,7 @@
         Try
             Me.Validate()
             Me.MeasureBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Me.MeasureTableAdapter.Update(Me.Ffe_databaseDataSet.measure)
             Ffe_databaseDataSet.measure.AcceptChanges()
             MeasureDataGridView.Sort(MeasureDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
@@ -45,10 +45,7 @@
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                MeasureBindingNavigator.Items(3).Visible = True
-                MeasureBindingNavigator.Items(3).PerformClick()
-                MeasureBindingNavigator.Items(3).Visible = False
-
+                MeasureBindingSource.RemoveCurrent()
                 rows = MeasureDataGridView.Rows.Count
             End If
         Catch ex As Exception

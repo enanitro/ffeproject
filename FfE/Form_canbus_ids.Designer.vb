@@ -31,7 +31,6 @@ Partial Class form_canbus_ids
         Dim StartbitLabel As System.Windows.Forms.Label
         Dim NameLabel As System.Windows.Forms.Label
         Dim Hex_idLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_canbus_ids))
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.Ids_canbusBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
@@ -49,7 +48,6 @@ Partial Class form_canbus_ids
         Me.Ids_canbusBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.Ids_canbusBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
@@ -60,7 +58,6 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.Ids_canbusDataGridView = New System.Windows.Forms.DataGridView
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -304,9 +301,9 @@ Partial Class form_canbus_ids
         Me.Ids_canbusBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
         Me.Ids_canbusBindingNavigator.BindingSource = Me.Ids_canbusBindingSource
         Me.Ids_canbusBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.Ids_canbusBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.Ids_canbusBindingNavigator.DeleteItem = Nothing
         Me.Ids_canbusBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
-        Me.Ids_canbusBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.Ids_canbusBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.ToolStripSeparator1, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2})
+        Me.Ids_canbusBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.Ids_canbusBindingNavigatorSaveItem, Me.Delete, Me.ToolStripSeparator1, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
         Me.Ids_canbusBindingNavigator.Location = New System.Drawing.Point(151, 356)
         Me.Ids_canbusBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.Ids_canbusBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -314,7 +311,7 @@ Partial Class form_canbus_ids
         Me.Ids_canbusBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.Ids_canbusBindingNavigator.Name = "Ids_canbusBindingNavigator"
         Me.Ids_canbusBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.Ids_canbusBindingNavigator.Size = New System.Drawing.Size(510, 56)
+        Me.Ids_canbusBindingNavigator.Size = New System.Drawing.Size(535, 56)
         Me.Ids_canbusBindingNavigator.TabIndex = 20
         Me.Ids_canbusBindingNavigator.Text = "BindingNavigator1"
         '
@@ -335,17 +332,6 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 53)
         Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
-        '
-        'BindingNavigatorDeleteItem
-        '
-        Me.BindingNavigatorDeleteItem.AutoSize = False
-        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(0, 0)
-        Me.BindingNavigatorDeleteItem.Text = "Delete"
-        Me.BindingNavigatorDeleteItem.Visible = False
         '
         'Ids_canbusBindingNavigatorSaveItem
         '
@@ -430,11 +416,6 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(52, 53)
         Me.BindingNavigatorMoveLastItem.Text = "Move last"
-        '
-        'BindingNavigatorSeparator2
-        '
-        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 56)
         '
         'Ids_canbusDataGridView
         '
@@ -558,7 +539,6 @@ Partial Class form_canbus_ids
     Friend WithEvents Ids_canbusBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Ids_canbusBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
@@ -569,7 +549,6 @@ Partial Class form_canbus_ids
     Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
-    Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Ids_canbusDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn

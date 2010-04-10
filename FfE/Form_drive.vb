@@ -269,7 +269,7 @@ Public Class Form_drive
         Try
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
-            Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet)
+            Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
             Ffe_databaseDataSet.drive.AcceptChanges()
             DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
@@ -343,12 +343,13 @@ Public Class Form_drive
         Try
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
             Dim import_full As New form_import_csv_full
             If Me.DriveBindingSource.Position <> -1 Then
                 If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
                     import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
-                    import_full.ShowDialog()
+                    import_full.MdiParent = Me.MdiParent
+                    import_full.Show()
                 End If
             End If
         Catch ex As Exception
@@ -455,9 +456,7 @@ Public Class Form_drive
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                DriveBindingNavigator.Items(3).Visible = True
-                DriveBindingNavigator.Items(3).PerformClick()
-                DriveBindingNavigator.Items(3).Visible = False
+                DriveBindingSource.RemoveCurrent()
                 rows = Ffe_databaseDataSet.drive.Count
                 If rows = 0 Then Drive_idLabel1.Visible = False
             End If
@@ -506,7 +505,8 @@ Public Class Form_drive
             form_export.car.Text = cmb_car.Text
             form_export.importer.Text = cmb_importer.Text
             form_export.description.Text = txt_description.Text
-            form_export.ShowDialog()
+            form_export.MdiParent = Me.MdiParent
+            form_export.Show()
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -514,7 +514,19 @@ Public Class Form_drive
         End Try
     End Sub
 
-    Private Sub Drive_idLabel1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Drive_idLabel1.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If Drive_idLabel1.Text <> "" Then
+            Dim show_Data As New Form_view_data(Drive_idLabel1.Text)
+            show_Data.MdiParent = Me.MdiParent
+            show_Data.Show()
+        End If
+    End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        If Drive_idLabel1.Text <> "" Then
+            Dim del_channel As New Form_delete_channel(Drive_idLabel1.Text)
+            del_channel.MdiParent = Me.MdiParent
+            del_channel.Show()
+        End If
     End Sub
 End Class

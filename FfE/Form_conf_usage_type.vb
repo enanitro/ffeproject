@@ -5,7 +5,7 @@
         Try
             Me.Validate()
             Me.Usage_typeBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Me.Usage_typeTableAdapter.Update(Me.Ffe_databaseDataSet.usage_type)
             Ffe_databaseDataSet.usage_type.AcceptChanges()
             Usage_typeDataGridView.Sort(Usage_typeDataGridView.Columns.Item(0), _
                                                       System.ComponentModel.ListSortDirection.Ascending)
@@ -45,10 +45,7 @@
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Usage_typeBindingNavigator.Items(3).Visible = True
-                Usage_typeBindingNavigator.Items(3).PerformClick()
-                Usage_typeBindingNavigator.Items(3).Visible = False
-
+                Usage_typeBindingSource.RemoveCurrent()
                 rows = Usage_typeDataGridView.Rows.Count
             End If
         Catch ex As Exception

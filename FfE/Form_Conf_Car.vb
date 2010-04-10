@@ -5,7 +5,7 @@
         Try
             Me.Validate()
             Me.CarBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Me.CarTableAdapter.Update(Me.Ffe_databaseDataSet.car)
             Ffe_databaseDataSet.car.AcceptChanges()
             CarDataGridView.Sort(CarDataGridView.Columns.Item(0), _
                                 System.ComponentModel.ListSortDirection.Ascending)
@@ -19,7 +19,6 @@
         Try
             If Me.Ffe_databaseDataSet.HasChanges() Or rows <> CarDataGridView.Rows.Count Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-
                     Me.Validate()
                     Me.CarBindingSource.EndEdit()
                     Me.CarTableAdapter.Update(Me.Ffe_databaseDataSet.car)
@@ -70,10 +69,7 @@
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                CarBindingNavigator.Items(3).Visible = True
-                CarBindingNavigator.Items(3).PerformClick()
-                CarBindingNavigator.Items(3).Visible = False
-        
+                CarBindingSource.RemoveCurrent()
                 rows = CarDataGridView.Rows.Count
             End If
         Catch ex As Exception

@@ -83,14 +83,19 @@ Public Class FfE_Main
 
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
         Dim form_conn As New Form_Connection
-
-        'form_conn.MdiParent = Me
-        form_conn.ShowDialog()
+        form_conn.MdiParent = Me
+        form_conn.Show()
     End Sub
 
     Private Sub ChannelsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChannelsToolStripMenuItem.Click
         Dim form_canbus As New form_canbus_ids
         form_canbus.MdiParent = Me
         form_canbus.Show()
+    End Sub
+
+    Private Sub RestoreDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestoreDBToolStripMenuItem.Click
+        Dim restore As New Form_restore_DB
+        restore.MdiParent = Me
+        restore.Show()
     End Sub
 End Class

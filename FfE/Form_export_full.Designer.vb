@@ -28,21 +28,29 @@ Partial Class Form_export_full
         Me.Button10 = New System.Windows.Forms.Button
         Me.btn_export = New System.Windows.Forms.Button
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.TextBox4 = New System.Windows.Forms.TextBox
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox
         Me.percent_canbus = New System.Windows.Forms.Label
         Me.path_canbus = New System.Windows.Forms.Label
         Me.ProgressBar4 = New System.Windows.Forms.ProgressBar
         Me.Button3 = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.TextBox2 = New System.Windows.Forms.TextBox
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox
         Me.percent_gps = New System.Windows.Forms.Label
         Me.path_gps = New System.Windows.Forms.Label
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar
         Me.Button2 = New System.Windows.Forms.Button
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
+        Me.TextBox3 = New System.Windows.Forms.TextBox
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox
         Me.percent_fluke = New System.Windows.Forms.Label
         Me.path_fluke = New System.Windows.Forms.Label
         Me.ProgressBar3 = New System.Windows.Forms.ProgressBar
         Me.Button4 = New System.Windows.Forms.Button
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.TextBox1 = New System.Windows.Forms.TextBox
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox
         Me.percent_graphtec = New System.Windows.Forms.Label
         Me.path_graphtec = New System.Windows.Forms.Label
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
@@ -86,9 +94,9 @@ Partial Class Form_export_full
         Me.Panel1.Controls.Add(Me.GroupBox5)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Location = New System.Drawing.Point(12, -2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(987, 516)
+        Me.Panel1.Size = New System.Drawing.Size(987, 640)
         Me.Panel1.TabIndex = 0
         '
         'Button10
@@ -96,7 +104,7 @@ Partial Class Form_export_full
         Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Button10.Image = Global.FfE.My.Resources.Resources.exit1
         Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button10.Location = New System.Drawing.Point(506, 403)
+        Me.Button10.Location = New System.Drawing.Point(506, 525)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(144, 105)
         Me.Button10.TabIndex = 33
@@ -106,7 +114,7 @@ Partial Class Form_export_full
         '
         Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
         Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(337, 403)
+        Me.btn_export.Location = New System.Drawing.Point(337, 525)
         Me.btn_export.Name = "btn_export"
         Me.btn_export.Size = New System.Drawing.Size(144, 105)
         Me.btn_export.TabIndex = 30
@@ -114,22 +122,44 @@ Partial Class Form_export_full
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.TextBox4)
+        Me.GroupBox4.Controls.Add(Me.CheckBox4)
         Me.GroupBox4.Controls.Add(Me.percent_canbus)
         Me.GroupBox4.Controls.Add(Me.path_canbus)
         Me.GroupBox4.Controls.Add(Me.ProgressBar4)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox4.Location = New System.Drawing.Point(506, 275)
+        Me.GroupBox4.Location = New System.Drawing.Point(506, 326)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(468, 114)
+        Me.GroupBox4.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox4.TabIndex = 32
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "CAN-BUS"
         '
+        'TextBox4
+        '
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(9, 104)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox4.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox4.TabIndex = 17
+        '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Location = New System.Drawing.Point(9, 83)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox4.TabIndex = 16
+        Me.CheckBox4.Text = "Execute only SQL syntax"
+        Me.CheckBox4.UseVisualStyleBackColor = True
+        '
         'percent_canbus
         '
         Me.percent_canbus.AutoSize = True
-        Me.percent_canbus.Location = New System.Drawing.Point(246, 51)
+        Me.percent_canbus.Location = New System.Drawing.Point(246, 49)
         Me.percent_canbus.Name = "percent_canbus"
         Me.percent_canbus.Size = New System.Drawing.Size(27, 15)
         Me.percent_canbus.TabIndex = 13
@@ -149,9 +179,9 @@ Partial Class Form_export_full
         '
         'ProgressBar4
         '
-        Me.ProgressBar4.Location = New System.Drawing.Point(96, 74)
+        Me.ProgressBar4.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar4.Name = "ProgressBar4"
-        Me.ProgressBar4.Size = New System.Drawing.Size(356, 23)
+        Me.ProgressBar4.Size = New System.Drawing.Size(356, 10)
         Me.ProgressBar4.TabIndex = 4
         Me.ProgressBar4.Visible = False
         '
@@ -160,28 +190,50 @@ Partial Class Form_export_full
         Me.Button3.Image = Global.FfE.My.Resources.Resources.find_excel
         Me.Button3.Location = New System.Drawing.Point(9, 20)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 77)
+        Me.Button3.Size = New System.Drawing.Size(75, 59)
         Me.Button3.TabIndex = 3
         Me.Button3.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.TextBox2)
+        Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.percent_gps)
         Me.GroupBox3.Controls.Add(Me.path_gps)
         Me.GroupBox3.Controls.Add(Me.ProgressBar2)
         Me.GroupBox3.Controls.Add(Me.Button2)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox3.Location = New System.Drawing.Point(506, 146)
+        Me.GroupBox3.Location = New System.Drawing.Point(506, 131)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(468, 114)
+        Me.GroupBox3.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox3.TabIndex = 29
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Columbus GPS"
         '
+        'TextBox2
+        '
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(9, 104)
+        Me.TextBox2.Multiline = True
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox2.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox2.TabIndex = 17
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(9, 83)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox2.TabIndex = 16
+        Me.CheckBox2.Text = "Execute only SQL syntax"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'percent_gps
         '
         Me.percent_gps.AutoSize = True
-        Me.percent_gps.Location = New System.Drawing.Point(246, 51)
+        Me.percent_gps.Location = New System.Drawing.Point(246, 49)
         Me.percent_gps.Name = "percent_gps"
         Me.percent_gps.Size = New System.Drawing.Size(27, 15)
         Me.percent_gps.TabIndex = 13
@@ -201,9 +253,9 @@ Partial Class Form_export_full
         '
         'ProgressBar2
         '
-        Me.ProgressBar2.Location = New System.Drawing.Point(96, 74)
+        Me.ProgressBar2.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar2.Name = "ProgressBar2"
-        Me.ProgressBar2.Size = New System.Drawing.Size(356, 23)
+        Me.ProgressBar2.Size = New System.Drawing.Size(356, 10)
         Me.ProgressBar2.TabIndex = 4
         Me.ProgressBar2.Visible = False
         '
@@ -212,28 +264,50 @@ Partial Class Form_export_full
         Me.Button2.Image = Global.FfE.My.Resources.Resources.find_excel
         Me.Button2.Location = New System.Drawing.Point(9, 20)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 77)
+        Me.Button2.Size = New System.Drawing.Size(75, 59)
         Me.Button2.TabIndex = 3
         Me.Button2.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.TextBox3)
+        Me.GroupBox5.Controls.Add(Me.CheckBox3)
         Me.GroupBox5.Controls.Add(Me.percent_fluke)
         Me.GroupBox5.Controls.Add(Me.path_fluke)
         Me.GroupBox5.Controls.Add(Me.ProgressBar3)
         Me.GroupBox5.Controls.Add(Me.Button4)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox5.Location = New System.Drawing.Point(12, 275)
+        Me.GroupBox5.Location = New System.Drawing.Point(12, 326)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(468, 114)
+        Me.GroupBox5.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox5.TabIndex = 31
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "LMG 500"
         '
+        'TextBox3
+        '
+        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(9, 104)
+        Me.TextBox3.Multiline = True
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox3.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox3.TabIndex = 17
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Location = New System.Drawing.Point(9, 83)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox3.TabIndex = 16
+        Me.CheckBox3.Text = "Execute only SQL syntax"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
         'percent_fluke
         '
         Me.percent_fluke.AutoSize = True
-        Me.percent_fluke.Location = New System.Drawing.Point(246, 51)
+        Me.percent_fluke.Location = New System.Drawing.Point(246, 49)
         Me.percent_fluke.Name = "percent_fluke"
         Me.percent_fluke.Size = New System.Drawing.Size(27, 15)
         Me.percent_fluke.TabIndex = 13
@@ -253,9 +327,9 @@ Partial Class Form_export_full
         '
         'ProgressBar3
         '
-        Me.ProgressBar3.Location = New System.Drawing.Point(96, 74)
+        Me.ProgressBar3.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar3.Name = "ProgressBar3"
-        Me.ProgressBar3.Size = New System.Drawing.Size(356, 23)
+        Me.ProgressBar3.Size = New System.Drawing.Size(356, 10)
         Me.ProgressBar3.TabIndex = 4
         Me.ProgressBar3.Visible = False
         '
@@ -264,28 +338,50 @@ Partial Class Form_export_full
         Me.Button4.Image = Global.FfE.My.Resources.Resources.find_excel
         Me.Button4.Location = New System.Drawing.Point(9, 20)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 77)
+        Me.Button4.Size = New System.Drawing.Size(75, 59)
         Me.Button4.TabIndex = 3
         Me.Button4.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.percent_graphtec)
         Me.GroupBox2.Controls.Add(Me.path_graphtec)
         Me.GroupBox2.Controls.Add(Me.ProgressBar1)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 146)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 131)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(468, 114)
+        Me.GroupBox2.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox2.TabIndex = 28
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Graphtec GL800"
         '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(9, 104)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox1.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox1.TabIndex = 15
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(9, 83)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(182, 19)
+        Me.CheckBox1.TabIndex = 14
+        Me.CheckBox1.Text = "Execute only SQL syntax"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'percent_graphtec
         '
         Me.percent_graphtec.AutoSize = True
-        Me.percent_graphtec.Location = New System.Drawing.Point(246, 51)
+        Me.percent_graphtec.Location = New System.Drawing.Point(246, 49)
         Me.percent_graphtec.Name = "percent_graphtec"
         Me.percent_graphtec.Size = New System.Drawing.Size(27, 15)
         Me.percent_graphtec.TabIndex = 13
@@ -305,9 +401,9 @@ Partial Class Form_export_full
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(96, 74)
+        Me.ProgressBar1.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(356, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(356, 10)
         Me.ProgressBar1.TabIndex = 4
         Me.ProgressBar1.Visible = False
         '
@@ -316,7 +412,7 @@ Partial Class Form_export_full
         Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
         Me.Button1.Location = New System.Drawing.Point(9, 20)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 77)
+        Me.Button1.Size = New System.Drawing.Size(75, 59)
         Me.Button1.TabIndex = 3
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -545,7 +641,7 @@ Partial Class Form_export_full
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1011, 540)
+        Me.ClientSize = New System.Drawing.Size(1011, 650)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "Form_export_full"
@@ -610,4 +706,12 @@ Partial Class Form_export_full
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 End Class

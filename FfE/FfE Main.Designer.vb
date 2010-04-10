@@ -36,13 +36,13 @@ Partial Class FfE_Main
         Me.CarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.FahrprofileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MeasureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.CANBUSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ChannelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.DatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ConnectionToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.BackupDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.RestoreDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.CANBUSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ChannelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -81,13 +81,13 @@ Partial Class FfE_Main
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.NewToolStripMenuItem.Text = "View"
         '
         'DataToolStripMenuItem
         '
         Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
-        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.DataToolStripMenuItem.Text = "Data"
         '
         'OptionsToolStripMenuItem
@@ -121,6 +121,24 @@ Partial Class FfE_Main
         Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.MeasureToolStripMenuItem.Text = "Measure"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(129, 6)
+        '
+        'CANBUSToolStripMenuItem
+        '
+        Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChannelsToolStripMenuItem})
+        Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
+        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
+        '
+        'ChannelsToolStripMenuItem
+        '
+        Me.ChannelsToolStripMenuItem.Name = "ChannelsToolStripMenuItem"
+        Me.ChannelsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.ChannelsToolStripMenuItem.Text = "Channels"
+        '
         'DatabaseToolStripMenuItem
         '
         Me.DatabaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectionToolStripMenuItem2, Me.BackupDBToolStripMenuItem, Me.RestoreDBToolStripMenuItem})
@@ -145,24 +163,6 @@ Partial Class FfE_Main
         Me.RestoreDBToolStripMenuItem.Name = "RestoreDBToolStripMenuItem"
         Me.RestoreDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RestoreDBToolStripMenuItem.Text = "Restore DB"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
-        '
-        'CANBUSToolStripMenuItem
-        '
-        Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChannelsToolStripMenuItem})
-        Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
-        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
-        '
-        'ChannelsToolStripMenuItem
-        '
-        Me.ChannelsToolStripMenuItem.Name = "ChannelsToolStripMenuItem"
-        Me.ChannelsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ChannelsToolStripMenuItem.Text = "Channels"
         '
         'FfE_Main
         '
