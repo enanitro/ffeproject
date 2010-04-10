@@ -228,34 +228,30 @@ Public Class Form_export_full
             res += vbCrLf
             cn.Close()
 
-            show_data(sql)
+            cn.Open()
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
 
+            sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql, max)
 
+            bar.Visible = True
+            percent.Visible = True
+            config_progressbar(max, bar)
+            i = 1
+            While query.Read()
+                res += query.GetString(0)
+                i = query.GetString(0).Split(",")(0)
+                progressbar(i, percent.Text, bar)
+                i += 1
+                res += vbCrLf
+                Application.DoEvents()
+            End While
 
-            'cn.Open()
-            'cmd.CommandTimeout = 1000
-            'cmd.CommandText = sql
-            'query = cmd.ExecuteReader()
-
-            'sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
-            '" and logger_id = " & logger_id & " order by data_index, time"
-            'execute_query(sql, max)
-
-            'bar.Visible = True
-            'percent.Visible = True
-            'config_progressbar(max, bar)
-            'i = 1
-            'While query.Read()
-            ' res += query.GetString(0)
-            'i = query.GetString(0).Split(",")(0)
-            'progressbar(i, percent.Text, bar)
-            'i += 1
-            'res += vbCrLf
-            'Application.DoEvents()
-            'End While
-
-            'res += vbCrLf
-            'cn.Close()
+            res += vbCrLf
+            cn.Close()
 
 
         Catch ex As Exception
@@ -271,50 +267,7 @@ Public Class Form_export_full
         End Try
     End Sub
 
-    Private Sub show_data(ByVal text As String)
-        ' nueva conexión indicando al SqlConnection la cadena de conexión  
-        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
-        Dim cn As New MySqlConnection(connection)
-        Dim sql As String = ""
-
-        Try
-
-            'grid.DataSource = ""
-            'execute_query_loggers(sql, logger_id)
-
-            ' Abrir la conexión a Sql  
-            cn.Open()
-
-            ' Pasar la consulta sql y la conexión al Sql Command   
-            Dim cmd As New MySqlCommand(text, cn)
-            cmd.CommandTimeout = 1000
-
-            ' Inicializar un nuevo SqlDataAdapter   
-            Dim da As New MySqlDataAdapter(cmd)
-
-            'Crear y Llenar un Dataset  
-            Dim ds As New DataSet
-
-            'da.FillSchema(ds, SchemaType.Mapped)
-            da.Fill(ds)
-
-            Dim tbl As DataTable = ds.Tables(0) ' data table prepara la estructura de la tabla
-            Dim sw As New System.IO.StreamWriter("C:\Users\enanitro\Desktop\Alemania\FfE\prueba000000.txt")
-            For Each r In tbl.Rows
-                sw.WriteLine(r.item(0))
-            Next
-            sw.Close()
-
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If cn.State = ConnectionState.Open Then
-                cn.Close()
-            End If
-        End Try
-    End Sub
-
+    
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
         Try
