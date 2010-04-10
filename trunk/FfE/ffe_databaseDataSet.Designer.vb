@@ -4520,9 +4520,9 @@ Partial Public Class ffe_databaseDataSet
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function Addids_canbusRow(ByVal channel_id As Integer, ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Boolean, ByVal factor As Decimal, ByVal offset As Integer) As ids_canbusRow
+        Public Overloads Function Addids_canbusRow(ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Boolean, ByVal factor As Decimal, ByVal offset As Integer) As ids_canbusRow
             Dim rowids_canbusRow As ids_canbusRow = CType(Me.NewRow,ids_canbusRow)
-            Dim columnValuesArray() As Object = New Object() {channel_id, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset}
+            Dim columnValuesArray() As Object = New Object() {Nothing, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset}
             rowids_canbusRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowids_canbusRow)
             Return rowids_canbusRow
@@ -4582,6 +4582,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnoffset = New Global.System.Data.DataColumn("offset", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnoffset)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnchannel_id}, true))
+            Me.columnchannel_id.AutoIncrement = true
             Me.columnchannel_id.AllowDBNull = false
             Me.columnchannel_id.Unique = true
             Me.columnhex_id.AllowDBNull = false
