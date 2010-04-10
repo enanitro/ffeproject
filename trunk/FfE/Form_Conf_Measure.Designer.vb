@@ -37,7 +37,6 @@ Partial Class Form_Conf_Measure
         Me.MeasureBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.MeasureBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
@@ -165,9 +164,9 @@ Partial Class Form_Conf_Measure
         Me.MeasureBindingNavigator.AutoSize = False
         Me.MeasureBindingNavigator.BindingSource = Me.MeasureBindingSource
         Me.MeasureBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.MeasureBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.MeasureBindingNavigator.DeleteItem = Nothing
         Me.MeasureBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
-        Me.MeasureBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.MeasureBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
+        Me.MeasureBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.MeasureBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
         Me.MeasureBindingNavigator.Location = New System.Drawing.Point(115, 286)
         Me.MeasureBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.MeasureBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -199,17 +198,6 @@ Partial Class Form_Conf_Measure
         Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(52, 49)
         Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
-        '
-        'BindingNavigatorDeleteItem
-        '
-        Me.BindingNavigatorDeleteItem.AutoSize = False
-        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(0, 0)
-        Me.BindingNavigatorDeleteItem.Text = "Eliminar"
-        Me.BindingNavigatorDeleteItem.Visible = False
         '
         'MeasureBindingNavigatorSaveItem
         '
@@ -424,7 +412,6 @@ Partial Class Form_Conf_Measure
     Friend WithEvents MeasureBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents MeasureBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator

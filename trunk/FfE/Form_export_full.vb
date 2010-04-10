@@ -8,27 +8,19 @@ Public Class Form_export_full
         Dim into As Boolean = False
         Try
             btn_export.Enabled = False
-            If path_graphtec.Text <> "" And abort = False Then
-                ProgressBar1.Visible = True
-                percent_graphtec.Visible = True
+            If path_graphtec.Text <> "" And abort = False And CheckBox1.CheckState = CheckState.Unchecked Then
                 logger_csv_file(path_graphtec.Text, FfE_Main.id_graphtec, "GRAPHTEC GL800")
                 into = True
             End If
-            If path_gps.Text <> "" And abort = False Then
-                ProgressBar2.Visible = True
-                percent_gps.Visible = True
+            If path_gps.Text <> "" And abort = False And CheckBox2.CheckState = CheckState.Unchecked Then
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
                 into = True
             End If
-            If path_fluke.Text <> "" And abort = False Then
-                ProgressBar3.Visible = True
-                percent_fluke.Visible = True
+            If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
                 logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "LMG 500")
                 into = True
             End If
-            If path_canbus.Text <> "" And abort = False Then
-                ProgressBar4.Visible = True
-                percent_canbus.Visible = True
+            If path_canbus.Text <> "" And abort = False And CheckBox4.CheckState = CheckState.Unchecked Then
                 logger_csv_file(path_canbus.Text, FfE_Main.id_canbus, "CAN-BUS")
                 into = True
             End If
@@ -88,7 +80,7 @@ Public Class Form_export_full
 
             ' Pasar la consulta sql y la conexión al Sql Command
             'He añadido esto: por defecto commandTimeOut vale 30, pero si le pones cero espera indefinidamente, supongo que con esto funcionará
-            cmd.CommandTimeout = 0
+            cmd.CommandTimeout = 1000
             cmd.Connection = cn
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -196,6 +188,7 @@ Public Class Form_export_full
         End Try
     End Sub
 
+
     Private Sub execute_query_loggers(ByRef res As String, ByVal logger_id As Integer, _
                                       ByVal logger As String, ByRef bar As ProgressBar, _
                                       ByRef percent As Label)
@@ -216,11 +209,11 @@ Public Class Form_export_full
 
             sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
              " and logger_id = " & logger_id
-            cmd.CommandTimeout = 0
+            cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-            sql = "select concat(data_index,',',time"
+            sql = "select convert(concat(data_index,',',time"
             res = "INDEX,TIME"
 
             While query.Read()
@@ -228,37 +221,41 @@ Public Class Form_export_full
                 sql += ",',',sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             End While
 
-            sql += ") as format_row from data" & _
+            sql += ") using utf8) as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
                 " group by data_index;"
             res += vbCrLf
             cn.Close()
 
-
-            cn.Open()
-            cmd.CommandTimeout = 0
-            cmd.CommandText = sql
-            query = cmd.ExecuteReader()
+            show_data(sql)
 
 
-            sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
-             " and logger_id = " & logger_id & " order by data_index, time"
-            execute_query(sql, max)
 
-            config_progressbar(max, bar)
-            i = 1
-            While query.Read()
-                res += query.GetString(0)
-                i = query.GetString(0).Split(",")(0)
-                progressbar(i, percent.Text, bar)
-                'i += 1
-                res += vbCrLf
-                Application.DoEvents()
-            End While
+            'cn.Open()
+            'cmd.CommandTimeout = 1000
+            'cmd.CommandText = sql
+            'query = cmd.ExecuteReader()
 
-            res += vbCrLf
-            cn.Close()
+            'sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
+            '" and logger_id = " & logger_id & " order by data_index, time"
+            'execute_query(sql, max)
+
+            'bar.Visible = True
+            'percent.Visible = True
+            'config_progressbar(max, bar)
+            'i = 1
+            'While query.Read()
+            ' res += query.GetString(0)
+            'i = query.GetString(0).Split(",")(0)
+            'progressbar(i, percent.Text, bar)
+            'i += 1
+            'res += vbCrLf
+            'Application.DoEvents()
+            'End While
+
+            'res += vbCrLf
+            'cn.Close()
 
 
         Catch ex As Exception
@@ -274,6 +271,49 @@ Public Class Form_export_full
         End Try
     End Sub
 
+    Private Sub show_data(ByVal text As String)
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim sql As String = ""
+
+        Try
+
+            'grid.DataSource = ""
+            'execute_query_loggers(sql, logger_id)
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            ' Pasar la consulta sql y la conexión al Sql Command   
+            Dim cmd As New MySqlCommand(text, cn)
+            cmd.CommandTimeout = 1000
+
+            ' Inicializar un nuevo SqlDataAdapter   
+            Dim da As New MySqlDataAdapter(cmd)
+
+            'Crear y Llenar un Dataset  
+            Dim ds As New DataSet
+
+            'da.FillSchema(ds, SchemaType.Mapped)
+            da.Fill(ds)
+
+            Dim tbl As DataTable = ds.Tables(0) ' data table prepara la estructura de la tabla
+            Dim sw As New System.IO.StreamWriter("C:\Users\enanitro\Desktop\Alemania\FfE\prueba000000.txt")
+            For Each r In tbl.Rows
+                sw.WriteLine(r.item(0))
+            Next
+            sw.Close()
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
@@ -341,6 +381,64 @@ Public Class Form_export_full
         path_gps.Text = ""
         path_fluke.Text = ""
         path_canbus.Text = ""
+        SQL_channels()
+    End Sub
+
+    Private Sub SQL_channels()
+        SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
+        SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
+        SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
+        SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+    End Sub
+
+    Private Sub SQL_syntax(ByVal logger_id As Integer, ByVal logger As String, ByVal text As TextBox)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql As String
+        Dim head As String
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
+             " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            sql = "select concat(data_index,',',time"
+            head = "INDEX,TIME"
+
+            While query.Read()
+                head += "," & query.GetString(0)
+                sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
+            End While
+
+            sql += ") as '" & head & "' from data" & _
+                " where drive_id = " & drive_id.Text & _
+                " and logger_id = " & logger_id & _
+                " group by data_index;"
+            cn.Close()
+
+            text.Text = sql
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
     End Sub
 
 End Class

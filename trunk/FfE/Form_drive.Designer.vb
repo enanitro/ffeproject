@@ -43,9 +43,9 @@ Partial Class Form_drive
         Dim Label9 As System.Windows.Forms.Label
         Dim Label11 As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_drive))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
@@ -63,7 +63,6 @@ Partial Class Form_drive
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.DriveBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton
         Me.delete = New System.Windows.Forms.ToolStripButton
         Me.btn_find_drive = New System.Windows.Forms.ToolStripButton
@@ -109,6 +108,8 @@ Partial Class Form_drive
         Me.Label13 = New System.Windows.Forms.Label
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Button1 = New System.Windows.Forms.Button
         Me.btn_export = New System.Windows.Forms.Button
         Me.btn_import = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
@@ -529,10 +530,10 @@ Partial Class Form_drive
         Me.DriveBindingNavigator.BackColor = System.Drawing.Color.Transparent
         Me.DriveBindingNavigator.BindingSource = Me.DriveBindingSource
         Me.DriveBindingNavigator.CountItem = Nothing
-        Me.DriveBindingNavigator.DeleteItem = Me.ToolStripButton2
+        Me.DriveBindingNavigator.DeleteItem = Nothing
         Me.DriveBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.DriveBindingNavigator.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.DriveBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton7, Me.delete, Me.ToolStripButton2, Me.btn_find_drive, Me.ToolStripButton3, Me.ToolStripButton4, Me.BindingNavigatorSeparator, Me.ToolStripButton5, Me.ToolStripButton6})
+        Me.DriveBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton7, Me.delete, Me.btn_find_drive, Me.ToolStripButton3, Me.ToolStripButton4, Me.BindingNavigatorSeparator, Me.ToolStripButton5, Me.ToolStripButton6})
         Me.DriveBindingNavigator.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
         Me.DriveBindingNavigator.Location = New System.Drawing.Point(69, 469)
         Me.DriveBindingNavigator.MoveFirstItem = Me.ToolStripButton3
@@ -556,18 +557,6 @@ Partial Class Form_drive
         Me.ToolStripButton1.Size = New System.Drawing.Size(56, 56)
         Me.ToolStripButton1.Text = "Add new"
         Me.ToolStripButton1.ToolTipText = "Add new drive"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.AutoSize = False
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.RightToLeftAutoMirrorImage = True
-        Me.ToolStripButton2.Size = New System.Drawing.Size(0, 0)
-        Me.ToolStripButton2.Text = "Delete"
-        Me.ToolStripButton2.ToolTipText = "Delete drive"
-        Me.ToolStripButton2.Visible = False
         '
         'ToolStripButton7
         '
@@ -1073,15 +1062,35 @@ Partial Class Form_drive
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.Button2)
+        Me.GroupBox4.Controls.Add(Me.Button1)
         Me.GroupBox4.Controls.Add(Me.btn_export)
         Me.GroupBox4.Controls.Add(Me.btn_import)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.GroupBox4.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(307, 149)
+        Me.GroupBox4.Size = New System.Drawing.Size(785, 149)
         Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Data operations"
+        '
+        'Button2
+        '
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.view_data
+        Me.Button2.Location = New System.Drawing.Point(474, 27)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(144, 105)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel2
+        Me.Button1.Location = New System.Drawing.Point(624, 27)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(144, 105)
+        Me.Button1.TabIndex = 2
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btn_export
         '
@@ -1120,30 +1129,30 @@ Partial Class Form_drive
         Me.DriveDataGridView.AllowUserToDeleteRows = False
         Me.DriveDataGridView.AutoGenerateColumns = False
         Me.DriveDataGridView.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DriveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DriveDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.DriveDataGridView.DataSource = Me.DriveBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.DriveDataGridView.Location = New System.Drawing.Point(15, 23)
         Me.DriveDataGridView.Name = "DriveDataGridView"
         Me.DriveDataGridView.ReadOnly = True
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DriveDataGridView.Size = New System.Drawing.Size(753, 384)
         Me.DriveDataGridView.TabIndex = 3
         '
@@ -1377,7 +1386,6 @@ Partial Class Form_drive
     Friend WithEvents btn_export As System.Windows.Forms.Button
     Friend WithEvents DriveBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
@@ -1410,4 +1418,6 @@ Partial Class Form_drive
     Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

@@ -91,6 +91,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ffe_databaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Form_delete_channel.Designer.vb">
+      <DependentUpon>Form_delete_channel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_delete_channel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_restore_DB.Designer.vb">
+      <DependentUpon>Form_restore_DB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_restore_DB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_canbus_ids.Designer.vb">
       <DependentUpon>Form_canbus_ids.vb</DependentUpon>
     </Compile>
@@ -164,6 +176,12 @@
     <Compile Include="form_import_csv_full.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_view_data.Designer.vb">
+      <DependentUpon>Form_view_data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_view_data.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="From_Conf_User.Designer.vb">
       <DependentUpon>From_Conf_User.vb</DependentUpon>
     </Compile>
@@ -232,6 +250,10 @@
       <DependentUpon>Form_data.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_delete_channel.resx">
+      <DependentUpon>Form_delete_channel.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_drive.resx">
       <DependentUpon>Form_drive.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -250,6 +272,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_measure.resx">
       <DependentUpon>Form_measure.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_restore_DB.resx">
+      <DependentUpon>Form_restore_DB.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_view_data.resx">
+      <DependentUpon>Form_view_data.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="From_Conf_User.resx">
@@ -415,6 +445,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\del_channel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\view_data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\del_channel2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -362,8 +362,11 @@ Public Class form_import_csv_full
         For Each i In list.CheckedIndices
             str = search_measure(logger_id, "name", ch(i), "channel", x)
             If str = "" Then
-                str = ch(i)
-                list.SetItemChecked(i, False)
+                If list.Items(i).ToString.Split("-")(0).Trim <> ch(i) Then
+                    str = ch(i) & " -> " & list.Items(i).ToString.Split("-")(0).Trim
+                Else
+                    str = list.Items(i)
+                End If
             End If
             list.Items(i) = str
         Next

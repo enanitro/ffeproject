@@ -5,7 +5,7 @@
         Try
             Me.Validate()
             Me.Ids_canbusBindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.Ffe_databaseDataSet)
+            Me.Ids_canbusTableAdapter.Update(Me.Ffe_databaseDataSet.ids_canbus)
             Ffe_databaseDataSet.car.AcceptChanges()
             Ids_canbusDataGridView.Sort(Ids_canbusDataGridView.Columns.Item(0), _
                                 System.ComponentModel.ListSortDirection.Ascending)
@@ -47,10 +47,7 @@
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Ids_canbusBindingNavigator.Items(3).Visible = True
-                Ids_canbusBindingNavigator.Items(3).PerformClick()
-                Ids_canbusBindingNavigator.Items(3).Visible = False
-
+                Ids_canbusBindingSource.RemoveCurrent()
                 rows = Ids_canbusDataGridView.Rows.Count
             End If
         Catch ex As Exception

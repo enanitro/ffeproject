@@ -1,0 +1,257 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP DATABASE ffe_database;
+
+CREATE SCHEMA IF NOT EXISTS ffe_database DEFAULT CHARACTER SET latin1 ;
+USE ffe_database;
+
+-- -----------------------------------------------------
+-- Table ffe_database.car
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.car (
+  car_id INT(11) NOT NULL ,
+  name VARCHAR(50) NULL DEFAULT NULL ,
+  type VARCHAR(30) NULL DEFAULT NULL ,
+  license_plate VARCHAR(30) NULL DEFAULT NULL ,
+  owner VARCHAR(80) NULL DEFAULT NULL ,
+  photo MEDIUMBLOB NULL DEFAULT NULL ,
+  PRIMARY KEY (car_id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.usage_type
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.usage_type (
+  usage_type_id INT(11) NOT NULL ,
+  name VARCHAR(50) NULL DEFAULT NULL ,
+  description VARCHAR(250) NULL DEFAULT NULL ,
+  usage_in_project VARCHAR(50) NULL DEFAULT NULL ,
+  PRIMARY KEY (usage_type_id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.user
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.user (
+  user_id INT(11) NOT NULL ,
+  vorname VARCHAR(30) NULL DEFAULT NULL ,
+  name VARCHAR(50) NULL DEFAULT NULL ,
+  photo MEDIUMBLOB NULL DEFAULT NULL ,
+  email VARCHAR(45) NULL ,
+  link VARCHAR(45) NULL ,
+  ma_art VARCHAR(45) NULL ,
+  PRIMARY KEY (user_id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.drive
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.drive (
+  drive_id INT(11) NOT NULL ,
+  status VARCHAR(30) NULL DEFAULT NULL ,
+  climate VARCHAR(30) NULL DEFAULT NULL ,
+  date DATE NULL DEFAULT NULL ,
+  description VARCHAR(250) NULL DEFAULT NULL ,
+  usage_type_id INT(11) NULL DEFAULT NULL 
+  REFERENCES ffe_database.usage_type (usage_type_id ),
+  driver_id INT(11) NULL DEFAULT NULL
+  REFERENCES ffe_database.user (user_id ),
+  importer_id INT(11) NULL DEFAULT NULL
+  REFERENCES ffe_database.user (user_id ),
+  car_id INT(11) NULL DEFAULT NULL
+  REFERENCES ffe_database.car (car_id ),
+  drive_type VARCHAR(20) NULL DEFAULT NULL ,
+  PRIMARY KEY (drive_id) ,
+  INDEX usage_type_id (usage_type_id ASC) ,
+  INDEX driver_id (driver_id ASC) ,
+  INDEX importer_id (importer_id ASC) ,
+  INDEX car_id (car_id ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.logger
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.logger (
+  logger_id INT(11) NOT NULL ,
+  name VARCHAR(30) NULL DEFAULT NULL ,
+  description VARCHAR(250) NULL DEFAULT NULL ,
+  PRIMARY KEY (logger_id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.measure
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.measure (
+  measure_id INT(11) NOT NULL ,
+  name VARCHAR(30) NULL DEFAULT NULL ,
+  timestep VARCHAR(20) NULL DEFAULT NULL ,
+  unit VARCHAR(20) NULL DEFAULT NULL ,
+  description VARCHAR(250) NULL DEFAULT NULL ,
+  PRIMARY KEY (measure_id) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table ffe_database.data
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.data (
+  data_index INT(11) NOT NULL,
+  data_id VARCHAR(160) NOT NULL ,
+  drive_id INT(11) NOT NULL,
+  logger_id INT(11) NOT NULL REFERENCES LOGGER(logger_id),
+  measure_id INT(11) NOT NULL REFERENCES MEASURE(measure_id),
+  time TIME NOT NULL ,
+  value DECIMAL(12,6) NULL DEFAULT NULL,
+  CONSTRAINT data_drive_fk FOREIGN KEY (drive_id)
+  REFERENCES drive(drive_id) ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.copy_data
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.copy_data (
+  data_index INT(11) NOT NULL,
+  data_id VARCHAR(50) NOT NULL ,
+  drive_id INT(11) NOT NULL,
+  logger_id INT(11) NOT NULL ,
+  measure_id INT(11) NOT NULL ,
+  time TIME NOT NULL ,
+  value DECIMAL(12,6) NULL DEFAULT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table ffe_database.photos
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.photos (
+  photo_id INT(11) NOT NULL ,
+  car_id INT(11) NOT NULL,
+  photo MEDIUMBLOB NULL DEFAULT NULL ,
+  path VARCHAR(100) NULL DEFAULT NULL ,
+  PRIMARY KEY (photo_id),
+  CONSTRAINT photo_car_fk FOREIGN KEY (car_id)
+  REFERENCES car(car_id) ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table ffe_database.channel_name
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.channel_name (
+  logger_id INT(11) NOT NULL,
+  channel VARCHAR(80) NOT NULL,
+  name VARCHAR(80) NOT NULL,
+  measure_id INT(11) NOT NULL,
+  CONSTRAINT channel_measure_fk FOREIGN KEY (measure_id)
+  REFERENCES measure(measure_id) ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table ffe_database.ids_canbus
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS ffe_database.ids_canbus (
+  channel_id INT(11) NOT NULL,
+  hex_id VARCHAR(5) NOT NULL,
+  dec_id INT(11) NOT NULL,
+  name VARCHAR(40) NOT NULL,
+  startbit INT(11) NOT NULL,
+  longbits INT(11) NOT NULL,
+  sequence VARCHAR(70) NOT NULL,
+  signed BOOL NOT NULL,
+  factor DECIMAL(10,6) NOT NULL,
+  offset INT(11) NOT NULL,
+  PRIMARY KEY (channel_id))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Data for table ffe_database.ids_canbus
+-- -----------------------------------------------------
+SET AUTOCOMMIT=0;
+USE ffe_database;
+INSERT INTO ids_canbus VALUES
+(0,'30',48,'Bremspedalstellung',32,8,'32-33-34-35-36-37-38-39',false,1,0),
+(1,'3B',59,'Batteriespannung',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,1,0),
+(2,'3B',59,'HV-Batterie Stromfluss',8,12,'8-9-10-11-12-13-14-15-0-1-2-3',true,0.1,0),
+(3,'244',580,'Gaspedalstellung',48,8,'48-49-50-51-52-53-54-55',false,0.5,0),
+(4,'3C8',968,'ICE Drehzahl',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,0.03125,0),
+(5,'3CA',970,'Fahrzeuggeschwindigkeit',16,8,'16-17-18-19-20-21-22-23',false,1,0),
+(6,'3CB',971,'SOC',16,16,'16-17-18-19-20-21-22-23',false,0.5,0),
+(7,'3CB',971,'max. Batterietemperatur',40,8,'40-41-42-43-44-45-46-47',false,1,0),
+(8,'3CB',971,'min. Batterietemperatur',32,8,'32-33-34-35-36-37-38-39',false,1,0),
+(9,'520',1312,'Einspritzung',16,16,'16-17-18-19-20-21-22-23-8-9-10-11-12-13-14-15',false,1,0),
+(10,'529',1321,'EV Modus',32,8,'32-33-34-35-36-37-38-39',false,1,0),
+(11,'52C',1324,'Motor-Kühlmitteltemeratur',8,8,'8-9-10-11-12-13-14-15',false,1,0),
+(12,'57F',1407,'Scheinwerfer',8,8,'8-9-10-11-12-13-14-15',false,1,0),
+(13,'5A4',1444,'Tankfüllstand',8,8,'8-9-10-11-12-13-14-15',false,2.5,0);
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table ffe_database.logger
+-- -----------------------------------------------------
+SET AUTOCOMMIT=0;
+USE ffe_database;
+INSERT INTO logger (logger_id, name, description) VALUES (1, 'GRAPHTEC GL800', NULL);
+INSERT INTO logger (logger_id, name, description) VALUES (2, 'COLUMBUS GPS', NULL);
+INSERT INTO logger (logger_id, name, description) VALUES (3, 'LMG 500', NULL);
+INSERT INTO logger (logger_id, name, description) VALUES (4, 'CAN-BUS', NULL);
+COMMIT;
+
+CREATE VIEW ffe_database.drive_full AS 
+SELECT 
+d.drive_id, 
+d.status, 
+d.climate, 
+d.date, 
+d.drive_type,
+usage_type.name as usage_type,
+concat(u1.vorname, ' ', u1.name) as driver,
+concat(u2.vorname, ' ', u2.name) as importer, 
+concat(car.name, ' (', car.license_plate, ')')as car, 
+d.description
+FROM 
+drive AS d
+LEFT OUTER JOIN usage_type ON (d.usage_type_id = usage_type.usage_type_id)
+LEFT OUTER JOIN user AS u1 ON (d.driver_id = u1.user_id)
+LEFT OUTER JOIN user AS u2 ON (d.importer_id = u2.user_id)
+LEFT OUTER JOIN car ON (d.car_id = car.car_id);
+
+
+CREATE VIEW ffe_database.data_full AS 
+SELECT 
+data.data_id, 
+data.drive_id, 
+data.logger_id, 
+data.measure_id, 
+data.time,
+data.value,
+data.data_index,
+logger.name,
+measure.unit,
+measure.timestep
+FROM 
+data, 
+measure, 
+logger
+WHERE 
+data.logger_id = logger.logger_id AND
+data.measure_id = measure.measure_id;

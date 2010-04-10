@@ -33,7 +33,6 @@ Partial Class Form_Conf_Car
         Me.CarBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.CarBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.Delete = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
@@ -119,9 +118,9 @@ Partial Class Form_Conf_Car
         Me.CarBindingNavigator.BackColor = System.Drawing.Color.Transparent
         Me.CarBindingNavigator.BindingSource = Me.CarBindingSource
         Me.CarBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.CarBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.CarBindingNavigator.DeleteItem = Nothing
         Me.CarBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
-        Me.CarBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.CarBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
+        Me.CarBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.CarBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
         Me.CarBindingNavigator.Location = New System.Drawing.Point(28, 397)
         Me.CarBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.CarBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -164,18 +163,6 @@ Partial Class Form_Conf_Car
         Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(56, 51)
         Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Número total de elementos"
-        '
-        'BindingNavigatorDeleteItem
-        '
-        Me.BindingNavigatorDeleteItem.AutoSize = False
-        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(0, 0)
-        Me.BindingNavigatorDeleteItem.Text = "Delete"
-        Me.BindingNavigatorDeleteItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.BindingNavigatorDeleteItem.Visible = False
         '
         'CarBindingNavigatorSaveItem
         '
@@ -439,7 +426,6 @@ Partial Class Form_Conf_Car
     Friend WithEvents CarBindingNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator

@@ -128,7 +128,6 @@ Public Class logger
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1, linea2, name As String
         Dim datos1(), datos2() As String
-        Dim data As New ffe_databaseDataSet.dataDataTable
         Dim i, j, count As Integer
 
         Try
