@@ -992,7 +992,7 @@ Partial Class Form_drive
         Me.cmb_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_status.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmb_status.FormattingEnabled = True
-        Me.cmb_status.Items.AddRange(New Object() {"Waiting for approval", "Experimental", "Final"})
+        Me.cmb_status.Items.AddRange(New Object() {"Waiting for approval", "Experimental", "Final", "Check"})
         Me.cmb_status.Location = New System.Drawing.Point(124, 149)
         Me.cmb_status.Name = "cmb_status"
         Me.cmb_status.Size = New System.Drawing.Size(157, 23)
