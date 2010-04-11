@@ -100,37 +100,37 @@ Partial Class FfE_Main
         'UserToolStripMenuItem
         '
         Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
-        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UserToolStripMenuItem.Text = "User"
         '
         'CarToolStripMenuItem
         '
         Me.CarToolStripMenuItem.Name = "CarToolStripMenuItem"
-        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CarToolStripMenuItem.Text = "Car"
         '
         'FahrprofileToolStripMenuItem
         '
         Me.FahrprofileToolStripMenuItem.Name = "FahrprofileToolStripMenuItem"
-        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.FahrprofileToolStripMenuItem.Text = "Usage type"
         '
         'MeasureToolStripMenuItem
         '
         Me.MeasureToolStripMenuItem.Name = "MeasureToolStripMenuItem"
-        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MeasureToolStripMenuItem.Text = "Measure"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(129, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
         '
         'CANBUSToolStripMenuItem
         '
         Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChannelsToolStripMenuItem})
         Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
-        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
         '
         'ChannelsToolStripMenuItem

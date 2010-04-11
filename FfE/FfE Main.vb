@@ -98,4 +98,10 @@ Public Class FfE_Main
         restore.MdiParent = Me
         restore.Show()
     End Sub
+
+    Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
+        Dim backup As New Form_backup_DB
+        backup.MdiParent = Me
+        backup.Show()
+    End Sub
 End Class

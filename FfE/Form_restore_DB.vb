@@ -15,7 +15,7 @@ Public Class Form_restore_DB
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
-        connection = connection.Remove(connection.IndexOf(connection.Split(";")(5)))
+        'connection = connection.Remove(connection.IndexOf(connection.Split(";")(5)))
         Dim sql As String = ""
         Dim cn As New MySqlConnection(connection)
         Dim file As New System.IO.StreamReader(Label1.Text)
