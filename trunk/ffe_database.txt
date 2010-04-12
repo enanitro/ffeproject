@@ -173,7 +173,7 @@ CREATE  TABLE IF NOT EXISTS ffe_database.ids_canbus (
   name VARCHAR(40) NOT NULL,
   startbit INT(11) NOT NULL,
   longbits INT(11) NOT NULL,
-  sequence VARCHAR(70) NOT NULL,
+  sequence VARCHAR(200) NOT NULL,
   signed BOOL NOT NULL,
   factor DECIMAL(10,6) NOT NULL,
   offset INT(11) NOT NULL,
