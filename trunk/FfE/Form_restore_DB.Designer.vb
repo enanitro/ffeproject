@@ -48,10 +48,11 @@ Partial Class Form_restore_DB
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(37, 74)
+        Me.Label1.Location = New System.Drawing.Point(250, 34)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(410, 23)
         Me.Label1.TabIndex = 2
+        Me.Label1.Text = "path"
         '
         'OpenFileDialog
         '
@@ -62,7 +63,7 @@ Partial Class Form_restore_DB
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(473, 131)
+        Me.ClientSize = New System.Drawing.Size(658, 87)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

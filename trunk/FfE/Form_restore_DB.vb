@@ -19,12 +19,25 @@ Public Class Form_restore_DB
         Dim sql As String = ""
         Dim cn As New MySqlConnection(connection)
         Dim file As New System.IO.StreamReader(Label1.Text)
-        Try
+        Dim cmd As New MySqlCommand(sql, cn)
+        Dim text As String = ""
 
+        Try
+            cn.Open()
             If Label1.Text <> "" Then
-                sql = file.ReadToEnd
-                cn.Open()
-                Dim cmd As New MySqlCommand(sql, cn)
+                text += file.ReadLine
+                While text <> "exit;"
+                    sql += text
+                    If text = "commit;" Then
+                        cmd.CommandText = sql
+                        cmd.CommandTimeout = 1000
+                        cmd.ExecuteNonQuery()
+                        sql = ""
+                    End If
+                    text = file.ReadLine
+                End While
+                cmd.CommandText = "commit;"
+                cmd.CommandTimeout = 1000
                 cmd.ExecuteNonQuery()
             End If
 
