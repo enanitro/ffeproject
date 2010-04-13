@@ -14,11 +14,14 @@ Public Class FfE_Main
     End Sub
 
     Private Sub UserToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserToolStripMenuItem.Click
-        Dim conf_user As New From_Conf_User
+        'Dim conf_user As New From_Conf_User
 
-        conf_user.MdiParent = Me
-        conf_user.Show()
+        'conf_user.MdiParent = Me
+        'conf_user.Show()
 
+        From_Conf_User.MdiParent = Me
+        From_Conf_User.Show()
+        From_Conf_User.Focus()
     End Sub
 
     Private Sub ImToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
