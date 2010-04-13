@@ -94,7 +94,7 @@ Partial Class Form_export_full
         Me.Panel1.Controls.Add(Me.GroupBox5)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 2)
+        Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(987, 638)
         Me.Panel1.TabIndex = 0
@@ -641,12 +641,14 @@ Partial Class Form_export_full
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1011, 650)
+        Me.ClientSize = New System.Drawing.Size(1011, 662)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.Black
+        Me.MinimumSize = New System.Drawing.Size(1000, 700)
         Me.Name = "Form_export_full"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export data drive"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()

@@ -78,13 +78,13 @@ Partial Class form_import_csv_full
         '
         'GroupBox_graphtec
         '
+        resources.ApplyResources(Me.GroupBox_graphtec, "GroupBox_graphtec")
         Me.GroupBox_graphtec.Controls.Add(Me.Button11)
         Me.GroupBox_graphtec.Controls.Add(Me.TextBox1)
         Me.GroupBox_graphtec.Controls.Add(Me.Panel1)
         Me.GroupBox_graphtec.Controls.Add(Me.Button5)
         Me.GroupBox_graphtec.Controls.Add(Me.CheckedListBox1)
         Me.GroupBox_graphtec.Controls.Add(Me.Button1)
-        resources.ApplyResources(Me.GroupBox_graphtec, "GroupBox_graphtec")
         Me.GroupBox_graphtec.Name = "GroupBox_graphtec"
         Me.GroupBox_graphtec.TabStop = False
         '
@@ -145,13 +145,13 @@ Partial Class form_import_csv_full
         '
         'GroupBox_columbusGPS
         '
+        resources.ApplyResources(Me.GroupBox_columbusGPS, "GroupBox_columbusGPS")
         Me.GroupBox_columbusGPS.Controls.Add(Me.Button12)
         Me.GroupBox_columbusGPS.Controls.Add(Me.TextBox2)
         Me.GroupBox_columbusGPS.Controls.Add(Me.Panel2)
         Me.GroupBox_columbusGPS.Controls.Add(Me.Button3)
         Me.GroupBox_columbusGPS.Controls.Add(Me.CheckedListBox2)
         Me.GroupBox_columbusGPS.Controls.Add(Me.Button6)
-        resources.ApplyResources(Me.GroupBox_columbusGPS, "GroupBox_columbusGPS")
         Me.GroupBox_columbusGPS.Name = "GroupBox_columbusGPS"
         Me.GroupBox_columbusGPS.TabStop = False
         '
@@ -213,13 +213,13 @@ Partial Class form_import_csv_full
         '
         'GroupBox_fluke
         '
+        resources.ApplyResources(Me.GroupBox_fluke, "GroupBox_fluke")
         Me.GroupBox_fluke.Controls.Add(Me.Button13)
         Me.GroupBox_fluke.Controls.Add(Me.TextBox3)
         Me.GroupBox_fluke.Controls.Add(Me.Panel3)
         Me.GroupBox_fluke.Controls.Add(Me.Button2)
         Me.GroupBox_fluke.Controls.Add(Me.CheckedListBox3)
         Me.GroupBox_fluke.Controls.Add(Me.Button4)
-        resources.ApplyResources(Me.GroupBox_fluke, "GroupBox_fluke")
         Me.GroupBox_fluke.Name = "GroupBox_fluke"
         Me.GroupBox_fluke.TabStop = False
         '
@@ -283,13 +283,13 @@ Partial Class form_import_csv_full
         '
         'GroupBox_CANBUS
         '
+        resources.ApplyResources(Me.GroupBox_CANBUS, "GroupBox_CANBUS")
         Me.GroupBox_CANBUS.Controls.Add(Me.Button14)
         Me.GroupBox_CANBUS.Controls.Add(Me.TextBox4)
         Me.GroupBox_CANBUS.Controls.Add(Me.Panel4)
         Me.GroupBox_CANBUS.Controls.Add(Me.Button8)
         Me.GroupBox_CANBUS.Controls.Add(Me.CheckedListBox4)
         Me.GroupBox_CANBUS.Controls.Add(Me.Button9)
-        resources.ApplyResources(Me.GroupBox_CANBUS, "GroupBox_CANBUS")
         Me.GroupBox_CANBUS.Name = "GroupBox_CANBUS"
         Me.GroupBox_CANBUS.TabStop = False
         '
@@ -376,6 +376,7 @@ Partial Class form_import_csv_full
         Me.Controls.Add(Me.GroupBox_graphtec)
         Me.Name = "form_import_csv_full"
         Me.ShowInTaskbar = False
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox_graphtec.ResumeLayout(False)
         Me.GroupBox_graphtec.PerformLayout()
         Me.Panel1.ResumeLayout(False)

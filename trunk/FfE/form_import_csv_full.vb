@@ -7,6 +7,7 @@ Public Class form_import_csv_full
     Public name_measure_graphtec(), name_measure_gps(), name_measure_fluke(), name_measure_canbus() As String
     Public path_graphtec, path_gps, path_fluke, path_canbus As String
     Public abort As Boolean = False
+    Public isClosed As Boolean = False
 
     Private Sub all_channels(ByRef channels() As String, ByVal list As CheckedListBox)
         Array.Resize(channels, list.Items.Count)
@@ -390,5 +391,9 @@ Public Class form_import_csv_full
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
         associations(CheckedListBox4, FfE_Main.id_canbus, id_measure_canbus)
         put_ch_list(CheckedListBox4, FfE_Main.id_canbus, name_measure_canbus)
+    End Sub
+
+    Private Sub form_import_csv_full_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+        isClosed = True
     End Sub
 End Class

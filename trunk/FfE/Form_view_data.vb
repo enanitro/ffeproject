@@ -3,6 +3,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class Form_view_data
     Dim drive_id As Integer
+    Public isClosed As Boolean = False
     Public Sub New()
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
@@ -236,6 +237,10 @@ Public Class Form_view_data
                 cn.Close()
             End If
         End Try
+    End Sub
+
+    Private Sub Form_view_data_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+        isClosed = True
     End Sub
 
     Private Sub Form_view_data_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

@@ -155,7 +155,7 @@ Partial Class Form_measure
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.Button2.Image = Global.FfE.My.Resources.Resources.add
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.add_rule
         Me.Button2.Location = New System.Drawing.Point(96, 14)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(58, 58)
