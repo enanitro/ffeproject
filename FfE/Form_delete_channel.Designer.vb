@@ -25,20 +25,20 @@ Partial Class Form_delete_channel
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.TabPage1 = New System.Windows.Forms.TabPage
         Me.CheckBox9 = New System.Windows.Forms.CheckBox
+        Me.Button2 = New System.Windows.Forms.Button
         Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox
         Me.TabPage2 = New System.Windows.Forms.TabPage
+        Me.Button1 = New System.Windows.Forms.Button
         Me.CheckBox1 = New System.Windows.Forms.CheckBox
         Me.CheckedListBox2 = New System.Windows.Forms.CheckedListBox
         Me.TabPage3 = New System.Windows.Forms.TabPage
+        Me.Button3 = New System.Windows.Forms.Button
         Me.CheckBox2 = New System.Windows.Forms.CheckBox
         Me.CheckedListBox3 = New System.Windows.Forms.CheckedListBox
         Me.TabPage4 = New System.Windows.Forms.TabPage
+        Me.Button4 = New System.Windows.Forms.Button
         Me.CheckBox3 = New System.Windows.Forms.CheckBox
         Me.CheckedListBox4 = New System.Windows.Forms.CheckedListBox
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Button4 = New System.Windows.Forms.Button
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -53,7 +53,7 @@ Partial Class Form_delete_channel
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(17, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(370, 409)
@@ -83,6 +83,18 @@ Partial Class Form_delete_channel
         Me.CheckBox9.Text = "All channels"
         Me.CheckBox9.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.Black
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button2.Location = New System.Drawing.Point(122, 311)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(105, 57)
+        Me.Button2.TabIndex = 17
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'CheckedListBox1
         '
         Me.CheckedListBox1.CheckOnClick = True
@@ -105,6 +117,18 @@ Partial Class Form_delete_channel
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Columbus GPS"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button1.Location = New System.Drawing.Point(122, 311)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(105, 57)
+        Me.Button1.TabIndex = 22
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'CheckBox1
         '
@@ -139,6 +163,18 @@ Partial Class Form_delete_channel
         Me.TabPage3.Text = "LMG 500"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.Transparent
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.Color.Black
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button3.Location = New System.Drawing.Point(122, 311)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(105, 57)
+        Me.Button3.TabIndex = 23
+        Me.Button3.UseVisualStyleBackColor = False
+        '
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
@@ -172,6 +208,18 @@ Partial Class Form_delete_channel
         Me.TabPage4.Text = "CAN-BUS"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.ForeColor = System.Drawing.Color.Black
+        Me.Button4.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button4.Location = New System.Drawing.Point(122, 311)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(105, 57)
+        Me.Button4.TabIndex = 24
+        Me.Button4.UseVisualStyleBackColor = False
+        '
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
@@ -192,54 +240,6 @@ Partial Class Form_delete_channel
         Me.CheckedListBox4.Name = "CheckedListBox4"
         Me.CheckedListBox4.Size = New System.Drawing.Size(330, 259)
         Me.CheckedListBox4.TabIndex = 19
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.Black
-        Me.Button2.Image = Global.FfE.My.Resources.Resources.del_channel
-        Me.Button2.Location = New System.Drawing.Point(122, 311)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(105, 57)
-        Me.Button2.TabIndex = 17
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.Black
-        Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel
-        Me.Button1.Location = New System.Drawing.Point(122, 311)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(105, 57)
-        Me.Button1.TabIndex = 22
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Transparent
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.Black
-        Me.Button3.Image = Global.FfE.My.Resources.Resources.del_channel
-        Me.Button3.Location = New System.Drawing.Point(122, 311)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(105, 57)
-        Me.Button3.TabIndex = 23
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.Transparent
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.Color.Black
-        Me.Button4.Image = Global.FfE.My.Resources.Resources.del_channel
-        Me.Button4.Location = New System.Drawing.Point(122, 311)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(105, 57)
-        Me.Button4.TabIndex = 24
-        Me.Button4.UseVisualStyleBackColor = False
         '
         'Form_delete_channel
         '
