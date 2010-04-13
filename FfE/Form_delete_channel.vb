@@ -3,6 +3,8 @@ Imports MySql.Data.MySqlClient
 
 Public Class Form_delete_channel
     Dim drive_id As Integer
+    Public isClosed As Boolean = False
+
     Public Sub New()
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
@@ -168,6 +170,10 @@ Public Class Form_delete_channel
 
     Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox3.CheckedChanged
         select_all_channels(CheckedListBox4, CheckBox3)
+    End Sub
+
+    Private Sub Form_delete_channel_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+        isClosed = True
     End Sub
 
     Private Sub Form_delete_channel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

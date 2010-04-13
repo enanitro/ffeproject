@@ -7,44 +7,22 @@ Public Class FfE_Main
     Public id_canbus As Integer = -1
 
     Private Sub CarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CarToolStripMenuItem.Click
-        Dim conf_car As New Form_Conf_Car
+        Form_Conf_Car.MdiParent = Me
+        Form_Conf_Car.Show()
+        Form_Conf_Car.Focus()
 
-        conf_car.MdiParent = Me
-        conf_car.Show()
     End Sub
 
     Private Sub UserToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserToolStripMenuItem.Click
-        'Dim conf_user As New From_Conf_User
-
-        'conf_user.MdiParent = Me
-        'conf_user.Show()
-
         From_Conf_User.MdiParent = Me
         From_Conf_User.Show()
         From_Conf_User.Focus()
     End Sub
 
-    Private Sub ImToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim import_cvs_full As New form_import_csv_full
-
-        import_cvs_full.MdiParent = Me
-        import_cvs_full.id_drive = 1
-        import_cvs_full.Show()
-
-    End Sub
-
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
-        Dim drive As New Form_drive
-
-        drive.MdiParent = Me
-        drive.Show()
-    End Sub
-
-    Private Sub ConnectionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim form_conn As New Form_Connection
-
-        'form_conn.MdiParent = Me
-        form_conn.ShowDialog()
+        Form_drive.MdiParent = Me
+        Form_drive.Show()
+        Form_drive.Focus()
     End Sub
 
     Private Sub MeasureToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MeasureToolStripMenuItem.Click
@@ -56,10 +34,9 @@ Public Class FfE_Main
 
 
     Private Sub FahrprofileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FahrprofileToolStripMenuItem.Click
-        Dim usage_type As New Form_conf_usage_type
-
-        usage_type.MdiParent = Me
-        usage_type.Show()
+        Form_conf_usage_type.MdiParent = Me
+        Form_conf_usage_type.Show()
+        Form_conf_usage_type.Focus()
     End Sub
 
     Private Sub FfE_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -79,32 +56,33 @@ Public Class FfE_Main
     End Sub
 
     Private Sub DataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DataToolStripMenuItem.Click
-        Dim form_data As New Form_data
-        form_data.MdiParent = Me
-        form_data.Show()
+        Form_data.MdiParent = Me
+        Form_data.Show()
+        Form_data.Focus()
     End Sub
 
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
         Dim form_conn As New Form_Connection
-        form_conn.MdiParent = Me
-        form_conn.Show()
+
+        'form_conn.MdiParent = Me
+        form_conn.ShowDialog()
     End Sub
 
     Private Sub ChannelsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChannelsToolStripMenuItem.Click
-        Dim form_canbus As New form_canbus_ids
-        form_canbus.MdiParent = Me
-        form_canbus.Show()
+        form_canbus_ids.MdiParent = Me
+        form_canbus_ids.Show()
+        form_canbus_ids.Focus()
     End Sub
 
     Private Sub RestoreDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestoreDBToolStripMenuItem.Click
-        Dim restore As New Form_restore_DB
-        restore.MdiParent = Me
-        restore.Show()
+        Form_restore_DB.MdiParent = Me
+        Form_restore_DB.Show()
+        Form_restore_DB.Focus()
     End Sub
 
     Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
-        Dim backup As New Form_backup_DB
-        backup.MdiParent = Me
-        backup.Show()
+        Form_backup_DB.MdiParent = Me
+        Form_backup_DB.Show()
+        Form_backup_DB.Focus()
     End Sub
 End Class

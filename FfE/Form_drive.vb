@@ -9,6 +9,12 @@ Public Class Form_drive
     Dim rows As Integer
     Dim combo As Boolean = False
 
+    'Visión de ventanas 
+    Dim show_Data As Form_view_data
+    Dim form_export As Form_export_full
+    Dim import_full As form_import_csv_full
+    Dim del_channel As Form_delete_channel
+
 
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Try
@@ -344,7 +350,16 @@ Public Class Form_drive
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
             Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
-            Dim import_full As New form_import_csv_full
+            If import_full Is Nothing Then
+                import_full = New form_import_csv_full
+            Else
+                If import_full.isClosed Then
+                    import_full = New form_import_csv_full
+                Else
+                    import_full.Focus()
+                End If
+            End If
+
             If Me.DriveBindingSource.Position <> -1 Then
                 If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0).Equals(DBNull.Value) Then
                     import_full.id_drive = Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(0)
@@ -494,19 +509,15 @@ Public Class Form_drive
     
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
-            Dim form_export As New Form_export_full
-            form_export.drive_id.Text = Drive_idLabel1.Text
-            form_export.datef.Text = date_driver.Text
-            form_export.climate.Text = cmb_climate.Text
-            form_export.status.Text = cmb_status.Text
-            form_export.drive_type.Text = cmb_drive_type.Text
-            form_export.usage_type.Text = cmb_usage.Text
-            form_export.driver.Text = cmb_driver.Text
-            form_export.car.Text = cmb_car.Text
-            form_export.importer.Text = cmb_importer.Text
-            form_export.description.Text = txt_description.Text
-            form_export.MdiParent = Me.MdiParent
-            form_export.Show()
+            If form_export Is Nothing Then
+                showExport()
+            Else
+                If form_export.isClosed Then
+                    showExport()
+                Else
+                    form_export.Focus()
+                End If
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -516,17 +527,54 @@ Public Class Form_drive
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         If Drive_idLabel1.Text <> "" Then
-            Dim show_Data As New Form_view_data(Drive_idLabel1.Text)
-            show_Data.MdiParent = Me.MdiParent
-            show_Data.Show()
+            If Not show_Data Is Nothing Then
+                If show_Data.isClosed Then
+                    showData()
+                Else
+                    show_Data.Focus()
+                End If
+            Else
+                showData()
+            End If
         End If
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         If Drive_idLabel1.Text <> "" Then
-            Dim del_channel As New Form_delete_channel(Drive_idLabel1.Text)
-            del_channel.MdiParent = Me.MdiParent
-            del_channel.Show()
+            del_channel = New Form_delete_channel(Drive_idLabel1.Text)
+            del_channel.ShowDialog()
         End If
+    End Sub
+
+    Private Sub showData()
+        show_Data = New Form_view_data(Drive_idLabel1.Text)
+        show_Data.lbl_drive_id.Text = Drive_idLabel1.Text
+        show_Data.datef.Text = date_driver.Text
+        show_Data.climate.Text = cmb_climate.Text
+        show_Data.status.Text = cmb_status.Text
+        show_Data.drive_type.Text = cmb_drive_type.Text
+        show_Data.usage_type.Text = cmb_usage.Text
+        show_Data.driver.Text = cmb_driver.Text
+        show_Data.car.Text = cmb_car.Text
+        show_Data.importer.Text = cmb_importer.Text
+        show_Data.description.Text = txt_description.Text
+        show_Data.MdiParent = Me.MdiParent
+        show_Data.Show()
+    End Sub
+
+    Private Sub showExport()
+        form_export = New Form_export_full
+        form_export.drive_id.Text = Drive_idLabel1.Text
+        form_export.datef.Text = date_driver.Text
+        form_export.climate.Text = cmb_climate.Text
+        form_export.status.Text = cmb_status.Text
+        form_export.drive_type.Text = cmb_drive_type.Text
+        form_export.usage_type.Text = cmb_usage.Text
+        form_export.driver.Text = cmb_driver.Text
+        form_export.car.Text = cmb_car.Text
+        form_export.importer.Text = cmb_importer.Text
+        form_export.description.Text = txt_description.Text
+        form_export.MdiParent = Me.MdiParent
+        form_export.Show()
     End Sub
 End Class

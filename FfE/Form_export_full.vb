@@ -3,6 +3,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class Form_export_full
     Dim abort As Boolean = False
+    Public isClosed As Boolean = False
 
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Dim into As Boolean = False
@@ -339,6 +340,10 @@ Public Class Form_export_full
                 Throw New Exception("Export process aborted")
             End If
         End If
+    End Sub
+
+    Private Sub Form_export_full_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+        isClosed = True
     End Sub
 
     Private Sub Form_export_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
