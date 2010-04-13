@@ -43,9 +43,9 @@ Partial Class Form_drive
         Dim Label9 As System.Windows.Forms.Label
         Dim Label11 As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_drive))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
@@ -503,22 +503,25 @@ Partial Class Form_drive
         '
         'Panel1
         '
-        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Location = New System.Drawing.Point(1, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(400, 610)
+        Me.Panel1.Size = New System.Drawing.Size(395, 654)
         Me.Panel1.TabIndex = 13
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.DriveBindingNavigator)
         Me.GroupBox2.Controls.Add(Me.Panel2)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 13)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(370, 586)
+        Me.GroupBox2.Size = New System.Drawing.Size(370, 630)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Drive"
@@ -542,7 +545,7 @@ Partial Class Form_drive
         Me.DriveBindingNavigator.MovePreviousItem = Me.ToolStripButton4
         Me.DriveBindingNavigator.Name = "DriveBindingNavigator"
         Me.DriveBindingNavigator.PositionItem = Nothing
-        Me.DriveBindingNavigator.Size = New System.Drawing.Size(235, 114)
+        Me.DriveBindingNavigator.Size = New System.Drawing.Size(235, 119)
         Me.DriveBindingNavigator.TabIndex = 16
         Me.DriveBindingNavigator.Text = "BindingNavigator1"
         '
@@ -1052,16 +1055,20 @@ Partial Class Form_drive
         '
         'Panel3
         '
-        Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.Controls.Add(Me.GroupBox4)
         Me.Panel3.Controls.Add(Me.GroupBox3)
-        Me.Panel3.Location = New System.Drawing.Point(418, 12)
+        Me.Panel3.Location = New System.Drawing.Point(402, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(819, 610)
+        Me.Panel3.Size = New System.Drawing.Size(818, 654)
         Me.Panel3.TabIndex = 14
         '
         'GroupBox4
         '
+        Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.Button2)
         Me.GroupBox4.Controls.Add(Me.Button1)
         Me.GroupBox4.Controls.Add(Me.btn_export)
@@ -1076,6 +1083,7 @@ Partial Class Form_drive
         '
         'Button2
         '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.Image = Global.FfE.My.Resources.Resources.view_data
         Me.Button2.Location = New System.Drawing.Point(474, 27)
         Me.Button2.Name = "Button2"
@@ -1085,6 +1093,7 @@ Partial Class Form_drive
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel2
         Me.Button1.Location = New System.Drawing.Point(624, 27)
         Me.Button1.Name = "Button1"
@@ -1114,11 +1123,14 @@ Partial Class Form_drive
         '
         'GroupBox3
         '
+        Me.GroupBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.DriveDataGridView)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 175)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 168)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(785, 424)
+        Me.GroupBox3.Size = New System.Drawing.Size(785, 475)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Drives"
@@ -1129,31 +1141,32 @@ Partial Class Form_drive
         Me.DriveDataGridView.AllowUserToDeleteRows = False
         Me.DriveDataGridView.AutoGenerateColumns = False
         Me.DriveDataGridView.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DriveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DriveDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.DriveDataGridView.DataSource = Me.DriveBindingSource
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DriveDataGridView.Location = New System.Drawing.Point(15, 23)
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DriveDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DriveDataGridView.Location = New System.Drawing.Point(3, 17)
         Me.DriveDataGridView.Name = "DriveDataGridView"
         Me.DriveDataGridView.ReadOnly = True
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DriveDataGridView.Size = New System.Drawing.Size(753, 384)
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.DriveDataGridView.Size = New System.Drawing.Size(779, 455)
         Me.DriveDataGridView.TabIndex = 3
         '
         'DataGridViewTextBoxColumn1
@@ -1295,12 +1308,14 @@ Partial Class Form_drive
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1257, 642)
+        Me.ClientSize = New System.Drawing.Size(1221, 662)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
+        Me.MinimumSize = New System.Drawing.Size(1110, 700)
         Me.Name = "Form_drive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Drive configuration"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DriveBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
