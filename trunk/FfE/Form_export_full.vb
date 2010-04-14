@@ -156,21 +156,21 @@ Public Class Form_export_full
                         points & " data points (" & channels & "channels)" & vbCrLf & _
                         "TIME STEP: " & res & vbCrLf
                 sw.WriteLine(text)
+                sw.Close()
 
                 Select Case logger_id
                     Case FfE_Main.id_graphtec
-                        execute_query_loggers(res, logger_id, logger, ProgressBar1, percent_graphtec, TextBox1)
+                        execute_query_loggers(logger_id, logger, ProgressBar1, percent_graphtec, TextBox1, path)
                     Case FfE_Main.id_gps
-                        execute_query_loggers(res, logger_id, logger, ProgressBar2, percent_gps, TextBox2)
+                        execute_query_loggers(logger_id, logger, ProgressBar2, percent_gps, TextBox2, path)
                     Case FfE_Main.id_fluke
-                        execute_query_loggers(res, logger_id, logger, ProgressBar3, percent_fluke, TextBox3)
+                        execute_query_loggers(logger_id, logger, ProgressBar3, percent_fluke, TextBox3, path)
                     Case FfE_Main.id_canbus
-                        execute_query_loggers(res, logger_id, logger, ProgressBar4, percent_canbus, TextBox4)
+                        execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
-                sw.WriteLine(res)
 
             End If
-            sw.Close()
+
         Catch ex As Exception
             If ex.Message = "Export process aborted" Then
                 sw.Close()
@@ -194,19 +194,19 @@ Public Class Form_export_full
             Else
                 MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
+            abort = True
         End Try
     End Sub
 
 
-    Private Sub execute_query_loggers(ByRef res As String, ByVal logger_id As Integer, _
-                                      ByVal logger As String, ByRef bar As ProgressBar, _
-                                      ByRef percent As Label, ByRef tb As TextBox)
+    Private Sub execute_query_loggers(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
+                                      ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
-
+        Dim sw As New System.IO.StreamWriter(path, True)
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
-        Dim sql As String
+        Dim sql, res As String
         Dim i, max As Integer
         res = ""
 
@@ -234,12 +234,13 @@ Public Class Form_export_full
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
                 " group by data_index;"
-            res += vbCrLf
             cn.Close()
 
             tb.Text = sql
             tb.Visible = True
 
+            sw.WriteLine(res)
+            res = ""
 
             cn.Open()
             cmd.CommandTimeout = 1000
@@ -258,14 +259,18 @@ Public Class Form_export_full
                 res += query.GetString(0)
                 i = query.GetString(0).Split(",")(0)
                 progressbar(i, percent.Text, bar)
+                If (i Mod 1001) >= 1000 Then
+                    sw.Write(res)
+                    res = ""
+                End If
                 i += 1
                 res += vbCrLf
+
                 Application.DoEvents()
             End While
 
             res += vbCrLf
-            cn.Close()
-
+            sw.WriteLine(res)
 
         Catch ex As Exception
             If ex.Message = "Export process aborted" Then
@@ -273,16 +278,124 @@ Public Class Form_export_full
             Else
                 MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
+            abort = True
         Finally
-            If cn.State = ConnectionState.Open Then
-                cn.Close()
-            End If
+            sw.Close()
+            cn.Close()
         End Try
     End Sub
 
-    
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
+    Private Sub execute_query_logger_canbus(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
+                                      ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql, res As String
+        Dim i, max As Integer
+        res = ""
+
+        Try
+
+            SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+            tb.Visible = True
+            sql = "select count(data_index) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & ";"
+            execute_query(sql, max)
+
+            bar.Visible = True
+            percent.Visible = True
+            config_progressbar(max, bar)
+
+            cn.Open()
+            cmd.Connection = cn
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
+             " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            i = 1
+            While query.Read()
+                execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
+                                             query.GetString(0), i)
+            End While
+
+            Dim sw As New System.IO.StreamWriter(path, True)
+            res += vbCrLf
+            sw.WriteLine(res)
+            sw.Close()
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            abort = True
+        Finally
+            cn.Close()
+        End Try
+    End Sub
+
+    Private Sub execute_query_canbus_channel(ByVal logger_id As Integer, ByVal logger As String, _
+                                             ByRef bar As ProgressBar, ByRef percent As Label, _
+                                             ByRef tb As TextBox, ByVal path As String, _
+                                             ByVal ch As String, ByRef i As Integer)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim sw As New System.IO.StreamWriter(path, True)
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql, res As String
+        res = ""
+
+        Try
+
+            cn.Open()
+            cmd.Connection = cn
+            cmd.CommandTimeout = 1000
+            sql = "select concat(data_index,',',time,',',value) from data" & _
+                " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
+                " and data_id like '" & ch & "';"
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+            res = "INDEX,TIME," & ch
+            sw.WriteLine(res)
+            res = ""
+
+            While query.Read()
+                res += query.GetString(0)
+                progressbar(i, percent.Text, bar)
+                If (i Mod 1001) >= 1000 Then
+                    sw.Write(res)
+                    res = ""
+                End If
+                i += 1
+                res += vbCrLf
+                Application.DoEvents()
+            End While
+
+            res += vbCrLf
+            sw.WriteLine(res)
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            abort = True
+        Finally
+            cn.Close()
+            sw.Close()
+        End Try
+
+    End Sub
+
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -295,7 +408,6 @@ Public Class Form_export_full
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -333,7 +445,6 @@ Public Class Form_export_full
     End Sub
 
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
-
         If btn_export.Enabled = False Then
             If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 abort = True
@@ -408,6 +519,49 @@ Public Class Form_export_full
         End Try
     End Sub
 
+    Private Sub SQL_syntax_canbus(ByVal logger_id As Integer, ByVal logger As String, ByVal text As TextBox)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql As String
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
+             " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+            sql = ""
+
+            While query.Read()
+                sql += "select concat(data_index,',',time,',',value) from data" & _
+                " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
+                " and data_id like '" & query.GetString(0) & "';" & vbCrLf
+            End While
+
+            cn.Close()
+            text.Text = sql
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
     Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.CheckState = CheckState.Checked Then
             If TextBox1.Text = "" Then
@@ -444,7 +598,7 @@ Public Class Form_export_full
     Private Sub CheckBox4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox4.CheckedChanged
         If CheckBox4.CheckState = CheckState.Checked Then
             If TextBox4.Text = "" Then
-                SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+                SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
             End If
             TextBox4.Visible = True
         Else
@@ -456,6 +610,6 @@ Public Class Form_export_full
         SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
         SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
         SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
-        SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+        SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
     End Sub
 End Class

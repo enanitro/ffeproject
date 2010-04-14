@@ -86,7 +86,6 @@ Partial Class Form_export_full
         '
         'Panel1
         '
-        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.Controls.Add(Me.Button10)
         Me.Panel1.Controls.Add(Me.btn_export)
         Me.Panel1.Controls.Add(Me.GroupBox4)
@@ -94,17 +93,19 @@ Partial Class Form_export_full
         Me.Panel1.Controls.Add(Me.GroupBox5)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(987, 638)
+        Me.Panel1.Size = New System.Drawing.Size(1011, 664)
         Me.Panel1.TabIndex = 0
         '
         'Button10
         '
+        Me.Button10.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Button10.Image = Global.FfE.My.Resources.Resources.exit1
         Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button10.Location = New System.Drawing.Point(506, 525)
+        Me.Button10.Location = New System.Drawing.Point(530, 549)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(144, 105)
         Me.Button10.TabIndex = 33
@@ -112,9 +113,10 @@ Partial Class Form_export_full
         '
         'btn_export
         '
+        Me.btn_export.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
         Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(337, 525)
+        Me.btn_export.Location = New System.Drawing.Point(336, 549)
         Me.btn_export.Name = "btn_export"
         Me.btn_export.Size = New System.Drawing.Size(144, 105)
         Me.btn_export.TabIndex = 30
@@ -122,6 +124,7 @@ Partial Class Form_export_full
         '
         'GroupBox4
         '
+        Me.GroupBox4.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox4.Controls.Add(Me.TextBox4)
         Me.GroupBox4.Controls.Add(Me.CheckBox4)
         Me.GroupBox4.Controls.Add(Me.percent_canbus)
@@ -129,7 +132,7 @@ Partial Class Form_export_full
         Me.GroupBox4.Controls.Add(Me.ProgressBar4)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox4.Location = New System.Drawing.Point(506, 326)
+        Me.GroupBox4.Location = New System.Drawing.Point(530, 352)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox4.TabIndex = 32
@@ -196,6 +199,7 @@ Partial Class Form_export_full
         '
         'GroupBox3
         '
+        Me.GroupBox3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox3.Controls.Add(Me.TextBox2)
         Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.percent_gps)
@@ -203,7 +207,7 @@ Partial Class Form_export_full
         Me.GroupBox3.Controls.Add(Me.ProgressBar2)
         Me.GroupBox3.Controls.Add(Me.Button2)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox3.Location = New System.Drawing.Point(506, 131)
+        Me.GroupBox3.Location = New System.Drawing.Point(530, 149)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox3.TabIndex = 29
@@ -270,6 +274,7 @@ Partial Class Form_export_full
         '
         'GroupBox5
         '
+        Me.GroupBox5.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox5.Controls.Add(Me.TextBox3)
         Me.GroupBox5.Controls.Add(Me.CheckBox3)
         Me.GroupBox5.Controls.Add(Me.percent_fluke)
@@ -277,7 +282,7 @@ Partial Class Form_export_full
         Me.GroupBox5.Controls.Add(Me.ProgressBar3)
         Me.GroupBox5.Controls.Add(Me.Button4)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox5.Location = New System.Drawing.Point(12, 326)
+        Me.GroupBox5.Location = New System.Drawing.Point(12, 352)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox5.TabIndex = 31
@@ -344,6 +349,7 @@ Partial Class Form_export_full
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox2.Controls.Add(Me.TextBox1)
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.percent_graphtec)
@@ -351,7 +357,7 @@ Partial Class Form_export_full
         Me.GroupBox2.Controls.Add(Me.ProgressBar1)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 131)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 149)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(468, 191)
         Me.GroupBox2.TabIndex = 28
@@ -418,6 +424,7 @@ Partial Class Form_export_full
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox1.Controls.Add(Me.description)
         Me.GroupBox1.Controls.Add(Me.importer)
         Me.GroupBox1.Controls.Add(Me.car)
@@ -441,7 +448,7 @@ Partial Class Form_export_full
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 8)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(962, 115)
+        Me.GroupBox1.Size = New System.Drawing.Size(986, 115)
         Me.GroupBox1.TabIndex = 27
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Drive"
@@ -641,7 +648,7 @@ Partial Class Form_export_full
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1011, 662)
+        Me.ClientSize = New System.Drawing.Size(1011, 664)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.Black
         Me.MinimumSize = New System.Drawing.Size(1000, 700)
