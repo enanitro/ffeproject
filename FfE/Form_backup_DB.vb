@@ -9,9 +9,14 @@ Public Class Form_backup_DB
     End Sub
 
     Private Sub Form_backup_DB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        clean_labels()
+    End Sub
+
+    Private Sub clean_labels()
         Label1.Text = ""
         Label2.Text = ""
         Label3.Text = ""
+        Label4.Text = ""
     End Sub
 
     Private Function backup_file() As String
@@ -117,13 +122,13 @@ Public Class Form_backup_DB
 
             execute_query_backup("select concat('(',data_index,',''',data_id,''',',drive_id,',',logger_id,','" & _
                                 ",measure_id,',''',time,''',',value,')') from data;", path, _
-                                "-- ffe_database.data" & vbCrLf & "delete from data;" & vbCrLf & _
+                                "-- ffe_database.data --" & vbCrLf & "delete from data;" & vbCrLf & _
                                 "insert into data(data_index,data_id,drive_id,logger_id,measure_id,time,value) values ")
 
 
             execute_query_backup("select concat('(',data_index,',''',data_id,''',',drive_id,',',logger_id,','" & _
                                 ",measure_id,',''',time,''',',value,')') from copy_data;", path, _
-                                "-- ffe_database.copy_data" & vbCrLf & "delete from copy_data;" & _
+                                "-- ffe_database.copy_data --" & vbCrLf & "delete from copy_data;" & _
                                 "insert into copy_data(data_index,data_id,drive_id,logger_id,measure_id,time,value) values ")
 
 
@@ -163,11 +168,14 @@ Public Class Form_backup_DB
             sr.WriteLine("exit;")
             sr.Close()
 
-            'cmd.CommandText = "unlock tables;"
-            'cmd.ExecuteNonQuery()
+            MsgBox("Backup completed successfully", MsgBoxStyle.Information)
+
+            cmd.CommandText = "unlock tables;"
+            cmd.ExecuteNonQuery()
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
+            clean_labels()
             cn.Close()
         End Try
     End Sub
@@ -184,11 +192,24 @@ Public Class Form_backup_DB
                           "channel_name write, ids_canbus write, logger write;"
         Dim i As Integer = 0
 
-        Try
-            Label3.Text = "Importing table " & head.Split(".")(1).Split("-")(0).ToUpper
-            Application.DoEvents()
-            System.Threading.Thread.Sleep(1500)
-            cn.Open()
+        Label3.Text = "Importing table " & head.Split(".")(1).Split("-")(0).ToUpper
+        Application.DoEvents()
+        System.Threading.Thread.Sleep(1500)
+        cn.Open()
+        cmd.CommandTimeout = 1000
+        cmd.Connection = cn
+        cmd.CommandText = lock_tables
+        cmd.ExecuteNonQuery()
+
+        cmd.CommandTimeout = 1000
+        cmd.Connection = cn
+        cmd.CommandText = "select count(*) from " & head.Split(".")(1).Split("-")(0)
+        query = cmd.ExecuteReader()
+        If query.HasRows Then
+            query.Read()
+            config_progressbar(ProgressBar1, query.GetValue(0))
+
+            query.Close()
             cmd.CommandTimeout = 1000
             cmd.Connection = cn
             cmd.CommandText = sql
@@ -198,6 +219,8 @@ Public Class Form_backup_DB
                 While query.Read()
                     res += query.GetString(0) & "," & vbCrLf
                     i += 1
+                    progressbar(i, ProgressBar1, Label3.Text)
+
                     If i >= 1000 Then
                         sw.WriteLine(head)
                         res = res.Remove(res.Length - 3) & ";" & vbCrLf & "commit;" & vbCrLf
@@ -205,6 +228,7 @@ Public Class Form_backup_DB
                         res = ""
                         i = 0
                     End If
+                    Application.DoEvents()
                 End While
                 If res <> "" Then
                     sw.WriteLine(head)
@@ -212,27 +236,24 @@ Public Class Form_backup_DB
                     sw.Write(res)
                 End If
             End If
-
             sw.WriteLine(vbCrLf)
+        End If
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            cn.Close()
-            sw.Close()
-        End Try
+        cn.Close()
+        sw.Close()
+
     End Sub
 
     'configuracion del progressbar y labels que le acompañan
     Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double)
-
         bar.Minimum = 0
         bar.Maximum = max
     End Sub
 
     'controla el objeto progressbar
-    Private Sub progressbar(ByVal val As Integer, ByRef bar As ProgressBar)
+    Private Sub progressbar(ByVal val As Integer, ByRef bar As ProgressBar, ByRef percent As String)
         bar.Value = val
+        percent = CLng((bar.Value * 100) / bar.Maximum) & " %"
         Application.DoEvents()
     End Sub
 

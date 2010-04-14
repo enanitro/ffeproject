@@ -28,8 +28,9 @@ Partial Class Form_backup_DB
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
         Me.Label3 = New System.Windows.Forms.Label
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
+        Me.Label4 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,6 +76,7 @@ Partial Class Form_backup_DB
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.ProgressBar1)
         Me.Panel1.Controls.Add(Me.Button1)
@@ -87,6 +89,16 @@ Partial Class Form_backup_DB
         Me.Panel1.Size = New System.Drawing.Size(589, 215)
         Me.Panel1.TabIndex = 4
         '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(36, 134)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(333, 23)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Label3"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(36, 164)
@@ -94,15 +106,15 @@ Partial Class Form_backup_DB
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 23)
         Me.ProgressBar1.TabIndex = 4
         '
-        'Label3
+        'Label4
         '
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(36, 134)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(526, 23)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Label3"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(375, 134)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(187, 23)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "Label4"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Form_backup_DB
         '
@@ -127,4 +139,5 @@ Partial Class Form_backup_DB
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class
