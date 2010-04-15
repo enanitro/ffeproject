@@ -25,6 +25,13 @@ Partial Class Form_fharprofil
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.select_id = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.drive_id = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Colour = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.failure = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Km = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.speed = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Time = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,13 +62,75 @@ Partial Class Form_fharprofil
         '
         'DataGridView1
         '
-        Me.DataGridView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(17, 30)
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.select_id, Me.drive_id, Me.Colour, Me.failure, Me.Km, Me.speed, Me.Time})
+        Me.DataGridView1.Location = New System.Drawing.Point(16, 29)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(565, 388)
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.Size = New System.Drawing.Size(477, 383)
         Me.DataGridView1.TabIndex = 0
+        '
+        'select_id
+        '
+        Me.select_id.HeaderText = ""
+        Me.select_id.Name = "select_id"
+        Me.select_id.ReadOnly = True
+        Me.select_id.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.select_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.select_id.Width = 30
+        '
+        'drive_id
+        '
+        Me.drive_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.drive_id.HeaderText = "Drive ID"
+        Me.drive_id.Name = "drive_id"
+        Me.drive_id.ReadOnly = True
+        Me.drive_id.Width = 83
+        '
+        'Colour
+        '
+        Me.Colour.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.Colour.HeaderText = "Colour"
+        Me.Colour.Name = "Colour"
+        Me.Colour.ReadOnly = True
+        Me.Colour.Width = 74
+        '
+        'failure
+        '
+        Me.failure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.failure.HeaderText = "Failure"
+        Me.failure.Name = "failure"
+        Me.failure.ReadOnly = True
+        Me.failure.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.failure.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.failure.Width = 77
+        '
+        'Km
+        '
+        Me.Km.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Km.HeaderText = "Km"
+        Me.Km.Name = "Km"
+        Me.Km.ReadOnly = True
+        Me.Km.Width = 70
+        '
+        'speed
+        '
+        Me.speed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.speed.HeaderText = "Speed"
+        Me.speed.Name = "speed"
+        Me.speed.ReadOnly = True
+        Me.speed.Width = 73
+        '
+        'Time
+        '
+        Me.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.Time.HeaderText = "Time"
+        Me.Time.Name = "Time"
+        Me.Time.ReadOnly = True
+        Me.Time.Width = 64
         '
         'Form_fharprofil
         '
@@ -81,4 +150,11 @@ Partial Class Form_fharprofil
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents select_id As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents drive_id As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Colour As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents failure As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

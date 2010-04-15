@@ -134,6 +134,7 @@ Partial Class Form_drive
         Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Data_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
+        Me.Button3 = New System.Windows.Forms.Button
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -1069,6 +1070,7 @@ Partial Class Form_drive
         '
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Controls.Add(Me.Button2)
         Me.GroupBox4.Controls.Add(Me.Button1)
         Me.GroupBox4.Controls.Add(Me.btn_export)
@@ -1085,7 +1087,7 @@ Partial Class Form_drive
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.Image = Global.FfE.My.Resources.Resources.view_data
-        Me.Button2.Location = New System.Drawing.Point(474, 27)
+        Me.Button2.Location = New System.Drawing.Point(471, 27)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(144, 105)
         Me.Button2.TabIndex = 3
@@ -1105,7 +1107,7 @@ Partial Class Form_drive
         '
         Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
         Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(156, 27)
+        Me.btn_export.Location = New System.Drawing.Point(159, 27)
         Me.btn_export.Name = "btn_export"
         Me.btn_export.Size = New System.Drawing.Size(144, 105)
         Me.btn_export.TabIndex = 1
@@ -1302,13 +1304,22 @@ Partial Class Form_drive
         '
         Me.Data_fullTableAdapter.ClearBeforeFill = True
         '
+        'Button3
+        '
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button3.Location = New System.Drawing.Point(315, 27)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(144, 105)
+        Me.Button3.TabIndex = 4
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form_drive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1221, 662)
+        Me.ClientSize = New System.Drawing.Size(1221, 664)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.MinimumSize = New System.Drawing.Size(1110, 700)
@@ -1435,4 +1446,5 @@ Partial Class Form_drive
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
