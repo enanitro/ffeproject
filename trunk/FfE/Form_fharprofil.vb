@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class Form_fharprofil
-    Public id_usage_type
+    Public id_usage_type As Integer
 
     Private Sub Form_fharprofil_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         execute_query_fharprofil()
