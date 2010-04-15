@@ -17,6 +17,7 @@ Public Class Form_backup_DB
         Label2.Text = ""
         Label3.Text = ""
         Label4.Text = ""
+        ProgressBar1.Visible = False
     End Sub
 
     Private Function backup_file() As String
@@ -39,17 +40,13 @@ Public Class Form_backup_DB
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
         Dim res, sql As String
 
         Try
             Dim lock_tables As String = "lock tables car write, user write, measure write, usage_type write, " & _
                           "drive write, data write, copy_data write, photos write, " & _
                           "channel_name write, ids_canbus write, logger write;"
-            cn.Open()
-            cmd.CommandTimeout = 1000
-            cmd.Connection = cn
-            'cmd.CommandText = lock_tables
-            'cmd.ExecuteNonQuery()
 
             sw.WriteLine("-- " & path)
             sw.WriteLine(vbCrLf)
@@ -170,8 +167,6 @@ Public Class Form_backup_DB
 
             MsgBox("Backup completed successfully", MsgBoxStyle.Information)
 
-            cmd.CommandText = "unlock tables;"
-            cmd.ExecuteNonQuery()
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -215,12 +210,13 @@ Public Class Form_backup_DB
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+            Dim count As Integer = 0
             If query.HasRows Then
                 While query.Read()
                     res += query.GetString(0) & "," & vbCrLf
                     i += 1
-                    progressbar(i, ProgressBar1, Label3.Text)
-
+                    count += 1
+                    progressbar(count, ProgressBar1, Label4.Text)
                     If i >= 1000 Then
                         sw.WriteLine(head)
                         res = res.Remove(res.Length - 3) & ";" & vbCrLf & "commit;" & vbCrLf
@@ -239,6 +235,14 @@ Public Class Form_backup_DB
             sw.WriteLine(vbCrLf)
         End If
 
+        query.Close()
+        cmd.CommandTimeout = 1000
+        cmd.Connection = cn
+        cmd.CommandText = "unlock tables;"
+        cmd.ExecuteNonQuery()
+        Application.DoEvents()
+        System.Threading.Thread.Sleep(1500)
+
         cn.Close()
         sw.Close()
 
@@ -246,6 +250,7 @@ Public Class Form_backup_DB
 
     'configuracion del progressbar y labels que le acompañan
     Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double)
+        bar.Visible = True
         bar.Minimum = 0
         bar.Maximum = max
     End Sub
