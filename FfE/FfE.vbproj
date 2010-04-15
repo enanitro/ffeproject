@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>FfE.My.MyApplication</StartupObject>
     <RootNamespace>FfE</RootNamespace>
-    <AssemblyName>FfE 1.8</AssemblyName>
+    <AssemblyName>FfE 1.9</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -24,7 +24,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>FfE 1.8.xml</DocumentationFile>
+    <DocumentationFile>FfE 1.9.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
@@ -34,7 +34,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>FfE 1.8.xml</DocumentationFile>
+    <DocumentationFile>FfE 1.9.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>

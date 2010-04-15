@@ -6,7 +6,7 @@
             Me.Validate()
             Me.Ids_canbusBindingSource.EndEdit()
             Me.Ids_canbusTableAdapter.Update(Me.Ffe_databaseDataSet.ids_canbus)
-            Ffe_databaseDataSet.car.AcceptChanges()
+            Ffe_databaseDataSet.ids_canbus.AcceptChanges()
             Ids_canbusDataGridView.Sort(Ids_canbusDataGridView.Columns.Item(0), _
                                 System.ComponentModel.ListSortDirection.Ascending)
             rows = Ids_canbusDataGridView.Rows.Count
@@ -62,9 +62,9 @@
 
     Private Sub sort_index()
         Try
-            Dim current As Integer = 1
-            For i = 1 To Ids_canbusDataGridView.Rows.Count
-                If Ids_canbusDataGridView.Rows.Item(i - 1).Cells.Item(0).Value <> i Then
+            Dim current As Integer = 0
+            For i = 0 To Ids_canbusDataGridView.Rows.Count - 1
+                If Ids_canbusDataGridView.Rows.Item(i).Cells.Item(0).Value <> i Then
                     Ids_canbusDataGridView.Rows.Item(Ids_canbusDataGridView.Rows.Count - 1) _
                     .Cells.Item(0).Value = i
                     current = i
