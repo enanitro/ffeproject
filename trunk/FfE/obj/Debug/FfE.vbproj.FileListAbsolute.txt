@@ -427,8 +427,11 @@ C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_r
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_view_data.resources
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.From_Conf_User.resources
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Resources.resources
-C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.SplashScreen1.resources
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.vbproj.GenerateResource.Cache
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_view_data.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_delete_channel.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_backup_DB.resources
+C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_backup_DB.resources
+C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_delete_channel.resources
+C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\bin\Debug\FfE 1.9.exe.config
+C:\Users\enanitro\Desktop\Alemania\ffeproject\FfE\bin\Debug\FfE 1.9.exe.config
