@@ -393,14 +393,7 @@ C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_export_full.resource
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_data.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.association.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.form_canbus_ids.resources
-C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.8.exe.config
-C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.8.exe
-C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.8.pdb
-C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.8.xml
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_restore_DB.resources
-C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.8.exe
-C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.8.xml
-C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.8.pdb
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\bin\Debug\FfE 1.8.exe.config
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE 1.8.exe
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE 1.8.xml
@@ -431,7 +424,34 @@ C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.vbproj
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_view_data.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_delete_channel.resources
 C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_backup_DB.resources
+<<<<<<< .mine
+C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE.Form_fharprofil.resources
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.9.exe.config
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.9.exe
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.9.pdb
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\FfE 1.9.xml
+C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.9.exe
+C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.9.xml
+C:\Users\enanitro\Desktop\ffeproject\FfE\obj\Debug\FfE 1.9.pdb
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\ZedGraph.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\ZedGraph.xml
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\de\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\es\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\fr\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\hu\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\it\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\ja\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\pt\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\ru\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\sk\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\sv\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\tr\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\zh-cn\ZedGraph.resources.dll
+C:\Users\enanitro\Desktop\ffeproject\FfE\bin\Debug\zh-tw\ZedGraph.resources.dll
+=======
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_backup_DB.resources
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\obj\Debug\FfE.Form_delete_channel.resources
 C:\Users\Ismael\Documents\Proyectos\Alemania\ffeproject\FfE\bin\Debug\FfE 1.9.exe.config
 C:\Users\enanitro\Desktop\Alemania\ffeproject\FfE\bin\Debug\FfE 1.9.exe.config
+>>>>>>> .r84
