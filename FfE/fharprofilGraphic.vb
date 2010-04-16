@@ -75,4 +75,8 @@ Public Class fharprofilGraphic
         '
         '	base.ZedGraphControl.AxisChange();
     End Sub
+
+    Private Sub Pane_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Pane.Load
+
+    End Sub
 End Class
