@@ -11,7 +11,7 @@ Public Class fharprofilGraphic
     End Enum
 
     Public Sub New()
-
+        Dim c As Color = Color(0)
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
 
@@ -54,21 +54,22 @@ Public Class fharprofilGraphic
         Next
 
 
-        '// Draw the Y tics between the labels instead of at the labels
-        '		myPane.YAxis.MajorTic.IsBetweenLabels = true;
+        'Draw the Y tics between the labels instead of at the labels
+        myPane.YAxis.MajorTic.IsBetweenLabels = True
+
+        'Set the YAxis labels
+        myPane.YAxis.Scale.TextLabels = labels.ToArray
+
+        'Set the YAxis to Text type
+        myPane.YAxis.Type = AxisType.Text
+
+        'Set the bar type to stack, which stacks the bars by automatically accumulating the values
+        myPane.BarSettings.Type = BarType.Stack
         '
-        '	// Set the YAxis labels
-        '	myPane.YAxis.Scale.TextLabels = labels;
-        '	// Set the YAxis to Text type
-        '	myPane.YAxis.Type = AxisType.Text;
-        '
-        '	// Set the bar type to stack, which stacks the bars by automatically accumulating the values
-        '	myPane.BarSettings.Type = BarType.Stack;
-        '
-        '	// Make the bars horizontal by setting the BarBase to "Y"
-        '	myPane.BarSettings.Base = BarBase.Y;
-        '
-        '	// Fill the axis background with a color gradient
+        'Make the bars horizontal by setting the BarBase to "Y"
+        myPane.BarSettings.Base = BarBase.Y
+
+        'Fill the axis background with a color gradient
         '	myPane.Chart.Fill = new Fill( Color.White,
         '		Color.FromArgb( 255, 255, 166), 45.0F );
         '
