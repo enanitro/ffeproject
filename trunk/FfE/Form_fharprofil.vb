@@ -3,6 +3,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class Form_fharprofil
     Public id_usage_type As Integer
+    Dim fharprofiles As New List(Of fharprofile)
 
     Private Sub Form_fharprofil_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         select_value_gps()
@@ -17,6 +18,7 @@ Public Class Form_fharprofil
             res = execute_simple(sql)
             If res <> -1 Then
                 execute_status(DataGridView1, res, FfE_Main.id_gps, "'waiting for approval'")
+                execute_status(DataGridView1, res, FfE_Main.id_gps, "'final'")
             End If
 
         Catch ex As Exception
@@ -50,20 +52,7 @@ Public Class Form_fharprofil
         End Try
     End Function
 
-    Private Sub execute_status(ByRef grid As DataGridView, ByVal measure_id As String, _
-                              ByVal logger_id As Integer, ByVal status As String)
-        Try
-            If status = "'waiting for approval'" Then
-                execute_query(grid, measure_id, logger_id, status)
-            Else
-                execute_query(grid, measure_id, logger_id, status)
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Private Sub execute_query(ByVal grid As DataGridView, ByVal measure_id As String, _
+    Private Sub execute_status(ByVal grid As DataGridView, ByVal measure_id As String, _
                               ByVal logger_id As Integer, ByVal status As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
@@ -74,6 +63,7 @@ Public Class Form_fharprofil
         Dim sec As Int64
         Dim t1, t2 As DateTime
         Dim interval As TimeSpan
+        Dim dec() As Decimal
 
         Try
             cn.Open()
@@ -87,20 +77,26 @@ Public Class Form_fharprofil
             cmd.CommandText = sql
             query = cmd.ExecuteReader
             If query.HasRows Then
-                i = 0
-                While query.Read
-                    grid.Rows.Add()
-                    grid(1, i).Value = query.GetString(0)
-                    grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
-                    t1 = query.GetString(2)
-                    t2 = query.GetString(3)
-                    interval = t1 - t2
-                    grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
-                                      interval.Seconds.ToString
-                    sec = DateDiff(DateInterval.Second, t2, t1)
-                    grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
-                    i += 1
-                End While
+                If status = "'waiting for approval'" Then
+                    i = 0
+                    While query.Read
+                        grid.Rows.Add()
+                        grid(1, i).Value = query.GetString(0)
+                        grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
+                        t1 = query.GetString(2)
+                        t2 = query.GetString(3)
+                        interval = t1 - t2
+                        grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
+                                          interval.Seconds.ToString
+                        sec = DateDiff(DateInterval.Second, t2, t1)
+                        grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
+                        fharprofiles.Add(New fharprofile(query.GetInt32(0), Nothing, True, _
+                                         New Decimal() {Val(grid(4, i)), Val(grid(5, i)), Val(grid(6, i))}, False))
+                        i += 1
+                    End While
+                Else
+                    
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
