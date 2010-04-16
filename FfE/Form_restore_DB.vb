@@ -21,7 +21,6 @@ Public Class Form_restore_DB
         Dim trs As MySqlTransaction
         Dim cmd As New MySqlCommand(sql, cn)
         Dim text As String = ""
-
         Try
             If Label1.Text <> "" Then
                 cn.Open()
