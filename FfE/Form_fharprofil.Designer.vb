@@ -24,7 +24,9 @@ Partial Class Form_fharprofil
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.pn_graphics = New System.Windows.Forms.Panel
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.Button1 = New System.Windows.Forms.Button
         Me.Label4 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
@@ -37,8 +39,6 @@ Partial Class Form_fharprofil
         Me.Km = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.speed = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Time = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pn_graphics = New System.Windows.Forms.Panel
-        Me.Button1 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -69,6 +69,13 @@ Partial Class Form_fharprofil
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Fharprofil ID"
         '
+        'pn_graphics
+        '
+        Me.pn_graphics.Location = New System.Drawing.Point(585, 20)
+        Me.pn_graphics.Name = "pn_graphics"
+        Me.pn_graphics.Size = New System.Drawing.Size(625, 527)
+        Me.pn_graphics.TabIndex = 2
+        '
         'Panel2
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -83,6 +90,15 @@ Partial Class Form_fharprofil
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(554, 527)
         Me.Panel2.TabIndex = 1
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(169, 436)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -199,22 +215,6 @@ Partial Class Form_fharprofil
         Me.Time.Name = "Time"
         Me.Time.ReadOnly = True
         Me.Time.Width = 64
-        '
-        'pn_graphics
-        '
-        Me.pn_graphics.Location = New System.Drawing.Point(632, 20)
-        Me.pn_graphics.Name = "pn_graphics"
-        Me.pn_graphics.Size = New System.Drawing.Size(580, 527)
-        Me.pn_graphics.TabIndex = 2
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(169, 436)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form_fharprofil
         '
