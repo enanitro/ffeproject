@@ -61,12 +61,11 @@
     </Reference>
     <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph.resources, Version=5.1.5.28844, Culture=es, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\zedgraph_dll_v5.1.5\es\ZedGraph.resources.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\..\Program Files\zedgraph_dll_v5.1.5\es\ZedGraph.resources.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -488,6 +487,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ZedGraph.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
