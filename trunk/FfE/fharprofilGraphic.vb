@@ -46,8 +46,8 @@ Public Class fharprofilGraphic
         myPane.YAxis.Title.Text = "km"
         myPane.XAxis.Title.Text = "Id Drive"
 
-        Dim labels As New ArrayList
-        Dim x As New ArrayList
+        Dim labels As New List(Of String)
+        Dim x As New List(Of Decimal)
         For Each ele In listf
             labels.Add(ele.id)
             x.Add(ele.value(type.km))
@@ -72,7 +72,9 @@ Public Class fharprofilGraphic
         'Fill the axis background with a color gradient
         myPane.Chart.Fill = New Fill(Color.White, Color.FromArgb(255, 255, 166), 45.0F)
 
-        '	base.ZedGraphControl.AxisChange();
+        Pane.AxisChange()
+
+        'Pane.GraphPane = myPane
     End Sub
 
 End Class
