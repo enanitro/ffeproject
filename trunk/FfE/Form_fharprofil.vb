@@ -18,7 +18,7 @@ Public Class Form_fharprofil
             res = execute_simple(sql)
             If res <> -1 Then
                 execute_status(DataGridView1, res, FfE_Main.id_gps, "'waiting for approval'")
-                execute_status(DataGridView1, res, FfE_Main.id_gps, "'final'")
+                'execute_status(DataGridView1, res, FfE_Main.id_gps, "'final'")
             End If
 
         Catch ex As Exception
@@ -91,7 +91,7 @@ Public Class Form_fharprofil
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         fharprofiles.Add(New fharprofile(query.GetInt32(0), Nothing, True, _
-                                         New Decimal() {Val(grid(4, i)), Val(grid(5, i)), Val(grid(6, i))}, False))
+                                         New Decimal() {Val(grid(4, i).Value), Val(grid(5, i).Value), Val(grid(6, i).Value)}, False))
                         i += 1
                     End While
                 Else

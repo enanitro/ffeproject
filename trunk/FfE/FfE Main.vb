@@ -75,9 +75,9 @@ Public Class FfE_Main
     End Sub
 
     Private Sub RestoreDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestoreDBToolStripMenuItem.Click
-        'Form_restore_DB.MdiParent = Me
-        'Form_restore_DB.Show()
-        'Form_restore_DB.Focus()
+        Form_restore_DB.MdiParent = Me
+        Form_restore_DB.Show()
+        Form_restore_DB.Focus()
     End Sub
 
     Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
