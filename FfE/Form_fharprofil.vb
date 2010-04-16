@@ -109,5 +109,6 @@ Public Class Form_fharprofil
         Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.km)
 
         pn_graphics.Controls.Add(fg)
+        pn_graphics.Controls(0).Dock = DockStyle.Fill
     End Sub
 End Class

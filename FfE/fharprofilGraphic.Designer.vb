@@ -23,34 +23,34 @@ Partial Class fharprofilGraphic
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Me.Pane = New ZedGraph.ZedGraphControl
+        Me.myPane = New ZedGraph.ZedGraphControl
         Me.SuspendLayout()
         '
-        'Pane
+        'myPane
         '
-        Me.Pane.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Pane.Location = New System.Drawing.Point(0, 0)
-        Me.Pane.Name = "Pane"
-        Me.Pane.ScrollGrace = 0
-        Me.Pane.ScrollMaxX = 0
-        Me.Pane.ScrollMaxY = 0
-        Me.Pane.ScrollMaxY2 = 0
-        Me.Pane.ScrollMinX = 0
-        Me.Pane.ScrollMinY = 0
-        Me.Pane.ScrollMinY2 = 0
-        Me.Pane.Size = New System.Drawing.Size(522, 383)
-        Me.Pane.TabIndex = 0
+        Me.myPane.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.myPane.Location = New System.Drawing.Point(0, 0)
+        Me.myPane.Name = "myPane"
+        Me.myPane.ScrollGrace = 0
+        Me.myPane.ScrollMaxX = 0
+        Me.myPane.ScrollMaxY = 0
+        Me.myPane.ScrollMaxY2 = 0
+        Me.myPane.ScrollMinX = 0
+        Me.myPane.ScrollMinY = 0
+        Me.myPane.ScrollMinY2 = 0
+        Me.myPane.Size = New System.Drawing.Size(522, 383)
+        Me.myPane.TabIndex = 0
         '
         'fharprofilGraphic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Pane)
+        Me.Controls.Add(Me.myPane)
         Me.Name = "fharprofilGraphic"
         Me.Size = New System.Drawing.Size(522, 383)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Pane As ZedGraph.ZedGraphControl
+    Friend WithEvents myPane As ZedGraph.ZedGraphControl
 
 End Class
