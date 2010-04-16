@@ -6,7 +6,7 @@
     Public isfinal As Boolean
 
 
-    Public Sub New(ByVal id As Integer, ByVal color As C, ByVal fail As Boolean, _
+    Public Sub New(ByVal id As Integer, ByVal C As Color, ByVal fail As Boolean, _
                    ByVal value() As Decimal, ByVal isfinal As Boolean)
         Me.id = id
         Me.col = c
