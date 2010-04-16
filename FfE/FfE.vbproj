@@ -100,6 +100,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ffe_databaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="fharprofile.vb" />
+    <Compile Include="fharprofilGraphic.Designer.vb">
+      <DependentUpon>fharprofilGraphic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fharprofilGraphic.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Form_backup_DB.Designer.vb">
       <DependentUpon>Form_backup_DB.vb</DependentUpon>
     </Compile>
@@ -235,6 +242,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FfE Main.resx">
       <DependentUpon>FfE Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fharprofilGraphic.resx">
+      <DependentUpon>fharprofilGraphic.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_backup_DB.resx">
