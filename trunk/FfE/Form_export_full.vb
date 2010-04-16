@@ -233,7 +233,7 @@ Public Class Form_export_full
             sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
-                " group by data_index;"
+                " group by data_index"
             cn.Close()
 
             tb.Text = sql
@@ -301,7 +301,7 @@ Public Class Form_export_full
             SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
             tb.Visible = True
             sql = "select count(data_index) from data_full where drive_id = " & drive_id.Text & _
-            " and logger_id = " & logger_id & ";"
+            " and logger_id = " & logger_id & ""
             execute_query(sql, max)
 
             bar.Visible = True
@@ -358,7 +358,7 @@ Public Class Form_export_full
             cmd.CommandTimeout = 1000
             sql = "select concat(data_index,',',time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
-                " and data_id like '" & ch & "';"
+                " and data_id like '" & ch & "'"
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
             res = "INDEX,TIME," & ch
@@ -397,7 +397,7 @@ Public Class Form_export_full
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 path_graphtec.Text = SaveFileDialog.FileName
                 path_graphtec.Visible = True
@@ -409,7 +409,7 @@ Public Class Form_export_full
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 path_gps.Text = SaveFileDialog.FileName
                 path_gps.Visible = True
@@ -422,7 +422,7 @@ Public Class Form_export_full
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
 
         Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 path_fluke.Text = SaveFileDialog.FileName
                 path_fluke.Visible = True
@@ -434,7 +434,7 @@ Public Class Form_export_full
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Try
-            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv;"
+            SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 path_canbus.Text = SaveFileDialog.FileName
                 path_canbus.Visible = True
@@ -501,7 +501,7 @@ Public Class Form_export_full
             sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
-                " group by data_index;"
+                " group by data_index"
             cn.Close()
 
             text.Text = sql
@@ -543,7 +543,7 @@ Public Class Form_export_full
             While query.Read()
                 sql += "select concat(data_index,',',time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
-                " and data_id like '" & query.GetString(0) & "';" & vbCrLf
+                " and data_id like '" & query.GetString(0) & "'" & vbCrLf
             End While
 
             cn.Close()

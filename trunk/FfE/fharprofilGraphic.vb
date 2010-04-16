@@ -40,41 +40,61 @@ Public Class fharprofilGraphic
 
 
     Private Sub ShowKm()
-        Dim myPane As New GraphPane(Pane.GraphPane)
 
-        myPane.Title.Text = "Show Km"
-        myPane.YAxis.Title.Text = "km"
-        myPane.XAxis.Title.Text = "Id Drive"
 
-        Dim labels As New List(Of String)
-        Dim x As New List(Of Decimal)
+        myPane.GraphPane.Title.Text = "Show Km"
+        myPane.GraphPane.YAxis.Title.Text = "km"
+        myPane.GraphPane.XAxis.Title.Text = "Id Drive"
+
+        Dim i As Integer = 10
         For Each ele In listf
-            labels.Add(ele.id)
-            x.Add(ele.value(type.km))
+            ' Generate a red bar with "Curve 1" in the legend
+            Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.km)}, Nothing)
+            ' Fill the bar with a red-white-red color gradient for a 3d look
+            myCurve.Bar.Fill = New Fill(ele.color, Color.White, ele.color)
+            i = i + 10
         Next
 
+        ' Draw the X tics between the labels instead of at the labels
+        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
 
-        'Draw the Y tics between the labels instead of at the labels
-        myPane.YAxis.MajorTic.IsBetweenLabels = True
+        ' Set the XAxis to Text type
+        myPane.GraphPane.XAxis.Type = AxisType.Text
 
-        'Set the YAxis labels
-        myPane.YAxis.Scale.TextLabels = labels.ToArray
+        ' Set the bar type to stack, which stacks the bars by automatically accumulating the values
+        myPane.GraphPane.BarSettings.Type = BarType.Stack
 
-        'Set the YAxis to Text type
-        myPane.YAxis.Type = AxisType.Text
+        myPane.AxisChange()
+    End Sub
 
-        'Set the bar type to stack, which stacks the bars by automatically accumulating the values
-        myPane.BarSettings.Type = BarType.Stack
-        '
-        'Make the bars horizontal by setting the BarBase to "Y"
-        myPane.BarSettings.Base = BarBase.Y
+    Private Sub p()
+        ' Set the title and axis labels
+        myPane.GraphPane.Title.Text = "Cat Stats"
+        myPane.GraphPane.XAxis.Title.Text = "Big Cats"
+        myPane.GraphPane.YAxis.Title.Text = "Population"
 
-        'Fill the axis background with a color gradient
-        myPane.Chart.Fill = New Fill(Color.White, Color.FromArgb(255, 255, 166), 45.0F)
+        ' Make up some data points
+        Dim labels() As String = {"Panther", "Lion", "Cheetah", "Cougar", "Tiger", "Leopard"}
+        Dim y() As Double = {100, 115, 75, 22, 98, 40}
 
-        Pane.AxisChange()
+        ' Generate a red bar with "Curve 1" in the legend
+        Dim myCurve As BarItem = myPane.GraphPane.AddBar("Here", Nothing, y, Color.Red)
+        ' Fill the bar with a red-white-red color gradient for a 3d look
+        myCurve.Bar.Fill = New Fill(Color.Red, Color.White, Color.Red)
 
-        'Pane.GraphPane = myPane
+
+        ' Draw the X tics between the labels instead of at the labels
+        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
+
+        ' Set the XAxis labels
+        myPane.GraphPane.XAxis.Scale.TextLabels = labels
+        ' Set the XAxis to Text type
+        myPane.GraphPane.XAxis.Type = AxisType.Text
+
+        ' Set the bar type to stack, which stacks the bars by automatically accumulating the values
+        myPane.GraphPane.BarSettings.Type = BarType.Stack
+
+        myPane.AxisChange()
     End Sub
 
 End Class
