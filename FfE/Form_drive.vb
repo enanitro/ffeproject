@@ -579,8 +579,10 @@ Public Class Form_drive
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Form_fharprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
-        Form_fharprofil.MdiParent = Me.MdiParent
-        Form_fharprofil.Show()
+        If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5).Equals(DBNull.Value) Then
+            Form_fharprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
+            Form_fharprofil.MdiParent = Me.MdiParent
+            Form_fharprofil.Show()
+        End If
     End Sub
 End Class

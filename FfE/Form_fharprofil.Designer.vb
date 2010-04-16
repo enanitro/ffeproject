@@ -34,7 +34,7 @@ Partial Class Form_fharprofil
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.select_id = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.drive_id = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Colour = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Colour = New System.Windows.Forms.DataGridViewButtonColumn
         Me.failure = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.Km = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.speed = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -182,6 +182,8 @@ Partial Class Form_fharprofil
         Me.Colour.HeaderText = "Colour"
         Me.Colour.Name = "Colour"
         Me.Colour.ReadOnly = True
+        Me.Colour.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Colour.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Colour.Width = 74
         '
         'failure
@@ -235,13 +237,6 @@ Partial Class Form_fharprofil
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents select_id As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents drive_id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Colour As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents failure As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -249,4 +244,11 @@ Partial Class Form_fharprofil
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents pn_graphics As System.Windows.Forms.Panel
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents select_id As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents drive_id As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Colour As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents failure As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

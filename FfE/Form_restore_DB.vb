@@ -18,36 +18,41 @@ Public Class Form_restore_DB
         'connection = connection.Remove(connection.IndexOf(connection.Split(";")(5)))
         Dim sql As String = ""
         Dim cn As New MySqlConnection(connection)
-        Dim file As New System.IO.StreamReader(Label1.Text)
+        Dim trs As MySqlTransaction
         Dim cmd As New MySqlCommand(sql, cn)
         Dim text As String = ""
 
         Try
-            cn.Open()
             If Label1.Text <> "" Then
-                text += file.ReadLine
+                cn.Open()
+                trs = cn.BeginTransaction
+                cmd.Transaction = trs
+                Dim file As New System.IO.StreamReader(Label1.Text)
+                text = file.ReadLine()
                 While text <> "exit;"
-                    sql += text
-                    If text = "commit;" Then
-                        cmd.CommandText = sql
-                        cmd.CommandTimeout = 1000
-                        cmd.ExecuteNonQuery()
-                        sql = ""
+                    If text = "" Then
+                        While text = ""
+                            text = file.ReadLine
+                        End While
+                    End If
+                    If text(0) <> "-" Then
+                        sql += text
+                        If text(text.Length - 1) = ";" Then
+                            'sql = sql.Substring(0, sql.Length - 7)
+                            cmd.CommandText = sql
+                            cmd.CommandTimeout = 1000
+                            cmd.ExecuteNonQuery()
+                            sql = ""
+                        End If
                     End If
                     text = file.ReadLine
                 End While
-                cmd.CommandText = "commit;"
-                cmd.CommandTimeout = 1000
-                cmd.ExecuteNonQuery()
+                trs.Commit()
+                file.Close()
             End If
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If cn.State = ConnectionState.Open Then
-                cn.Close()
-            End If
-            file.Close()
         End Try
     End Sub
 End Class
