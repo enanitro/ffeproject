@@ -104,4 +104,10 @@ Public Class Form_fharprofil
             cn.Close()
         End Try
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.km)
+
+        pn_graphics.Controls.Add(fg)
+    End Sub
 End Class

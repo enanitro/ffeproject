@@ -11,7 +11,7 @@ Public Class fharprofilGraphic
     End Enum
 
     Public Sub New()
-        Dim c As Color = Color(0)
+        Dim c As Color = Color.Coral
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
 
@@ -70,13 +70,9 @@ Public Class fharprofilGraphic
         myPane.BarSettings.Base = BarBase.Y
 
         'Fill the axis background with a color gradient
-        '	myPane.Chart.Fill = new Fill( Color.White,
-        '		Color.FromArgb( 255, 255, 166), 45.0F );
-        '
+        myPane.Chart.Fill = New Fill(Color.White, Color.FromArgb(255, 255, 166), 45.0F)
+
         '	base.ZedGraphControl.AxisChange();
     End Sub
 
-    Private Sub Pane_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Pane.Load
-
-    End Sub
 End Class
