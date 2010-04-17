@@ -62,7 +62,7 @@ Public Class fharprofilGraphic
         myPane.GraphPane.XAxis.Type = AxisType.Text
 
         ' Set the bar type to stack, which stacks the bars by automatically accumulating the values
-        myPane.GraphPane.BarSettings.Type = BarType.Stack
+        myPane.GraphPane.BarSettings.Type = BarType.Cluster
 
         myPane.AxisChange()
     End Sub

@@ -1,9 +1,11 @@
 ﻿Imports MySql.Data
 Imports MySql.Data.MySqlClient
 
+
 Public Class Form_fharprofil
     Public id_usage_type As Integer
     Dim fharprofiles As New List(Of fharprofile)
+    Dim colores As New Colours
 
     Private Sub Form_fharprofil_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         select_value_gps()
@@ -90,7 +92,7 @@ Public Class Form_fharprofil
                                           interval.Seconds.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
-                        fharprofiles.Add(New fharprofile(query.GetInt32(0), True, _
+                        fharprofiles.Add(New fharprofile(query.GetInt32(0), True, colores.getNexColor, _
                                          New Decimal() {Val(grid(4, i).Value), Val(grid(5, i).Value), Val(grid(6, i).Value)}, False))
                         i += 1
                     End While
