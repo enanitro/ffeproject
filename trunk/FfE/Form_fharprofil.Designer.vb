@@ -39,6 +39,8 @@ Partial Class Form_fharprofil
         Me.Km = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.speed = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Time = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Button3 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -80,6 +82,8 @@ Partial Class Form_fharprofil
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.Button3)
+        Me.Panel2.Controls.Add(Me.Button2)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -93,11 +97,11 @@ Partial Class Form_fharprofil
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(169, 436)
+        Me.Button1.Location = New System.Drawing.Point(222, 426)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(93, 74)
         Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "Graphic Km"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label4
@@ -218,6 +222,24 @@ Partial Class Form_fharprofil
         Me.Time.ReadOnly = True
         Me.Time.Width = 64
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(327, 426)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(93, 74)
+        Me.Button2.TabIndex = 6
+        Me.Button2.Text = "Graphic Speed"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(432, 426)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(93, 74)
+        Me.Button3.TabIndex = 7
+        Me.Button3.Text = "Graphic Time"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form_fharprofil
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -251,4 +273,6 @@ Partial Class Form_fharprofil
     Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
