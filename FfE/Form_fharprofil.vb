@@ -109,7 +109,22 @@ Public Class Form_fharprofil
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.km)
+        pn_graphics.Controls.Clear()
+        pn_graphics.Controls.Add(fg)
+        pn_graphics.Controls(0).Dock = DockStyle.Fill
+    End Sub
 
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.speed)
+        pn_graphics.Controls.Clear()
+        pn_graphics.Controls.Add(fg)
+        pn_graphics.Controls(0).Dock = DockStyle.Fill
+    End Sub
+
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.time)
+        pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill
     End Sub

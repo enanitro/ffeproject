@@ -49,7 +49,7 @@ Public Class Colours
     End Function
 
     Public Function getNexColor() As Color
-        pos += 1
+        pos = (pos + 1) Mod allColors.Length
         If pos = 79 Then
             pos += 1 'Aseguramos que el color verde no se asinga
         End If
