@@ -1,29 +1,29 @@
 ﻿Public Class fharprofile
     Public id As Integer
-    Public col As Color
+    Public colour As Color
     Public fail As Boolean
     Public value() As Decimal
     Public isfinal As Boolean
 
 
-    Public Sub New(ByVal id As Integer, ByVal C As Color, ByVal fail As Boolean, _
+    Public Sub New(ByVal id As Integer, ByVal fail As Boolean, _
                    ByVal value() As Decimal, ByVal isfinal As Boolean)
         Me.id = id
-        Me.col = c
         Me.fail = fail
         Me.value = value
         Me.isfinal = isfinal
-
-        'Si el color está vacio lo inicializamos con ramdom
-        If col = Nothing Then
-            color = QBColor(Aleatorio(0, 15))
-
+        Dim c As New ColorConverter
+        If Not isfinal Then
+            colour = System.Drawing.Color.FromArgb(255, Aleatorio, Aleatorio, Aleatorio)
+        Else
+            colour = Color.Green
         End If
+
     End Sub
 
 
-    Private Function Aleatorio(ByVal Minimo As Long, ByVal Maximo As Long) As Long
+    Private Function Aleatorio(Optional ByVal Minimo As Short = 0, Optional ByVal Maximo As Short = 255) As Short
         Randomize()
-        Aleatorio = CLng((Minimo - Maximo) * Rnd + Maximo)
+        Aleatorio = CShort((Minimo - Maximo) * Rnd() + Maximo)
     End Function
 End Class
