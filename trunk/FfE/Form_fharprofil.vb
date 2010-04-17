@@ -90,7 +90,7 @@ Public Class Form_fharprofil
                                           interval.Seconds.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
-                        fharprofiles.Add(New fharprofile(query.GetInt32(0), Nothing, True, _
+                        fharprofiles.Add(New fharprofile(query.GetInt32(0), True, _
                                          New Decimal() {Val(grid(4, i).Value), Val(grid(5, i).Value), Val(grid(6, i).Value)}, False))
                         i += 1
                     End While

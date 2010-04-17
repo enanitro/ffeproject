@@ -51,12 +51,12 @@ Public Class fharprofilGraphic
             ' Generate a red bar with "Curve 1" in the legend
             Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.km)}, Nothing)
             ' Fill the bar with a red-white-red color gradient for a 3d look
-            myCurve.Bar.Fill = New Fill(ele.color, Color.White, ele.color)
+            myCurve.Bar.Fill = New Fill(ele.colour, Color.White, ele.colour)
             i = i + 10
         Next
 
         ' Draw the X tics between the labels instead of at the labels
-        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
+        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = False
 
         ' Set the XAxis to Text type
         myPane.GraphPane.XAxis.Type = AxisType.Text
