@@ -6,16 +6,15 @@
     Public isfinal As Boolean
 
 
-    Public Sub New(ByVal id As Integer, ByVal fail As Boolean, _
+    Public Sub New(ByVal id As Integer, ByVal fail As Boolean, ByVal colour As Color, _
                    ByVal value() As Decimal, ByVal isfinal As Boolean)
         Me.id = id
         Me.fail = fail
         Me.value = value
         Me.isfinal = isfinal
+        Me.colour = colour
         Dim c As New ColorConverter
-        If Not isfinal Then
-            colour = System.Drawing.Color.FromArgb(255, Aleatorio, Aleatorio, Aleatorio)
-        Else
+        If isfinal Then
             colour = Color.Green
         End If
 
@@ -25,5 +24,35 @@
     Private Function Aleatorio(Optional ByVal Minimo As Short = 0, Optional ByVal Maximo As Short = 255) As Short
         Randomize()
         Aleatorio = CShort((Minimo - Maximo) * Rnd() + Maximo)
+    End Function
+End Class
+
+
+'Funcion que genera colores a partir de los colores del sistema
+Public Class Colours
+    Dim allColors() As KnownColor
+    Dim pos As Integer
+
+    Public Sub New()
+        Dim colorsArray As Array
+        colorsArray = [Enum].GetValues(GetType(KnownColor))
+        ReDim allColors(colorsArray.Length)
+
+        Array.Copy(colorsArray, allColors, colorsArray.Length)
+
+        'Posicion del color actual
+        pos = 0
+    End Sub
+
+    Public Function getColor() As Color
+        getColor = Color.FromKnownColor(Me.allColors(pos))
+    End Function
+
+    Public Function getNexColor() As Color
+        pos += 1
+        If pos = 79 Then
+            pos += 1 'Aseguramos que el color verde no se asinga
+        End If
+        getNexColor = Color.FromKnownColor(Me.allColors(pos))
     End Function
 End Class
