@@ -30,7 +30,7 @@ Public Class Form_view_data
         grid.Columns(0).Width = 60
         grid.Columns(1).Width = 60
         For i = 2 To grid.Columns.Count - 1
-            grid.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
+            grid.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet
         Next
     End Sub
 

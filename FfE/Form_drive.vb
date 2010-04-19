@@ -14,6 +14,7 @@ Public Class Form_drive
     Dim form_export As Form_export_full
     Dim import_full As form_import_csv_full
     Dim del_channel As Form_delete_channel
+    Dim form_fahrprofil As Form_fharprofil
 
 
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -38,12 +39,8 @@ Public Class Form_drive
             load_combobox(cmb_car, "select car_id, concat(cast(car_id as char), ' - ', name) as valor from car", connection)
             load_combobox(cmb_importer, "select user_id, concat(cast(user_id as char), ' - ', vorname, ' ', name) as valor from user", connection)
 
-
-
             'TODO: esta línea de código carga datos en la tabla 'Ffe_databaseDataSet.usage_type' Puede moverla o quitarla según sea necesario.
             Me.Usage_typeTableAdapter.Fill(Me.Ffe_databaseDataSet.usage_type)
-            'TODO: esta línea de código carga datos en la tabla 'Ffe_databaseDataSet.car' Puede moverla o quitarla según sea necesario.
-            Me.CarTableAdapter.Fill(Me.Ffe_databaseDataSet.car)
             'TODO: esta línea de código carga datos en la tabla 'Ffe_databaseDataSet.car' Puede moverla o quitarla según sea necesario.
             Me.CarTableAdapter.Fill(Me.Ffe_databaseDataSet.car)
             'TODO: esta línea de código carga datos en la tabla 'Ffe_databaseDataSet.user' Puede moverla o quitarla según sea necesario.
@@ -148,8 +145,6 @@ Public Class Form_drive
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         load_combobox(cmb_driver, "select user_id, concat(cast(user_id as char), ' - ', vorname, ' ', name) as valor from user", connection)
     End Sub
-
-
 
     Private Sub cmb_driver_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_driver.SelectedIndexChanged
         Try
@@ -287,12 +282,6 @@ Public Class Form_drive
         End Try
     End Sub
 
-    'Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-    '    If MsgBox("Are you sure you want to delete the driver?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Delete driver") = MsgBoxResult.No Then
-    '       Exit Sub
-    '    End If
-    'End Sub
-
     'Este procedimiento cambia el valor de los combos sincronizando con el valor de los datos 
     Private Sub data_2_combo()
         If Me.DriveBindingSource.Position <> -1 Then
@@ -383,90 +372,6 @@ Public Class Form_drive
     End Sub
 
    
-
-    Private Sub grid_configuration(ByRef grid As DataGridView)
-        grid.DataSource = ""
-        grid.DataSource = Data_fullBindingSource
-        grid.Columns.Remove(grid.Columns.Item(1))
-        grid.Columns.Remove(grid.Columns.Item(1))
-        grid.Columns.Remove(grid.Columns.Item(1))
-        grid.Columns.Remove(grid.Columns.Item(3))
-        grid.Columns.Remove(grid.Columns.Item(5))
-        grid.Columns.Item(0).HeaderText = "Data id"
-        grid.Columns.Item(0).Width = 250
-        grid.Columns.Item(1).HeaderText = "Time"
-        grid.Columns.Item(2).HeaderText = "Value"
-        grid.Columns.Item(3).HeaderText = "Unit"
-        grid.Columns.Item(4).HeaderText = "Time step"
-    End Sub
-
-    Private Sub clear_grid(ByRef grid As DataGridView)
-        grid.DataSource = ""
-    End Sub
-
-    Private Sub data_summary(ByRef graphtec As String, ByRef gps As String, ByRef fluke As String, _
-                             ByRef canbus As String, ByRef total As String)
-        Dim x, y, tot_p, tot_ch As Integer
-        tot_ch = 0
-        tot_p = 0
-        x = 0
-        y = 0
-        data_points_channels(x, y, FfE_Main.id_graphtec)
-        tot_p += x
-        tot_ch += y
-        graphtec = x & " data points" & " (" & y & " channels)"
-        data_points_channels(x, y, FfE_Main.id_gps)
-        tot_p += x
-        tot_ch += y
-        gps = x & " data points" & " (" & y & " channels)"
-        data_points_channels(x, y, FfE_Main.id_fluke)
-        tot_p += x
-        tot_ch += y
-        fluke = x & " data points" & " (" & y & " channels)"
-        data_points_channels(x, y, FfE_Main.id_canbus)
-        tot_p += x
-        tot_ch += y
-        canbus = x & " data points" & " (" & y & " channels)"
-        total = tot_p & " data points" & " (" & tot_ch & " channels)"
-    End Sub
-
-    Private Sub data_points_channels(ByRef points As String, ByRef channels As String, ByVal logger As Integer)
-        execute_query("select count(*) from data where drive_id = " & Drive_idLabel1.Text _
-                      & " and logger_id = " & logger, points)
-        execute_query("select count(distinct data_id) from data where drive_id = " & Drive_idLabel1.Text _
-                      & " and logger_id = " & logger, channels)
-    End Sub
-
-    Private Sub execute_query(ByVal sql As String, ByRef res As String)
-        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
-        ' nueva conexión indicando al SqlConnection la cadena de conexión  
-        Dim cn As New MySqlConnection(connection)
-        Dim cmd As New MySqlCommand
-        Dim query As MySqlDataReader
-        Dim text As String = ""
-
-        Try
-
-            ' Abrir la conexión a Sql  
-            cn.Open()
-
-            ' Pasar la consulta sql y la conexión al Sql Command
-            cmd.Connection = cn
-            cmd.CommandText = sql
-            query = cmd.ExecuteReader()
-            query.Read()
-            If query.HasRows() Then res = query.GetString(0)
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If cn.State = ConnectionState.Open Then
-                cn.Close()
-            End If
-        End Try
-    End Sub
-
-
     Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles delete.Click
         Try
             If MsgBox("Are you sure you want to delete this information?", _
@@ -578,11 +483,70 @@ Public Class Form_drive
         form_export.Show()
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub showFahrprofil()
         If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5).Equals(DBNull.Value) Then
             Form_fharprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
             Form_fharprofil.MdiParent = Me.MdiParent
             Form_fharprofil.Show()
+        End If
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        Try
+            If form_fahrprofil Is Nothing Then
+                showFahrprofil()
+            Else
+                If form_fahrprofil.isClosed Then
+                    showFahrprofil()
+                Else
+                    form_export.Focus()
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            'export.Visible = False
+        End Try
+        
+    End Sub
+
+    Private Sub ToolStripButton5_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton5.MouseDown
+        If combo = True Then
+            Dim pos As Integer = DriveBindingSource.Position
+            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            DriveBindingSource.Position = pos
+        End If
+    End Sub
+
+    Private Sub ToolStripButton4_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton4.MouseDown
+        If combo = True Then
+            Dim pos As Integer = DriveBindingSource.Position
+            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            DriveBindingSource.Position = pos
+        End If
+    End Sub
+
+    Private Sub ToolStripButton6_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton6.MouseDown
+        If combo = True Then
+            Dim pos As Integer = DriveBindingSource.Position
+            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            DriveBindingSource.Position = pos
+        End If
+    End Sub
+
+    Private Sub ToolStripButton3_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton3.MouseDown
+        If combo = True Then
+            Dim pos As Integer = DriveBindingSource.Position
+            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            DriveBindingSource.Position = pos
+        End If
+    End Sub
+
+    Private Sub DriveDataGridView_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DriveDataGridView.MouseDown
+        If combo = True Then
+            Dim pos As Integer = DriveBindingSource.Position
+            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            DriveBindingSource.Position = pos
         End If
     End Sub
 End Class
