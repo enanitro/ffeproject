@@ -43,9 +43,9 @@ Partial Class Form_drive
         Dim Label9 As System.Windows.Forms.Label
         Dim Label11 As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_drive))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
@@ -108,6 +108,7 @@ Partial Class Form_drive
         Me.Label13 = New System.Windows.Forms.Label
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.Button3 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Button1 = New System.Windows.Forms.Button
         Me.btn_export = New System.Windows.Forms.Button
@@ -124,7 +125,6 @@ Partial Class Form_drive
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Data_fullBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DriveTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.driveTableAdapter
         Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
@@ -132,9 +132,7 @@ Partial Class Form_drive
         Me.UserTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.userTableAdapter
         Me.TableAdapterManager1 = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Data_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
-        Me.Button3 = New System.Windows.Forms.Button
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -175,7 +173,6 @@ Partial Class Form_drive
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -904,6 +901,7 @@ Partial Class Form_drive
         Me.pn_driver.Controls.Add(Me.cmb_driver)
         Me.pn_driver.Controls.Add(Label2)
         Me.pn_driver.Location = New System.Drawing.Point(3, 305)
+        Me.pn_driver.MinimumSize = New System.Drawing.Size(305, 38)
         Me.pn_driver.Name = "pn_driver"
         Me.pn_driver.Size = New System.Drawing.Size(305, 38)
         Me.pn_driver.TabIndex = 25
@@ -1083,9 +1081,18 @@ Partial Class Form_drive
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Data operations"
         '
+        'Button3
+        '
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button3.Location = New System.Drawing.Point(315, 27)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(144, 105)
+        Me.Button3.TabIndex = 4
+        Me.Button3.Text = "Fahrprofile"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Button2
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.Image = Global.FfE.My.Resources.Resources.view_data
         Me.Button2.Location = New System.Drawing.Point(471, 27)
         Me.Button2.Name = "Button2"
@@ -1095,7 +1102,6 @@ Partial Class Form_drive
         '
         'Button1
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel2
         Me.Button1.Location = New System.Drawing.Point(624, 27)
         Me.Button1.Name = "Button1"
@@ -1143,31 +1149,31 @@ Partial Class Form_drive
         Me.DriveDataGridView.AllowUserToDeleteRows = False
         Me.DriveDataGridView.AutoGenerateColumns = False
         Me.DriveDataGridView.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DriveDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DriveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DriveDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.DriveDataGridView.DataSource = Me.DriveBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.DriveDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DriveDataGridView.Location = New System.Drawing.Point(3, 17)
         Me.DriveDataGridView.Name = "DriveDataGridView"
         Me.DriveDataGridView.ReadOnly = True
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DriveDataGridView.Size = New System.Drawing.Size(779, 455)
         Me.DriveDataGridView.TabIndex = 3
         '
@@ -1241,11 +1247,6 @@ Partial Class Form_drive
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         Me.DataGridViewTextBoxColumn9.ReadOnly = True
         '
-        'Data_fullBindingSource
-        '
-        Me.Data_fullBindingSource.DataMember = "data_full"
-        Me.Data_fullBindingSource.DataSource = Me.Ffe_databaseDataSet
-        '
         'DriveTableAdapter
         '
         Me.DriveTableAdapter.ClearBeforeFill = True
@@ -1300,19 +1301,6 @@ Partial Class Form_drive
         Me.FfedatabaseDataSetBindingSource.DataSource = Me.Ffe_databaseDataSet
         Me.FfedatabaseDataSetBindingSource.Position = 0
         '
-        'Data_fullTableAdapter
-        '
-        Me.Data_fullTableAdapter.ClearBeforeFill = True
-        '
-        'Button3
-        '
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button3.Location = New System.Drawing.Point(315, 27)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(144, 105)
-        Me.Button3.TabIndex = 4
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'Form_drive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1322,7 +1310,7 @@ Partial Class Form_drive
         Me.ClientSize = New System.Drawing.Size(1221, 664)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
-        Me.MinimumSize = New System.Drawing.Size(1110, 700)
+        Me.MinimumSize = New System.Drawing.Size(1237, 700)
         Me.Name = "Form_drive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Drive configuration"
@@ -1353,7 +1341,6 @@ Partial Class Form_drive
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Data_fullBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -1428,8 +1415,6 @@ Partial Class Form_drive
     Friend WithEvents cmb_importer As System.Windows.Forms.ComboBox
     Friend WithEvents ImporterBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents Data_fullBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents Data_fullTableAdapter As FfE.ffe_databaseDataSetTableAdapters.data_fullTableAdapter
     Friend WithEvents delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents DriveDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents Label13 As System.Windows.Forms.Label

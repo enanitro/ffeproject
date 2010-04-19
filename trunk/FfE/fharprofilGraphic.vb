@@ -40,9 +40,9 @@ Public Class fharprofilGraphic
 
 
     Private Sub ShowKm()
-        myPane.GraphPane.Title.Text = "Show Km"
+        myPane.GraphPane.Title.Text = "Km"
         myPane.GraphPane.YAxis.Title.Text = "km"
-        myPane.GraphPane.XAxis.Title.Text = "Id Drive"
+        myPane.GraphPane.XAxis.Title.Text = "Drives"
 
         Dim i As Integer = 10
         For Each ele In listf
@@ -66,14 +66,14 @@ Public Class fharprofilGraphic
     End Sub
 
     Private Sub ShowSpeed()
-        myPane.GraphPane.Title.Text = "Show Speed"
+        myPane.GraphPane.Title.Text = "Speed"
         myPane.GraphPane.YAxis.Title.Text = "Speed"
-        myPane.GraphPane.XAxis.Title.Text = "Id Drive"
+        myPane.GraphPane.XAxis.Title.Text = "Drives"
 
         Dim i As Integer = 10
         For Each ele In listf
             ' Generate a red bar with "Curve 1" in the legend
-            Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.km)}, Nothing)
+            Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.speed)}, Nothing)
             ' Fill the bar with a red-white-red color gradient for a 3d look
             myCurve.Bar.Fill = New Fill(ele.colour, Color.White, ele.colour)
             i = i + 10
@@ -92,14 +92,14 @@ Public Class fharprofilGraphic
     End Sub
 
     Private Sub ShowTime()
-        myPane.GraphPane.Title.Text = "Show Time"
-        myPane.GraphPane.YAxis.Title.Text = "Time"
-        myPane.GraphPane.XAxis.Title.Text = "Id Drive"
+        myPane.GraphPane.Title.Text = "Time"
+        myPane.GraphPane.YAxis.Title.Text = "Time(seconds)"
+        myPane.GraphPane.XAxis.Title.Text = "Drives"
 
         Dim i As Integer = 10
         For Each ele In listf
             ' Generate a red bar with "Curve 1" in the legend
-            Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.km)}, Nothing)
+            Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, New Double() {ele.value(type.time)}, Nothing)
             ' Fill the bar with a red-white-red color gradient for a 3d look
             myCurve.Bar.Fill = New Fill(ele.colour, Color.White, ele.colour)
             i = i + 10

@@ -57,7 +57,7 @@ Public Class Form_backup_DB
                                  "if(name is null,'NULL',concat('''',name,'''')),','," & _
                                  "if(description is null,'NULL',concat('''',description,''''))," & _
                                  "')') from logger;", path, _
-                                 "-- ffe_database.logger --" & vbCrLf & "delete from logger;" & vbCrLf & _
+                                 "-- ffe_database.logger " & vbCrLf & "delete from logger;" & vbCrLf & _
                                  "insert into logger(logger_id,name,description) values ")
 
 
@@ -67,7 +67,7 @@ Public Class Form_backup_DB
                                  "if(license_plate is null,'NULL',concat('''',license_plate,'''')),','," & _
                                  "if(owner is null,'NULL',concat('''',owner,'''')),','," & _
                                  "'NULL',')') from car;", path, _
-                                 "-- ffe_database.car --" & vbCrLf & "delete from car;" & vbCrLf & _
+                                 "-- ffe_database.car " & vbCrLf & "delete from car;" & vbCrLf & _
                                  "insert into car(car_id,name,type,license_plate,owner,photo) values ")
 
 
@@ -76,7 +76,7 @@ Public Class Form_backup_DB
                                  "if(description is null,'NULL',concat('''',description,'''')),','," & _
                                  "if(usage_in_project is null,'NULL',concat('''',usage_in_project,''''))," & _
                                  "')') from usage_type;", path, _
-                                 "-- ffe_database.usage_type --" & vbCrLf & "delete from usage_type;" & vbCrLf & _
+                                 "-- ffe_database.usage_type " & vbCrLf & "delete from usage_type;" & vbCrLf & _
                                  "insert into usage_type(usage_type_id,name,description,usage_in_project) values ")
 
 
@@ -87,7 +87,7 @@ Public Class Form_backup_DB
                                  "if(link is null,'NULL',concat('''',link,'''')),','," & _
                                  "if(ma_art is null,'NULL',concat('''',ma_art,'''')),','," & _
                                  "'NULL',')') from user;", path, _
-                                 "-- ffe_database.user --" & vbCrLf & "delete from user;" & vbCrLf & _
+                                 "-- ffe_database.user " & vbCrLf & "delete from user;" & vbCrLf & _
                                  "insert into user(user_id,vorname,name,email,link,ma_art,photo) values ")
 
 
@@ -97,7 +97,7 @@ Public Class Form_backup_DB
                                  "if(unit is null,'NULL',concat('''',unit,'''')),','," & _
                                  "if(description is null,'NULL',concat('''',description,''''))," & _
                                  "')') from measure;", path, _
-                                 "-- ffe_database.measure --" & vbCrLf & "delete from measure;" & vbCrLf & _
+                                 "-- ffe_database.measure " & vbCrLf & "delete from measure;" & vbCrLf & _
                                  "insert into measure(measure_id,name,timestep,unit,description) values ")
 
 
@@ -112,20 +112,20 @@ Public Class Form_backup_DB
                                  "if(car_id is null,'NULL',car_id),','," & _
                                  "if(drive_type is null,'NULL',concat('''',drive_type,''''))," & _
                                  "')') from drive;", path, _
-                                 "-- ffe_database.drive --" & vbCrLf & "delete from drive;" & vbCrLf & _
+                                 "-- ffe_database.drive " & vbCrLf & "delete from drive;" & vbCrLf & _
                                  "insert into drive(drive_id,status,climate,date,description,usage_type_id," & _
                                  "driver_id,importer_id,car_id,drive_type) values ")
 
 
             execute_query_backup("select concat('(',data_index,',''',data_id,''',',drive_id,',',logger_id,','" & _
                                 ",measure_id,',''',time,''',',value,')') from data;", path, _
-                                "-- ffe_database.data --" & vbCrLf & "delete from data;" & vbCrLf & _
+                                "-- ffe_database.data " & vbCrLf & "delete from data;" & vbCrLf & _
                                 "insert into data(data_index,data_id,drive_id,logger_id,measure_id,time,value) values ")
 
 
             execute_query_backup("select concat('(',data_index,',''',data_id,''',',drive_id,',',logger_id,','" & _
                                 ",measure_id,',''',time,''',',value,')') from copy_data;", path, _
-                                "-- ffe_database.copy_data --" & vbCrLf & "delete from copy_data;" & _
+                                "-- ffe_database.copy_data " & vbCrLf & "delete from copy_data;" & _
                                 "insert into copy_data(data_index,data_id,drive_id,logger_id,measure_id,time,value) values ")
 
 
@@ -133,7 +133,7 @@ Public Class Form_backup_DB
                                  "if(car_id is null,'NULL',car_id),','," & _
                                  "if(path is null,'NULL',concat('''',path,'''')),','," & _
                                  "'NULL',')') from photos;", path, _
-                                 "-- ffe_database.photos --" & vbCrLf & "delete from photos;" & vbCrLf & _
+                                 "-- ffe_database.photos " & vbCrLf & "delete from photos;" & vbCrLf & _
                                  "insert into photos(photo_id,car_id,path,photo) values ")
 
 
@@ -142,7 +142,7 @@ Public Class Form_backup_DB
                                  "if(name is null,'NULL',concat('''',name,'''')),','," & _
                                  "if(measure_id is null,'NULL',measure_id)," & _
                                  "')') from channel_name;", path, _
-                                 "-- ffe_database.channel_name --" & vbCrLf & "delete from channel_name;" & vbCrLf & _
+                                 "-- ffe_database.channel_name " & vbCrLf & "delete from channel_name;" & vbCrLf & _
                                  "insert into channel_name(logger_id,channel,name,measure_id) values ")
 
 
@@ -157,7 +157,7 @@ Public Class Form_backup_DB
                                  "if(factor is null,'NULL',factor),','," & _
                                  "if(offset is null,'NULL',offset)," & _
                                  "')') from ids_canbus;", path, _
-                                 "-- ffe_database.ids_canbus --" & vbCrLf & "delete from ids_canbus;" & vbCrLf & _
+                                 "-- ffe_database.ids_canbus " & vbCrLf & "delete from ids_canbus;" & vbCrLf & _
                                  "insert into ids_canbus(channel_id,hex_id,dec_id,name,startbit,longbits," & _
                                  "sequence,signed,factor,offset) values ")
 
@@ -175,7 +175,8 @@ Public Class Form_backup_DB
         End Try
     End Sub
 
-    Private Sub execute_query_backup(ByVal sql As String, ByVal path As String, ByVal head As String)
+    Private Sub execute_query_backup(ByVal sql As String, ByVal path As String, _
+                                     ByVal head1 As String) ', ByVal head2 As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
@@ -187,7 +188,7 @@ Public Class Form_backup_DB
                           "channel_name write, ids_canbus write, logger write;"
         Dim i As Integer = 0
 
-        Label3.Text = "Importing table " & head.Split(".")(1).Split("-")(0).ToUpper
+        Label3.Text = "Importing table " & head1.Split(".")(1).Split("-")(0).ToUpper
         Application.DoEvents()
         System.Threading.Thread.Sleep(1500)
         cn.Open()
@@ -198,7 +199,7 @@ Public Class Form_backup_DB
 
         cmd.CommandTimeout = 1000
         cmd.Connection = cn
-        cmd.CommandText = "select count(*) from " & head.Split(".")(1).Split("-")(0)
+        cmd.CommandText = "select count(*) from " & head1.Split(".")(1).Split("-")(0)
         query = cmd.ExecuteReader()
         If query.HasRows Then
             query.Read()
@@ -218,7 +219,7 @@ Public Class Form_backup_DB
                     count += 1
                     progressbar(count, ProgressBar1, Label4.Text)
                     If i >= 1000 Then
-                        sw.WriteLine(head)
+                        sw.WriteLine(head1)
                         res = res.Remove(res.Length - 3) & ";" & vbCrLf & "commit;" & vbCrLf
                         sw.Write(res)
                         res = ""
@@ -227,7 +228,7 @@ Public Class Form_backup_DB
                     Application.DoEvents()
                 End While
                 If res <> "" Then
-                    sw.WriteLine(head)
+                    sw.WriteLine(head1)
                     res = res.Remove(res.Length - 3) & ";" & vbCrLf & "commit;" & vbCrLf
                     sw.Write(res)
                 End If

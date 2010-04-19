@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 '0 Bremspedalstellung
-'1 "Batteriespannung
+'1 Batteriespannung
 '2 HV-Batterie Stromfluss
 '3 Gaspedalstellung
 '4 ICE Drehzahl

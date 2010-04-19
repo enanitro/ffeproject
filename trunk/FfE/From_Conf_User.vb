@@ -86,7 +86,4 @@
         End Try
     End Sub
 
-    Private Sub BindingNavigatorMovePreviousItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorMovePreviousItem.Click
-
-    End Sub
 End Class
