@@ -292,8 +292,9 @@ Public Class Form_export_full
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
+        Dim sw As New System.IO.StreamWriter(path, True)
         Dim sql, res As String
-        Dim i, max As Integer
+        Dim i, j, max, count, lines As Integer
         res = ""
 
         Try
@@ -308,6 +309,14 @@ Public Class Form_export_full
             percent.Visible = True
             config_progressbar(max, bar)
 
+            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & ""
+            execute_query(sql, count)
+            Dim v_query(count - 1) As MySqlDataReader
+            Dim v_cn(count - 1) As MySqlConnection
+            Dim v_cmd(count - 1) As MySqlCommand
+
+
             cn.Open()
             cmd.Connection = cn
             sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
@@ -316,16 +325,56 @@ Public Class Form_export_full
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+            j = 0
+            While query.Read
+                v_cn(j) = New MySqlConnection(connection)
+                v_cn(j).Open()
+                res += "INDEX,TIME," & query.GetString(0) & ", --- ,"
+                sql = "select concat(data_index,',',time,',',value) from data" & _
+                " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
+                " and data_id like '" & query.GetString(0) & "'"
+                v_cmd(j) = New MySqlCommand(sql, v_cn(j))
+                v_cmd(j).CommandTimeout = 1000
+                v_query(j) = v_cmd(j).ExecuteReader()
+                j += 1
+            End While
+            res = res.Substring(0, res.Length - 7) & vbCrLf
+
             i = 1
-            While query.Read()
-                execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
-                                             query.GetString(0), i)
+            lines = 1
+            While i <= max
+                For j = 0 To count - 1
+                    If v_query(j).Read Then
+                        res += v_query(j).GetString(0) & ",,"
+                        progressbar(i, percent.Text, bar)
+                        i += 1
+                    Else
+                        res += ",,,,"
+                    End If
+                Next
+                res = res.Remove(res.Length - 1)
+                res += vbCrLf
+                If (lines Mod 1001) >= 1000 Then
+                    sw.Write(res)
+                    res = ""
+                End If
+                lines += 1
+                Application.DoEvents()
             End While
 
-            Dim sw As New System.IO.StreamWriter(path, True)
+            'i = 1
+            'While query.Read()
+            ' execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
+            '                             query.GetString(0), i)
+            'End While
+
             res += vbCrLf
             sw.WriteLine(res)
             sw.Close()
+
+            For j = 0 To count - 1
+                v_cn(j).Close()
+            Next
 
         Catch ex As Exception
             If ex.Message = "Export process aborted" Then
