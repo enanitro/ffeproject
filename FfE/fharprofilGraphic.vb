@@ -2,6 +2,9 @@
 
 Public Class fharprofilGraphic
     Dim listf As List(Of fharprofile)
+    Dim Xtitle As String
+    Dim labels() As String
+
     Dim typ As Integer
 
     Public Enum type As Integer
@@ -16,26 +19,34 @@ Public Class fharprofilGraphic
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-
     End Sub
 
     Public Sub New(ByVal l As List(Of fharprofile), ByVal t As type)
         Me.New()
-
         listf = l
         typ = t
     End Sub
 
+    Public Sub New(ByVal l As List(Of fharprofile), ByVal Xtitle As String, _
+                   ByVal labels() As String)
+        Me.New()
+        Me.listf = l
+        Me.Xtitle = Xtitle
+        Me.labels = labels
+    End Sub
+
 
     Private Sub fharprofilGraphic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Select Case typ
-            Case type.km
-                ShowKm()
-            Case type.speed
-                ShowSpeed()
-            Case type.time
-                ShowTime()
-        End Select
+        show_histogram()
+
+        'Select Case typ
+        '   Case type.km
+        'ShowKm()
+        '   Case type.speed
+        'ShowSpeed()
+        '   Case type.time
+        'ShowTime()
+        ' End Select
     End Sub
 
 
@@ -115,6 +126,30 @@ Public Class fharprofilGraphic
         myPane.GraphPane.BarSettings.Type = BarType.Cluster
 
         myPane.AxisChange()
+    End Sub
+
+    Private Sub show_histogram()
+
+        myPane.GraphPane.YAxis.Title.Text = "Frequency"
+        myPane.GraphPane.XAxis.Title.Text = Xtitle
+        For Each ele In listf
+            myPane.GraphPane.AddBar(ele.id, Nothing, ele.value, ele.colour)
+        Next
+        'Draw the X tics between the labels instead of at the labels
+        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
+
+        'Set the XAxis to Text type
+        myPane.GraphPane.XAxis.Type = AxisType.Text
+        'Set the XAxis labels
+
+        myPane.GraphPane.XAxis.Scale.TextLabels = labels
+        myPane.GraphPane.XAxis.Scale.FontSpec.Size = 10.0F
+
+        myPane.GraphPane.BarSettings.Type = BarType.Stack
+        myPane.GraphPane.BarSettings.MinClusterGap = 0
+
+        myPane.GraphPane.AxisChange()
+
     End Sub
 
 End Class
