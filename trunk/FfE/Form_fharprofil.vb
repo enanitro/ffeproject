@@ -132,8 +132,8 @@ Public Class Form_fharprofil
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
                         t1 = query.GetString(2)
                         t2 = query.GetString(3)
-                        grid(7, i).Value = t2.ToShortTimeString
-                        grid(8, i).Value = t1.ToShortTimeString
+                        grid(7, i).Value = t2.ToLongTimeString
+                        grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
                         grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
                                           interval.Seconds.ToString
@@ -157,13 +157,14 @@ Public Class Form_fharprofil
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
                         t1 = query.GetString(2)
                         t2 = query.GetString(3)
-                        grid(7, i).Value = t2.ToShortTimeString
-                        grid(8, i).Value = t1.ToShortTimeString
+                        grid(7, i).Value = t2.ToLongTimeString
+                        grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
                         grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
                                           interval.Seconds.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
-                        grid(2, i).Style.BackColor = Label1.BackColor
+                        'grid(2, i).Style.BackColor = Label1.BackColor
+                        grid(2, i).Style.BackColor = Color.Green
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         speed_avg += Math.Round((query.GetDouble(1)), 4)
                         t1 = query.GetString(2)
@@ -171,10 +172,6 @@ Public Class Form_fharprofil
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         sec_avg += sec
                         km_avg = Math.Round((query.GetDouble(1) / 3600) * sec_avg, 4)
-                        'fharprofiles.Add(New fharprofile(query.GetInt32(0), True, Label1.BackColor, _
-                        '                New Decimal() {Val(Math.Round((query.GetDouble(1) / 3600) * sec, 4)), _
-                        '                              Val(Math.Round((query.GetDouble(1)), 4)), _
-                        '                             Val(DateDiff(DateInterval.Second, t2, t1))}, True))
                         grid.Rows.Item(i).Visible = False
                         i += 1
                     End While
@@ -271,20 +268,129 @@ Public Class Form_fharprofil
         End If
     End Sub
 
-    Private Sub load_fahrprofiles(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fharprofile))
+    Private Sub load_fahrprofiles(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fharprofile), _
+                                   ByRef labels() As String, ByVal intervals() As Double, _
+                                   ByVal pos As Integer)
         For i = 0 To grid.Rows.Count - 1
             If grid(0, i).Value = True Then
-                fahrprofiles.Add(New fharprofile(grid(1, i).Value, True, grid(2, i).Style.BackColor, _
-                         New Decimal() {Val(grid(4, i).Value), Val(grid(5, i).Value), _
-                         Val(DateDiff(DateInterval.Second, grid(7, i).Value, grid(8, i).Value))}, False))
+                Dim values(intervals.Count - 1) As Double
+                For j = 0 To intervals.Count - 1
+                    If grid(pos, i).Value < intervals(j) Then
+                        values(j) = 1
+                        j = intervals.Count
+                    End If
+                Next
+                fahrprofiles.Add(New fharprofile(grid(1, i).Value, grid(3, i).Value, _
+                                                 grid(2, i).Style.BackColor, values, False))
             End If
         Next
+
+        Dim labs(intervals.Count - 1) As String
+        For i = 0 To intervals.Count - 1
+            labs(i) = "< " & intervals(i)
+        Next
+        labels = labs
     End Sub
+
+    Private Function calculate_range_km(ByVal grid As DataGridView) As Double()
+        Dim max, min As Double
+        Dim count As Integer = 0
+        min = grid(4, 0).Value
+        max = grid(4, 0).Value
+        For i = 0 To grid.Rows.Count - 1
+            If grid(0, i).Value = True Then
+                If max < grid(4, i).Value Then
+                    max = grid(4, i).Value
+                Else
+                    If min > grid(4, i).Value Then
+                        min = grid(4, i).Value
+                    End If
+                End If
+            End If
+        Next
+        max = Math.Truncate(max) + 1
+        min = Math.Truncate(min)
+        Dim value As String = CType(CType(min, Integer), String)
+        If value.Length = 1 Then
+            value = 0
+        Else
+            value = value.Replace(value.Length - 1, "0")
+        End If
+
+        count = Math.Truncate((max - value) / 5) '5 km
+
+        Dim intervals(count) As Double
+        intervals(0) = value + 5
+        For i = 1 To count
+            intervals(i) = intervals(i - 1) + 5
+        Next
+
+        calculate_range_km = intervals
+    End Function
+
+    Private Function calculate_range_speed(ByVal grid As DataGridView) As Double()
+        Dim max, min As Double
+        Dim count As Integer = 0
+        min = grid(5, 0).Value
+        max = grid(5, 0).Value
+        For i = 0 To grid.Rows.Count - 1
+            If grid(0, i).Value = True Then
+                If max < grid(5, i).Value Then
+                    max = grid(5, i).Value
+                Else
+                    If min > grid(5, i).Value Then
+                        min = grid(5, i).Value
+                    End If
+                End If
+            End If
+        Next
+        max = Math.Truncate(max) + 1
+        min = Math.Truncate(min)
+        Dim value As String = CType(CType(min, Integer), String)
+        If value.Length = 1 Then
+            value = 0
+        Else
+            value = value.Replace(value.Length - 1, "0")
+        End If
+
+        count = Math.Truncate((max - value) / 10) '10 km/h
+
+        Dim intervals(count) As Double
+        intervals(0) = value + 10
+        For i = 1 To count
+            intervals(i) = intervals(i - 1) + 10
+        Next
+
+        calculate_range_speed = intervals
+
+    End Function
+
+
+    Private Function calculate_range_time(ByVal grid As DataGridView) As Double()
+        Dim max, min As DateTime
+        Dim count As Integer = 0
+        min = grid(6, 0).Value
+        max = grid(6, 0).Value
+        For i = 0 To grid.Rows.Count - 1
+            If grid(0, i).Value = True Then
+                If max < grid(6, i).Value Then
+                    max = grid(6, i).Value
+                Else
+                    If min > grid(6, i).Value Then
+                        min = grid(6, i).Value
+                    End If
+                End If
+            End If
+        Next
+
+        'calculate_range_time = intervals
+    End Function
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim fharprofiles As New List(Of fharprofile)
-        load_fahrprofiles(DataGridView1, fharprofiles)
-        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.km)
+        Dim labels() As String
+        load_fahrprofiles(DataGridView1, fharprofiles, labels, calculate_range_km(DataGridView1), 4)
+        Dim fg As New fharprofilGraphic(fharprofiles, "Kms", labels)
         pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill
@@ -292,21 +398,23 @@ Public Class Form_fharprofil
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim fharprofiles As New List(Of fharprofile)
-        load_fahrprofiles(DataGridView1, fharprofiles)
-        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.speed)
-        pn_graphics.Controls.Clear()
-        pn_graphics.Controls.Add(fg)
-        pn_graphics.Controls(0).Dock = DockStyle.Fill
+        calculate_range_speed(DataGridView1)
+        'load_fahrprofiles(DataGridView1, fharprofiles)
+        'Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.speed)
+        'pn_graphics.Controls.Clear()
+        'pn_graphics.Controls.Add(fg)
+        'pn_graphics.Controls(0).Dock = DockStyle.Fill
     End Sub
 
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim fharprofiles As New List(Of fharprofile)
-        load_fahrprofiles(DataGridView1, fharprofiles)
-        Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.time)
-        pn_graphics.Controls.Clear()
-        pn_graphics.Controls.Add(fg)
-        pn_graphics.Controls(0).Dock = DockStyle.Fill
+        calculate_range_time(DataGridView1)
+        'load_fahrprofiles(DataGridView1, fharprofiles)
+        'Dim fg As New fharprofilGraphic(fharprofiles, fharprofilGraphic.type.time)
+        'pn_graphics.Controls.Clear()
+        'pn_graphics.Controls.Add(fg)
+        'pn_graphics.Controls(0).Dock = DockStyle.Fill
     End Sub
 
     Private Sub DataGridView1_CellMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick

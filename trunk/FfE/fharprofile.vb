@@ -2,12 +2,12 @@
     Public id As Integer
     Public colour As Color
     Public fail As Boolean
-    Public value() As Decimal
+    Public value() As Double
     Public isfinal As Boolean
 
 
     Public Sub New(ByVal id As Integer, ByVal fail As Boolean, ByVal colour As Color, _
-                   ByVal value() As Decimal, ByVal isfinal As Boolean)
+                   ByVal value() As Double, ByVal isfinal As Boolean)
         Me.id = id
         Me.fail = fail
         Me.value = value
@@ -16,6 +16,7 @@
         Dim c As New ColorConverter
         If isfinal Then
             colour = Color.Green
+            id = id & "(final)"
         End If
 
     End Sub
