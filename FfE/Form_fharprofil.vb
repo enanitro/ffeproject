@@ -12,6 +12,12 @@ Public Class Form_fharprofil
         isClosed = True
     End Sub
 
+    Private Sub Form_fharprofil_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        Dim pos As Integer = Form_drive.DriveBindingSource.Position
+        Form_drive.DriveTableAdapter.Fill(Form_drive.Ffe_databaseDataSet.drive)
+        Form_drive.DriveBindingSource.Position = pos
+    End Sub
+
     Private Sub Form_fharprofil_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         GroupBox1.Text = "Fahrprofil ID " & id_usage_type
         load_usage_type()

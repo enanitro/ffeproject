@@ -19,7 +19,7 @@ Public Class Form_view_data
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
         show_data(DataGridView2, FfE_Main.id_fluke)
-        show_data(DataGridView3, FfE_Main.id_canbus)
+        show_data_canbus(DataGridView3, FfE_Main.id_canbus)
 
     End Sub
 
@@ -74,6 +74,98 @@ Public Class Form_view_data
             If cn.State = ConnectionState.Open Then
                 cn.Close()
             End If
+        End Try
+    End Sub
+
+    Private Sub show_data_canbus(ByRef grid As DataGridView, ByVal logger_id As Integer)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql, res As String
+        Dim i, j, max, count, lines, cols As Integer
+        res = ""
+
+        Try
+
+            sql = "select count(data_index) from data_full where drive_id = " & drive_id & _
+            " and logger_id = " & logger_id & ""
+            execute_query(sql, max)
+
+
+            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
+            " and logger_id = " & logger_id & ""
+            execute_query(sql, count)
+            Dim v_query(count - 1) As MySqlDataReader
+            Dim v_cn(count - 1) As MySqlConnection
+            Dim v_cmd(count - 1) As MySqlCommand
+
+
+            cn.Open()
+            cmd.Connection = cn
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+             " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            j = 0
+            cols = 0
+            While query.Read
+                v_cn(j) = New MySqlConnection(connection)
+                v_cn(j).Open()
+                sql = "select data_index,time,value from data" & _
+                " where drive_id = " & drive_id & " and logger_id = " & logger_id & _
+                " and data_id like '" & query.GetString(0) & "'"
+                v_cmd(j) = New MySqlCommand(sql, v_cn(j))
+                v_cmd(j).CommandTimeout = 1000
+                v_query(j) = v_cmd(j).ExecuteReader()
+                grid.Columns.Add(cols, "INDEX")
+                grid.Columns.Add(cols + 1, "TIME")
+                grid.Columns.Add(cols + 2, query.GetString(0))
+                cols += 3
+                j += 1
+            End While
+            count = j
+
+            i = 1
+            lines = 0
+            While i <= max
+                grid.Rows.Add()
+                j = 0
+                cols = 0
+                While j < count
+                    If v_query(j).Read Then
+                        grid.Rows.Item(lines).Cells(cols).Value = v_query(j).GetString(0)
+                        grid.Rows.Item(lines).Cells(cols + 1).Value = v_query(j).GetString(1)
+                        grid.Rows.Item(lines).Cells(cols + 2).Value = v_query(j).GetString(2)
+                        i += 1
+                    Else
+                        grid.Rows.Item(lines).Cells(cols).Value = ""
+                        grid.Rows.Item(lines).Cells(cols + 1).Value = ""
+                        grid.Rows.Item(lines).Cells(cols + 2).Value = ""
+                    End If
+                    cols += 3
+                    j += 1
+                End While
+                lines += 1
+            End While
+
+            'i = 1
+            'While query.Read()
+            ' execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
+            '                             query.GetString(0), i)
+            'End While
+
+
+            For j = 0 To count - 1
+                v_cn(j).Close()
+            Next
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            cn.Close()
         End Try
     End Sub
 
