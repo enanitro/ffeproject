@@ -1,12 +1,12 @@
 ﻿Public Class fharprofile
-    Public id As Integer
+    Public id As String
     Public colour As Color
     Public fail As Boolean
     Public value() As Double
     Public isfinal As Boolean
 
 
-    Public Sub New(ByVal id As Integer, ByVal fail As Boolean, ByVal colour As Color, _
+    Public Sub New(ByVal id As String, ByVal fail As Boolean, ByVal colour As Color, _
                    ByVal value() As Double, ByVal isfinal As Boolean)
         Me.id = id
         Me.fail = fail
@@ -15,8 +15,8 @@
         Me.colour = colour
         Dim c As New ColorConverter
         If isfinal Then
-            colour = Color.Green
-            id = id & "(final)"
+            Me.colour = Color.Green
+            Me.id = id & "(final)"
         End If
 
     End Sub

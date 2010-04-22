@@ -52,6 +52,9 @@ Partial Class Form_fharprofil
         Me.Button1 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.Label6 = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
         Me.select_id = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.drive_id = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Colour = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -64,9 +67,7 @@ Partial Class Form_fharprofil
         Me.speed_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.start_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.end_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
+        Me.final = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -407,12 +408,41 @@ Partial Class Form_fharprofil
         Me.DataGridView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.select_id, Me.drive_id, Me.Colour, Me.failure, Me.Km, Me.speed, Me.Time, Me.start_gps, Me.end_gps, Me.speed_canbus, Me.start_canbus, Me.end_canbus})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.select_id, Me.drive_id, Me.Colour, Me.failure, Me.Km, Me.speed, Me.Time, Me.start_gps, Me.end_gps, Me.speed_canbus, Me.start_canbus, Me.end_canbus, Me.final})
         Me.DataGridView1.Location = New System.Drawing.Point(15, 13)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(517, 291)
         Me.DataGridView1.TabIndex = 5
+        '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(548, 77)
+        Me.Panel3.TabIndex = 8
+        '
+        'Label6
+        '
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(7, 34)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(504, 35)
+        Me.Label6.TabIndex = 11
+        Me.Label6.Text = "Label6"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(7, 7)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 15)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Label5"
         '
         'select_id
         '
@@ -507,34 +537,12 @@ Partial Class Form_fharprofil
         Me.end_canbus.ReadOnly = True
         Me.end_canbus.Visible = False
         '
-        'Panel3
+        'final
         '
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(548, 77)
-        Me.Panel3.TabIndex = 8
-        '
-        'Label6
-        '
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(7, 34)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(504, 35)
-        Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Label6"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(7, 7)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(51, 15)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Label5"
+        Me.final.HeaderText = "final"
+        Me.final.Name = "final"
+        Me.final.ReadOnly = True
+        Me.final.Visible = False
         '
         'Form_fharprofil
         '
@@ -578,18 +586,6 @@ Partial Class Form_fharprofil
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents select_id As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents drive_id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Colour As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents failure As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents start_gps As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents end_gps As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents speed_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents start_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents end_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
@@ -602,4 +598,17 @@ Partial Class Form_fharprofil
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents select_id As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents drive_id As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Colour As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents failure As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Km As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents speed As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Time As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents start_gps As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents end_gps As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents speed_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents start_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents end_canbus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents final As System.Windows.Forms.DataGridViewCheckBoxColumn
 End Class
