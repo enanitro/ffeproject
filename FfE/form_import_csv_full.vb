@@ -114,8 +114,9 @@ Public Class form_import_csv_full
                 logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
                 logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
                 logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+                abort = False
             Else
-                MsgBox("Files were imported successfully", MsgBoxStyle.Information)
+                If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
             End If
             logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
             logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)

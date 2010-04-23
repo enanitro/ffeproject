@@ -102,10 +102,10 @@ Partial Class form_import_csv_full
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.ProgressBar1)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label6)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'ProgressBar1
@@ -131,8 +131,8 @@ Partial Class form_import_csv_full
         '
         'CheckedListBox1
         '
-        Me.CheckedListBox1.CheckOnClick = True
         resources.ApplyResources(Me.CheckedListBox1, "CheckedListBox1")
+        Me.CheckedListBox1.CheckOnClick = True
         Me.CheckedListBox1.FormattingEnabled = True
         Me.CheckedListBox1.Name = "CheckedListBox1"
         '
@@ -169,10 +169,10 @@ Partial Class form_import_csv_full
         '
         'Panel2
         '
+        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Controls.Add(Me.ProgressBar2)
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.Label8)
-        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Name = "Panel2"
         '
         'ProgressBar2
@@ -199,8 +199,8 @@ Partial Class form_import_csv_full
         '
         'CheckedListBox2
         '
-        Me.CheckedListBox2.CheckOnClick = True
         resources.ApplyResources(Me.CheckedListBox2, "CheckedListBox2")
+        Me.CheckedListBox2.CheckOnClick = True
         Me.CheckedListBox2.FormattingEnabled = True
         Me.CheckedListBox2.Name = "CheckedListBox2"
         '
@@ -237,10 +237,10 @@ Partial Class form_import_csv_full
         '
         'Panel3
         '
+        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Controls.Add(Me.ProgressBar3)
         Me.Panel3.Controls.Add(Me.Label9)
         Me.Panel3.Controls.Add(Me.Label10)
-        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Name = "Panel3"
         '
         'ProgressBar3
@@ -266,8 +266,8 @@ Partial Class form_import_csv_full
         '
         'CheckedListBox3
         '
-        Me.CheckedListBox3.CheckOnClick = True
         resources.ApplyResources(Me.CheckedListBox3, "CheckedListBox3")
+        Me.CheckedListBox3.CheckOnClick = True
         Me.CheckedListBox3.FormattingEnabled = True
         Me.CheckedListBox3.Name = "CheckedListBox3"
         '
@@ -307,10 +307,10 @@ Partial Class form_import_csv_full
         '
         'Panel4
         '
+        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Controls.Add(Me.ProgressBar4)
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Controls.Add(Me.Label12)
-        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Name = "Panel4"
         '
         'ProgressBar4
@@ -338,8 +338,8 @@ Partial Class form_import_csv_full
         '
         'CheckedListBox4
         '
-        Me.CheckedListBox4.CheckOnClick = True
         resources.ApplyResources(Me.CheckedListBox4, "CheckedListBox4")
+        Me.CheckedListBox4.CheckOnClick = True
         Me.CheckedListBox4.FormattingEnabled = True
         Me.CheckedListBox4.Name = "CheckedListBox4"
         '
