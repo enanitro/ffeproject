@@ -458,6 +458,7 @@ Public Class logger
             End If
             data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
+            form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -534,6 +535,7 @@ Public Class logger
             End If
             data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
+            form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -597,6 +599,7 @@ Public Class logger
             End If
             data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
+            form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -643,8 +646,11 @@ Public Class logger
             Dim ins As New insert_Data
             ins.init_string()
 
+
+
             long_file = long_file / list.CheckedIndices.Count
             config_progressbar(bar, long_file, list, n_data)
+
 
             Do
                 If linea <> Nothing Then
@@ -690,6 +696,7 @@ Public Class logger
             End If
             data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
+            form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -783,7 +790,7 @@ Public Class logger
         make_time = hh & ":" & mm & ":" & ss
     End Function
 
-    Private Function format_time(ByVal time As Double, ByVal unit As Integer, ByVal ini As String) As String
+    Private Function format_time(ByVal time As Double, ByVal unit As Integer, ByRef ini As String) As String
         Dim res As String
         Dim h, m, s, ss As Integer
         Dim format() As String
