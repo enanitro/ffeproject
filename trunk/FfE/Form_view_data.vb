@@ -83,84 +83,69 @@ Public Class Form_view_data
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql, res As String
-        Dim i, j, max, count, lines, cols As Integer
+        Dim i, j, max, count, cols As Integer
         res = ""
 
         Try
 
-            sql = "select count(data_index) from data_full where drive_id = " & drive_id & _
-            " and logger_id = " & logger_id & ""
-            execute_query(sql, max)
-
-
             sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
-            " and logger_id = " & logger_id & ""
+            " and logger_id = " & logger_id
             execute_query(sql, count)
-            Dim v_query(count - 1) As MySqlDataReader
-            Dim v_cn(count - 1) As MySqlConnection
-            Dim v_cmd(count - 1) As MySqlCommand
+            Dim sqls(count - 1) As String
+            Dim lines(count - 1) As Integer
 
-
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+            " and logger_id = " & logger_id
             cn.Open()
             cmd.Connection = cn
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
-             " and logger_id = " & logger_id
-            cmd.CommandTimeout = 1000
             cmd.CommandText = sql
-            query = cmd.ExecuteReader()
+            cmd.CommandTimeout = 1000
+            query = cmd.ExecuteReader
+            i = 0
 
-            j = 0
-            cols = 0
             While query.Read
-                v_cn(j) = New MySqlConnection(connection)
-                v_cn(j).Open()
-                sql = "select data_index,time,value from data" & _
-                " where drive_id = " & drive_id & " and logger_id = " & logger_id & _
-                " and data_id like '" & query.GetString(0) & "'"
-                v_cmd(j) = New MySqlCommand(sql, v_cn(j))
-                v_cmd(j).CommandTimeout = 1000
-                v_query(j) = v_cmd(j).ExecuteReader()
-                grid.Columns.Add(cols, "INDEX")
-                grid.Columns.Add(cols + 1, "TIME")
-                grid.Columns.Add(cols + 2, query.GetString(0))
-                cols += 3
-                j += 1
+                grid.Columns.Add("INDEX", "INDEX")
+                grid.Columns.Add("TIME", "TIME")
+                grid.Columns.Add(query.GetString(0), query.GetString(0))
+                sql = "select count(data_index) from data where drive_id = " & drive_id & _
+                      " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
+                execute_query(sql, lines(i))
+                sqls(i) = "select data_index,time,value from data where drive_id = " & drive_id & _
+                      " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
+                i += 1
             End While
-            count = j
+            cn.Close()
 
-            i = 1
-            lines = 0
-            While i <= max
+            max = lines(0)
+            For i = 1 To count - 1
+                If lines(i) > max Then
+                    max = lines(i)
+                End If
+            Next
+
+            For i = 0 To max
                 grid.Rows.Add()
+            Next
+
+            For i = 0 To count - 1
+                cn.Open()
+                cmd.Connection = cn
+                cmd.CommandText = sqls(i)
+                cmd.CommandTimeout = 1000
+                query = cmd.ExecuteReader
                 j = 0
-                cols = 0
-                While j < count
-                    If v_query(j).Read Then
-                        grid.Rows.Item(lines).Cells(cols).Value = v_query(j).GetString(0)
-                        grid.Rows.Item(lines).Cells(cols + 1).Value = v_query(j).GetString(1)
-                        grid.Rows.Item(lines).Cells(cols + 2).Value = v_query(j).GetString(2)
-                        i += 1
-                    Else
-                        grid.Rows.Item(lines).Cells(cols).Value = ""
-                        grid.Rows.Item(lines).Cells(cols + 1).Value = ""
-                        grid.Rows.Item(lines).Cells(cols + 2).Value = ""
+                While query.Read
+                    If grid.Rows.Count - 1 < j Then
+                        grid.Rows.Add()
                     End If
-                    cols += 3
+                    grid(i * 3, j).Value = query.GetString(0)
+                    grid(i * 3 + 1, j).Value = query.GetString(1)
+                    grid(i * 3 + 2, j).Value = query.GetString(2)
                     j += 1
                 End While
-                lines += 1
-            End While
-
-            'i = 1
-            'While query.Read()
-            ' execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
-            '                             query.GetString(0), i)
-            'End While
-
-
-            For j = 0 To count - 1
-                v_cn(j).Close()
+                cn.Close()
             Next
+            MsgBox(DateTime.Now)
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -183,7 +168,7 @@ Public Class Form_view_data
             cn.Open()
 
             ' Pasar la consulta sql y la conexión al Sql Command
-            cmd.CommandTimeout = 0
+            cmd.CommandTimeout = 1000
             cmd.Connection = cn
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
