@@ -154,6 +154,7 @@ Public Class Form_drive
             If cmb_driver.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
                 Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(6) = Me.cmb_driver.SelectedItem(0)
             End If
+            combo = True
         Catch
         End Try
     End Sub
@@ -171,6 +172,7 @@ Public Class Form_drive
             If cmb_car.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
                 Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(8) = Me.cmb_car.SelectedItem(0)
             End If
+            combo = True
         Catch
         End Try
     End Sub
@@ -188,6 +190,7 @@ Public Class Form_drive
             If cmb_importer.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
                 Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(7) = Me.cmb_importer.SelectedItem(0)
             End If
+            combo = True
         Catch
         End Try
     End Sub
@@ -218,9 +221,9 @@ Public Class Form_drive
     End Sub
 
     Private Sub cmb_usage_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_usage.SelectedIndexChanged
-
         If cmb_usage.SelectedIndex <> -1 And Me.DriveBindingSource.Position <> -1 Then
             Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5) = Me.cmb_usage.SelectedValue
+            combo = True
         End If
     End Sub
 
