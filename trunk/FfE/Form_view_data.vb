@@ -4,6 +4,9 @@ Imports MySql.Data.MySqlClient
 Public Class Form_view_data
     Dim drive_id As Integer
     Public isClosed As Boolean = False
+    Dim sqls(0) As String
+    Dim range1, range2, scr As Integer
+
     Public Sub New()
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
@@ -19,6 +22,8 @@ Public Class Form_view_data
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
         show_data(DataGridView2, FfE_Main.id_fluke)
+        range1 = 0
+        range2 = 50
         show_data_canbus(DataGridView3, FfE_Main.id_canbus)
 
     End Sub
@@ -83,57 +88,43 @@ Public Class Form_view_data
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql, res As String
-        Dim i, j, max, count, cols As Integer
+        'Dim sqls(0) As String
+        Dim i, j, count As Integer
         res = ""
 
         Try
+            If range1 = 0 Then
+                scr = 0
+                sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+                    " and logger_id = " & logger_id
+                cn.Open()
+                cmd.Connection = cn
+                cmd.CommandText = sql
+                cmd.CommandTimeout = 1000
+                query = cmd.ExecuteReader
 
-            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id & _
-            " and logger_id = " & logger_id
-            execute_query(sql, count)
-            Dim sqls(count - 1) As String
-            Dim lines(count - 1) As Integer
-
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
-            " and logger_id = " & logger_id
-            cn.Open()
-            cmd.Connection = cn
-            cmd.CommandText = sql
-            cmd.CommandTimeout = 1000
-            query = cmd.ExecuteReader
-            i = 0
-
-            While query.Read
-                grid.Columns.Add("INDEX", "INDEX")
-                grid.Columns.Add("TIME", "TIME")
-                grid.Columns.Add(query.GetString(0), query.GetString(0))
-                sql = "select count(data_index) from data where drive_id = " & drive_id & _
-                      " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
-                execute_query(sql, lines(i))
-                sqls(i) = "select data_index,time,value from data where drive_id = " & drive_id & _
-                      " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
-                i += 1
-            End While
-            cn.Close()
-
-            max = lines(0)
-            For i = 1 To count - 1
-                If lines(i) > max Then
-                    max = lines(i)
-                End If
-            Next
-
-            For i = 0 To max
-                grid.Rows.Add()
-            Next
+                count = 0
+                While query.Read
+                    grid.Columns.Add("INDEX", "INDEX")
+                    grid.Columns.Add("TIME", "TIME")
+                    grid.Columns.Add(query.GetString(0), query.GetString(0))
+                    Array.Resize(sqls, count + 1)
+                    sqls(count) = "select data_index,time,value from data where drive_id = " & drive_id & _
+                          " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
+                    count += 1
+                End While
+                cn.Close()
+            Else
+                count = 13
+            End If
 
             For i = 0 To count - 1
                 cn.Open()
                 cmd.Connection = cn
-                cmd.CommandText = sqls(i)
+                cmd.CommandText = sqls(i) & " limit " & range1 & "," & range2
                 cmd.CommandTimeout = 1000
                 query = cmd.ExecuteReader
-                j = 0
+                j = range1
                 While query.Read
                     If grid.Rows.Count - 1 < j Then
                         grid.Rows.Add()
@@ -145,7 +136,6 @@ Public Class Form_view_data
                 End While
                 cn.Close()
             Next
-            MsgBox(DateTime.Now)
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -322,5 +312,20 @@ Public Class Form_view_data
 
     Private Sub Form_view_data_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         show_loggers()
+    End Sub
+
+    Private Sub DataGridView3_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DataGridView3.MouseWheel
+        If scr < 5 Then
+            scr += 1
+        Else
+            range1 = range2
+            range2 += 50
+            show_data_canbus(DataGridView3, 4)
+            scr = 0
+        End If
+    End Sub
+
+    Private Sub DataGridView3_Scroll(ByVal sender As Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles DataGridView3.Scroll
+        
     End Sub
 End Class
