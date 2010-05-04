@@ -150,7 +150,7 @@ Partial Class Form_view_data
         Me.DataGridView.Name = "DataGridView"
         Me.DataGridView.ReadOnly = True
         Me.DataGridView.RowHeadersVisible = False
-        Me.DataGridView.Size = New System.Drawing.Size(1083, 527)
+        Me.DataGridView.Size = New System.Drawing.Size(1077, 527)
         Me.DataGridView.TabIndex = 6
         '
         'TabPage3
@@ -197,7 +197,7 @@ Partial Class Form_view_data
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(1083, 527)
+        Me.DataGridView1.Size = New System.Drawing.Size(1078, 527)
         Me.DataGridView1.TabIndex = 10
         '
         'TabPage4
@@ -244,7 +244,7 @@ Partial Class Form_view_data
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowHeadersVisible = False
-        Me.DataGridView2.Size = New System.Drawing.Size(1083, 527)
+        Me.DataGridView2.Size = New System.Drawing.Size(1077, 527)
         Me.DataGridView2.TabIndex = 5
         '
         'TabPage5

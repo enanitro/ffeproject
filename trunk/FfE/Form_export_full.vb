@@ -145,6 +145,8 @@ Public Class Form_export_full
         Dim text, sql, res, points, channels As String
         Dim sw As New System.IO.StreamWriter(path)
         Try
+            procesing.Show()
+            Application.DoEvents()
             data_points_channels(points, channels, logger_id)
             head_csv_file(text)
             res = ""
@@ -253,6 +255,7 @@ Public Class Form_export_full
 
             bar.Visible = True
             percent.Visible = True
+            procesing.Close()
             config_progressbar(max, bar)
             i = 1
             While query.Read()
@@ -294,7 +297,7 @@ Public Class Form_export_full
         Dim query As MySqlDataReader
         Dim sw As New System.IO.StreamWriter(path, True)
         Dim sql, res As String
-        Dim i, j, max, count, lines As Integer
+        Dim i, j, max, count As Integer
         res = ""
 
         Try
@@ -309,13 +312,8 @@ Public Class Form_export_full
             percent.Visible = True
             config_progressbar(max, bar)
 
-            sql = "select count(distinct data_id) from data_full where drive_id = " & drive_id.Text & _
-            " and logger_id = " & logger_id & ""
-            execute_query(sql, count)
-            Dim v_query(count - 1) As MySqlDataReader
-            Dim v_cn(count - 1) As MySqlConnection
-            Dim v_cmd(count - 1) As MySqlCommand
-
+            Dim sqls(0) As String
+            Dim line(0) As String
 
             cn.Open()
             cmd.Connection = cn
@@ -325,56 +323,52 @@ Public Class Form_export_full
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-            j = 0
+            res = ""
+            count = 0
             While query.Read
-                v_cn(j) = New MySqlConnection(connection)
-                v_cn(j).Open()
-                res += "INDEX,TIME," & query.GetString(0) & ", --- ,"
-                sql = "select concat(data_index,',',time,',',value) from data" & _
+                Array.Resize(sqls, count + 1)
+                sqls(count) = "select concat(data_index,',',time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
                 " and data_id like '" & query.GetString(0) & "'"
-                v_cmd(j) = New MySqlCommand(sql, v_cn(j))
-                v_cmd(j).CommandTimeout = 1000
-                v_query(j) = v_cmd(j).ExecuteReader()
-                j += 1
+                res += "INDEX,TIME," & query.GetString(0)
+                count += 1
             End While
-            res = res.Substring(0, res.Length - 7) & vbCrLf
+            cn.Close()
+            sw.WriteLine(res)
+
+            Dim range1, range2 As Integer
+            Dim lines As List(Of String)
+            procesing.Close()
+            range1 = 0
+            range2 = 1000
+            For i = 0 To count - 1
+                cn.Open()
+                cmd.Connection = cn
+                cmd.CommandText = sqls(i) & " limit " & range1 & "," & range2
+                cmd.CommandTimeout = 1000
+                query = cmd.ExecuteReader
+                j = range1
+                If query.HasRows Then
+                    While query.Read
+
+                    End While
+                End If
+                cn.Close()
+                range1 = range2
+                range2 += 1000
+            Next
+
+
 
             i = 1
-            lines = 1
-            While i <= max
-                For j = 0 To count - 1
-                    If v_query(j).Read Then
-                        res += v_query(j).GetString(0) & ",,"
-                        progressbar(i, percent.Text, bar)
-                        i += 1
-                    Else
-                        res += ",,,,"
-                    End If
-                Next
-                res = res.Remove(res.Length - 1)
-                res += vbCrLf
-                If (lines Mod 1001) >= 1000 Then
-                    sw.Write(res)
-                    res = ""
-                End If
-                lines += 1
-                Application.DoEvents()
+            While query.Read()
+                execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
+                                            query.GetString(0), i)
             End While
-
-            'i = 1
-            'While query.Read()
-            ' execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
-            '                             query.GetString(0), i)
-            'End While
 
             res += vbCrLf
             sw.WriteLine(res)
             sw.Close()
-
-            For j = 0 To count - 1
-                v_cn(j).Close()
-            Next
 
         Catch ex As Exception
             If ex.Message = "Export process aborted" Then
