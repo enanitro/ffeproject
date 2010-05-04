@@ -147,8 +147,8 @@ Public Class Form_delete_channel
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        delete_channel(FfE_Main.id_fluke, CheckedListBox3)
-        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
+        delete_channel(FfE_Main.id_lmg, CheckedListBox3)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
@@ -179,7 +179,7 @@ Public Class Form_delete_channel
     Private Sub Form_delete_channel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
         execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
-        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
         execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
     End Sub
 

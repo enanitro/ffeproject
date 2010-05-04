@@ -42,7 +42,7 @@ Public Class form_import_csv_full
         Dim logger As New logger
         logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
         'id_logger = 3
-        path_fluke = logger.logger_dialog(OpenFileDialog, CheckedListBox3, FfE_Main.id_fluke, _
+        path_fluke = logger.logger_dialog(OpenFileDialog, CheckedListBox3, FfE_Main.id_lmg, _
                                           TextBox3, long_fluke, id_measure_fluke)
         If CheckedListBox3.Items.Count > 0 Then
             all_channels(name_measure_fluke, CheckedListBox3)
@@ -91,8 +91,8 @@ Public Class form_import_csv_full
             If path_fluke <> "" And GroupBox_fluke.Enabled _
             And CheckedListBox3.CheckedItems.Count <> 0 Then
                 Panel3.Visible = True
-                logger.insert_logger_fluke(path_fluke, CheckedListBox3, _
-                TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_fluke, id_drive, long_fluke, id_measure_fluke)
+                logger.insert_logger_lmg500(path_fluke, CheckedListBox3, _
+                TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_lmg, id_drive, long_fluke, id_measure_fluke)
                 'GroupBox_fluke.Enabled = False
                 imp = True
             End If
@@ -112,7 +112,7 @@ Public Class form_import_csv_full
             If abort = True Then
                 logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
                 logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
-                logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_fluke)
+                logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_lmg)
                 logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
                 abort = False
             Else
@@ -135,7 +135,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
-        select_measure(CheckedListBox3, id_measure_fluke, FfE_Main.id_fluke, name_measure_fluke)
+        select_measure(CheckedListBox3, id_measure_fluke, FfE_Main.id_lmg, name_measure_fluke)
     End Sub
 
     Private Sub CheckedListBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox4.SelectedIndexChanged
@@ -385,8 +385,8 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button13.Click
-        associations(CheckedListBox3, FfE_Main.id_fluke, id_measure_fluke)
-        put_ch_list(CheckedListBox3, FfE_Main.id_fluke, name_measure_fluke)
+        associations(CheckedListBox3, FfE_Main.id_lmg, id_measure_fluke)
+        put_ch_list(CheckedListBox3, FfE_Main.id_lmg, name_measure_fluke)
     End Sub
 
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click

@@ -3,7 +3,7 @@
 Public Class FfE_Main
     Public id_graphtec As Integer = -1
     Public id_gps As Integer = -1
-    Public id_fluke As Integer = -1
+    Public id_lmg As Integer = -1
     Public id_canbus As Integer = -1
 
     Private Sub CarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CarToolStripMenuItem.Click
@@ -47,7 +47,7 @@ Public Class FfE_Main
             Dim get_id As New logger
             id_graphtec = get_id.get_logger_id("GRAPHTEC GL800")
             id_gps = get_id.get_logger_id("COLUMBUS GPS")
-            id_fluke = get_id.get_logger_id("LMG 500")
+            id_lmg = get_id.get_logger_id("LMG 500")
             id_canbus = get_id.get_logger_id("CAN-BUS")
         Catch ex As Exception
             Dim conf_conection As New Form_Connection

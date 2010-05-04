@@ -123,7 +123,7 @@ Public Class logger
             If id = FfE_Main.id_gps Then
                 analyze_logger_columbus_gps(path, list, text, id, long_file, measure)
             Else
-                If id = FfE_Main.id_fluke Then
+                If id = FfE_Main.id_lmg Then
                     analyze_logger_fluke(path, list, text, id, long_file, measure)
                 ElseIf id = FfE_Main.id_canbus Then
                     analyze_logger_canbus(path, list, text, id, long_file, measure)
@@ -283,49 +283,13 @@ Public Class logger
         Dim i As Integer
 
         Try
-            'leer cabecera, hacer comprobaciones, mostrarla por pantalla
-            linea1 = fichero.ReadLine
-            datos1 = linea1.Split(";")
-            If datos1(0) <> "PQ Log" Then
-                MsgBox("error", MsgBoxStyle.Critical)
-                Exit Sub
-            End If
-
-            'leo cabecera
-            text.Text = linea1 + vbCrLf
-            linea1 = fichero.ReadLine
-            datos1 = linea1.Split(";")
-            text.Text += datos1(0) & ", " & datos1(1) + vbCrLf
-            text.Text += datos1(2) + vbCrLf
-            For i = 0 To 4
-                linea1 = fichero.ReadLine
-                datos1 = linea1.Split(";")
-                text.Text += linea1 + vbCrLf
-            Next
-            linea1 = fichero.ReadLine
-            datos1 = linea1.Split(";")
-            datos2 = datos1(1).Split(":")
-            text.Text += datos1(0) & ", " & datos2(0) + vbCrLf
-            text.Text += datos2(1) & ", " & datos1(2) & ", " & datos1(3) + vbCrLf
-
-            linea1 = fichero.ReadLine
-
             'leemos los canales y sus unidades
             linea1 = fichero.ReadLine
-            datos1 = linea1.Split(";")
-            linea2 = fichero.ReadLine
-            datos2 = linea2.Split(";")
+            datos1 = linea1.Split(",")
 
             'introducir los canales en checklistbox
-            For i = 2 To datos1.Length - 1
-                If datos2(i) <> "" Then
-                    'name = (i - 1) & " " & datos1(i) & " (" & datos2(i) & ")"
-                    name = datos1(i) & " (" & datos2(i) & ")"
-                Else
-                    'name = (i - 1) & " " & datos1(i)
-                    name = datos1(i)
-                End If
-                list.Items.Add(name)
+            For i = 1 To datos1.Length - 1
+                list.Items.Add(datos1(i))
             Next
             Array.Resize(measure, list.Items.Count)
 
@@ -336,6 +300,7 @@ Public Class logger
             Loop Until linea1 Is Nothing
 
             'escribo cabecera
+            text.Text += "LMG500" & vbCrLf
             text.Text += "Total data points: " & long_file
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -552,7 +517,7 @@ Public Class logger
     End Sub
 
     'inserta los datos del fichero en la tabla data (logger Fluke)
-    Public Sub insert_logger_fluke(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
+    Public Sub insert_logger_lmg500(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
@@ -567,9 +532,7 @@ Public Class logger
 
         Try
             'leo la primera linea que pertenece a la cabecera
-            For i = 0 To 10
-                linea = fichero.ReadLine
-            Next
+            linea = fichero.ReadLine
 
             Dim ins As New insert_Data
             ins.init_string()
@@ -580,19 +543,20 @@ Public Class logger
                 linea = fichero.ReadLine
                 If linea <> Nothing Then
                     Application.DoEvents()
-                    datos = linea.Split(";")
+                    datos = linea.Split(",")
                     index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
 
-                        If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                        If IsNumeric(datos(list.CheckedIndices.Item(i) + 1)) Then
                             data_points += 1
                             clock += 1
 
-                            val = datos(list.CheckedIndices.Item(i) + 2).Replace(",", ".")
+                            '& "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
+                            val = datos(list.CheckedIndices.Item(i) + 1)
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
+                            & "'" & "00:00:00" & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
                         End If

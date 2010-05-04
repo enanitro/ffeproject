@@ -21,7 +21,7 @@ Public Class Form_export_full
             End If
             If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
                 TextBox3.Visible = False
-                logger_csv_file(path_fluke.Text, FfE_Main.id_fluke, "LMG 500")
+                logger_csv_file(path_fluke.Text, FfE_Main.id_lmg, "LMG 500")
                 into = True
             End If
             If path_canbus.Text <> "" And abort = False And CheckBox4.CheckState = CheckState.Unchecked Then
@@ -51,7 +51,7 @@ Public Class Form_export_full
         path_gps.Text = ""
         TextBox2.Visible = False
         ProgressBar4.Visible = False
-        percent_fluke.Visible = False
+        percent_lmg500.Visible = False
         path_fluke.Text = ""
         TextBox3.Visible = False
         ProgressBar3.Visible = False
@@ -165,8 +165,8 @@ Public Class Form_export_full
                         execute_query_loggers(logger_id, logger, ProgressBar1, percent_graphtec, TextBox1, path)
                     Case FfE_Main.id_gps
                         execute_query_loggers(logger_id, logger, ProgressBar2, percent_gps, TextBox2, path)
-                    Case FfE_Main.id_fluke
-                        execute_query_loggers(logger_id, logger, ProgressBar3, percent_fluke, TextBox3, path)
+                    Case FfE_Main.id_lmg
+                        execute_query_loggers(logger_id, logger, ProgressBar3, percent_lmg500, TextBox3, path)
                     Case FfE_Main.id_canbus
                         execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
@@ -630,7 +630,7 @@ Public Class Form_export_full
     Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox3.CheckedChanged
         If CheckBox3.CheckState = CheckState.Checked Then
             If TextBox3.Text = "" Then
-                SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
+                SQL_syntax(FfE_Main.id_lmg, "LMG 500", TextBox3)
             End If
             TextBox3.Visible = True
         Else
@@ -652,7 +652,7 @@ Public Class Form_export_full
     Private Sub SQL_channels()
         SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
         SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
-        SQL_syntax(FfE_Main.id_fluke, "LMG 500", TextBox3)
+        SQL_syntax(FfE_Main.id_lmg, "LMG 500", TextBox3)
         SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
     End Sub
 End Class
