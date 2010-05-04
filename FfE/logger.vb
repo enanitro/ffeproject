@@ -27,10 +27,14 @@ Public Class logger
         Public signed As Boolean
         Public factor As Double
         Public offset As Integer
+        Public average As Boolean
+        Public value As Double
+        Public time As String
+        Public count As Double
 
         Public Sub New(ByVal i As Integer, ByVal sb As Integer, ByVal lg As Integer, _
                        ByVal sq As String, ByVal sg As Boolean, ByVal dec As Double, _
-                       ByVal os As Integer)
+                       ByVal os As Integer, ByVal av As Boolean)
             id = i
             startbit = sb
             longbits = lg
@@ -38,6 +42,10 @@ Public Class logger
             signed = sg
             factor = dec
             offset = os
+            average = av
+            value = 0
+            time = ""
+            count = 0
         End Sub
 
     End Class
@@ -71,12 +79,12 @@ Public Class logger
             For Each i In list.CheckedIndices
                 cn.Open()
                 cmd.Connection = cn
-                s = "select channel_id, dec_id, startbit, longbits, sequence, signed, factor, offset " & _
+                s = "select channel_id, dec_id, startbit, longbits, sequence, signed, factor, offset, average " & _
                     " from ids_canbus where channel_id = " & i & ";"
                 cmd.CommandText = s
                 dr = cmd.ExecuteReader
                 dr.Read()
-                table_canbus.Add(i, New str_canbus(dr(1), dr(2), dr(3), dr(4), dr(5), dr(6), dr(7)))
+                table_canbus.Add(i, New str_canbus(dr(1), dr(2), dr(3), dr(4), dr(5), dr(6), dr(7), dr(8)))
                 cn.Close()
             Next
         Catch ex As Exception
@@ -107,6 +115,8 @@ Public Class logger
     'analiza la cabecera del archivo
     Public Sub analizar_CVS(ByVal path As String, ByVal id As String, ByRef text As TextBox, _
                             ByRef list As CheckedListBox, ByRef long_file As String, ByRef measure() As Integer)
+        procesing.Show()
+        Application.DoEvents()
         If id = FfE_Main.id_graphtec Then
             analyze_logger_graphtec_gl800(path, list, text, id, long_file, measure)
         Else
@@ -120,6 +130,7 @@ Public Class logger
                 End If
             End If
         End If
+        procesing.Close()
     End Sub
 
     'analisis del archivo cvs del logger graphtec gl800
@@ -611,7 +622,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, time, tm, val As String
+        Dim linea, aux, time, tm, val, avg As String
         Dim datos() As String
         Dim div As Int64 = 0
         Dim num_lines As Integer = 0
@@ -672,11 +683,41 @@ Public Class logger
                                     val = val.Replace(",", ".")
                                     t = CType(datos(0), Double)
                                     tm = format_time(t, div, time)
-                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                    & "," & id_logger & "," & measure(x) & "," _
-                                    & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
-                                    & val & ")"
-                                    ins.set_string(aux)
+                                    If table_canbus(x).average = True Then
+                                        'inicializamos por primera vez los datos
+                                        If table_canbus(x).time = "" Then
+                                            table_canbus(x).time = tm
+                                            table_canbus(x).value = val
+                                            table_canbus(x).count = 1
+                                        Else
+                                            'todavia estamos en la misma hora, sumamos los valores
+                                            If table_canbus(x).time = tm Then
+                                                table_canbus(x).value += val
+                                                table_canbus(x).count += 1
+                                            Else
+                                                'hemos cambiado de hora, guardamos la media 
+                                                res = table_canbus(x).value / table_canbus(x).count
+                                                avg = CType(res, String)
+                                                avg = avg.Replace(",", ".")
+                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                                & "," & id_logger & "," & measure(x) & "," _
+                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                                & avg & ")"
+                                                ins.set_string(aux)
+                                                'inicializamos el valor para el siguiente segundo
+                                                table_canbus(x).time = tm
+                                                table_canbus(x).value = val
+                                                table_canbus(x).count = 1
+                                            End If
+                                        End If
+                                    Else
+                                        aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                        & "," & id_logger & "," & measure(x) & "," _
+                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
+                                        & val & ")"
+                                        ins.set_string(aux)
+                                    End If
+
                                 Next
                                 progressbar(num_lines, bar, percent)
                             End If
@@ -691,6 +732,22 @@ Public Class logger
                 End If
                 linea = fichero.ReadLine
             Loop Until linea Is Nothing
+
+            'hay que comprobar que valores quedan por ser importados porque el ultimo cambio de hora no se reconoce
+            For Each x In list.CheckedIndices
+                If table_canbus(x).average = True And table_canbus(x).time <> "" Then
+                    'guardamos la media 
+                    res = table_canbus(x).value / table_canbus(x).count
+                    avg = CType(res, String)
+                    avg = avg.Replace(",", ".")
+                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                    & "," & id_logger & "," & measure(x) & "," _
+                    & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                    & avg & ")"
+                    ins.set_string(aux)
+                End If
+            Next
+
             If Not ins.is_empty Then
                 ins.insert_into_string()
             End If

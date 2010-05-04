@@ -425,6 +425,8 @@ Public Class Form_fharprofil
     End Function
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        procesing.Show()
+        Application.DoEvents()
         Dim fharprofiles As New List(Of fharprofile)
         Dim labels() As String
         load_fahrprofiles(DataGridView1, fharprofiles, labels, calculate_range_km(DataGridView1), 4)
@@ -432,9 +434,12 @@ Public Class Form_fharprofil
         pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill
+        procesing.Close()
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        procesing.Show()
+        Application.DoEvents()
         Dim fharprofiles As New List(Of fharprofile)
         Dim labels() As String
         load_fahrprofiles(DataGridView1, fharprofiles, labels, calculate_range_speed(DataGridView1), 5)
@@ -442,10 +447,13 @@ Public Class Form_fharprofil
         pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill
+        procesing.Close()
     End Sub
 
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        procesing.Show()
+        Application.DoEvents()
         Dim fharprofiles As New List(Of fharprofile)
         Dim labels() As String
         load_fahrprofiles_time(DataGridView1, fharprofiles, labels, calculate_range_time(DataGridView1))
@@ -453,6 +461,7 @@ Public Class Form_fharprofil
         pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill
+        procesing.Close()
     End Sub
 
     Private Sub DataGridView1_CellMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick

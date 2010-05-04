@@ -133,19 +133,24 @@ Public Class fharprofilGraphic
         myPane.GraphPane.Title.Text = "Histogram"
         myPane.GraphPane.YAxis.Title.Text = "Frequency"
         myPane.GraphPane.XAxis.Title.Text = Xtitle
+
         For Each ele In listf
             Dim myCurve As BarItem = myPane.GraphPane.AddBar(ele.id, Nothing, ele.value, Nothing)
             myCurve.Bar.Fill = New Fill(ele.colour, Color.White, ele.colour)
         Next
+
         'Draw the X tics between the labels instead of at the labels
         myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
 
         'Set the XAxis to Text type
         myPane.GraphPane.XAxis.Type = AxisType.Text
         'Set the XAxis labels
-
         myPane.GraphPane.XAxis.Scale.TextLabels = labels
         myPane.GraphPane.XAxis.Scale.FontSpec.Size = 10.0F
+
+        'myPane.GraphPane.YAxis.Scale.
+        myPane.GraphPane.YAxis.Scale.Format = "0"
+
 
         myPane.GraphPane.BarSettings.Type = BarType.Stack
         myPane.GraphPane.BarSettings.MinClusterGap = 0

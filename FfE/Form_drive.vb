@@ -434,6 +434,8 @@ Public Class Form_drive
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        procesing.Show()
+        Application.DoEvents()
         If Drive_idLabel1.Text <> "" Then
             If Not show_Data Is Nothing Then
                 If show_Data.isClosed Then
@@ -445,6 +447,7 @@ Public Class Form_drive
                 showData()
             End If
         End If
+        procesing.Close()
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -495,6 +498,8 @@ Public Class Form_drive
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        procesing.Show()
+        Application.DoEvents()
         Try
             If form_fahrprofil Is Nothing Then
                 showFahrprofil()
@@ -510,7 +515,7 @@ Public Class Form_drive
         Finally
             'export.Visible = False
         End Try
-        
+        procesing.Close()
     End Sub
 
     Private Sub ToolStripButton5_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton5.MouseDown
