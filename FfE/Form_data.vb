@@ -207,8 +207,8 @@ Public Class Form_data
         show_data(DataGridView1, FfE_Main.id_gps, CheckedListBox2)
         CheckBox11.CheckState = CheckState.Checked
 
-        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
-        show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
+        show_data(DataGridView2, FfE_Main.id_lmg, CheckedListBox3)
         CheckBox12.CheckState = CheckState.Checked
 
         execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
@@ -496,13 +496,13 @@ Public Class Form_data
     End Sub
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
-        show_data(DataGridView, FfE_Main.id_fluke, CheckedListBox3)
+        show_data(DataGridView, FfE_Main.id_lmg, CheckedListBox3)
     End Sub
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-        delete_channel(FfE_Main.id_fluke, CheckedListBox3)
-        execute_list_channels(FfE_Main.id_fluke, CheckedListBox3)
-        show_data(DataGridView2, FfE_Main.id_fluke, CheckedListBox3)
+        delete_channel(FfE_Main.id_lmg, CheckedListBox3)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
+        show_data(DataGridView2, FfE_Main.id_lmg, CheckedListBox3)
         CheckBox12.CheckState = CheckState.Checked
     End Sub
 
@@ -531,7 +531,7 @@ Public Class Form_data
     End Sub
 
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        show_data(DataGridView3, FfE_Main.id_fluke, CheckedListBox4)
+        show_data(DataGridView3, FfE_Main.id_lmg, CheckedListBox4)
     End Sub
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click

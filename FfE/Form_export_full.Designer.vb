@@ -44,7 +44,7 @@ Partial Class Form_export_full
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
         Me.TextBox3 = New System.Windows.Forms.TextBox
         Me.CheckBox3 = New System.Windows.Forms.CheckBox
-        Me.percent_fluke = New System.Windows.Forms.Label
+        Me.percent_lmg500 = New System.Windows.Forms.Label
         Me.path_fluke = New System.Windows.Forms.Label
         Me.ProgressBar3 = New System.Windows.Forms.ProgressBar
         Me.Button4 = New System.Windows.Forms.Button
@@ -277,7 +277,7 @@ Partial Class Form_export_full
         Me.GroupBox5.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.GroupBox5.Controls.Add(Me.TextBox3)
         Me.GroupBox5.Controls.Add(Me.CheckBox3)
-        Me.GroupBox5.Controls.Add(Me.percent_fluke)
+        Me.GroupBox5.Controls.Add(Me.percent_lmg500)
         Me.GroupBox5.Controls.Add(Me.path_fluke)
         Me.GroupBox5.Controls.Add(Me.ProgressBar3)
         Me.GroupBox5.Controls.Add(Me.Button4)
@@ -311,13 +311,13 @@ Partial Class Form_export_full
         '
         'percent_fluke
         '
-        Me.percent_fluke.AutoSize = True
-        Me.percent_fluke.Location = New System.Drawing.Point(246, 49)
-        Me.percent_fluke.Name = "percent_fluke"
-        Me.percent_fluke.Size = New System.Drawing.Size(27, 15)
-        Me.percent_fluke.TabIndex = 13
-        Me.percent_fluke.Text = "0%"
-        Me.percent_fluke.Visible = False
+        Me.percent_lmg500.AutoSize = True
+        Me.percent_lmg500.Location = New System.Drawing.Point(246, 49)
+        Me.percent_lmg500.Name = "percent_fluke"
+        Me.percent_lmg500.Size = New System.Drawing.Size(27, 15)
+        Me.percent_lmg500.TabIndex = 13
+        Me.percent_lmg500.Text = "0%"
+        Me.percent_lmg500.Visible = False
         '
         'path_fluke
         '
@@ -685,7 +685,7 @@ Partial Class Form_export_full
     Friend WithEvents ProgressBar2 As System.Windows.Forms.ProgressBar
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents percent_fluke As System.Windows.Forms.Label
+    Friend WithEvents percent_lmg500 As System.Windows.Forms.Label
     Friend WithEvents path_fluke As System.Windows.Forms.Label
     Friend WithEvents ProgressBar3 As System.Windows.Forms.ProgressBar
     Friend WithEvents Button4 As System.Windows.Forms.Button
