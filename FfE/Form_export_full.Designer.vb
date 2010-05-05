@@ -76,16 +76,19 @@ Partial Class Form_export_full
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
+        Me.grid = New System.Windows.Forms.DataGridView
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.grid)
         Me.Panel1.Controls.Add(Me.Button10)
         Me.Panel1.Controls.Add(Me.btn_export)
         Me.Panel1.Controls.Add(Me.GroupBox4)
@@ -309,11 +312,11 @@ Partial Class Form_export_full
         Me.CheckBox3.Text = "SQL syntax only"
         Me.CheckBox3.UseVisualStyleBackColor = True
         '
-        'percent_fluke
+        'percent_lmg500
         '
         Me.percent_lmg500.AutoSize = True
         Me.percent_lmg500.Location = New System.Drawing.Point(246, 49)
-        Me.percent_lmg500.Name = "percent_fluke"
+        Me.percent_lmg500.Name = "percent_lmg500"
         Me.percent_lmg500.Size = New System.Drawing.Size(27, 15)
         Me.percent_lmg500.TabIndex = 13
         Me.percent_lmg500.Text = "0%"
@@ -643,6 +646,18 @@ Partial Class Form_export_full
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Drive ID:"
         '
+        'grid
+        '
+        Me.grid.AllowUserToAddRows = False
+        Me.grid.AllowUserToDeleteRows = False
+        Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grid.Location = New System.Drawing.Point(708, 566)
+        Me.grid.Name = "grid"
+        Me.grid.ReadOnly = True
+        Me.grid.Size = New System.Drawing.Size(142, 86)
+        Me.grid.TabIndex = 34
+        Me.grid.Visible = False
+        '
         'Form_export_full
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -667,6 +682,7 @@ Partial Class Form_export_full
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -723,4 +739,5 @@ Partial Class Form_export_full
     Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents grid As System.Windows.Forms.DataGridView
 End Class

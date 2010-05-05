@@ -5,8 +5,6 @@ Public Class Form_view_data
     Dim drive_id As Integer
     Public isClosed As Boolean = False
     Dim sqls(0) As String
-    Dim range1, range2, scr, offset, cont(0) As Integer
-    Dim check As Boolean = False
 
     Public Sub New()
         ' Llamada necesaria para el Diseñador de Windows Forms.
@@ -23,8 +21,6 @@ Public Class Form_view_data
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
         show_data(DataGridView2, FfE_Main.id_lmg)
-        range1 = 0
-        range2 = 500
         show_data_canbus(DataGridView3, FfE_Main.id_canbus)
         'show_data(DataGridView3, FfE_Main.id_canbus)
 
@@ -95,32 +91,26 @@ Public Class Form_view_data
         res = ""
 
         Try
-            If range1 = 0 Then
-                scr = 1
-                sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
-                    " and logger_id = " & logger_id & " order by data_id"
-                cn.Open()
-                cmd.Connection = cn
-                cmd.CommandText = sql
-                cmd.CommandTimeout = 1000
-                query = cmd.ExecuteReader
 
-                count = 0
-                While query.Read
-                    grid.Columns.Add("INDEX", "INDEX")
-                    grid.Columns.Add("TIME", "TIME")
-                    grid.Columns.Add(query.GetString(0), query.GetString(0))
-                    Array.Resize(sqls, count + 1)
-                    Array.Resize(cont, count + 1)
-                    sqls(count) = "select data_index,time,value from data where drive_id = " & drive_id & _
-                          " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
-                    cont(count) = 0
-                    count += 1
-                End While
-                cn.Close()
-            Else
-                count = 13
-            End If
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id & _
+                " and logger_id = " & logger_id & " order by data_id"
+            cn.Open()
+            cmd.Connection = cn
+            cmd.CommandText = sql
+            cmd.CommandTimeout = 1000
+            query = cmd.ExecuteReader
+
+            count = 0
+            While query.Read
+                grid.Columns.Add("INDEX", "INDEX")
+                grid.Columns.Add("TIME", "TIME")
+                grid.Columns.Add(query.GetString(0), query.GetString(0))
+                Array.Resize(sqls, count + 1)
+                sqls(count) = "select data_index,time,value from data where drive_id = " & drive_id & _
+                      " and logger_id = " & logger_id & " and data_id like '" & query.GetString(0) & "'"
+                count += 1
+            End While
+            cn.Close()
 
             For i = 0 To count - 1
                 cn.Open()
@@ -128,7 +118,7 @@ Public Class Form_view_data
                 cmd.CommandText = sqls(i)
                 cmd.CommandTimeout = 1000
                 query = cmd.ExecuteReader
-                j = range1
+                j = 0
                 If query.HasRows Then
                     While query.Read
                         If grid.Rows.Count - 1 < j Then
@@ -139,18 +129,9 @@ Public Class Form_view_data
                         grid(i * 3 + 2, j).Value = query.GetString(2)
                         j += 1
                     End While
-                Else
-                    cont(i) = 1
                 End If
                 cn.Close()
             Next
-
-            check = True
-            For i = 0 To cont.Count - 1
-                If cont(i) = 0 Then check = False
-            Next
-            offset = grid.Rows.Count * 21
-            If offset < grid.VerticalScrollingOffset Then offset = grid.VerticalScrollingOffset + 1
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
