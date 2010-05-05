@@ -1084,11 +1084,11 @@ Partial Class Form_drive
         'Button3
         '
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.car_photo
         Me.Button3.Location = New System.Drawing.Point(315, 27)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(144, 105)
         Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Fahrprofile"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2

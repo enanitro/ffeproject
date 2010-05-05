@@ -4389,6 +4389,8 @@ Partial Public Class ffe_databaseDataSet
         
         Private columnoffset As Global.System.Data.DataColumn
         
+        Private columnaverage As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -4491,6 +4493,13 @@ Partial Public Class ffe_databaseDataSet
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property averageColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnaverage
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4520,9 +4529,9 @@ Partial Public Class ffe_databaseDataSet
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function Addids_canbusRow(ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Boolean, ByVal factor As Decimal, ByVal offset As Integer) As ids_canbusRow
+        Public Overloads Function Addids_canbusRow(ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Boolean, ByVal factor As Decimal, ByVal offset As Integer, ByVal average As Boolean) As ids_canbusRow
             Dim rowids_canbusRow As ids_canbusRow = CType(Me.NewRow,ids_canbusRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset}
+            Dim columnValuesArray() As Object = New Object() {Nothing, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset, average}
             rowids_canbusRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowids_canbusRow)
             Return rowids_canbusRow
@@ -4557,6 +4566,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnsigned = MyBase.Columns("signed")
             Me.columnfactor = MyBase.Columns("factor")
             Me.columnoffset = MyBase.Columns("offset")
+            Me.columnaverage = MyBase.Columns("average")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -4581,6 +4591,8 @@ Partial Public Class ffe_databaseDataSet
             MyBase.Columns.Add(Me.columnfactor)
             Me.columnoffset = New Global.System.Data.DataColumn("offset", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnoffset)
+            Me.columnaverage = New Global.System.Data.DataColumn("average", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnaverage)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnchannel_id}, true))
             Me.columnchannel_id.AutoIncrement = true
             Me.columnchannel_id.AllowDBNull = false
@@ -4597,6 +4609,7 @@ Partial Public Class ffe_databaseDataSet
             Me.columnsigned.AllowDBNull = false
             Me.columnfactor.AllowDBNull = false
             Me.columnoffset.AllowDBNull = false
+            Me.columnaverage.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -6690,6 +6703,16 @@ Partial Public Class ffe_databaseDataSet
             End Get
             Set
                 Me(Me.tableids_canbus.offsetColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property average() As Boolean
+            Get
+                Return CType(Me(Me.tableids_canbus.averageColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableids_canbus.averageColumn) = value
             End Set
         End Property
     End Class
@@ -13060,15 +13083,16 @@ Namespace ffe_databaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("signed", "signed")
             tableMapping.ColumnMappings.Add("factor", "factor")
             tableMapping.ColumnMappings.Add("offset", "offset")
+            tableMapping.ColumnMappings.Add("average", "average")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (channel_id = @Original_channel_id) AND (hex"& _ 
-                "_id = @Original_hex_id) AND (dec_id = @Original_dec_id) AND (name = @Original_na"& _ 
-                "me) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (startbit = @Original_startbit) AND (longbits"& _ 
-                " = @Original_longbits) AND (sequence = @Original_sequence) AND (signed = @Origin"& _ 
-                "al_signed) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (factor = @Original_factor) AND (offse"& _ 
-                "t = @Original_offset)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `ffe_database`.`ids_canbus` WHERE ((`channel_id` = @Original_channel_"& _ 
+                "id) AND (`hex_id` = @Original_hex_id) AND (`dec_id` = @Original_dec_id) AND (`na"& _ 
+                "me` = @Original_name) AND (`startbit` = @Original_startbit) AND (`longbits` = @O"& _ 
+                "riginal_longbits) AND (`sequence` = @Original_sequence) AND (`signed` = @Origina"& _ 
+                "l_signed) AND (`factor` = @Original_factor) AND (`offset` = @Original_offset) AN"& _ 
+                "D (`average` = @Original_average))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@Original_channel_id"
@@ -13082,7 +13106,6 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@Original_hex_id"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 5
             param.IsNullable = true
             param.SourceColumn = "hex_id"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
@@ -13099,7 +13122,6 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@Original_name"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 40
             param.IsNullable = true
             param.SourceColumn = "name"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
@@ -13124,23 +13146,20 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@Original_sequence"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 70
             param.IsNullable = true
             param.SourceColumn = "sequence"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.DeleteCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@Original_signed"
-            param.DbType = Global.System.Data.DbType.[Object]
+            param.DbType = Global.System.Data.DbType.[SByte]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
-            param.Size = 1024
             param.IsNullable = true
             param.SourceColumn = "signed"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.DeleteCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@Original_factor"
-            param.DbType = Global.System.Data.DbType.[Decimal]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.NewDecimal
             param.IsNullable = true
             param.SourceColumn = "factor"
@@ -13154,12 +13173,20 @@ Namespace ffe_databaseDataSetTableAdapters
             param.SourceColumn = "offset"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_average"
+            param.DbType = Global.System.Data.DbType.[SByte]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.IsNullable = true
+            param.SourceColumn = "average"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
             Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (channel_id, hex_id, dec_id, nam"& _ 
-                "e, startbit, longbits, sequence, signed, factor, offset)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@channe"& _ 
-                "l_id, @hex_id, @dec_id, @name, @startbit, @longbits, @sequence, @signed, @factor"& _ 
-                ", @offset)"
+                "e, startbit, longbits, sequence, signed, factor, offset, average)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES       "& _ 
+                " (@channel_id, @hex_id, @dec_id, @name, @startbit, @longbits, @sequence, @signed"& _ 
+                ", @factor, @offset, @average)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@channel_id"
@@ -13209,7 +13236,7 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@sequence"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 70
+            param.Size = 200
             param.IsNullable = true
             param.SourceColumn = "sequence"
             Me._adapter.InsertCommand.Parameters.Add(param)
@@ -13235,17 +13262,25 @@ Namespace ffe_databaseDataSetTableAdapters
             param.IsNullable = true
             param.SourceColumn = "offset"
             Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@average"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "average"
+            Me._adapter.InsertCommand.Parameters.Add(param)
             Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE       ids_canbus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                channel_id = @channel_id, hex_id = @h"& _ 
                 "ex_id, dec_id = @dec_id, name = @name, startbit = @startbit, longbits = @longbit"& _ 
                 "s, sequence = @sequence, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         signed = @signed, factor = @"& _ 
-                "factor, offset = @offset"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (channel_id = @Original_channel_id) AND ("& _ 
-                "hex_id = @Original_hex_id) AND (dec_id = @Original_dec_id) AND (name = @Original"& _ 
-                "_name) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (startbit = @Original_startbit) AND (longb"& _ 
-                "its = @Original_longbits) AND (sequence = @Original_sequence) AND (signed = @Ori"& _ 
-                "ginal_signed) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (factor = @Original_factor) AND (of"& _ 
-                "fset = @Original_offset)"
+                "factor, offset = @offset, average = @average"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (channel_id = @Origin"& _ 
+                "al_channel_id) AND (hex_id = @Original_hex_id) AND (dec_id = @Original_dec_id) A"& _ 
+                "ND (name = @Original_name) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (startbit = @Original_"& _ 
+                "startbit) AND (longbits = @Original_longbits) AND (sequence = @Original_sequence"& _ 
+                ") AND (signed = @Original_signed) AND "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (factor = @Orig"& _ 
+                "inal_factor) AND (offset = @Original_offset) AND (average = @Original_average)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@channel_id"
@@ -13295,7 +13330,7 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@sequence"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 70
+            param.Size = 200
             param.IsNullable = true
             param.SourceColumn = "sequence"
             Me._adapter.UpdateCommand.Parameters.Add(param)
@@ -13320,6 +13355,14 @@ Namespace ffe_databaseDataSetTableAdapters
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
             param.IsNullable = true
             param.SourceColumn = "offset"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@average"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "average"
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter
             param.ParameterName = "@Original_channel_id"
@@ -13375,7 +13418,7 @@ Namespace ffe_databaseDataSetTableAdapters
             param.ParameterName = "@Original_sequence"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.Size = 70
+            param.Size = 200
             param.IsNullable = true
             param.SourceColumn = "sequence"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
@@ -13405,6 +13448,15 @@ Namespace ffe_databaseDataSetTableAdapters
             param.SourceColumn = "offset"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter
+            param.ParameterName = "@Original_average"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.[Byte]
+            param.Size = 1024
+            param.IsNullable = true
+            param.SourceColumn = "average"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -13418,8 +13470,8 @@ Namespace ffe_databaseDataSetTableAdapters
             Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT `channel_id`, `hex_id`, `dec_id`, `name`, `startbit`, `longbits`, `sequenc"& _ 
-                "e`, `signed`, `factor`, `offset` FROM `ffe_database`.`ids_canbus`"
+            Me._commandCollection(0).CommandText = "SELECT        channel_id, hex_id, dec_id, name, startbit, longbits, sequence, sig"& _ 
+                "ned, factor, offset, average"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            ids_canbus"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -13472,7 +13524,7 @@ Namespace ffe_databaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_channel_id As Integer, ByVal Original_hex_id As String, ByVal Original_dec_id As Integer, ByVal Original_name As String, ByVal Original_startbit As Integer, ByVal Original_longbits As Integer, ByVal Original_sequence As String, ByVal Original_signed As Object, ByVal Original_factor As Decimal, ByVal Original_offset As Integer) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_channel_id As Integer, ByVal Original_hex_id As String, ByVal Original_dec_id As Integer, ByVal Original_name As String, ByVal Original_startbit As Integer, ByVal Original_longbits As Integer, ByVal Original_sequence As String, ByVal Original_signed As Byte, ByVal Original_factor As String, ByVal Original_offset As Integer, ByVal Original_average As Byte) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_channel_id,Integer)
             If (Original_hex_id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_hex_id")
@@ -13492,13 +13544,14 @@ Namespace ffe_databaseDataSetTableAdapters
             Else
                 Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_sequence,String)
             End If
-            If (Original_signed Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_signed")
+            Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_signed,Byte)
+            If (Original_factor Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_factor")
             Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_signed,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_factor,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_factor,Decimal)
             Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_offset,Integer)
+            Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_average,Byte)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13517,7 +13570,7 @@ Namespace ffe_databaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal channel_id As Integer, ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Object, ByVal factor As Decimal, ByVal offset As Integer) As Integer
+        Public Overloads Overridable Function Insert(ByVal channel_id As Integer, ByVal hex_id As String, ByVal dec_id As Integer, ByVal name As String, ByVal startbit As Integer, ByVal longbits As Integer, ByVal sequence As String, ByVal signed As Object, ByVal factor As Decimal, ByVal offset As Integer, ByVal average As Object) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(channel_id,Integer)
             If (hex_id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("hex_id")
@@ -13544,6 +13597,11 @@ Namespace ffe_databaseDataSetTableAdapters
             End If
             Me.Adapter.InsertCommand.Parameters(8).Value = CType(factor,Decimal)
             Me.Adapter.InsertCommand.Parameters(9).Value = CType(offset,Integer)
+            If (average Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("average")
+            Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(average,Object)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13573,6 +13631,7 @@ Namespace ffe_databaseDataSetTableAdapters
                     ByVal signed As Object,  _
                     ByVal factor As Decimal,  _
                     ByVal offset As Integer,  _
+                    ByVal average As Object,  _
                     ByVal Original_channel_id As Integer,  _
                     ByVal Original_hex_id As String,  _
                     ByVal Original_dec_id As Integer,  _
@@ -13582,7 +13641,8 @@ Namespace ffe_databaseDataSetTableAdapters
                     ByVal Original_sequence As String,  _
                     ByVal Original_signed As Object,  _
                     ByVal Original_factor As Decimal,  _
-                    ByVal Original_offset As Integer) As Integer
+                    ByVal Original_offset As Integer,  _
+                    ByVal Original_average As Object) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(channel_id,Integer)
             If (hex_id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("hex_id")
@@ -13609,32 +13669,42 @@ Namespace ffe_databaseDataSetTableAdapters
             End If
             Me.Adapter.UpdateCommand.Parameters(8).Value = CType(factor,Decimal)
             Me.Adapter.UpdateCommand.Parameters(9).Value = CType(offset,Integer)
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_channel_id,Integer)
+            If (average Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("average")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(average,Object)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_channel_id,Integer)
             If (Original_hex_id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_hex_id")
             Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_hex_id,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_hex_id,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_dec_id,Integer)
+            Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_dec_id,Integer)
             If (Original_name Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_name")
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_name,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_name,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_startbit,Integer)
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_longbits,Integer)
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_startbit,Integer)
+            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_longbits,Integer)
             If (Original_sequence Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_sequence")
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_sequence,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_sequence,String)
             End If
             If (Original_signed Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_signed")
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_signed,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_signed,Object)
             End If
-            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_factor,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_offset,Integer)
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_factor,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_offset,Integer)
+            If (Original_average Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_average")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_average,Object)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13663,6 +13733,7 @@ Namespace ffe_databaseDataSetTableAdapters
                     ByVal signed As Object,  _
                     ByVal factor As Decimal,  _
                     ByVal offset As Integer,  _
+                    ByVal average As Object,  _
                     ByVal Original_channel_id As Integer,  _
                     ByVal Original_hex_id As String,  _
                     ByVal Original_dec_id As Integer,  _
@@ -13672,8 +13743,9 @@ Namespace ffe_databaseDataSetTableAdapters
                     ByVal Original_sequence As String,  _
                     ByVal Original_signed As Object,  _
                     ByVal Original_factor As Decimal,  _
-                    ByVal Original_offset As Integer) As Integer
-            Return Me.Update(Original_channel_id, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset, Original_channel_id, Original_hex_id, Original_dec_id, Original_name, Original_startbit, Original_longbits, Original_sequence, Original_signed, Original_factor, Original_offset)
+                    ByVal Original_offset As Integer,  _
+                    ByVal Original_average As Object) As Integer
+            Return Me.Update(Original_channel_id, hex_id, dec_id, name, startbit, longbits, sequence, signed, factor, offset, average, Original_channel_id, Original_hex_id, Original_dec_id, Original_name, Original_startbit, Original_longbits, Original_sequence, Original_signed, Original_factor, Original_offset, Original_average)
         End Function
     End Class
     

@@ -297,74 +297,87 @@ Public Class Form_export_full
         Dim query As MySqlDataReader
         Dim sw As New System.IO.StreamWriter(path, True)
         Dim sql, res As String
-        Dim i, j, max, count As Integer
+        Dim i, j, max, count, num As Integer
         res = ""
 
         Try
-
             SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
             tb.Visible = True
-            sql = "select count(data_index) from data_full where drive_id = " & drive_id.Text & _
-            " and logger_id = " & logger_id & ""
-            execute_query(sql, max)
-
-            bar.Visible = True
-            percent.Visible = True
-            config_progressbar(max, bar)
 
             Dim sqls(0) As String
-            Dim line(0) As String
 
             cn.Open()
             cmd.Connection = cn
             sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
-             " and logger_id = " & logger_id
+             " and logger_id = " & logger_id & " order by data_id"
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
+            sql = ""
             res = ""
             count = 0
             While query.Read
+                grid.Columns.Add(query.GetString(0), query.GetString(0))
                 Array.Resize(sqls, count + 1)
                 sqls(count) = "select concat(data_index,',',time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
                 " and data_id like '" & query.GetString(0) & "'"
-                res += "INDEX,TIME," & query.GetString(0)
+                res += "INDEX,TIME," & query.GetString(0) & ","
                 count += 1
             End While
             cn.Close()
+            res = res.Remove(res.Length - 1)
             sw.WriteLine(res)
+            res = ""
 
-            Dim range1, range2 As Integer
-            Dim lines As List(Of String)
-            procesing.Close()
-            range1 = 0
-            range2 = 1000
             For i = 0 To count - 1
                 cn.Open()
                 cmd.Connection = cn
-                cmd.CommandText = sqls(i) & " limit " & range1 & "," & range2
+                cmd.CommandText = sqls(i)
                 cmd.CommandTimeout = 1000
                 query = cmd.ExecuteReader
-                j = range1
+                j = 0
                 If query.HasRows Then
                     While query.Read
-
+                        If grid.Rows.Count - 1 < j Then
+                            grid.Rows.Add()
+                        End If
+                        grid(i, j).Value = query.GetString(0) & ","
+                        j += 1
                     End While
                 End If
                 cn.Close()
-                range1 = range2
-                range2 += 1000
             Next
 
+            bar.Visible = True
+            percent.Visible = True
+            config_progressbar(grid.rows.count, bar)
 
+            procesing.Close()
+            num = 0
+            For i = 0 To grid.Rows.Count - 1
+                For j = 0 To grid.Columns.Count - 1
+                    If grid(j, i).Value = "" Then
+                        res += ",,,"
+                    Else
+                        res += grid(j, i).Value
+                        progressbar(i, percent.Text, bar)
+                        Application.DoEvents()
+                    End If
+                Next
+                res = res.Remove(res.Length - 1) & vbCrLf
+                If i Mod 1000 = 0 Then
+                    sw.Write(res)
+                    res = ""
+                End If
+            Next
 
-            i = 1
-            While query.Read()
-                execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
-                                            query.GetString(0), i)
-            End While
+            'i = 1
+            'While query.Read()
+            ' execute_query_canbus_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path, _
+            '                            query.GetString(0), i)
+            'End While
 
             res += vbCrLf
             sw.WriteLine(res)
@@ -378,6 +391,7 @@ Public Class Form_export_full
             End If
             abort = True
         Finally
+            sw.Close()
             cn.Close()
         End Try
     End Sub
@@ -577,7 +591,7 @@ Public Class Form_export_full
             cmd.Connection = cn
 
             sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
-             " and logger_id = " & logger_id
+             " and logger_id = " & logger_id & " order by data_id"
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
