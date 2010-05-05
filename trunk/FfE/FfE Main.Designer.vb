@@ -43,6 +43,7 @@ Partial Class FfE_Main
         Me.ConnectionToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.BackupDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.RestoreDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -64,7 +65,7 @@ Partial Class FfE_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.DatabaseToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.DatabaseToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(632, 24)
@@ -100,37 +101,37 @@ Partial Class FfE_Main
         'UserToolStripMenuItem
         '
         Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
-        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.UserToolStripMenuItem.Text = "User"
         '
         'CarToolStripMenuItem
         '
         Me.CarToolStripMenuItem.Name = "CarToolStripMenuItem"
-        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.CarToolStripMenuItem.Text = "Car"
         '
         'FahrprofileToolStripMenuItem
         '
         Me.FahrprofileToolStripMenuItem.Name = "FahrprofileToolStripMenuItem"
-        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.FahrprofileToolStripMenuItem.Text = "Usage type"
         '
         'MeasureToolStripMenuItem
         '
         Me.MeasureToolStripMenuItem.Name = "MeasureToolStripMenuItem"
-        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.MeasureToolStripMenuItem.Text = "Measure"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(129, 6)
         '
         'CANBUSToolStripMenuItem
         '
         Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChannelsToolStripMenuItem})
         Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
-        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
         '
         'ChannelsToolStripMenuItem
@@ -164,11 +165,18 @@ Partial Class FfE_Main
         Me.RestoreDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RestoreDBToolStripMenuItem.Text = "Restore DB"
         '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
         'FfE_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(632, 453)
+        Me.ControlBox = False
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.MenuStrip1)
         Me.IsMdiContainer = True
@@ -202,5 +210,6 @@ Partial Class FfE_Main
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CANBUSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChannelsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

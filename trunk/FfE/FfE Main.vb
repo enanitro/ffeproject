@@ -85,4 +85,10 @@ Public Class FfE_Main
         Form_backup_DB.Show()
         Form_backup_DB.Focus()
     End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+        If MsgBox("Are you sure that you want to exit FfE?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Me.Close()
+        End If
+    End Sub
 End Class

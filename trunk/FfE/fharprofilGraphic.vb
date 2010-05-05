@@ -35,7 +35,6 @@ Public Class fharprofilGraphic
         Me.labels = labels
     End Sub
 
-
     Private Sub fharprofilGraphic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         show_histogram()
 
@@ -128,7 +127,21 @@ Public Class fharprofilGraphic
         myPane.AxisChange()
     End Sub
 
+    Dim i As Integer = -1
+    Public Function YScaleFormatEvent(ByVal pane As GraphPane, ByVal axis As Axis, ByVal val As Double, ByVal index As Int32) As String
+
+        If i = Math.Truncate(val) Then
+            Return ""
+        Else
+            i = Math.Truncate(val)
+            Return val.ToString("f0")
+        End If
+    End Function
+
     Private Sub show_histogram()
+
+        AddHandler myPane.GraphPane.YAxis.ScaleFormatEvent, AddressOf YScaleFormatEvent
+
 
         myPane.GraphPane.Title.Text = "Histogram"
         myPane.GraphPane.YAxis.Title.Text = "Frequency"
@@ -148,8 +161,8 @@ Public Class fharprofilGraphic
         myPane.GraphPane.XAxis.Scale.TextLabels = labels
         myPane.GraphPane.XAxis.Scale.FontSpec.Size = 10.0F
 
-        'myPane.GraphPane.YAxis.Scale.
-        myPane.GraphPane.YAxis.Scale.Format = "0"
+        myPane.GraphPane.YAxis.Scale.BaseTic = 0
+        'myPane.GraphPane.YAxis.Scale.Format = "f0"
 
 
         myPane.GraphPane.BarSettings.Type = BarType.Stack
