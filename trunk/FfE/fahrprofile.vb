@@ -1,4 +1,4 @@
-﻿Public Class fharprofile
+﻿Public Class fahrprofile
     Public id As String
     Public colour As Color
     Public fail As Boolean

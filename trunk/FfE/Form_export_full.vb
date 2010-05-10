@@ -19,11 +19,11 @@ Public Class Form_export_full
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
                 into = True
             End If
-            If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
-                TextBox3.Visible = False
-                logger_csv_file(path_fluke.Text, FfE_Main.id_lmg, "LMG 500")
-                into = True
-            End If
+            'If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
+            'TextBox3.Visible = False
+            'logger_csv_file(path_fluke.Text, FfE_Main.id_lmg, "LMG 500")
+            'into = True
+            'End If
             If path_canbus.Text <> "" And abort = False And CheckBox4.CheckState = CheckState.Unchecked Then
                 TextBox4.Visible = False
                 logger_csv_file(path_canbus.Text, FfE_Main.id_canbus, "CAN-BUS")

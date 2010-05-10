@@ -1,7 +1,7 @@
 ﻿Imports ZedGraph
 
 Public Class fharprofilGraphic
-    Dim listf As List(Of fharprofile)
+    Dim listf As List(Of fahrprofile)
     Dim Xtitle As String
     Dim labels() As String
 
@@ -21,13 +21,13 @@ Public Class fharprofilGraphic
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Public Sub New(ByVal l As List(Of fharprofile), ByVal t As type)
+    Public Sub New(ByVal l As List(Of fahrprofile), ByVal t As type)
         Me.New()
         listf = l
         typ = t
     End Sub
 
-    Public Sub New(ByVal l As List(Of fharprofile), ByVal Xtitle As String, _
+    Public Sub New(ByVal l As List(Of fahrprofile), ByVal Xtitle As String, _
                    ByVal labels() As String)
         Me.New()
         Me.listf = l
