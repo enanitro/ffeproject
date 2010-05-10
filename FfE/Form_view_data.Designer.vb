@@ -38,12 +38,24 @@ Partial Class Form_view_data
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.TabPage2 = New System.Windows.Forms.TabPage
+        Me.CheckBox9 = New System.Windows.Forms.CheckBox
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox
         Me.DataGridView = New System.Windows.Forms.DataGridView
         Me.TabPage3 = New System.Windows.Forms.TabPage
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox
+        Me.CheckedListBox2 = New System.Windows.Forms.CheckedListBox
+        Me.Button2 = New System.Windows.Forms.Button
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.TabPage4 = New System.Windows.Forms.TabPage
+        Me.Button3 = New System.Windows.Forms.Button
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox
+        Me.CheckedListBox3 = New System.Windows.Forms.CheckedListBox
         Me.DataGridView2 = New System.Windows.Forms.DataGridView
         Me.TabPage5 = New System.Windows.Forms.TabPage
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox
+        Me.CheckedListBox4 = New System.Windows.Forms.CheckedListBox
         Me.DataGridView3 = New System.Windows.Forms.DataGridView
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.lbl_drive_id = New System.Windows.Forms.Label
@@ -108,6 +120,9 @@ Partial Class Form_view_data
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.CheckBox9)
+        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.CheckedListBox1)
         Me.TabPage2.Controls.Add(Me.DataGridView)
         Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage2.Location = New System.Drawing.Point(4, 24)
@@ -117,6 +132,42 @@ Partial Class Form_view_data
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Graphtec GL800"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'CheckBox9
+        '
+        Me.CheckBox9.AutoSize = True
+        Me.CheckBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox9.Location = New System.Drawing.Point(6, 9)
+        Me.CheckBox9.Name = "CheckBox9"
+        Me.CheckBox9.Size = New System.Drawing.Size(104, 19)
+        Me.CheckBox9.TabIndex = 21
+        Me.CheckBox9.Text = "All channels"
+        Me.CheckBox9.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button1.Location = New System.Drawing.Point(55, 344)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(105, 57)
+        Me.Button1.TabIndex = 20
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'CheckedListBox1
+        '
+        Me.CheckedListBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CheckedListBox1.CheckOnClick = True
+        Me.CheckedListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckedListBox1.FormattingEnabled = True
+        Me.CheckedListBox1.Location = New System.Drawing.Point(6, 34)
+        Me.CheckedListBox1.Name = "CheckedListBox1"
+        Me.CheckedListBox1.Size = New System.Drawing.Size(211, 304)
+        Me.CheckedListBox1.TabIndex = 19
         '
         'DataGridView
         '
@@ -147,15 +198,18 @@ Partial Class Form_view_data
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView.Location = New System.Drawing.Point(223, 3)
         Me.DataGridView.Name = "DataGridView"
         Me.DataGridView.ReadOnly = True
         Me.DataGridView.RowHeadersVisible = False
-        Me.DataGridView.Size = New System.Drawing.Size(1077, 527)
+        Me.DataGridView.Size = New System.Drawing.Size(858, 401)
         Me.DataGridView.TabIndex = 6
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.CheckBox1)
+        Me.TabPage3.Controls.Add(Me.CheckedListBox2)
+        Me.TabPage3.Controls.Add(Me.Button2)
         Me.TabPage3.Controls.Add(Me.DataGridView1)
         Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage3.Location = New System.Drawing.Point(4, 24)
@@ -165,6 +219,42 @@ Partial Class Form_view_data
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Columbus GPS"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(6, 9)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(104, 19)
+        Me.CheckBox1.TabIndex = 22
+        Me.CheckBox1.Text = "All channels"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'CheckedListBox2
+        '
+        Me.CheckedListBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CheckedListBox2.CheckOnClick = True
+        Me.CheckedListBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckedListBox2.FormattingEnabled = True
+        Me.CheckedListBox2.Location = New System.Drawing.Point(6, 34)
+        Me.CheckedListBox2.Name = "CheckedListBox2"
+        Me.CheckedListBox2.Size = New System.Drawing.Size(211, 304)
+        Me.CheckedListBox2.TabIndex = 20
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.Black
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button2.Location = New System.Drawing.Point(55, 344)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(105, 57)
+        Me.Button2.TabIndex = 18
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'DataGridView1
         '
@@ -195,15 +285,18 @@ Partial Class Form_view_data
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView1.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView1.Location = New System.Drawing.Point(223, 3)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(1078, 527)
+        Me.DataGridView1.Size = New System.Drawing.Size(858, 401)
         Me.DataGridView1.TabIndex = 10
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.Button3)
+        Me.TabPage4.Controls.Add(Me.CheckBox2)
+        Me.TabPage4.Controls.Add(Me.CheckedListBox3)
         Me.TabPage4.Controls.Add(Me.DataGridView2)
         Me.TabPage4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage4.Location = New System.Drawing.Point(4, 24)
@@ -213,6 +306,42 @@ Partial Class Form_view_data
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "LMG 500"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button3.BackColor = System.Drawing.Color.Transparent
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.Color.Black
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button3.Location = New System.Drawing.Point(55, 344)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(105, 57)
+        Me.Button3.TabIndex = 26
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox2.Location = New System.Drawing.Point(6, 9)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(104, 19)
+        Me.CheckBox2.TabIndex = 25
+        Me.CheckBox2.Text = "All channels"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckedListBox3
+        '
+        Me.CheckedListBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CheckedListBox3.CheckOnClick = True
+        Me.CheckedListBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckedListBox3.FormattingEnabled = True
+        Me.CheckedListBox3.Location = New System.Drawing.Point(6, 34)
+        Me.CheckedListBox3.Name = "CheckedListBox3"
+        Me.CheckedListBox3.Size = New System.Drawing.Size(210, 304)
+        Me.CheckedListBox3.TabIndex = 24
         '
         'DataGridView2
         '
@@ -243,15 +372,18 @@ Partial Class Form_view_data
         DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridView2.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView2.Location = New System.Drawing.Point(223, 3)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowHeadersVisible = False
-        Me.DataGridView2.Size = New System.Drawing.Size(1077, 527)
+        Me.DataGridView2.Size = New System.Drawing.Size(858, 401)
         Me.DataGridView2.TabIndex = 5
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.Button4)
+        Me.TabPage5.Controls.Add(Me.CheckBox3)
+        Me.TabPage5.Controls.Add(Me.CheckedListBox4)
         Me.TabPage5.Controls.Add(Me.DataGridView3)
         Me.TabPage5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage5.Location = New System.Drawing.Point(4, 24)
@@ -262,12 +394,50 @@ Partial Class Form_view_data
         Me.TabPage5.Text = "CAN-BUS"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.ForeColor = System.Drawing.Color.Black
+        Me.Button4.Image = Global.FfE.My.Resources.Resources.del_channel
+        Me.Button4.Location = New System.Drawing.Point(55, 344)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(105, 57)
+        Me.Button4.TabIndex = 27
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox3.Location = New System.Drawing.Point(6, 9)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(104, 19)
+        Me.CheckBox3.TabIndex = 26
+        Me.CheckBox3.Text = "All channels"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'CheckedListBox4
+        '
+        Me.CheckedListBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CheckedListBox4.CheckOnClick = True
+        Me.CheckedListBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckedListBox4.FormattingEnabled = True
+        Me.CheckedListBox4.Location = New System.Drawing.Point(6, 34)
+        Me.CheckedListBox4.Name = "CheckedListBox4"
+        Me.CheckedListBox4.Size = New System.Drawing.Size(210, 304)
+        Me.CheckedListBox4.TabIndex = 25
+        '
         'DataGridView3
         '
         Me.DataGridView3.AllowUserToAddRows = False
         Me.DataGridView3.AllowUserToDeleteRows = False
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.DataGridView3.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+        Me.DataGridView3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DataGridView3.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView3.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -287,9 +457,8 @@ Partial Class Form_view_data
         DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView3.DefaultCellStyle = DataGridViewCellStyle12
-        Me.DataGridView3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView3.GridColor = System.Drawing.Color.DarkGray
-        Me.DataGridView3.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView3.Location = New System.Drawing.Point(223, 3)
         Me.DataGridView3.Name = "DataGridView3"
         Me.DataGridView3.ReadOnly = True
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -301,7 +470,7 @@ Partial Class Form_view_data
         DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView3.RowHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView3.RowHeadersVisible = False
-        Me.DataGridView3.Size = New System.Drawing.Size(1077, 404)
+        Me.DataGridView3.Size = New System.Drawing.Size(858, 401)
         Me.DataGridView3.TabIndex = 5
         '
         'GroupBox1
@@ -534,18 +703,23 @@ Partial Class Form_view_data
         Me.ClientSize = New System.Drawing.Size(1103, 581)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.MinimumSize = New System.Drawing.Size(1119, 617)
         Me.Name = "Form_view_data"
         Me.Text = "View Data"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -583,4 +757,16 @@ Partial Class Form_view_data
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lbl_drive_id As System.Windows.Forms.Label
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents CheckedListBox2 As System.Windows.Forms.CheckedListBox
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox9 As System.Windows.Forms.CheckBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents CheckedListBox1 As System.Windows.Forms.CheckedListBox
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckedListBox3 As System.Windows.Forms.CheckedListBox
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckedListBox4 As System.Windows.Forms.CheckedListBox
 End Class

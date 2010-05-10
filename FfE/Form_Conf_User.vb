@@ -1,4 +1,4 @@
-﻿Public Class From_Conf_User
+﻿Public Class Form_Conf_User
     Private rows As Integer
 
     Private Sub UserBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserBindingNavigatorSaveItem.Click

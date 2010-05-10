@@ -6,6 +6,7 @@ Public Class FfE_Main
     Public id_lmg As Integer = -1
     Public id_canbus As Integer = -1
 
+
     Private Sub CarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CarToolStripMenuItem.Click
         Form_Conf_Car.MdiParent = Me
         Form_Conf_Car.Show()
@@ -14,9 +15,9 @@ Public Class FfE_Main
     End Sub
 
     Private Sub UserToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserToolStripMenuItem.Click
-        From_Conf_User.MdiParent = Me
-        From_Conf_User.Show()
-        From_Conf_User.Focus()
+        Form_Conf_User.MdiParent = Me
+        Form_Conf_User.Show()
+        Form_Conf_User.Focus()
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripMenuItem.Click
@@ -39,9 +40,10 @@ Public Class FfE_Main
         Form_conf_usage_type.Focus()
     End Sub
 
-    Private Sub FfE_Main_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-
-    End Sub
+    'Private Sub FfE_Main_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    '   AddHandler Me.FormClosing, AddressOf form_exit
+    '  form_exit()
+    'End Sub
 
     Private Sub FfE_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
@@ -59,11 +61,6 @@ Public Class FfE_Main
         End Try
     End Sub
 
-    Private Sub DataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DataToolStripMenuItem.Click
-        Form_data.MdiParent = Me
-        Form_data.Show()
-        Form_data.Focus()
-    End Sub
 
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
         Dim form_conn As New Form_Connection
@@ -89,10 +86,13 @@ Public Class FfE_Main
         'Form_backup_DB.Show()
         'Form_backup_DB.Focus()
     End Sub
-
-    Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+    Private Sub form_exit()
         If MsgBox("Are you sure that you want to exit FfE?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Me.Close()
         End If
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+        form_exit()
     End Sub
 End Class

@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 
-Public Class Form_fharprofil
+Public Class Form_fahrprofil
     Public id_usage_type As Integer
     Dim sp_gps, sp_canbus As Integer
     Dim colores As New Colours

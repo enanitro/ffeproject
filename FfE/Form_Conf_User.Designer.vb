@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class From_Conf_User
+Partial Class Form_Conf_User
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -28,7 +28,7 @@ Partial Class From_Conf_User
         Dim EmailLabel As System.Windows.Forms.Label
         Dim LinkLabel As System.Windows.Forms.Label
         Dim Ma_artLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(From_Conf_User))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Conf_User))
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.Ma_artTextBox = New System.Windows.Forms.TextBox
         Me.UserBindingSource = New System.Windows.Forms.BindingSource(Me.components)

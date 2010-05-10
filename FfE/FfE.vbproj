@@ -134,10 +134,10 @@
     <Compile Include="Form_delete_channel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_fharprofil.Designer.vb">
-      <DependentUpon>Form_fharprofil.vb</DependentUpon>
+    <Compile Include="Form_fahrprofil.Designer.vb">
+      <DependentUpon>Form_fahrprofil.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_fharprofil.vb">
+    <Compile Include="Form_fahrprofil.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_restore_DB.Designer.vb">
@@ -150,12 +150,6 @@
       <DependentUpon>Form_canbus_ids.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_canbus_ids.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_data.Designer.vb">
-      <DependentUpon>Form_data.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_data.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_car_photos.Designer.vb">
@@ -225,10 +219,10 @@
     <Compile Include="Form_view_data.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="From_Conf_User.Designer.vb">
-      <DependentUpon>From_Conf_User.vb</DependentUpon>
+    <Compile Include="Form_Conf_User.Designer.vb">
+      <DependentUpon>Form_Conf_User.vb</DependentUpon>
     </Compile>
-    <Compile Include="From_Conf_User.vb">
+    <Compile Include="Form_Conf_User.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="insert_data.vb" />
@@ -297,10 +291,6 @@
       <DependentUpon>Form_Connection.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_data.resx">
-      <DependentUpon>Form_data.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_delete_channel.resx">
       <DependentUpon>Form_delete_channel.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -313,8 +303,8 @@
       <DependentUpon>Form_export_full.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_fharprofil.resx">
-      <DependentUpon>Form_fharprofil.vb</DependentUpon>
+    <EmbeddedResource Include="Form_fahrprofil.resx">
+      <DependentUpon>Form_fahrprofil.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_find_drive.resx">
@@ -337,8 +327,8 @@
       <DependentUpon>Form_view_data.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="From_Conf_User.resx">
-      <DependentUpon>From_Conf_User.vb</DependentUpon>
+    <EmbeddedResource Include="Form_Conf_User.resx">
+      <DependentUpon>Form_Conf_User.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
