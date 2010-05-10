@@ -24,48 +24,48 @@ Partial Class form_import_csv_full
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_import_csv_full))
         Me.GroupBox_graphtec = New System.Windows.Forms.GroupBox
+        Me.Button11 = New System.Windows.Forms.Button
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
         Me.Label5 = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
+        Me.Button5 = New System.Windows.Forms.Button
         Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox
+        Me.Button1 = New System.Windows.Forms.Button
         Me.GroupBox_columbusGPS = New System.Windows.Forms.GroupBox
+        Me.Button12 = New System.Windows.Forms.Button
         Me.TextBox2 = New System.Windows.Forms.TextBox
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar
         Me.Label7 = New System.Windows.Forms.Label
         Me.Label8 = New System.Windows.Forms.Label
+        Me.Button3 = New System.Windows.Forms.Button
         Me.CheckedListBox2 = New System.Windows.Forms.CheckedListBox
+        Me.Button6 = New System.Windows.Forms.Button
         Me.GroupBox_fluke = New System.Windows.Forms.GroupBox
+        Me.Button13 = New System.Windows.Forms.Button
         Me.TextBox3 = New System.Windows.Forms.TextBox
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.ProgressBar3 = New System.Windows.Forms.ProgressBar
         Me.Label9 = New System.Windows.Forms.Label
         Me.Label10 = New System.Windows.Forms.Label
+        Me.Button2 = New System.Windows.Forms.Button
         Me.CheckedListBox3 = New System.Windows.Forms.CheckedListBox
+        Me.Button4 = New System.Windows.Forms.Button
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
         Me.GroupBox_CANBUS = New System.Windows.Forms.GroupBox
+        Me.Button14 = New System.Windows.Forms.Button
         Me.TextBox4 = New System.Windows.Forms.TextBox
         Me.Panel4 = New System.Windows.Forms.Panel
         Me.ProgressBar4 = New System.Windows.Forms.ProgressBar
         Me.Label11 = New System.Windows.Forms.Label
         Me.Label12 = New System.Windows.Forms.Label
-        Me.CheckedListBox4 = New System.Windows.Forms.CheckedListBox
-        Me.Button10 = New System.Windows.Forms.Button
-        Me.Button14 = New System.Windows.Forms.Button
         Me.Button8 = New System.Windows.Forms.Button
+        Me.CheckedListBox4 = New System.Windows.Forms.CheckedListBox
         Me.Button9 = New System.Windows.Forms.Button
+        Me.Button10 = New System.Windows.Forms.Button
         Me.Button7 = New System.Windows.Forms.Button
-        Me.Button13 = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Button4 = New System.Windows.Forms.Button
-        Me.Button12 = New System.Windows.Forms.Button
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Button6 = New System.Windows.Forms.Button
-        Me.Button11 = New System.Windows.Forms.Button
-        Me.Button5 = New System.Windows.Forms.Button
-        Me.Button1 = New System.Windows.Forms.Button
         Me.GroupBox_graphtec.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox_columbusGPS.SuspendLayout()
@@ -87,6 +87,13 @@ Partial Class form_import_csv_full
         Me.GroupBox_graphtec.Controls.Add(Me.Button1)
         Me.GroupBox_graphtec.Name = "GroupBox_graphtec"
         Me.GroupBox_graphtec.TabStop = False
+        '
+        'Button11
+        '
+        resources.ApplyResources(Me.Button11, "Button11")
+        Me.Button11.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
+        Me.Button11.Name = "Button11"
+        Me.Button11.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
@@ -116,12 +123,26 @@ Partial Class form_import_csv_full
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'CheckedListBox1
         '
         resources.ApplyResources(Me.CheckedListBox1, "CheckedListBox1")
         Me.CheckedListBox1.CheckOnClick = True
         Me.CheckedListBox1.FormattingEnabled = True
         Me.CheckedListBox1.Name = "CheckedListBox1"
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox_columbusGPS
         '
@@ -134,6 +155,13 @@ Partial Class form_import_csv_full
         Me.GroupBox_columbusGPS.Controls.Add(Me.Button6)
         Me.GroupBox_columbusGPS.Name = "GroupBox_columbusGPS"
         Me.GroupBox_columbusGPS.TabStop = False
+        '
+        'Button12
+        '
+        resources.ApplyResources(Me.Button12, "Button12")
+        Me.Button12.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
+        Me.Button12.Name = "Button12"
+        Me.Button12.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
@@ -163,12 +191,26 @@ Partial Class form_import_csv_full
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'CheckedListBox2
         '
         resources.ApplyResources(Me.CheckedListBox2, "CheckedListBox2")
         Me.CheckedListBox2.CheckOnClick = True
         Me.CheckedListBox2.FormattingEnabled = True
         Me.CheckedListBox2.Name = "CheckedListBox2"
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'GroupBox_fluke
         '
@@ -181,6 +223,13 @@ Partial Class form_import_csv_full
         Me.GroupBox_fluke.Controls.Add(Me.Button4)
         Me.GroupBox_fluke.Name = "GroupBox_fluke"
         Me.GroupBox_fluke.TabStop = False
+        '
+        'Button13
+        '
+        resources.ApplyResources(Me.Button13, "Button13")
+        Me.Button13.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
+        Me.Button13.Name = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
         '
         'TextBox3
         '
@@ -210,12 +259,25 @@ Partial Class form_import_csv_full
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
         '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'CheckedListBox3
         '
         resources.ApplyResources(Me.CheckedListBox3, "CheckedListBox3")
         Me.CheckedListBox3.CheckOnClick = True
         Me.CheckedListBox3.FormattingEnabled = True
         Me.CheckedListBox3.Name = "CheckedListBox3"
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'OpenFileDialog
         '
@@ -232,6 +294,13 @@ Partial Class form_import_csv_full
         Me.GroupBox_CANBUS.Controls.Add(Me.Button9)
         Me.GroupBox_CANBUS.Name = "GroupBox_CANBUS"
         Me.GroupBox_CANBUS.TabStop = False
+        '
+        'Button14
+        '
+        resources.ApplyResources(Me.Button14, "Button14")
+        Me.Button14.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
+        Me.Button14.Name = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
         '
         'TextBox4
         '
@@ -263,12 +332,25 @@ Partial Class form_import_csv_full
         Me.Label12.BackColor = System.Drawing.Color.White
         Me.Label12.Name = "Label12"
         '
+        'Button8
+        '
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
+        Me.Button8.Name = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'CheckedListBox4
         '
         resources.ApplyResources(Me.CheckedListBox4, "CheckedListBox4")
         Me.CheckedListBox4.CheckOnClick = True
         Me.CheckedListBox4.FormattingEnabled = True
         Me.CheckedListBox4.Name = "CheckedListBox4"
+        '
+        'Button9
+        '
+        resources.ApplyResources(Me.Button9, "Button9")
+        Me.Button9.Name = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
         '
         'Button10
         '
@@ -277,94 +359,12 @@ Partial Class form_import_csv_full
         Me.Button10.Name = "Button10"
         Me.Button10.UseVisualStyleBackColor = True
         '
-        'Button14
-        '
-        resources.ApplyResources(Me.Button14, "Button14")
-        Me.Button14.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
-        Me.Button14.Name = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
-        '
-        'Button8
-        '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        resources.ApplyResources(Me.Button9, "Button9")
-        Me.Button9.Name = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
         'Button7
         '
         resources.ApplyResources(Me.Button7, "Button7")
         Me.Button7.Image = Global.FfE.My.Resources.Resources.document_import
         Me.Button7.Name = "Button7"
         Me.Button7.UseVisualStyleBackColor = True
-        '
-        'Button13
-        '
-        resources.ApplyResources(Me.Button13, "Button13")
-        Me.Button13.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
-        Me.Button13.Name = "Button13"
-        Me.Button13.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button12
-        '
-        resources.ApplyResources(Me.Button12, "Button12")
-        Me.Button12.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
-        Me.Button12.Name = "Button12"
-        Me.Button12.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        resources.ApplyResources(Me.Button6, "Button6")
-        Me.Button6.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button6.Name = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button11
-        '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.Image = Global.FfE.My.Resources.Resources.NetByte_Design_Studio___0072
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Image = Global.FfE.My.Resources.Resources.arrow_refresh_blue
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'form_import_csv_full
         '

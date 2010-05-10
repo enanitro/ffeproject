@@ -88,11 +88,7 @@ Public Class Form_delete_channel
             cn.Close()
 
         Catch ex As Exception
-            If ex.Message = "Export process aborted" Then
-                Throw New Exception("Export process aborted")
-            Else
-                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If cn.State = ConnectionState.Open Then
                 cn.Close()

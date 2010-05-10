@@ -8,13 +8,14 @@ Public Class Form_drive
     Dim binding_complete As Integer = 0
     Dim rows As Integer
     Dim combo As Boolean = False
+    Dim position As Integer
 
     'Visión de ventanas 
     Dim show_Data As Form_view_data
     Dim form_export As Form_export_full
     Dim import_full As form_import_csv_full
     Dim del_channel As Form_delete_channel
-    Dim form_fahrprofil As Form_fharprofil
+    Dim form_fahrprofil As Form_fahrprofil
 
 
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -374,7 +375,7 @@ Public Class Form_drive
         End Try
     End Sub
 
-   
+
     Private Sub Delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles delete.Click
         Try
             If MsgBox("Are you sure you want to delete this information?", _
@@ -414,7 +415,7 @@ Public Class Form_drive
         End Try
     End Sub
 
-    
+
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
             If form_export Is Nothing Then
@@ -448,13 +449,6 @@ Public Class Form_drive
             End If
         End If
         procesing.Close()
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        If Drive_idLabel1.Text <> "" Then
-            del_channel = New Form_delete_channel(Drive_idLabel1.Text)
-            del_channel.ShowDialog()
-        End If
     End Sub
 
     Private Sub showData()
@@ -491,9 +485,9 @@ Public Class Form_drive
 
     Private Sub showFahrprofil()
         If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5).Equals(DBNull.Value) Then
-            Form_fharprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
-            Form_fharprofil.MdiParent = Me.MdiParent
-            Form_fharprofil.Show()
+            Form_fahrprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
+            Form_fahrprofil.MdiParent = Me.MdiParent
+            Form_fahrprofil.Show()
         End If
     End Sub
 
@@ -519,41 +513,43 @@ Public Class Form_drive
     End Sub
 
     Private Sub ToolStripButton5_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton5.MouseDown
-        If combo = True Then
-            Dim pos As Integer = DriveBindingSource.Position
-            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
-            DriveBindingSource.Position = pos
-        End If
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveNext()
     End Sub
 
     Private Sub ToolStripButton4_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton4.MouseDown
-        If combo = True Then
-            Dim pos As Integer = DriveBindingSource.Position
-            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
-            DriveBindingSource.Position = pos
-        End If
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MovePrevious()
     End Sub
 
     Private Sub ToolStripButton6_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton6.MouseDown
-        If combo = True Then
-            Dim pos As Integer = DriveBindingSource.Position
-            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
-            DriveBindingSource.Position = pos
-        End If
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveLast()
     End Sub
 
     Private Sub ToolStripButton3_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton3.MouseDown
-        If combo = True Then
-            Dim pos As Integer = DriveBindingSource.Position
-            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
-            DriveBindingSource.Position = pos
-        End If
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveFirst()
     End Sub
 
     Private Sub DriveDataGridView_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DriveDataGridView.MouseDown
+        position = DriveBindingSource.Position
+        field_control(position)
+    End Sub
+
+    Private Sub field_control(ByVal pos As Integer)
         If combo = True Then
-            Dim pos As Integer = DriveBindingSource.Position
-            DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                Me.Validate()
+                Me.DriveBindingSource.EndEdit()
+                Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+            Else
+                DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+            End If
             DriveBindingSource.Position = pos
         End If
     End Sub

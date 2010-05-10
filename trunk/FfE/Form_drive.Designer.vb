@@ -110,7 +110,6 @@ Partial Class Form_drive
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.Button3 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
-        Me.Button1 = New System.Windows.Forms.Button
         Me.btn_export = New System.Windows.Forms.Button
         Me.btn_import = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
@@ -1070,7 +1069,6 @@ Partial Class Form_drive
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Controls.Add(Me.Button2)
-        Me.GroupBox4.Controls.Add(Me.Button1)
         Me.GroupBox4.Controls.Add(Me.btn_export)
         Me.GroupBox4.Controls.Add(Me.btn_import)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
@@ -1085,7 +1083,7 @@ Partial Class Form_drive
         '
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.Button3.Image = Global.FfE.My.Resources.Resources.car_photo
-        Me.Button3.Location = New System.Drawing.Point(315, 27)
+        Me.Button3.Location = New System.Drawing.Point(418, 27)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(144, 105)
         Me.Button3.TabIndex = 4
@@ -1094,26 +1092,17 @@ Partial Class Form_drive
         'Button2
         '
         Me.Button2.Image = Global.FfE.My.Resources.Resources.view_data
-        Me.Button2.Location = New System.Drawing.Point(471, 27)
+        Me.Button2.Location = New System.Drawing.Point(616, 27)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(144, 105)
         Me.Button2.TabIndex = 3
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.Image = Global.FfE.My.Resources.Resources.del_channel2
-        Me.Button1.Location = New System.Drawing.Point(624, 27)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(144, 105)
-        Me.Button1.TabIndex = 2
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'btn_export
         '
         Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
         Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(159, 27)
+        Me.btn_export.Location = New System.Drawing.Point(220, 27)
         Me.btn_export.Name = "btn_export"
         Me.btn_export.Size = New System.Drawing.Size(144, 105)
         Me.btn_export.TabIndex = 1
@@ -1123,7 +1112,7 @@ Partial Class Form_drive
         '
         Me.btn_import.BackgroundImage = CType(resources.GetObject("btn_import.BackgroundImage"), System.Drawing.Image)
         Me.btn_import.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_import.Location = New System.Drawing.Point(6, 27)
+        Me.btn_import.Location = New System.Drawing.Point(22, 27)
         Me.btn_import.Name = "btn_import"
         Me.btn_import.Size = New System.Drawing.Size(144, 105)
         Me.btn_import.TabIndex = 0
@@ -1430,6 +1419,5 @@ Partial Class Form_drive
     Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
