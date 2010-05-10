@@ -150,19 +150,19 @@ Partial Class FfE_Main
         'ConnectionToolStripMenuItem2
         '
         Me.ConnectionToolStripMenuItem2.Name = "ConnectionToolStripMenuItem2"
-        Me.ConnectionToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.ConnectionToolStripMenuItem2.Size = New System.Drawing.Size(136, 22)
         Me.ConnectionToolStripMenuItem2.Text = "Connection"
         '
         'BackupDBToolStripMenuItem
         '
         Me.BackupDBToolStripMenuItem.Name = "BackupDBToolStripMenuItem"
-        Me.BackupDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BackupDBToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.BackupDBToolStripMenuItem.Text = "Backup DB"
         '
         'RestoreDBToolStripMenuItem
         '
         Me.RestoreDBToolStripMenuItem.Name = "RestoreDBToolStripMenuItem"
-        Me.RestoreDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RestoreDBToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.RestoreDBToolStripMenuItem.Text = "Restore DB"
         '
         'ExitToolStripMenuItem
@@ -176,7 +176,6 @@ Partial Class FfE_Main
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(632, 453)
-        Me.ControlBox = False
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.MenuStrip1)
         Me.IsMdiContainer = True

@@ -20,7 +20,7 @@ Public Class Form_view_data
         
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
-        show_data(DataGridView2, FfE_Main.id_lmg)
+        'show_data(DataGridView2, FfE_Main.id_lmg)
         show_data_canbus(DataGridView3, FfE_Main.id_canbus)
         'show_data(DataGridView3, FfE_Main.id_canbus)
 

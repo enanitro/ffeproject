@@ -52,9 +52,6 @@ Partial Class Form_fharprofil
         Me.Button1 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
         Me.select_id = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.drive_id = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Colour = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -68,6 +65,9 @@ Partial Class Form_fharprofil
         Me.start_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.end_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.final = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.Label6 = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -103,7 +103,8 @@ Partial Class Form_fharprofil
         '
         'pn_graphics
         '
-        Me.pn_graphics.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pn_graphics.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pn_graphics.Location = New System.Drawing.Point(585, 20)
         Me.pn_graphics.Name = "pn_graphics"
@@ -415,35 +416,6 @@ Partial Class Form_fharprofil
         Me.DataGridView1.Size = New System.Drawing.Size(517, 291)
         Me.DataGridView1.TabIndex = 5
         '
-        'Panel3
-        '
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(548, 77)
-        Me.Panel3.TabIndex = 8
-        '
-        'Label6
-        '
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(7, 34)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(504, 35)
-        Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Label6"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(7, 7)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(51, 15)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Label5"
-        '
         'select_id
         '
         Me.select_id.HeaderText = ""
@@ -544,6 +516,35 @@ Partial Class Form_fharprofil
         Me.final.ReadOnly = True
         Me.final.Visible = False
         '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(548, 77)
+        Me.Panel3.TabIndex = 8
+        '
+        'Label6
+        '
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(7, 34)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(504, 35)
+        Me.Label6.TabIndex = 11
+        Me.Label6.Text = "Label6"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(7, 7)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 15)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Label5"
+        '
         'Form_fharprofil
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -552,7 +553,7 @@ Partial Class Form_fharprofil
         Me.ClientSize = New System.Drawing.Size(1264, 646)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Form_fharprofil"
-        Me.Text = "Fharprofil"
+        Me.Text = "Fahrprofil"
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)

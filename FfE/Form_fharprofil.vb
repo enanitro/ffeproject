@@ -270,7 +270,7 @@ Public Class Form_fharprofil
         End If
     End Sub
 
-    Private Sub load_fahrprofiles(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fharprofile), _
+    Private Sub load_fahrprofiles(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fahrprofile), _
                                    ByRef labels() As String, ByVal intervals() As Double, _
                                    ByVal pos As Integer)
         For i = 0 To grid.Rows.Count - 1
@@ -282,7 +282,7 @@ Public Class Form_fharprofil
                         j = intervals.Count
                     End If
                 Next
-                fahrprofiles.Add(New fharprofile(grid(1, i).Value, grid(3, i).Value, _
+                fahrprofiles.Add(New fahrprofile(grid(1, i).Value, grid(3, i).Value, _
                                                  grid(2, i).Style.BackColor, values, grid(12, i).Value))
             End If
         Next
@@ -367,7 +367,7 @@ Public Class Form_fharprofil
 
     End Function
 
-    Private Sub load_fahrprofiles_time(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fharprofile), _
+    Private Sub load_fahrprofiles_time(ByVal grid As DataGridView, ByRef fahrprofiles As List(Of fahrprofile), _
                                    ByRef labels() As String, ByVal intervals() As DateTime)
         For i = 0 To grid.Rows.Count - 1
             If grid(0, i).Value = True Then
@@ -378,7 +378,7 @@ Public Class Form_fharprofil
                         j = intervals.Count
                     End If
                 Next
-                fahrprofiles.Add(New fharprofile(grid(1, i).Value, grid(3, i).Value, _
+                fahrprofiles.Add(New fahrprofile(grid(1, i).Value, grid(3, i).Value, _
                                                  grid(2, i).Style.BackColor, values, grid(12, i).Value))
             End If
         Next
@@ -427,7 +427,7 @@ Public Class Form_fharprofil
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         procesing.Show()
         Application.DoEvents()
-        Dim fharprofiles As New List(Of fharprofile)
+        Dim fharprofiles As New List(Of fahrprofile)
         Dim labels() As String
         load_fahrprofiles(DataGridView1, fharprofiles, labels, calculate_range_km(DataGridView1), 4)
         Dim fg As New fharprofilGraphic(fharprofiles, "Kms", labels)
@@ -440,7 +440,7 @@ Public Class Form_fharprofil
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         procesing.Show()
         Application.DoEvents()
-        Dim fharprofiles As New List(Of fharprofile)
+        Dim fharprofiles As New List(Of fahrprofile)
         Dim labels() As String
         load_fahrprofiles(DataGridView1, fharprofiles, labels, calculate_range_speed(DataGridView1), 5)
         Dim fg As New fharprofilGraphic(fharprofiles, "Km/h", labels)
@@ -454,7 +454,7 @@ Public Class Form_fharprofil
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         procesing.Show()
         Application.DoEvents()
-        Dim fharprofiles As New List(Of fharprofile)
+        Dim fharprofiles As New List(Of fahrprofile)
         Dim labels() As String
         load_fahrprofiles_time(DataGridView1, fharprofiles, labels, calculate_range_time(DataGridView1))
         Dim fg As New fharprofilGraphic(fharprofiles, "Time", labels)

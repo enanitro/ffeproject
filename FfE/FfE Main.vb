@@ -39,6 +39,10 @@ Public Class FfE_Main
         Form_conf_usage_type.Focus()
     End Sub
 
+    Private Sub FfE_Main_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+
+    End Sub
+
     Private Sub FfE_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Dim conection As New MySql.Data.MySqlClient.MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString())
@@ -75,15 +79,15 @@ Public Class FfE_Main
     End Sub
 
     Private Sub RestoreDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestoreDBToolStripMenuItem.Click
-        Form_restore_DB.MdiParent = Me
-        Form_restore_DB.Show()
-        Form_restore_DB.Focus()
+        'Form_restore_DB.MdiParent = Me
+        'Form_restore_DB.Show()
+        'Form_restore_DB.Focus()
     End Sub
 
     Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
-        Form_backup_DB.MdiParent = Me
-        Form_backup_DB.Show()
-        Form_backup_DB.Focus()
+        'Form_backup_DB.MdiParent = Me
+        'Form_backup_DB.Show()
+        'Form_backup_DB.Focus()
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click

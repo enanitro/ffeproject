@@ -602,11 +602,11 @@ Public Class logger
             load_ids_chs(list)
 
             linea = fichero.ReadLine
-            If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
-                div = 1000000000
-            Else
-                If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
-            End If
+            'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
+            div = 1000000000
+            'Else
+            'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
+            'End If
             linea = fichero.ReadLine
             datos = linea.Split(vbTab)
             time = datos(4)
