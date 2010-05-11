@@ -124,7 +124,7 @@ Public Class logger
                 analyze_logger_columbus_gps(path, list, text, id, long_file, measure)
             Else
                 If id = FfE_Main.id_lmg Then
-                    analyze_logger_fluke(path, list, text, id, long_file, measure)
+                    analyze_logger_lmg(path, list, text, id, long_file, measure)
                 ElseIf id = FfE_Main.id_canbus Then
                     analyze_logger_canbus(path, list, text, id, long_file, measure)
                 End If
@@ -239,7 +239,7 @@ Public Class logger
             datos1 = linea1.Split(",")
 
             'hora de comienzo
-            stime = make_date(datos1(2)) & " " & make_time(datos1(3))
+            stime = make_date(datos1(2)) & " " & make_time(datos1(3), time_gps(make_date(datos1(2))))
 
             'contamos el numero de registros
             i = 1
@@ -256,7 +256,7 @@ Public Class logger
             long_file = i
 
             'hora de finalizacion
-            etime = make_date(datos1(2)) & " " & make_time(datos1(3))
+            etime = make_date(datos1(2)) & " " & make_time(datos1(3), time_gps(make_date(datos1(2))))
 
             'calculo el intervalo aprox. de tiempo
             interval = DateDiff("s", FormatDateTime(stime), FormatDateTime(etime))
@@ -274,7 +274,7 @@ Public Class logger
     End Sub
 
     'analisis del archivo cvs del logger columbus GPS
-    Public Sub analyze_logger_fluke(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
+    Public Sub analyze_logger_lmg(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1, linea2, name As String
@@ -452,6 +452,8 @@ Public Class logger
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
+        Dim s_w_time As String = ""
+        Dim add_hour As Integer
 
         Try
             'leo la primera linea que pertenece a la cabecera
@@ -464,6 +466,11 @@ Public Class logger
 
             Do
                 linea = fichero.ReadLine
+                If s_w_time = "" Then
+                    datos = linea.Split(",")
+                    s_w_time = make_date(datos(2))
+                    add_hour = time_gps(s_w_time)
+                End If
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
@@ -493,7 +500,7 @@ Public Class logger
 
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & FormatDateTime(make_time(datos(3)), DateFormat.LongTime) & "'" & "," _
+                            & "'" & FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
                         End If
@@ -795,6 +802,15 @@ Public Class logger
         long_file = 0
     End Sub
 
+    Private Function time_gps(ByVal val As String) As Integer
+        Dim localtime As System.TimeZoneInfo
+        Dim d As DateTime
+        localtime = TimeZoneInfo.Local
+        d = FormatDateTime(val, DateFormat.GeneralDate)
+        d = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(d), localtime)
+        Return d.Hour
+    End Function
+
     Private Function make_date(ByVal day As String) As String
         Dim yyyy, mm, dd As String
         yyyy = "20" & day(0) & day(1)
@@ -803,11 +819,16 @@ Public Class logger
         make_date = yyyy & "-" & mm & "-" & dd
     End Function
 
-    Private Function make_time(ByVal time As String) As String
+    Private Function make_time(ByVal time As String, ByVal h As Integer) As String
         Dim hh, mm, ss As String
         hh = time(0) & time(1)
         mm = time(2) & time(3)
         ss = time(4) & time(5)
+        h = CType(hh, Integer) + h
+        If h >= 24 Then
+            h = h Mod 24
+        End If
+        hh = h
         make_time = hh & ":" & mm & ":" & ss
     End Function
 

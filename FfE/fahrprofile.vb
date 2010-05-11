@@ -37,9 +37,26 @@ Public Class Colours
     Public Sub New()
         Dim colorsArray As Array
         colorsArray = [Enum].GetValues(GetType(KnownColor))
-        ReDim allColors(colorsArray.Length)
+        'ReDim allColors(colorsArray.Length)
+        ReDim allColors(15)
+        allColors(0) = KnownColor.Green
+        allColors(1) = KnownColor.Blue
+        allColors(2) = KnownColor.Beige
+        allColors(3) = KnownColor.Red
+        allColors(4) = KnownColor.Yellow
+        allColors(5) = KnownColor.Violet
+        allColors(6) = KnownColor.Brown
+        allColors(7) = KnownColor.Orange
+        allColors(8) = KnownColor.Gray
+        allColors(9) = KnownColor.Salmon
+        allColors(10) = KnownColor.Azure
+        allColors(11) = KnownColor.Coral
+        allColors(12) = KnownColor.Cyan
+        allColors(13) = KnownColor.Magenta
+        allColors(14) = KnownColor.Olive
+        
 
-        Array.Copy(colorsArray, allColors, colorsArray.Length)
+        'Array.Copy(colorsArray, allColors, colorsArray.Length)
 
         'Posicion del color actual
         pos = 0
@@ -50,8 +67,12 @@ Public Class Colours
     End Function
 
     Public Function getNexColor() As Color
-        pos = (pos + 1) Mod allColors.Length
-        If pos = 79 Then
+        'pos = (pos + 20) Mod allColors.Length
+        pos = (pos + 1) Mod 15
+        'If pos = 79 Then
+        'pos += 1 'Aseguramos que el color verde no se asinga
+        'End If
+        If pos = 0 Then
             pos += 1 'Aseguramos que el color verde no se asinga
         End If
         getNexColor = Color.FromKnownColor(Me.allColors(pos))

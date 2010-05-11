@@ -138,9 +138,14 @@ Public Class fharprofilGraphic
         End If
     End Function
 
+    Public Function XScaleFormatEvent(ByVal pane As GraphPane, ByVal axis As Axis, ByVal val As String, ByVal index As Int32) As String
+
+    End Function
+
     Private Sub show_histogram()
 
         AddHandler myPane.GraphPane.YAxis.ScaleFormatEvent, AddressOf YScaleFormatEvent
+        'AddHandler myPane.GraphPane.XAxis.ScaleFormatEvent, AddressOf XScaleFormatEvent
 
 
         myPane.GraphPane.Title.Text = "Histogram"
@@ -153,17 +158,13 @@ Public Class fharprofilGraphic
         Next
 
         'Draw the X tics between the labels instead of at the labels
-        myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
+        'myPane.GraphPane.XAxis.MajorTic.IsBetweenLabels = True
 
-        'Set the XAxis to Text type
         myPane.GraphPane.XAxis.Type = AxisType.Text
-        'Set the XAxis labels
         myPane.GraphPane.XAxis.Scale.TextLabels = labels
         myPane.GraphPane.XAxis.Scale.FontSpec.Size = 10.0F
 
         myPane.GraphPane.YAxis.Scale.BaseTic = 0
-        'myPane.GraphPane.YAxis.Scale.Format = "f0"
-
 
         myPane.GraphPane.BarSettings.Type = BarType.Stack
         myPane.GraphPane.BarSettings.MinClusterGap = 0
