@@ -15,7 +15,7 @@ Public Class Form_drive
     Dim form_export As Form_export_full
     Dim import_full As form_import_csv_full
     Dim del_channel As Form_delete_channel
-    Dim form_fahrprofil As Form_fahrprofil
+    Dim view_fahrprofil As Form_fahrprofil
 
 
     Private Sub Form_drive_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -485,9 +485,11 @@ Public Class Form_drive
 
     Private Sub showFahrprofil()
         If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5).Equals(DBNull.Value) Then
-            Form_fahrprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
-            Form_fahrprofil.MdiParent = Me.MdiParent
-            Form_fahrprofil.Show()
+            view_fahrprofil = New Form_fahrprofil
+            view_fahrprofil.isClosed = False
+            view_fahrprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
+            view_fahrprofil.MdiParent = Me.MdiParent
+            view_fahrprofil.Show()
         End If
     End Sub
 
@@ -495,13 +497,13 @@ Public Class Form_drive
         procesing.Show()
         Application.DoEvents()
         Try
-            If form_fahrprofil Is Nothing Then
+            If view_fahrprofil Is Nothing Then
                 showFahrprofil()
             Else
-                If form_fahrprofil.isClosed Then
+                If view_fahrprofil.isClosed Then
                     showFahrprofil()
                 Else
-                    form_export.Focus()
+                    view_fahrprofil.Focus()
                 End If
             End If
         Catch ex As Exception

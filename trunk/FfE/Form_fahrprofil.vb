@@ -135,8 +135,9 @@ Public Class Form_fahrprofil
                         grid(7, i).Value = t2.ToLongTimeString
                         grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
-                        grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
-                                          interval.Seconds.ToString
+                        'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
+                        'interval.Seconds.ToString()
+                        grid(6, i).Value = interval.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         grid(2, i).Style.BackColor = colores.getNexColor
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
@@ -161,8 +162,9 @@ Public Class Form_fahrprofil
                         grid(7, i).Value = t2.ToLongTimeString
                         grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
-                        grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
-                                          interval.Seconds.ToString
+                        'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
+                        'interval.Seconds.ToString()
+                        grid(6, i).Value = interval.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
                         'grid(2, i).Style.BackColor = Label1.BackColor
                         grid(2, i).Style.BackColor = Color.Green
@@ -289,7 +291,7 @@ Public Class Form_fahrprofil
 
         Dim labs(intervals.Count - 1) As String
         For i = 0 To intervals.Count - 1
-            labs(i) = "< " & intervals(i)
+            labs(i) = intervals(i)
         Next
         labels = labs
     End Sub
@@ -385,7 +387,7 @@ Public Class Form_fahrprofil
 
         Dim labs(intervals.Count - 1) As String
         For i = 0 To intervals.Count - 1
-            labs(i) = "< " & intervals(i).ToString("HH:mm")
+            labs(i) = intervals(i).ToString("HH:mm")
         Next
         labels = labs
     End Sub

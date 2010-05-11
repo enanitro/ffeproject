@@ -40,10 +40,12 @@ Public Class FfE_Main
         Form_conf_usage_type.Focus()
     End Sub
 
-    'Private Sub FfE_Main_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-    '   AddHandler Me.FormClosing, AddressOf form_exit
-    '  form_exit()
-    'End Sub
+
+    Private Sub FfE_Main_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If MsgBox("Are you sure that you want to exit FfE?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+            e.Cancel = True
+        End If
+    End Sub
 
     Private Sub FfE_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
@@ -65,7 +67,7 @@ Public Class FfE_Main
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
         Dim form_conn As New Form_Connection
 
-        'form_conn.MdiParent = Me
+        form_conn.MdiParent = Me
         form_conn.ShowDialog()
     End Sub
 
@@ -86,13 +88,8 @@ Public Class FfE_Main
         'Form_backup_DB.Show()
         'Form_backup_DB.Focus()
     End Sub
-    Private Sub form_exit()
-        If MsgBox("Are you sure that you want to exit FfE?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            Me.Close()
-        End If
-    End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
-        form_exit()
+        Me.Close()
     End Sub
 End Class
