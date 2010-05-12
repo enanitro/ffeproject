@@ -116,7 +116,7 @@ Public Class Form_fahrprofil
             cn.Open()
             cmd.Connection = cn
             cmd.CommandTimeout = 1000
-            sql = "select drive_id,avg(value),max(time),min(time) from data" & _
+            sql = "select drive_id,avg(value),max(data_index),min(data_index) from data" & _
                       " where (measure_id = " & sp_gps & " or data_id like '%speed%')" & _
                       " and logger_id = " & logger_id & " group by drive_id having drive_id in " & _
                       " (select drive_id from drive where usage_type_id = " & id_usage_type & _
@@ -130,8 +130,12 @@ Public Class Form_fahrprofil
                         i = grid.Rows.Count - 1
                         grid(1, i).Value = query.GetString(0)
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
-                        t1 = query.GetString(2)
-                        t2 = query.GetString(3)
+                        t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
+                        t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
+                        't1 = query.GetString(2)
+                        't2 = query.GetString(3)
                         grid(7, i).Value = t2.ToLongTimeString
                         grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
@@ -157,8 +161,12 @@ Public Class Form_fahrprofil
                         grid(0, i).Value = True
                         grid(1, i).Value = query.GetString(0)
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
-                        t1 = query.GetString(2)
-                        t2 = query.GetString(3)
+                        t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
+                        t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
+                        't1 = query.GetString(2)
+                        't2 = query.GetString(3)
                         grid(7, i).Value = t2.ToLongTimeString
                         grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
@@ -166,14 +174,13 @@ Public Class Form_fahrprofil
                         'interval.Seconds.ToString()
                         grid(6, i).Value = interval.ToString
                         sec = DateDiff(DateInterval.Second, t2, t1)
-                        'grid(2, i).Style.BackColor = Label1.BackColor
                         grid(2, i).Style.BackColor = Color.Green
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         grid(12, i).Value = True
                         speed_avg += Math.Round((query.GetDouble(1)), 4)
-                        t1 = query.GetString(2)
-                        t2 = query.GetString(3)
-                        sec = DateDiff(DateInterval.Second, t2, t1)
+                        't1 = query.GetString(2)
+                        't2 = query.GetString(3)
+                        'sec = DateDiff(DateInterval.Second, t2, t1)
                         sec_avg += sec
                         km_avg = Math.Round((query.GetDouble(1) / 3600) * sec_avg, 4)
                         grid.Rows.Item(i).Visible = False
@@ -201,7 +208,7 @@ Public Class Form_fahrprofil
         Try
             cn.Open()
             cmd.Connection = cn
-            sql = "select avg(value),max(time),min(time) from data where drive_id = " & drive_id & _
+            sql = "select avg(value),max(data_index),min(data_index) from data where drive_id = " & drive_id & _
             " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")"
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
@@ -209,8 +216,10 @@ Public Class Form_fahrprofil
             If query.Read Then
                 If query.IsDBNull(0) = False Then
                     grid(9, index).Value = Math.Round(query.GetDouble(0), 4)
-                    grid(10, index).Value = query.GetString(2)
-                    grid(11, index).Value = query.GetString(1)
+                    grid(10, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
+                                " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(2))
+                    grid(11, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
+                                " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(1))
                     find = True
                 End If
             End If
@@ -263,12 +272,17 @@ Public Class Form_fahrprofil
 
     Private Sub update_drives(ByVal grid As DataGridView, ByVal status As String)
         If MsgBox("Are you sure to update drives selected?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            procesing.Show()
+            Application.DoEvents()
             For i = 0 To grid.Rows.Count - 1
                 If grid.Rows.Item(i).Visible = True And grid(0, i).Value = True Then
                     execute_simple("update drive set status = " & status & _
                                    " where drive_id = " & grid(1, i).Value)
                 End If
             Next
+            clear_window(DataGridView1)
+            select_value_gps()
+            procesing.Close()
         End If
     End Sub
 
@@ -315,11 +329,7 @@ Public Class Form_fahrprofil
         max = Math.Truncate(max) + 1
         min = Math.Truncate(min)
         Dim value As String = CType(CType(min, Integer), String)
-        If value.Length = 1 Then
-            value = 0
-        Else
-            value = value.Replace(value.Length - 1, "0")
-        End If
+        value = value.Remove(value.Length - 1) & "0"
 
         count = Math.Truncate((max - value) / 5) '5 km
 
@@ -351,11 +361,7 @@ Public Class Form_fahrprofil
         max = Math.Truncate(max) + 1
         min = Math.Truncate(min)
         Dim value As String = CType(CType(min, Integer), String)
-        If value.Length = 1 Then
-            value = 0
-        Else
-            value = value.Remove(value.Length - 1) & "0"
-        End If
+        value = value.Remove(value.Length - 1) & "0"
 
         count = Math.Truncate((max - value) / 10) '10 km/h
 
@@ -472,17 +478,15 @@ Public Class Form_fahrprofil
 
     Private Sub clear_window(ByRef grid As DataGridView)
         grid.Rows.Clear()
+        pn_graphics.Controls.Clear()
+        colores = New Colours
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         update_drives(DataGridView1, "'Final'")
-        clear_window(DataGridView1)
-        select_value_gps()
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         update_drives(DataGridView1, "'Check'")
-        clear_window(DataGridView1)
-        select_value_gps()
     End Sub
 End Class
