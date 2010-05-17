@@ -317,8 +317,8 @@ Partial Class form_import_csv_full
         '
         'ProgressBar4
         '
-        Me.ProgressBar4.ForeColor = System.Drawing.SystemColors.GrayText
         resources.ApplyResources(Me.ProgressBar4, "ProgressBar4")
+        Me.ProgressBar4.ForeColor = System.Drawing.SystemColors.GrayText
         Me.ProgressBar4.Name = "ProgressBar4"
         '
         'Label11
@@ -328,8 +328,8 @@ Partial Class form_import_csv_full
         '
         'Label12
         '
-        resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         '
         'Button8
@@ -383,19 +383,15 @@ Partial Class form_import_csv_full
         Me.GroupBox_graphtec.ResumeLayout(False)
         Me.GroupBox_graphtec.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.GroupBox_columbusGPS.ResumeLayout(False)
         Me.GroupBox_columbusGPS.PerformLayout()
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.GroupBox_fluke.ResumeLayout(False)
         Me.GroupBox_fluke.PerformLayout()
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.GroupBox_CANBUS.ResumeLayout(False)
         Me.GroupBox_CANBUS.PerformLayout()
         Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

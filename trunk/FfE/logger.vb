@@ -95,12 +95,13 @@ Public Class logger
     End Sub
 
 
-    Function logger_dialog(ByVal filedialog As OpenFileDialog, ByRef list As CheckedListBox, ByVal id As Integer, _
-                             ByRef text As TextBox, ByRef long_file As Integer, ByRef measure() As Integer) As String
+    Public Function logger_dialog(ByVal filedialog As OpenFileDialog, ByRef list As CheckedListBox, ByVal id As Integer, _
+                             ByRef text As TextBox, ByRef long_file As Integer, ByRef measure() As Integer, _
+                             ByVal n_file As Integer) As String
         filedialog.FileName = ""
         filedialog.ShowDialog()
         If My.Computer.FileSystem.FileExists(filedialog.FileName) Then
-            analizar_CVS(filedialog.FileName, id, text, list, long_file, measure)
+            analizar_CVS(filedialog.FileName, id, text, n_file, list, long_file, measure)
         End If
         If list.Items.Count <> 0 Then
             list.Visible = True
@@ -113,20 +114,20 @@ Public Class logger
 
 
     'analiza la cabecera del archivo
-    Public Sub analizar_CVS(ByVal path As String, ByVal id As String, ByRef text As TextBox, _
+    Public Sub analizar_CVS(ByVal path As String, ByVal id As String, ByRef text As TextBox, ByVal n_file As Integer, _
                             ByRef list As CheckedListBox, ByRef long_file As String, ByRef measure() As Integer)
         procesing.Show()
         Application.DoEvents()
         If id = FfE_Main.id_graphtec Then
-            analyze_logger_graphtec_gl800(path, list, text, id, long_file, measure)
+            analyze_logger_graphtec_gl800(path, list, text, id, long_file, measure, n_file)
         Else
             If id = FfE_Main.id_gps Then
-                analyze_logger_columbus_gps(path, list, text, id, long_file, measure)
+                analyze_logger_columbus_gps(path, list, text, id, long_file, measure, n_file)
             Else
                 If id = FfE_Main.id_lmg Then
-                    analyze_logger_lmg(path, list, text, id, long_file, measure)
+                    analyze_logger_lmg(path, list, text, id, long_file, measure, n_file)
                 ElseIf id = FfE_Main.id_canbus Then
-                    analyze_logger_canbus(path, list, text, id, long_file, measure)
+                    analyze_logger_canbus(path, list, text, id, long_file, measure, n_file)
                 End If
             End If
         End If
@@ -134,30 +135,29 @@ Public Class logger
     End Sub
 
     'analisis del archivo cvs del logger graphtec gl800
-    Public Sub analyze_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
-                                              ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
+    Public Sub analyze_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, _
+                                             ByRef text As TextBox, ByVal id As Integer, ByRef long_file As String, _
+                                             ByRef measure() As Integer, ByVal n_file As Integer)
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1, linea2, name As String
         Dim datos1(), datos2() As String
         Dim i, j, count As Integer
 
         Try
-            'limpiar
-            list.Items.Clear()
-            text.Text = ""
+            text.Text += "File: " & (n_file + 1) & vbCrLf
 
             'comprobar si es un archivo del logger graphtec gl800
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
 
-            text.Text = datos1(1) + vbCrLf
+            text.Text += datos1(1) & vbCrLf
 
             'leer cabecera y mostrarla por pantalla
             For i = 0 To 3
                 linea1 = fichero.ReadLine
                 datos1 = linea1.Split(",")
-                text.Text += datos1(0) + ": "
-                text.Text += datos1(1) + vbCrLf
+                text.Text += datos1(0) & ": "
+                text.Text += datos1(1) & vbCrLf
                 If i = 2 Then unit = datos1(1)
                 If i = 3 Then count = datos1(1)
             Next
@@ -165,10 +165,11 @@ Public Class logger
             For i = 0 To 2
                 linea1 = fichero.ReadLine
                 datos1 = linea1.Split(",")
-                text.Text += datos1(0) + ": "
-                text.Text += datos1(1) + " "
-                text.Text += datos1(2) + vbCrLf
+                text.Text += datos1(0) & ": "
+                text.Text += datos1(1) & " "
+                text.Text += datos1(2) & vbCrLf
             Next
+            text.Text += vbCrLf
 
             linea1 = fichero.ReadLine
             linea1 = fichero.ReadLine
@@ -182,18 +183,21 @@ Public Class logger
             Loop Until datos1(0) = "Logic/Pulse"
             i = i - 1
 
+
             'crear los items para cada canal
             linea1 = fichero.ReadLine
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
             linea2 = fichero.ReadLine
             datos2 = linea2.Split(",")
-            For j = 2 To i + 1
-                datos2(j) = datos2(j).Trim("""")
-                name = datos1(j) + " (" + datos2(j) + ")"
-                list.Items.Add(name)
-            Next
-            Array.Resize(measure, list.Items.Count)
+            If n_file = 0 Then
+                For j = 2 To i + 1
+                    datos2(j) = datos2(j).Trim("""")
+                    name = datos1(j) + " (" + datos2(j) + ")"
+                    list.Items.Add(name)
+                Next
+                Array.Resize(measure, list.Items.Count)
+            End If
 
             'comprobar si el archivo es correcto
             long_file = -1
@@ -213,8 +217,9 @@ Public Class logger
 
 
     'analisis del archivo cvs del logger columbus GPS
-    Public Sub analyze_logger_columbus_gps(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
-                                              ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
+    Public Sub analyze_logger_columbus_gps(ByVal path As String, ByRef list As CheckedListBox, _
+                                           ByRef text As TextBox, ByVal id As Integer, ByRef long_file As String, _
+                                           ByRef measure() As Integer, ByVal n_file As Integer)
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1, linea2, name As String
         Dim datos1(), datos2() As String
@@ -223,17 +228,21 @@ Public Class logger
         Dim i As Integer
 
         Try
+            text.Text += "File: " & (n_file + 1) & vbCrLf
+
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
 
-            'introducir los canales en checklistbox
-            For i = 4 To datos1.Length - 2
-                'name = (i - 3) & " (" & datos1(i) & ")"
-                name = datos1(i)
-                list.Items.Add(name)
-            Next
-            Array.Resize(measure, list.Items.Count)
+            If n_file = 0 Then
+                'introducir los canales en checklistbox
+                For i = 4 To datos1.Length - 2
+                    'name = (i - 3) & " (" & datos1(i) & ")"
+                    name = datos1(i)
+                    list.Items.Add(name)
+                Next
+                Array.Resize(measure, list.Items.Count)
+            End If
 
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
@@ -263,19 +272,20 @@ Public Class logger
             interval = interval / i
 
             'escribo cabecera
-            text.Text = "Columbus GPS" & vbCrLf & _
+            text.Text += "Columbus GPS" & vbCrLf & _
                         "Sampling interval: " & interval & "s" & vbCrLf & _
                         "Total data points: " & i & vbCrLf & _
                         "Start time: " & stime & vbCrLf & _
-                        "End time: " & etime
+                        "End time: " & etime & vbCrLf & vbCrLf
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     'analisis del archivo cvs del logger columbus GPS
-    Public Sub analyze_logger_lmg(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
-                                    ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
+    Public Sub analyze_logger_lmg(ByVal path As String, ByRef list As CheckedListBox, _
+                                  ByRef text As TextBox, ByVal id As Integer, ByRef long_file As String, _
+                                  ByRef measure() As Integer, ByVal n_file As Integer)
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1, linea2, name As String
         Dim datos1(), datos2() As String
@@ -283,15 +293,19 @@ Public Class logger
         Dim i As Integer
 
         Try
+            text.Text += "File: " & (n_file + 1) & vbCrLf
+
             'leemos los canales y sus unidades
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
 
             'introducir los canales en checklistbox
-            For i = 1 To datos1.Length - 1
-                list.Items.Add(datos1(i))
-            Next
-            Array.Resize(measure, list.Items.Count)
+            If n_file = 0 Then
+                For i = 1 To datos1.Length - 1
+                    list.Items.Add(datos1(i))
+                Next
+                Array.Resize(measure, list.Items.Count)
+            End If
 
             long_file = 0
             Do
@@ -301,15 +315,16 @@ Public Class logger
 
             'escribo cabecera
             text.Text += "LMG500" & vbCrLf
-            text.Text += "Total data points: " & long_file
+            text.Text += "Total data points: " & long_file & vbCrLf & vbCrLf
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     'analisis del archivo cvs del logger CANBUS
-    Public Sub analyze_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
-                                    ByVal id As Integer, ByRef long_file As String, ByRef measure() As Integer)
+    Public Sub analyze_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, _
+                                     ByRef text As TextBox, ByVal id As Integer, ByRef long_file As String, _
+                                     ByRef measure() As Integer, ByVal n_file As Integer)
         Dim fichero As New System.IO.StreamReader(path)
         Dim linea1 As String
         Dim datos1(), datos2() As String
@@ -317,8 +332,10 @@ Public Class logger
         Dim i As Integer
 
         Try
+            text.Text += "File: " & (n_file + 1) & vbCrLf
+
             'leer cabecera, hacer comprobaciones, mostrarla por pantalla
-            text.Text = "CAN-BUS" & vbCrLf
+            text.Text += "CAN-BUS" & vbCrLf
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(vbTab)
             linea1 = fichero.ReadLine
@@ -337,11 +354,12 @@ Public Class logger
                 linea1 = fichero.ReadLine
                 long_file += 1
             Loop While linea1 <> Nothing
-            text.Text += "Data points: " & long_file & vbCrLf
+            text.Text += "Data points: " & long_file & vbCrLf & vbCrLf
 
-            load_channels_canbus(list)
-
-            Array.Resize(measure, list.Items.Count)
+            If n_file = 0 Then
+                load_channels_canbus(list)
+                Array.Resize(measure, list.Items.Count)
+            End If
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -373,7 +391,28 @@ Public Class logger
         End Try
     End Sub
 
-    'Public Sub 
+    Private Function find_last_index(ByVal id_logger As Integer, ByVal id_drive As Integer) As Integer
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql As String = ""
+        Dim res As Integer = 0
+
+        cn.Open()
+        cmd.Connection = cn
+        sql = "select if(max(data_index)is not null,max(data_index),0) from data where drive_id = " & id_drive & _
+              " and logger_id = " & id_logger
+        cmd.CommandText = sql
+        query = cmd.ExecuteReader()
+        query.Read()
+        If query.HasRows() Then
+            res = query.GetInt32(0)
+        End If
+        cn.Close()
+
+        find_last_index = res
+    End Function
 
     'inserta los datos del fichero en la tabla data (logger graphtec GL800)
     Public Sub insert_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
@@ -390,6 +429,7 @@ Public Class logger
         Dim value As Double
 
         Try
+            index = find_last_index(id_logger, id_drive)
             'sumo el numero de canales + 14 lineas de datos que contiene la cabecera del logger graphtec gl800
             For i = 1 To list.Items.Count + 14
                 linea = fichero.ReadLine
@@ -432,7 +472,7 @@ Public Class logger
             If Not ins.is_empty Then
                 ins.insert_into_string()
             End If
-            data_summary(num_lines, n_data, data_points)
+            'data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -456,6 +496,8 @@ Public Class logger
         Dim add_hour As Integer
 
         Try
+            index = find_last_index(id_logger, id_drive)
+
             'leo la primera linea que pertenece a la cabecera
             linea = fichero.ReadLine
 
@@ -516,7 +558,7 @@ Public Class logger
             If Not ins.is_empty Then
                 ins.insert_into_string()
             End If
-            data_summary(num_lines, n_data, data_points)
+            'data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -538,6 +580,8 @@ Public Class logger
         Dim value As Double
 
         Try
+            index = find_last_index(id_logger, id_drive)
+
             'leo la primera linea que pertenece a la cabecera
             linea = fichero.ReadLine
 
@@ -579,7 +623,7 @@ Public Class logger
             If Not ins.is_empty Then
                 ins.insert_into_string()
             End If
-            data_summary(num_lines, n_data, data_points)
+            'data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -605,8 +649,11 @@ Public Class logger
         Dim str As str_canbus
 
         Try
-            Load_table_canbus(list)
-            load_ids_chs(list)
+            index = find_last_index(id_logger, id_drive)
+            If index = 0 Then
+                Load_table_canbus(list)
+                load_ids_chs(list)
+            End If
 
             linea = fichero.ReadLine
             'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
@@ -722,7 +769,7 @@ Public Class logger
             If Not ins.is_empty Then
                 ins.insert_into_string()
             End If
-            data_summary(num_lines, n_data, data_points)
+            'data_summary(num_lines, n_data, data_points)
         Catch ex As Exception
             form_import_csv_full.abort = True
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -792,14 +839,14 @@ Public Class logger
     End Function
 
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
-                            ByRef path As String, ByRef long_file As Integer)
+                            ByRef path() As String, ByRef long_file() As Integer)
         panel.Visible = False
         list.Items.Clear()
         list.Visible = False
         text.Text = ""
         text.Visible = False
-        path = ""
-        long_file = 0
+        path = Nothing
+        long_file = Nothing
     End Sub
 
     Private Function time_gps(ByVal val As String) As Integer
@@ -865,7 +912,7 @@ Public Class logger
     'configuracion del progressbar y labels que le acompañan
     Private Sub config_progressbar(ByRef bar As ProgressBar, ByVal max As Double, _
                                    ByVal list As CheckedListBox, ByRef n_data As Label)
-        n_data.Text = ""
+        'n_data.Text = ""
         bar.Minimum = 0
         bar.Maximum = max * list.CheckedIndices.Count
     End Sub
