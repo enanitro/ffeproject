@@ -101,6 +101,8 @@ Public Class Form_view_data
             query = cmd.ExecuteReader
 
             count = 0
+            grid.Rows.Clear()
+            grid.Columns.Clear()
             While query.Read
                 grid.Columns.Add("TIME", "TIME")
                 grid.Columns.Add(query.GetString(0), query.GetString(0))
@@ -215,7 +217,7 @@ Public Class Form_view_data
         End Try
     End Sub
 
-    Private Sub execute_list_channels(ByVal logger_id As Integer, ByVal list As CheckedListBox)
+    Private Sub execute_list_channels(ByVal logger_id As Integer, ByVal list As CheckedListBox, ByVal check As CheckBox)
 
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
@@ -243,6 +245,7 @@ Public Class Form_view_data
                 list.SetItemChecked(i, False)
                 i += 1
             End While
+            check.Checked = False
 
             cn.Close()
 
@@ -308,10 +311,10 @@ Public Class Form_view_data
     End Sub
 
     Private Sub channel_load()
-        execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
-        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
-        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
-        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
+        execute_list_channels(FfE_Main.id_gps, CheckedListBox2, CheckBox9)
+        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1, CheckBox1)
+        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3,CheckBox2)
+        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
     End Sub
 
     Private Sub select_all_channels(ByRef list As CheckedListBox, ByVal check As CheckBox)
@@ -339,7 +342,7 @@ Public Class Form_view_data
         procesing.Show()
         Application.DoEvents()
         show_data(DataGridView, FfE_Main.id_graphtec)
-        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1)
+        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1, CheckBox9)
         procesing.Close()
     End Sub
 
@@ -348,7 +351,7 @@ Public Class Form_view_data
         procesing.Show()
         Application.DoEvents()
         show_data(DataGridView1, FfE_Main.id_gps)
-        execute_list_channels(FfE_Main.id_gps, CheckedListBox2)
+        execute_list_channels(FfE_Main.id_gps, CheckedListBox2, CheckBox1)
         procesing.Close()
     End Sub
 
@@ -373,7 +376,7 @@ Public Class Form_view_data
         'procesing.Show()
         'Application.DoEvents()
         'show_data(DataGridView2, FfE_Main.id_lmg)
-        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3)
+        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3,CheckBox2)
         'procesing.Close()
     End Sub
 
@@ -390,7 +393,7 @@ Public Class Form_view_data
         procesing.Show()
         Application.DoEvents()
         show_data_canbus(DataGridView3, FfE_Main.id_canbus)
-        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4)
+        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
         procesing.Close()
     End Sub
 

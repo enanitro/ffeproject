@@ -4,22 +4,18 @@ Imports MySql.Data.MySqlClient
 Public Class insert_Data
     Public insert_string As String
     Public Sub insert_into_string()
-        Try
-            Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
-            ' Abrir la conexión a Sql  
-            cn.Open()
+        Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
+        ' Abrir la conexión a Sql  
+        cn.Open()
 
-            Dim s As String = 0
-            s = insert_string.Remove(insert_string.LastIndexOf(","))
-            s += "; commit;"
+        Dim s As String = 0
+        s = insert_string.Remove(insert_string.LastIndexOf(","))
+        s += "; commit;"
 
-            ' Pasar la consulta sql y la conexión al Sql Command   
-            Dim cmd As New MySqlCommand(s, cn)
-            cmd.ExecuteNonQuery()
-            cn.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        ' Pasar la consulta sql y la conexión al Sql Command   
+        Dim cmd As New MySqlCommand(s, cn)
+        cmd.ExecuteNonQuery()
+        cn.Close()
     End Sub
 
     Public Sub init_string()

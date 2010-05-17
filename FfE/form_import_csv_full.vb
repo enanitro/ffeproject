@@ -2,12 +2,14 @@
 Imports MySql.Data.MySqlClient
 
 Public Class form_import_csv_full
-    Public long_graphtec, long_gps, long_fluke, long_canbus, id_drive As Integer
-    Public id_measure_graphtec(), id_measure_gps(), id_measure_fluke(), id_measure_canbus() As Integer
-    Public name_measure_graphtec(), name_measure_gps(), name_measure_fluke(), name_measure_canbus() As String
-    Public path_graphtec, path_gps, path_fluke, path_canbus As String
+    Dim long_graphtec(), long_gps(), long_lmg(), long_canbus() As Integer
+    Dim id_measure_graphtec(), id_measure_gps(), id_measure_lmg(), id_measure_canbus() As Integer
+    Dim name_measure_graphtec(), name_measure_gps(), name_measure_lmg(), name_measure_canbus() As String
+    Dim path_graphtec(0), path_gps(0), path_lmg(0), path_canbus(0) As String
+    Dim length_graphtec, length_gps, length_lmg, length_canbus As Integer
     Public abort As Boolean = False
     Public isClosed As Boolean = False
+    Public id_drive As Integer
 
     Private Sub all_channels(ByRef channels() As String, ByVal list As CheckedListBox)
         Array.Resize(channels, list.Items.Count)
@@ -18,50 +20,119 @@ Public Class form_import_csv_full
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
+        Dim txt As String
+        'logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
         'id_logger = 1
-        path_graphtec = logger.logger_dialog(OpenFileDialog, CheckedListBox1, FfE_Main.id_graphtec, _
-                                             TextBox1, long_graphtec, id_measure_graphtec)
-        If CheckedListBox1.Items.Count > 0 Then
-            all_channels(name_measure_graphtec, CheckedListBox1)
+        If length_graphtec = 0 Then
+            ReDim path_graphtec(0)
+            ReDim long_graphtec(0)
+            length_graphtec = 1
+            path_graphtec(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox1, FfE_Main.id_graphtec, _
+                                             TextBox1, long_graphtec(0), id_measure_graphtec, length_graphtec - 1)
+            If CheckedListBox1.Items.Count > 0 Then
+                all_channels(name_measure_graphtec, CheckedListBox1)
+            End If
+        Else
+            Array.Resize(path_graphtec, path_graphtec.Length + 1)
+            Array.Resize(long_graphtec, long_graphtec.Length + 1)
+            length_graphtec += 1
+            path_graphtec(path_graphtec.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox1, _
+                                                    FfE_Main.id_graphtec, TextBox1, long_graphtec(length_graphtec - 1), _
+                                                    id_measure_graphtec, length_graphtec - 1)
         End If
     End Sub
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
+        'logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
         'id_logger = 2
-        path_gps = logger.logger_dialog(OpenFileDialog, CheckedListBox2, FfE_Main.id_gps, _
-                                        TextBox2, long_gps, id_measure_gps)
-        If CheckedListBox2.Items.Count > 0 Then
-            all_channels(name_measure_gps, CheckedListBox2)
+        If length_gps = 0 Then
+            ReDim path_gps(0)
+            ReDim long_gps(0)
+            length_gps = 1
+            path_gps(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox2, FfE_Main.id_gps, _
+                                            TextBox2, long_gps(0), id_measure_gps, length_gps - 1)
+            If CheckedListBox2.Items.Count > 0 Then
+                all_channels(name_measure_gps, CheckedListBox2)
+            End If
+        Else
+            Array.Resize(path_gps, path_gps.Length + 1)
+            Array.Resize(long_gps, long_gps.Length + 1)
+            length_gps += 1
+            path_gps(path_gps.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox2, _
+                                                    FfE_Main.id_gps, TextBox2, long_gps(length_gps - 1), _
+                                                    id_measure_gps, length_gps - 1)
         End If
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+        'logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg)
         'id_logger = 3
-        path_fluke = logger.logger_dialog(OpenFileDialog, CheckedListBox3, FfE_Main.id_lmg, _
-                                          TextBox3, long_fluke, id_measure_fluke)
-        If CheckedListBox3.Items.Count > 0 Then
-            all_channels(name_measure_fluke, CheckedListBox3)
+        If length_lmg = 0 Then
+            ReDim path_lmg(0)
+            ReDim long_lmg(0)
+            length_lmg = 1
+            path_lmg(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox3, FfE_Main.id_lmg, _
+                                              TextBox3, long_lmg(0), id_measure_lmg, length_lmg - 1)
+            If CheckedListBox3.Items.Count > 0 Then
+                all_channels(name_measure_lmg, CheckedListBox3)
+            End If
+        Else
+            Array.Resize(path_lmg, path_lmg.Length + 1)
+            Array.Resize(long_lmg, long_lmg.Length + 1)
+            length_lmg += 1
+            path_lmg(path_lmg.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox3, _
+                                                    FfE_Main.id_lmg, TextBox3, long_lmg(length_lmg - 1), _
+                                                    id_measure_lmg, length_lmg - 1)
         End If
+    End Sub
+
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        Dim logger As New logger
+        'logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+        'id_logger = 4
+        If length_canbus = 0 Then
+            ReDim path_canbus(0)
+            ReDim long_canbus(0)
+            length_canbus = 1
+            path_canbus(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox4, FfE_Main.id_canbus, _
+                                               TextBox4, long_canbus(0), id_measure_canbus, length_canbus - 1)
+            If CheckedListBox4.Items.Count > 0 Then
+                all_channels(name_measure_canbus, CheckedListBox4)
+            End If
+        Else
+            Array.Resize(path_canbus, path_canbus.Length + 1)
+            Array.Resize(long_canbus, long_canbus.Length + 1)
+            length_canbus += 1
+            path_canbus(path_canbus.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox4, _
+                                                    FfE_Main.id_canbus, TextBox4, long_canbus(length_canbus - 1), _
+                                                    id_measure_canbus, length_canbus - 1)
+        End If
+    End Sub
+
+    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+        Dim logger As New logger
+        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+        length_canbus = 0
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         Dim logger As New logger
         logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
+        length_graphtec = 0
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim logger As New logger
         logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
+        length_gps = 0
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg)
+        length_lmg = 0
     End Sub
 
     'import files
@@ -70,38 +141,54 @@ Public Class form_import_csv_full
         Dim imp As Boolean = False
         Try
             Button7.Enabled = False
-            If path_graphtec <> "" And GroupBox_graphtec.Enabled _
+            If path_graphtec(0) <> "" And GroupBox_graphtec.Enabled _
             And CheckedListBox1.CheckedItems.Count <> 0 Then
                 Panel1.Visible = True
-                logger.insert_logger_graphtec_gl800(path_graphtec, CheckedListBox1, _
-                TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, long_graphtec, id_measure_graphtec)
+                For i = 0 To length_graphtec - 1
+                    Label6.Text = "Importing File " & i + 1
+                    logger.insert_logger_graphtec_gl800(path_graphtec(i), CheckedListBox1, _
+                    TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, _
+                    long_graphtec(i), id_measure_graphtec)
+                Next
                 'GroupBox_graphtec.Enabled = False
                 imp = True
             End If
 
-            If path_gps <> "" And GroupBox_columbusGPS.Enabled _
+            If path_gps(0) <> "" And GroupBox_columbusGPS.Enabled _
             And CheckedListBox2.CheckedItems.Count <> 0 Then
                 Panel2.Visible = True
-                logger.insert_logger_columbus_gps(path_gps, CheckedListBox2, _
-                TextBox2, Label7, Label8, ProgressBar2, FfE_Main.id_gps, id_drive, long_gps, id_measure_gps)
+                For i = 0 To length_gps - 1
+                    Label8.Text = "Importing File " & i + 1
+                    logger.insert_logger_columbus_gps(path_gps(i), CheckedListBox2, _
+                    TextBox2, Label7, Label8, ProgressBar2, FfE_Main.id_gps, id_drive, _
+                    long_gps(i), id_measure_gps)
+                Next
                 'GroupBox_columbusGPS.Enabled = False
                 imp = True
             End If
 
-            If path_fluke <> "" And GroupBox_fluke.Enabled _
+            If path_lmg(0) <> "" And GroupBox_fluke.Enabled _
             And CheckedListBox3.CheckedItems.Count <> 0 Then
                 Panel3.Visible = True
-                logger.insert_logger_lmg500(path_fluke, CheckedListBox3, _
-                TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_lmg, id_drive, long_fluke, id_measure_fluke)
+                For i = 0 To length_lmg - 1
+                    Label10.Text = "Importing File " & i + 1
+                    logger.insert_logger_lmg500(path_lmg(i), CheckedListBox3, _
+                    TextBox3, Label9, Label10, ProgressBar3, FfE_Main.id_lmg, id_drive, _
+                    long_lmg(i), id_measure_lmg)
+                Next
                 'GroupBox_fluke.Enabled = False
                 imp = True
             End If
 
-            If path_canbus <> "" And GroupBox_CANBUS.Enabled _
+            If path_canbus(0) <> "" And GroupBox_CANBUS.Enabled _
             And CheckedListBox4.CheckedItems.Count <> 0 Then
                 Panel4.Visible = True
-                logger.insert_logger_canbus(path_canbus, CheckedListBox4, _
-                TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, long_canbus, id_measure_canbus)
+                For i = 0 To length_canbus - 1
+                    Label12.Text = "Importing File " & i + 1
+                    logger.insert_logger_canbus(path_canbus(i), CheckedListBox4, _
+                    TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, _
+                    long_canbus(i), id_measure_canbus)
+                Next
                 'GroupBox_CANBUS.Enabled = False
                 imp = True
             End If
@@ -110,18 +197,25 @@ Public Class form_import_csv_full
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If abort = True Then
+                procesing.Show()
+                Application.DoEvents()
                 logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
                 logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
                 logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_lmg)
                 logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+                procesing.Close()
                 abort = False
             Else
                 If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
             End If
             logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
             logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
-            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_fluke, long_fluke)
+            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg)
             logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
+            length_graphtec = 0
+            length_gps = 0
+            length_lmg = 0
+            length_canbus = 0
             Button7.Enabled = True
         End Try
     End Sub
@@ -135,7 +229,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
-        select_measure(CheckedListBox3, id_measure_fluke, FfE_Main.id_lmg, name_measure_fluke)
+        select_measure(CheckedListBox3, id_measure_lmg, FfE_Main.id_lmg, name_measure_lmg)
     End Sub
 
     Private Sub CheckedListBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox4.SelectedIndexChanged
@@ -273,22 +367,6 @@ Public Class form_import_csv_full
         End Try
     End Sub
 
-    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        Dim logger As New logger
-        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
-        'id_logger = 4
-        path_canbus = logger.logger_dialog(OpenFileDialog, CheckedListBox4, FfE_Main.id_canbus, _
-                                           TextBox4, long_canbus, id_measure_canbus)
-        If CheckedListBox4.Items.Count > 0 Then
-            all_channels(name_measure_canbus, CheckedListBox4)
-        End If
-    End Sub
-
-    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
-        Dim logger As New logger
-        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
-    End Sub
-
     Function check_channel(ByVal channel As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
@@ -330,10 +408,10 @@ Public Class form_import_csv_full
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
         If Button7.Enabled = False Then
             If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                If CheckedListBox1.Visible = True Then path_graphtec = ""
-                If CheckedListBox2.Visible = True Then path_gps = ""
-                If CheckedListBox3.Visible = True Then path_fluke = ""
-                If CheckedListBox4.Visible = True Then path_canbus = ""
+                If CheckedListBox1.Visible = True Then path_graphtec(0) = ""
+                If CheckedListBox2.Visible = True Then path_gps(0) = ""
+                If CheckedListBox3.Visible = True Then path_lmg(0) = ""
+                If CheckedListBox4.Visible = True Then path_canbus(0) = ""
                 abort = True
                 Throw New Exception("Import process aborted")
             End If
@@ -385,8 +463,8 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button13.Click
-        associations(CheckedListBox3, FfE_Main.id_lmg, id_measure_fluke)
-        put_ch_list(CheckedListBox3, FfE_Main.id_lmg, name_measure_fluke)
+        associations(CheckedListBox3, FfE_Main.id_lmg, id_measure_lmg)
+        put_ch_list(CheckedListBox3, FfE_Main.id_lmg, name_measure_lmg)
     End Sub
 
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
@@ -396,5 +474,12 @@ Public Class form_import_csv_full
 
     Private Sub form_import_csv_full_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         isClosed = True
+    End Sub
+
+    Private Sub form_import_csv_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        length_graphtec = 0
+        length_gps = 0
+        length_lmg = 0
+        length_canbus = 0
     End Sub
 End Class
