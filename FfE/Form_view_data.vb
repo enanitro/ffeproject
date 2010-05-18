@@ -20,7 +20,7 @@ Public Class Form_view_data
         
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
-        'show_data(DataGridView2, FfE_Main.id_lmg)
+        show_data(DataGridView2, FfE_Main.id_lmg)
         show_data_canbus(DataGridView3, FfE_Main.id_canbus)
         'show_data(DataGridView3, FfE_Main.id_canbus)
 
@@ -313,7 +313,7 @@ Public Class Form_view_data
     Private Sub channel_load()
         execute_list_channels(FfE_Main.id_gps, CheckedListBox2, CheckBox9)
         execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1, CheckBox1)
-        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3,CheckBox2)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3, CheckBox2)
         execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
     End Sub
 
@@ -372,12 +372,12 @@ Public Class Form_view_data
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        'delete_channel(FfE_Main.id_lmg, CheckedListBox3)
-        'procesing.Show()
-        'Application.DoEvents()
-        'show_data(DataGridView2, FfE_Main.id_lmg)
-        'execute_list_channels(FfE_Main.id_lmg, CheckedListBox3,CheckBox2)
-        'procesing.Close()
+        delete_channel(FfE_Main.id_lmg, CheckedListBox3)
+        procesing.Show()
+        Application.DoEvents()
+        show_data(DataGridView2, FfE_Main.id_lmg)
+        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3, CheckBox2)
+        procesing.Close()
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged

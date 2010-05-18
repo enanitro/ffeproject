@@ -25,36 +25,31 @@ Partial Class Form_export_full
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_export_full))
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Button10 = New System.Windows.Forms.Button
-        Me.btn_export = New System.Windows.Forms.Button
+        Me.grid = New System.Windows.Forms.DataGridView
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.TextBox4 = New System.Windows.Forms.TextBox
         Me.CheckBox4 = New System.Windows.Forms.CheckBox
         Me.percent_canbus = New System.Windows.Forms.Label
         Me.path_canbus = New System.Windows.Forms.Label
         Me.ProgressBar4 = New System.Windows.Forms.ProgressBar
-        Me.Button3 = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
         Me.TextBox2 = New System.Windows.Forms.TextBox
         Me.CheckBox2 = New System.Windows.Forms.CheckBox
         Me.percent_gps = New System.Windows.Forms.Label
         Me.path_gps = New System.Windows.Forms.Label
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar
-        Me.Button2 = New System.Windows.Forms.Button
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
         Me.TextBox3 = New System.Windows.Forms.TextBox
         Me.CheckBox3 = New System.Windows.Forms.CheckBox
         Me.percent_lmg500 = New System.Windows.Forms.Label
         Me.path_fluke = New System.Windows.Forms.Label
         Me.ProgressBar3 = New System.Windows.Forms.ProgressBar
-        Me.Button4 = New System.Windows.Forms.Button
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.CheckBox1 = New System.Windows.Forms.CheckBox
         Me.percent_graphtec = New System.Windows.Forms.Label
         Me.path_graphtec = New System.Windows.Forms.Label
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.Button1 = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.description = New System.Windows.Forms.Label
         Me.importer = New System.Windows.Forms.Label
@@ -76,14 +71,19 @@ Partial Class Form_export_full
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
-        Me.grid = New System.Windows.Forms.DataGridView
+        Me.Button10 = New System.Windows.Forms.Button
+        Me.btn_export = New System.Windows.Forms.Button
+        Me.Button3 = New System.Windows.Forms.Button
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.Button1 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
+        CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -99,35 +99,24 @@ Partial Class Form_export_full
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1011, 664)
+        Me.Panel1.Size = New System.Drawing.Size(1262, 687)
         Me.Panel1.TabIndex = 0
         '
-        'Button10
+        'grid
         '
-        Me.Button10.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.Button10.Image = Global.FfE.My.Resources.Resources.exit1
-        Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button10.Location = New System.Drawing.Point(530, 549)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(144, 105)
-        Me.Button10.TabIndex = 33
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'btn_export
-        '
-        Me.btn_export.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
-        Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btn_export.Location = New System.Drawing.Point(336, 549)
-        Me.btn_export.Name = "btn_export"
-        Me.btn_export.Size = New System.Drawing.Size(144, 105)
-        Me.btn_export.TabIndex = 30
-        Me.btn_export.UseVisualStyleBackColor = True
+        Me.grid.AllowUserToAddRows = False
+        Me.grid.AllowUserToDeleteRows = False
+        Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grid.Location = New System.Drawing.Point(830, 588)
+        Me.grid.Name = "grid"
+        Me.grid.ReadOnly = True
+        Me.grid.Size = New System.Drawing.Size(142, 86)
+        Me.grid.TabIndex = 34
+        Me.grid.Visible = False
         '
         'GroupBox4
         '
-        Me.GroupBox4.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBox4.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.GroupBox4.Controls.Add(Me.TextBox4)
         Me.GroupBox4.Controls.Add(Me.CheckBox4)
         Me.GroupBox4.Controls.Add(Me.percent_canbus)
@@ -135,9 +124,9 @@ Partial Class Form_export_full
         Me.GroupBox4.Controls.Add(Me.ProgressBar4)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox4.Location = New System.Drawing.Point(530, 352)
+        Me.GroupBox4.Location = New System.Drawing.Point(637, 345)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(468, 191)
+        Me.GroupBox4.Size = New System.Drawing.Size(616, 222)
         Me.GroupBox4.TabIndex = 32
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "CAN-BUS"
@@ -149,7 +138,7 @@ Partial Class Form_export_full
         Me.TextBox4.Multiline = True
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox4.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox4.Size = New System.Drawing.Size(595, 105)
         Me.TextBox4.TabIndex = 17
         '
         'CheckBox4
@@ -165,7 +154,7 @@ Partial Class Form_export_full
         'percent_canbus
         '
         Me.percent_canbus.AutoSize = True
-        Me.percent_canbus.Location = New System.Drawing.Point(246, 49)
+        Me.percent_canbus.Location = New System.Drawing.Point(325, 51)
         Me.percent_canbus.Name = "percent_canbus"
         Me.percent_canbus.Size = New System.Drawing.Size(27, 15)
         Me.percent_canbus.TabIndex = 13
@@ -178,7 +167,7 @@ Partial Class Form_export_full
         Me.path_canbus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.path_canbus.Location = New System.Drawing.Point(96, 20)
         Me.path_canbus.Name = "path_canbus"
-        Me.path_canbus.Size = New System.Drawing.Size(356, 18)
+        Me.path_canbus.Size = New System.Drawing.Size(508, 18)
         Me.path_canbus.TabIndex = 11
         Me.path_canbus.Text = "path"
         Me.path_canbus.Visible = False
@@ -187,22 +176,13 @@ Partial Class Form_export_full
         '
         Me.ProgressBar4.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar4.Name = "ProgressBar4"
-        Me.ProgressBar4.Size = New System.Drawing.Size(356, 10)
+        Me.ProgressBar4.Size = New System.Drawing.Size(509, 10)
         Me.ProgressBar4.TabIndex = 4
         Me.ProgressBar4.Visible = False
         '
-        'Button3
-        '
-        Me.Button3.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button3.Location = New System.Drawing.Point(9, 20)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 59)
-        Me.Button3.TabIndex = 3
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'GroupBox3
         '
-        Me.GroupBox3.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.GroupBox3.Controls.Add(Me.TextBox2)
         Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.percent_gps)
@@ -210,9 +190,9 @@ Partial Class Form_export_full
         Me.GroupBox3.Controls.Add(Me.ProgressBar2)
         Me.GroupBox3.Controls.Add(Me.Button2)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox3.Location = New System.Drawing.Point(530, 149)
+        Me.GroupBox3.Location = New System.Drawing.Point(638, 122)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(468, 191)
+        Me.GroupBox3.Size = New System.Drawing.Size(616, 222)
         Me.GroupBox3.TabIndex = 29
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Columbus GPS"
@@ -224,7 +204,7 @@ Partial Class Form_export_full
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox2.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox2.Size = New System.Drawing.Size(595, 104)
         Me.TextBox2.TabIndex = 17
         '
         'CheckBox2
@@ -240,7 +220,7 @@ Partial Class Form_export_full
         'percent_gps
         '
         Me.percent_gps.AutoSize = True
-        Me.percent_gps.Location = New System.Drawing.Point(246, 49)
+        Me.percent_gps.Location = New System.Drawing.Point(325, 51)
         Me.percent_gps.Name = "percent_gps"
         Me.percent_gps.Size = New System.Drawing.Size(27, 15)
         Me.percent_gps.TabIndex = 13
@@ -253,7 +233,7 @@ Partial Class Form_export_full
         Me.path_gps.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.path_gps.Location = New System.Drawing.Point(96, 20)
         Me.path_gps.Name = "path_gps"
-        Me.path_gps.Size = New System.Drawing.Size(356, 18)
+        Me.path_gps.Size = New System.Drawing.Size(508, 18)
         Me.path_gps.TabIndex = 11
         Me.path_gps.Text = "path"
         Me.path_gps.Visible = False
@@ -262,22 +242,13 @@ Partial Class Form_export_full
         '
         Me.ProgressBar2.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar2.Name = "ProgressBar2"
-        Me.ProgressBar2.Size = New System.Drawing.Size(356, 10)
+        Me.ProgressBar2.Size = New System.Drawing.Size(508, 10)
         Me.ProgressBar2.TabIndex = 4
         Me.ProgressBar2.Visible = False
         '
-        'Button2
-        '
-        Me.Button2.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button2.Location = New System.Drawing.Point(9, 20)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 59)
-        Me.Button2.TabIndex = 3
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'GroupBox5
         '
-        Me.GroupBox5.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBox5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.GroupBox5.Controls.Add(Me.TextBox3)
         Me.GroupBox5.Controls.Add(Me.CheckBox3)
         Me.GroupBox5.Controls.Add(Me.percent_lmg500)
@@ -285,9 +256,9 @@ Partial Class Form_export_full
         Me.GroupBox5.Controls.Add(Me.ProgressBar3)
         Me.GroupBox5.Controls.Add(Me.Button4)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox5.Location = New System.Drawing.Point(12, 352)
+        Me.GroupBox5.Location = New System.Drawing.Point(10, 345)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(468, 191)
+        Me.GroupBox5.Size = New System.Drawing.Size(616, 222)
         Me.GroupBox5.TabIndex = 31
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "LMG 500"
@@ -299,7 +270,7 @@ Partial Class Form_export_full
         Me.TextBox3.Multiline = True
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox3.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox3.Size = New System.Drawing.Size(595, 105)
         Me.TextBox3.TabIndex = 17
         '
         'CheckBox3
@@ -315,7 +286,7 @@ Partial Class Form_export_full
         'percent_lmg500
         '
         Me.percent_lmg500.AutoSize = True
-        Me.percent_lmg500.Location = New System.Drawing.Point(246, 49)
+        Me.percent_lmg500.Location = New System.Drawing.Point(315, 49)
         Me.percent_lmg500.Name = "percent_lmg500"
         Me.percent_lmg500.Size = New System.Drawing.Size(27, 15)
         Me.percent_lmg500.TabIndex = 13
@@ -328,7 +299,7 @@ Partial Class Form_export_full
         Me.path_fluke.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.path_fluke.Location = New System.Drawing.Point(96, 20)
         Me.path_fluke.Name = "path_fluke"
-        Me.path_fluke.Size = New System.Drawing.Size(356, 18)
+        Me.path_fluke.Size = New System.Drawing.Size(508, 18)
         Me.path_fluke.TabIndex = 11
         Me.path_fluke.Text = "path"
         Me.path_fluke.Visible = False
@@ -337,22 +308,13 @@ Partial Class Form_export_full
         '
         Me.ProgressBar3.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar3.Name = "ProgressBar3"
-        Me.ProgressBar3.Size = New System.Drawing.Size(356, 10)
+        Me.ProgressBar3.Size = New System.Drawing.Size(510, 10)
         Me.ProgressBar3.TabIndex = 4
         Me.ProgressBar3.Visible = False
         '
-        'Button4
-        '
-        Me.Button4.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button4.Location = New System.Drawing.Point(9, 20)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 59)
-        Me.Button4.TabIndex = 3
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
-        Me.GroupBox2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.GroupBox2.Controls.Add(Me.TextBox1)
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.percent_graphtec)
@@ -360,9 +322,9 @@ Partial Class Form_export_full
         Me.GroupBox2.Controls.Add(Me.ProgressBar1)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 149)
+        Me.GroupBox2.Location = New System.Drawing.Point(9, 122)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(468, 191)
+        Me.GroupBox2.Size = New System.Drawing.Size(616, 222)
         Me.GroupBox2.TabIndex = 28
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Graphtec GL800"
@@ -374,7 +336,7 @@ Partial Class Form_export_full
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox1.Size = New System.Drawing.Size(453, 76)
+        Me.TextBox1.Size = New System.Drawing.Size(595, 104)
         Me.TextBox1.TabIndex = 15
         '
         'CheckBox1
@@ -390,7 +352,7 @@ Partial Class Form_export_full
         'percent_graphtec
         '
         Me.percent_graphtec.AutoSize = True
-        Me.percent_graphtec.Location = New System.Drawing.Point(246, 49)
+        Me.percent_graphtec.Location = New System.Drawing.Point(323, 51)
         Me.percent_graphtec.Name = "percent_graphtec"
         Me.percent_graphtec.Size = New System.Drawing.Size(27, 15)
         Me.percent_graphtec.TabIndex = 13
@@ -403,7 +365,7 @@ Partial Class Form_export_full
         Me.path_graphtec.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.path_graphtec.Location = New System.Drawing.Point(96, 20)
         Me.path_graphtec.Name = "path_graphtec"
-        Me.path_graphtec.Size = New System.Drawing.Size(356, 18)
+        Me.path_graphtec.Size = New System.Drawing.Size(508, 18)
         Me.path_graphtec.TabIndex = 11
         Me.path_graphtec.Text = "path"
         Me.path_graphtec.Visible = False
@@ -412,22 +374,13 @@ Partial Class Form_export_full
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(96, 69)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(356, 10)
+        Me.ProgressBar1.Size = New System.Drawing.Size(508, 10)
         Me.ProgressBar1.TabIndex = 4
         Me.ProgressBar1.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
-        Me.Button1.Location = New System.Drawing.Point(9, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 59)
-        Me.Button1.TabIndex = 3
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'GroupBox1
         '
-        Me.GroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.GroupBox1.Controls.Add(Me.description)
         Me.GroupBox1.Controls.Add(Me.importer)
         Me.GroupBox1.Controls.Add(Me.car)
@@ -449,9 +402,9 @@ Partial Class Form_export_full
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 8)
+        Me.GroupBox1.Location = New System.Drawing.Point(9, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(986, 115)
+        Me.GroupBox1.Size = New System.Drawing.Size(1241, 115)
         Me.GroupBox1.TabIndex = 27
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Drive"
@@ -460,9 +413,9 @@ Partial Class Form_export_full
         '
         Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.description.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.description.Location = New System.Drawing.Point(748, 52)
+        Me.description.Location = New System.Drawing.Point(864, 52)
         Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(208, 40)
+        Me.description.Size = New System.Drawing.Size(355, 40)
         Me.description.TabIndex = 19
         Me.description.Text = "Label11"
         '
@@ -470,9 +423,9 @@ Partial Class Form_export_full
         '
         Me.importer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.importer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.importer.Location = New System.Drawing.Point(549, 79)
+        Me.importer.Location = New System.Drawing.Point(628, 79)
         Me.importer.Name = "importer"
-        Me.importer.Size = New System.Drawing.Size(173, 15)
+        Me.importer.Size = New System.Drawing.Size(218, 15)
         Me.importer.TabIndex = 18
         Me.importer.Text = "Label11"
         '
@@ -480,9 +433,9 @@ Partial Class Form_export_full
         '
         Me.car.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.car.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.car.Location = New System.Drawing.Point(549, 54)
+        Me.car.Location = New System.Drawing.Point(628, 54)
         Me.car.Name = "car"
-        Me.car.Size = New System.Drawing.Size(173, 15)
+        Me.car.Size = New System.Drawing.Size(218, 15)
         Me.car.TabIndex = 17
         Me.car.Text = "Label11"
         '
@@ -490,9 +443,9 @@ Partial Class Form_export_full
         '
         Me.driver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.driver.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.driver.Location = New System.Drawing.Point(549, 29)
+        Me.driver.Location = New System.Drawing.Point(628, 29)
         Me.driver.Name = "driver"
-        Me.driver.Size = New System.Drawing.Size(173, 15)
+        Me.driver.Size = New System.Drawing.Size(218, 15)
         Me.driver.TabIndex = 16
         Me.driver.Text = "Label11"
         '
@@ -500,9 +453,9 @@ Partial Class Form_export_full
         '
         Me.usage_type.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.usage_type.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.usage_type.Location = New System.Drawing.Point(317, 79)
+        Me.usage_type.Location = New System.Drawing.Point(353, 79)
         Me.usage_type.Name = "usage_type"
-        Me.usage_type.Size = New System.Drawing.Size(153, 15)
+        Me.usage_type.Size = New System.Drawing.Size(202, 15)
         Me.usage_type.TabIndex = 15
         Me.usage_type.Text = "Label11"
         '
@@ -510,9 +463,9 @@ Partial Class Form_export_full
         '
         Me.drive_type.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.drive_type.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.drive_type.Location = New System.Drawing.Point(317, 54)
+        Me.drive_type.Location = New System.Drawing.Point(353, 54)
         Me.drive_type.Name = "drive_type"
-        Me.drive_type.Size = New System.Drawing.Size(153, 15)
+        Me.drive_type.Size = New System.Drawing.Size(202, 15)
         Me.drive_type.TabIndex = 14
         Me.drive_type.Text = "Label11"
         '
@@ -520,9 +473,9 @@ Partial Class Form_export_full
         '
         Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.status.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.status.Location = New System.Drawing.Point(317, 29)
+        Me.status.Location = New System.Drawing.Point(353, 29)
         Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(153, 15)
+        Me.status.Size = New System.Drawing.Size(202, 15)
         Me.status.TabIndex = 13
         Me.status.Text = "Label11"
         '
@@ -532,7 +485,7 @@ Partial Class Form_export_full
         Me.climate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.climate.Location = New System.Drawing.Point(86, 79)
         Me.climate.Name = "climate"
-        Me.climate.Size = New System.Drawing.Size(143, 15)
+        Me.climate.Size = New System.Drawing.Size(171, 15)
         Me.climate.TabIndex = 12
         Me.climate.Text = "Label11"
         '
@@ -542,7 +495,7 @@ Partial Class Form_export_full
         Me.datef.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.datef.Location = New System.Drawing.Point(86, 54)
         Me.datef.Name = "datef"
-        Me.datef.Size = New System.Drawing.Size(143, 15)
+        Me.datef.Size = New System.Drawing.Size(171, 15)
         Me.datef.TabIndex = 11
         Me.datef.Text = "Label11"
         '
@@ -552,14 +505,14 @@ Partial Class Form_export_full
         Me.drive_id.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.drive_id.Location = New System.Drawing.Point(86, 29)
         Me.drive_id.Name = "drive_id"
-        Me.drive_id.Size = New System.Drawing.Size(143, 15)
+        Me.drive_id.Size = New System.Drawing.Size(171, 15)
         Me.drive_id.TabIndex = 10
         Me.drive_id.Text = "Label11"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(745, 27)
+        Me.Label10.Location = New System.Drawing.Point(861, 27)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(84, 15)
         Me.Label10.TabIndex = 9
@@ -568,7 +521,7 @@ Partial Class Form_export_full
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(483, 77)
+        Me.Label9.Location = New System.Drawing.Point(562, 77)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(65, 15)
         Me.Label9.TabIndex = 8
@@ -577,7 +530,7 @@ Partial Class Form_export_full
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(515, 52)
+        Me.Label8.Location = New System.Drawing.Point(594, 52)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(33, 15)
         Me.Label8.TabIndex = 7
@@ -586,7 +539,7 @@ Partial Class Form_export_full
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(499, 27)
+        Me.Label7.Location = New System.Drawing.Point(578, 27)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(49, 15)
         Me.Label7.TabIndex = 6
@@ -595,7 +548,7 @@ Partial Class Form_export_full
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(234, 77)
+        Me.Label6.Location = New System.Drawing.Point(270, 77)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(82, 15)
         Me.Label6.TabIndex = 5
@@ -604,7 +557,7 @@ Partial Class Form_export_full
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(238, 52)
+        Me.Label5.Location = New System.Drawing.Point(274, 52)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 15)
         Me.Label5.TabIndex = 4
@@ -613,7 +566,7 @@ Partial Class Form_export_full
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(265, 27)
+        Me.Label4.Location = New System.Drawing.Point(301, 27)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(51, 15)
         Me.Label4.TabIndex = 3
@@ -646,32 +599,80 @@ Partial Class Form_export_full
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Drive ID:"
         '
-        'grid
+        'Button10
         '
-        Me.grid.AllowUserToAddRows = False
-        Me.grid.AllowUserToDeleteRows = False
-        Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grid.Location = New System.Drawing.Point(708, 566)
-        Me.grid.Name = "grid"
-        Me.grid.ReadOnly = True
-        Me.grid.Size = New System.Drawing.Size(142, 86)
-        Me.grid.TabIndex = 34
-        Me.grid.Visible = False
+        Me.Button10.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Button10.Image = Global.FfE.My.Resources.Resources._exit
+        Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button10.Location = New System.Drawing.Point(653, 575)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(144, 105)
+        Me.Button10.TabIndex = 33
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'btn_export
+        '
+        Me.btn_export.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btn_export.BackgroundImage = CType(resources.GetObject("btn_export.BackgroundImage"), System.Drawing.Image)
+        Me.btn_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btn_export.Location = New System.Drawing.Point(469, 575)
+        Me.btn_export.Name = "btn_export"
+        Me.btn_export.Size = New System.Drawing.Size(144, 105)
+        Me.btn_export.TabIndex = 30
+        Me.btn_export.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button3.Location = New System.Drawing.Point(9, 20)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 59)
+        Me.Button3.TabIndex = 3
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button2.Location = New System.Drawing.Point(9, 20)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 59)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button4.Location = New System.Drawing.Point(9, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 59)
+        Me.Button4.TabIndex = 3
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.find_excel
+        Me.Button1.Location = New System.Drawing.Point(9, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 59)
+        Me.Button1.TabIndex = 3
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form_export_full
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1011, 664)
+        Me.ClientSize = New System.Drawing.Size(1262, 687)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.Black
-        Me.MinimumSize = New System.Drawing.Size(1000, 700)
+        Me.MinimumSize = New System.Drawing.Size(1278, 723)
         Me.Name = "Form_export_full"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export data drive"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
+        CType(Me.grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -682,7 +683,6 @@ Partial Class Form_export_full
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -710,6 +710,15 @@ Partial Class Form_export_full
     Friend WithEvents path_graphtec As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents grid As System.Windows.Forms.DataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents description As System.Windows.Forms.Label
     Friend WithEvents importer As System.Windows.Forms.Label
@@ -731,13 +740,4 @@ Partial Class Form_export_full
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Friend WithEvents grid As System.Windows.Forms.DataGridView
 End Class

@@ -320,7 +320,7 @@ Public Class Form_export_full
             While query.Read
                 grid.Columns.Add(query.GetString(0), query.GetString(0))
                 Array.Resize(sqls, count + 1)
-                sqls(count) = "select concat(data_index,',',time,',',value) from data" & _
+                sqls(count) = "select concat(time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
                 " and data_id like '" & query.GetString(0) & "'"
                 res += "INDEX,TIME," & query.GetString(0) & ","
