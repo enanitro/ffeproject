@@ -19,11 +19,11 @@ Public Class Form_export_full
                 logger_csv_file(path_gps.Text, FfE_Main.id_gps, "COLUMBUS GPS")
                 into = True
             End If
-            'If path_fluke.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
-            'TextBox3.Visible = False
-            'logger_csv_file(path_fluke.Text, FfE_Main.id_lmg, "LMG 500")
-            'into = True
-            'End If
+            If path_lmg.Text <> "" And abort = False And CheckBox3.CheckState = CheckState.Unchecked Then
+                TextBox3.Visible = False
+                logger_csv_file(path_lmg.Text, FfE_Main.id_lmg, "LMG 500")
+                into = True
+            End If
             If path_canbus.Text <> "" And abort = False And CheckBox4.CheckState = CheckState.Unchecked Then
                 TextBox4.Visible = False
                 logger_csv_file(path_canbus.Text, FfE_Main.id_canbus, "CAN-BUS")
@@ -52,7 +52,7 @@ Public Class Form_export_full
         TextBox2.Visible = False
         ProgressBar4.Visible = False
         percent_lmg500.Visible = False
-        path_fluke.Text = ""
+        path_lmg.Text = ""
         TextBox3.Visible = False
         ProgressBar3.Visible = False
         percent_canbus.Visible = False
@@ -166,7 +166,7 @@ Public Class Form_export_full
                     Case FfE_Main.id_gps
                         execute_query_loggers(logger_id, logger, ProgressBar2, percent_gps, TextBox2, path)
                     Case FfE_Main.id_lmg
-                        execute_query_loggers(logger_id, logger, ProgressBar3, percent_lmg500, TextBox3, path)
+                        execute_query_logger_lmg(logger_id, logger, ProgressBar3, percent_lmg500, TextBox3, path)
                     Case FfE_Main.id_canbus
                         execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
@@ -182,15 +182,15 @@ Public Class Form_export_full
                 If My.Computer.FileSystem.FileExists(path_gps.Text) Then
                     My.Computer.FileSystem.DeleteFile(path_gps.Text)
                 End If
-                If My.Computer.FileSystem.FileExists(path_fluke.Text) Then
-                    My.Computer.FileSystem.DeleteFile(path_fluke.Text)
+                If My.Computer.FileSystem.FileExists(path_lmg.Text) Then
+                    My.Computer.FileSystem.DeleteFile(path_lmg.Text)
                 End If
                 If My.Computer.FileSystem.FileExists(path_canbus.Text) Then
                     My.Computer.FileSystem.DeleteFile(path_canbus.Text)
                 End If
                 path_graphtec.Text = ""
                 path_gps.Text = ""
-                path_fluke.Text = ""
+                path_lmg.Text = ""
                 path_canbus.Text = ""
                 MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
@@ -288,6 +288,93 @@ Public Class Form_export_full
         End Try
     End Sub
 
+    Private Sub execute_query_logger_lmg(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
+                                      ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim sw As New System.IO.StreamWriter(path, True)
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql, res, head As String
+        Dim i, max As Integer
+        res = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
+             " and logger_id = " & logger_id
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            sql = "select concat(data_index,',',time"
+            head = ",Zeit difference"
+            res = "INDEX,TIME"
+
+            While query.Read()
+                res += "," & query.GetString(0)
+                sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
+            End While
+
+            sql += ") as format_row from data" & _
+                " where drive_id = " & drive_id.Text & _
+                " and logger_id = " & logger_id & _
+                " group by data_index"
+            cn.Close()
+
+            tb.Text = sql
+            tb.Visible = True
+
+            sw.WriteLine(res)
+            res = ""
+
+            cn.Open()
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            sql = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql, max)
+
+            bar.Visible = True
+            percent.Visible = True
+            procesing.Close()
+            config_progressbar(max, bar)
+            i = 1
+            While query.Read()
+                res += query.GetString(0)
+                i = query.GetString(0).Split(",")(0)
+                progressbar(i, percent.Text, bar)
+                If (i Mod 1001) >= 1000 Then
+                    sw.Write(res)
+                    res = ""
+                End If
+                i += 1
+                res += vbCrLf
+
+                Application.DoEvents()
+            End While
+
+            res += vbCrLf
+            sw.WriteLine(res)
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            abort = True
+        Finally
+            sw.Close()
+            cn.Close()
+        End Try
+    End Sub
 
     Private Sub execute_query_logger_canbus(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
                                       ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
@@ -481,8 +568,8 @@ Public Class Form_export_full
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
             If SaveFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                path_fluke.Text = SaveFileDialog.FileName
-                path_fluke.Visible = True
+                path_lmg.Text = SaveFileDialog.FileName
+                path_lmg.Visible = True
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -517,7 +604,7 @@ Public Class Form_export_full
     Private Sub Form_export_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         path_graphtec.Text = ""
         path_gps.Text = ""
-        path_fluke.Text = ""
+        path_lmg.Text = ""
         path_canbus.Text = ""
         TextBox1.Visible = False
         TextBox2.Visible = False
