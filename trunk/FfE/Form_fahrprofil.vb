@@ -141,8 +141,8 @@ Public Class Form_fahrprofil
                         interval = t1 - t2
                         'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
                         'interval.Seconds.ToString()
-                        grid(6, i).Value = interval.ToString
-                        sec = DateDiff(DateInterval.Second, t2, t1)
+                        grid(6, i).Value = interval.ToString.Trim("-")
+                        sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
                         grid(2, i).Style.BackColor = colores.getNexColor
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         grid(12, i).Value = False
@@ -172,8 +172,8 @@ Public Class Form_fahrprofil
                         interval = t1 - t2
                         'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
                         'interval.Seconds.ToString()
-                        grid(6, i).Value = interval.ToString
-                        sec = DateDiff(DateInterval.Second, t2, t1)
+                        grid(6, i).Value = interval.ToString.Trim("-")
+                        sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
                         grid(2, i).Style.BackColor = Color.Green
                         grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         grid(12, i).Value = True
