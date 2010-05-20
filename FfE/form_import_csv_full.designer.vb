@@ -355,7 +355,7 @@ Partial Class form_import_csv_full
         'Button10
         '
         resources.ApplyResources(Me.Button10, "Button10")
-        Me.Button10.Image = Global.FfE.My.Resources.Resources._exit
+        Me.Button10.Image = Global.FfE.My.Resources.Resources.click_here_for_abort
         Me.Button10.Name = "Button10"
         Me.Button10.UseVisualStyleBackColor = True
         '
