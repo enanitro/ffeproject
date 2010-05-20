@@ -312,7 +312,7 @@ Public Class Form_export_full
             query = cmd.ExecuteReader()
 
             sql = "select concat(data_index,',',time"
-            head = ",Zeit difference"
+            head = ",Zeit differenz,MG1,,,,,,,MG2,,,,,,,Klimakompressor,,,HV-Batterie,,"
             res = "INDEX,TIME"
 
             While query.Read()
@@ -329,6 +329,7 @@ Public Class Form_export_full
             tb.Text = sql
             tb.Visible = True
 
+            sw.WriteLine(head)
             sw.WriteLine(res)
             res = ""
 
@@ -601,6 +602,43 @@ Public Class Form_export_full
         isClosed = True
     End Sub
 
+    Private Sub search_loggers()
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+
+        Try
+            cn.Open()
+            cmd.CommandTimeout = 1000
+            cmd.Connection = cn
+            cmd.CommandText = "select distinct(logger_id) from data where drive_id = " & drive_id.Text
+            query = cmd.ExecuteReader()
+            If query.HasRows() Then
+                While query.Read()
+                    Select Case query.GetString(0)
+                        Case FfE_Main.id_graphtec
+                            GroupBox2.Enabled = True
+                        Case FfE_Main.id_gps
+                            GroupBox3.Enabled = True
+                        Case FfE_Main.id_lmg
+                            GroupBox5.Enabled = True
+                        Case FfE_Main.id_canbus
+                            GroupBox4.Enabled = True
+                    End Select
+                End While
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
     Private Sub Form_export_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         path_graphtec.Text = ""
         path_gps.Text = ""
@@ -614,6 +652,11 @@ Public Class Form_export_full
         TextBox2.Text = ""
         TextBox3.Text = ""
         TextBox4.Text = ""
+        GroupBox2.Enabled = False
+        GroupBox3.Enabled = False
+        GroupBox5.Enabled = False
+        GroupBox4.Enabled = False
+        search_loggers()
     End Sub
 
     Private Sub SQL_syntax(ByVal logger_id As Integer, ByVal logger As String, ByVal text As TextBox)

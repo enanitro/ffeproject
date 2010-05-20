@@ -118,7 +118,7 @@ Partial Class Form_export_full
         '
         Me.Button10.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Button10.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.Button10.Image = Global.FfE.My.Resources.Resources._exit
+        Me.Button10.Image = Global.FfE.My.Resources.Resources.click_here_for_abort
         Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Button10.Location = New System.Drawing.Point(653, 575)
         Me.Button10.Name = "Button10"

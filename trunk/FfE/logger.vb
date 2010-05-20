@@ -294,10 +294,20 @@ Public Class logger
 
         Try
             text.Text += "File: " & (n_file + 1) & vbCrLf
+            'escribo cabecera
+            text.Text += "LMG500" & vbCrLf
+
+            linea1 = fichero.ReadLine
+            linea1 = fichero.ReadLine
+            text.Text += "Start time: " & linea1.TrimEnd.Substring(linea1.Length - 9).TrimStart & vbCrLf
 
             'leemos los canales y sus unidades
             linea1 = fichero.ReadLine
             datos1 = linea1.Split(",")
+            While datos1(0) <> "dt/s"
+                linea1 = fichero.ReadLine
+                datos1 = linea1.Split(",")
+            End While
 
             'introducir los canales en checklistbox
             If n_file = 0 Then
@@ -313,8 +323,6 @@ Public Class logger
                 If linea1 <> Nothing Then long_file += 1
             Loop Until linea1 Is Nothing
 
-            'escribo cabecera
-            text.Text += "LMG500" & vbCrLf
             text.Text += "Total data points: " & long_file & vbCrLf & vbCrLf
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -571,7 +579,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val As String
+        Dim linea, aux, val, tm As String
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
@@ -582,8 +590,15 @@ Public Class logger
         Try
             index = find_last_index(id_logger, id_drive)
 
-            'leo la primera linea que pertenece a la cabecera
             linea = fichero.ReadLine
+            linea = fichero.ReadLine
+            tm = linea.TrimEnd.Substring(linea.Length - 9).TrimStart()
+            linea = fichero.ReadLine
+            datos = linea.Split(",")
+            While datos(0) <> "dt/s"
+                linea = fichero.ReadLine
+                datos = linea.Split(",")
+            End While
 
             Dim ins As New insert_Data
             ins.init_string()
@@ -598,16 +613,13 @@ Public Class logger
                     index += 1
                     For i = 0 To list.CheckedIndices.Count - 1
                         num_lines += 1
-
                         If IsNumeric(datos(list.CheckedIndices.Item(i) + 1)) Then
                             data_points += 1
                             clock += 1
-
-                            '& "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
                             val = datos(list.CheckedIndices.Item(i) + 1)
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & "00:00:00" & "'" & "," _
+                            & "'" & format_time2(format_number(datos(0)), 1, tm) & "'" & "," _
                             & val & ")"
                             ins.set_string(aux)
                         End If
@@ -701,10 +713,7 @@ Public Class logger
                                     val = CType(res, String)
                                     val = val.Replace(",", ".")
                                     t = CType(datos(0), Double)
-                                    If t = 320685540000.0 Then
-
-                                    End If
-                                    tm = format_time(t, div, time)
+                                    tm = format_time2(t, div, time)
                                     If table_canbus(x).average = True Then
                                         'inicializamos por primera vez los datos
                                         If table_canbus(x).time = "" Then
@@ -843,7 +852,7 @@ Public Class logger
     End Function
 
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
-                            ByRef path() As String, ByRef long_file() As Integer)
+                            ByRef path() As String, ByRef long_file() As Integer, ByRef length As Integer)
         panel.Visible = False
         list.Items.Clear()
         list.Visible = False
@@ -851,6 +860,7 @@ Public Class logger
         text.Visible = False
         path = Nothing
         long_file = Nothing
+        length = 0
     End Sub
 
     Private Function time_gps(ByVal val As String) As Integer
@@ -908,6 +918,10 @@ Public Class logger
             End If
         Loop
 
+        If h >= 24 Then
+            h = h Mod 24
+        End If
+
         res = h & ":" & m & ":" & s
 
         format_time = CType(FormatDateTime(res, DateFormat.LongTime), String)
@@ -927,14 +941,33 @@ Public Class logger
         ss = Math.Truncate(time)
         ss = ss + s
 
-        m = Math.Truncate(ss / 60)
+        m = m + Math.Truncate(ss / 60)
         s = ss Mod 60
-        h = Math.Truncate(m / 60)
+        h = h + Math.Truncate(m / 60)
         m = m Mod 60
+
+        If h >= 24 Then
+            h = h Mod 24
+        End If
 
         res = h & ":" & m & ":" & s
 
         format_time2 = CType(FormatDateTime(res, DateFormat.LongTime), String)
+    End Function
+
+    Private Function format_number(ByVal value As String) As Double
+        Dim res As Double
+        Dim exp, point As Integer
+
+        exp = value.Split("E")(1)
+        value = value.Split("E")(0).Trim
+        point = value.IndexOf(".")
+        value = value.Remove(point, 1)
+        point += exp
+        value = "0" & value.Insert(point, ",") & "0"
+        res = value
+
+        format_number = res
     End Function
 
     'configuracion del progressbar y labels que le acompañan
