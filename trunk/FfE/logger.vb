@@ -645,7 +645,7 @@ Public Class logger
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value, id_ch() As Integer
-        Dim res, t As Double
+        Dim res, res2, t As Double
         Dim str As str_canbus
 
         Try
@@ -697,35 +697,39 @@ Public Class logger
                                 For Each x In id_ch
                                     aux = hex_to_dec(datos(7).Split(":")(1))
                                     res = read_string(aux, table_canbus(x))
+                                    res2 = res
                                     val = CType(res, String)
                                     val = val.Replace(",", ".")
                                     t = CType(datos(0), Double)
+                                    If t = 320685540000.0 Then
+
+                                    End If
                                     tm = format_time(t, div, time)
                                     If table_canbus(x).average = True Then
                                         'inicializamos por primera vez los datos
                                         If table_canbus(x).time = "" Then
                                             table_canbus(x).time = tm
-                                            table_canbus(x).value = val
+                                            table_canbus(x).value = res2
                                             table_canbus(x).count = 1
                                         Else
                                             'todavia estamos en la misma hora, sumamos los valores
                                             If table_canbus(x).time = tm Then
-                                                table_canbus(x).value += val
+                                                table_canbus(x).value += res2
                                                 table_canbus(x).count += 1
                                             Else
-                                                'hemos cambiado de hora, guardamos la media 
-                                                res = table_canbus(x).value / table_canbus(x).count
-                                                avg = CType(res, String)
-                                                avg = avg.Replace(",", ".")
-                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                                & "," & id_logger & "," & measure(x) & "," _
-                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                & avg & ")"
-                                                ins.set_string(aux)
-                                                'inicializamos el valor para el siguiente segundo
-                                                table_canbus(x).time = tm
-                                                table_canbus(x).value = val
-                                                table_canbus(x).count = 1
+                                            'hemos cambiado de hora, guardamos la media 
+                                            res = table_canbus(x).value / table_canbus(x).count
+                                            avg = CType(res, String)
+                                            avg = avg.Replace(",", ".")
+                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                            & "," & id_logger & "," & measure(x) & "," _
+                                            & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                            & val & ")"
+                                            ins.set_string(aux)
+                                            'inicializamos el valor para el siguiente segundo
+                                            table_canbus(x).time = tm
+                                            table_canbus(x).value = res2
+                                            table_canbus(x).count = 1
                                             End If
                                         End If
                                     Else
@@ -906,7 +910,31 @@ Public Class logger
 
         res = h & ":" & m & ":" & s
 
-        format_time = res
+        format_time = CType(FormatDateTime(res, DateFormat.LongTime), String)
+    End Function
+
+    Private Function format_time2(ByVal time As Double, ByVal unit As Integer, ByRef ini As String) As String
+        Dim res As String
+        Dim h, m, s, ss As Double
+        Dim format() As String
+        ss = 0
+        format = ini.Split(":")
+        h = format(0)
+        m = format(1)
+        s = format(2)
+
+        time = time / unit
+        ss = Math.Truncate(time)
+        ss = ss + s
+
+        m = Math.Truncate(ss / 60)
+        s = ss Mod 60
+        h = Math.Truncate(m / 60)
+        m = m Mod 60
+
+        res = h & ":" & m & ":" & s
+
+        format_time2 = CType(FormatDateTime(res, DateFormat.LongTime), String)
     End Function
 
     'configuracion del progressbar y labels que le acompañan

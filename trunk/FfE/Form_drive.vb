@@ -418,36 +418,51 @@ Public Class Form_drive
 
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
-            If form_export Is Nothing Then
-                showExport()
-            Else
-                If form_export.isClosed Then
+            Dim res As String
+            res = execute_simple("select count(distinct(logger_id)) from data where drive_id = " & Drive_idLabel1.Text)
+            If res <> "" And res <> "0" Then
+                If form_export Is Nothing Then
                     showExport()
                 Else
-                    form_export.Focus()
+                    If form_export.isClosed Then
+                        showExport()
+                    Else
+                        form_export.Focus()
+                    End If
                 End If
+            Else
+                MsgBox("There is no data-loggers for drive ID " & Drive_idLabel1.Text, MsgBoxStyle.Information)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            'export.Visible = False
         End Try
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         procesing.Show()
         Application.DoEvents()
-        If Drive_idLabel1.Text <> "" Then
-            If Not show_Data Is Nothing Then
-                If show_Data.isClosed Then
-                    showData()
+        Try
+            If Drive_idLabel1.Text <> "" Then
+                Dim res As String
+                res = execute_simple("select count(distinct(logger_id)) from data where drive_id = " & Drive_idLabel1.Text)
+                If res <> "" And res <> "0" Then
+                    If Not show_Data Is Nothing Then
+                        If show_Data.isClosed Then
+                            showData()
+                        Else
+                            show_Data.Focus()
+                        End If
+                    Else
+                        showData()
+                    End If
                 Else
-                    show_Data.Focus()
+                    procesing.Close()
+                    MsgBox("There is no data-loggers for drive ID " & Drive_idLabel1.Text, MsgBoxStyle.Information)
                 End If
-            Else
-                showData()
             End If
-        End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
         procesing.Close()
     End Sub
 
@@ -485,11 +500,20 @@ Public Class Form_drive
 
     Private Sub showFahrprofil()
         If Not Me.DriveBindingSource.Item(Me.DriveBindingSource.Position)(5).Equals(DBNull.Value) Then
-            view_fahrprofil = New Form_fahrprofil
-            view_fahrprofil.isClosed = False
-            view_fahrprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
-            view_fahrprofil.MdiParent = Me.MdiParent
-            view_fahrprofil.Show()
+            Dim res As String
+            res = execute_simple("select count(distinct(drive_id)) from data where logger_id = 2 and drive_id in " & _
+                          "(select drive_id from drive where usage_type_id = " & _
+                          DriveBindingSource.Item(DriveBindingSource.Position)(5) & ")")
+            If res <> "" And res <> "0" Then
+                view_fahrprofil = New Form_fahrprofil
+                view_fahrprofil.isClosed = False
+                view_fahrprofil.id_usage_type = DriveBindingSource.Item(DriveBindingSource.Position)(5)
+                view_fahrprofil.MdiParent = Me.MdiParent
+                view_fahrprofil.Show()
+            Else
+                procesing.Close()
+                MsgBox("There is no Columbus GPS data-logger for " & cmb_usage.Text, MsgBoxStyle.Information)
+            End If
         End If
     End Sub
 
@@ -508,8 +532,6 @@ Public Class Form_drive
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            'export.Visible = False
         End Try
         procesing.Close()
     End Sub
@@ -555,5 +577,32 @@ Public Class Form_drive
             DriveBindingSource.Position = pos
         End If
     End Sub
+
+
+    Private Function execute_simple(ByVal sql As String) As String
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim res As String = ""
+
+        Try
+            cn.Open()
+            cmd.Connection = cn
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+            If query.HasRows Then
+                query.Read()
+                res = query.GetString(0)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            cn.Close()
+            execute_simple = res
+        End Try
+    End Function
 
 End Class

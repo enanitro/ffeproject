@@ -39,15 +39,15 @@ Public Class Form_fahrprofil
             cn.Open()
             cmd.Connection = cn
             cmd.CommandTimeout = 1000
-            cmd.CommandText = "select name,usage_in_project,description from usage_type where usage_type_id = " & _
+            cmd.CommandText = "select if(name is null,'',name),if(usage_in_project is null,'',usage_in_project)," & _
+                              "if(description is null,'',description) from usage_type where usage_type_id = " & _
                               id_usage_type
             query = cmd.ExecuteReader()
             If query.HasRows Then
                 query.Read()
-                If query.IsDBNull(0) = False Then
-                    Label5.Text = query.GetString(0) & " (" & query.GetString(1) & ")"
-                    Label6.Text = query.GetString(2)
-                End If
+                If query.GetString(0) <> "" Then Label5.Text = query.GetString(0)
+                If query.GetString(1) <> "" Then Label5.Text += " (" & query.GetString(1) & ")"
+                If query.GetString(2) <> "" Then Label6.Text = query.GetString(2)
             End If
 
         Catch ex As Exception
