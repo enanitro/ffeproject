@@ -501,6 +501,7 @@
     <None Include="img\del_channel2.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\click_here_for_abort.png" />
     <Content Include="MySql.Data.dll" />
     <None Include="Resources\arrow_refresh_blue.png" />
     <Content Include="ZedGraph.dll" />

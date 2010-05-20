@@ -510,7 +510,7 @@ Partial Class Form_view_data
         '
         Me.lbl_drive_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_drive_id.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbl_drive_id.Location = New System.Drawing.Point(145, 29)
+        Me.lbl_drive_id.Location = New System.Drawing.Point(73, 29)
         Me.lbl_drive_id.Name = "lbl_drive_id"
         Me.lbl_drive_id.Size = New System.Drawing.Size(143, 15)
         Me.lbl_drive_id.TabIndex = 20
@@ -530,7 +530,7 @@ Partial Class Form_view_data
         '
         Me.importer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.importer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.importer.Location = New System.Drawing.Point(608, 79)
+        Me.importer.Location = New System.Drawing.Point(583, 79)
         Me.importer.Name = "importer"
         Me.importer.Size = New System.Drawing.Size(173, 15)
         Me.importer.TabIndex = 18
@@ -540,7 +540,7 @@ Partial Class Form_view_data
         '
         Me.car.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.car.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.car.Location = New System.Drawing.Point(608, 54)
+        Me.car.Location = New System.Drawing.Point(583, 54)
         Me.car.Name = "car"
         Me.car.Size = New System.Drawing.Size(173, 15)
         Me.car.TabIndex = 17
@@ -550,7 +550,7 @@ Partial Class Form_view_data
         '
         Me.driver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.driver.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.driver.Location = New System.Drawing.Point(608, 29)
+        Me.driver.Location = New System.Drawing.Point(583, 29)
         Me.driver.Name = "driver"
         Me.driver.Size = New System.Drawing.Size(173, 15)
         Me.driver.TabIndex = 16
@@ -560,7 +560,7 @@ Partial Class Form_view_data
         '
         Me.usage_type.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.usage_type.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.usage_type.Location = New System.Drawing.Point(376, 79)
+        Me.usage_type.Location = New System.Drawing.Point(326, 79)
         Me.usage_type.Name = "usage_type"
         Me.usage_type.Size = New System.Drawing.Size(153, 15)
         Me.usage_type.TabIndex = 15
@@ -570,7 +570,7 @@ Partial Class Form_view_data
         '
         Me.drive_type.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.drive_type.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.drive_type.Location = New System.Drawing.Point(376, 54)
+        Me.drive_type.Location = New System.Drawing.Point(326, 54)
         Me.drive_type.Name = "drive_type"
         Me.drive_type.Size = New System.Drawing.Size(153, 15)
         Me.drive_type.TabIndex = 14
@@ -580,7 +580,7 @@ Partial Class Form_view_data
         '
         Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.status.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.status.Location = New System.Drawing.Point(376, 29)
+        Me.status.Location = New System.Drawing.Point(326, 29)
         Me.status.Name = "status"
         Me.status.Size = New System.Drawing.Size(153, 15)
         Me.status.TabIndex = 13
@@ -590,7 +590,7 @@ Partial Class Form_view_data
         '
         Me.climate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.climate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.climate.Location = New System.Drawing.Point(145, 79)
+        Me.climate.Location = New System.Drawing.Point(73, 79)
         Me.climate.Name = "climate"
         Me.climate.Size = New System.Drawing.Size(143, 15)
         Me.climate.TabIndex = 12
@@ -600,7 +600,7 @@ Partial Class Form_view_data
         '
         Me.datef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.datef.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.datef.Location = New System.Drawing.Point(145, 54)
+        Me.datef.Location = New System.Drawing.Point(73, 54)
         Me.datef.Name = "datef"
         Me.datef.Size = New System.Drawing.Size(143, 15)
         Me.datef.TabIndex = 11
@@ -618,7 +618,7 @@ Partial Class Form_view_data
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(542, 77)
+        Me.Label9.Location = New System.Drawing.Point(517, 77)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(65, 15)
         Me.Label9.TabIndex = 8
@@ -627,7 +627,7 @@ Partial Class Form_view_data
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(574, 52)
+        Me.Label8.Location = New System.Drawing.Point(549, 52)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(33, 15)
         Me.Label8.TabIndex = 7
@@ -636,7 +636,7 @@ Partial Class Form_view_data
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(558, 27)
+        Me.Label7.Location = New System.Drawing.Point(533, 27)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(49, 15)
         Me.Label7.TabIndex = 6
@@ -645,7 +645,7 @@ Partial Class Form_view_data
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(293, 77)
+        Me.Label6.Location = New System.Drawing.Point(243, 77)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(82, 15)
         Me.Label6.TabIndex = 5
@@ -654,7 +654,7 @@ Partial Class Form_view_data
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(297, 52)
+        Me.Label5.Location = New System.Drawing.Point(247, 52)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 15)
         Me.Label5.TabIndex = 4
@@ -663,7 +663,7 @@ Partial Class Form_view_data
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(324, 27)
+        Me.Label4.Location = New System.Drawing.Point(274, 27)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(51, 15)
         Me.Label4.TabIndex = 3
@@ -672,7 +672,7 @@ Partial Class Form_view_data
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(83, 77)
+        Me.Label3.Location = New System.Drawing.Point(11, 77)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(60, 15)
         Me.Label3.TabIndex = 2
@@ -681,7 +681,7 @@ Partial Class Form_view_data
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(102, 52)
+        Me.Label2.Location = New System.Drawing.Point(30, 52)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 15)
         Me.Label2.TabIndex = 1
@@ -690,7 +690,7 @@ Partial Class Form_view_data
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(81, 27)
+        Me.Label1.Location = New System.Drawing.Point(9, 27)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(62, 15)
         Me.Label1.TabIndex = 0

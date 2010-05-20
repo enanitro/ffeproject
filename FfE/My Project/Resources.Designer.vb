@@ -158,6 +158,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property click_here_for_abort() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("click_here_for_abort", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property coche_01() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("coche_01", resourceCulture)
