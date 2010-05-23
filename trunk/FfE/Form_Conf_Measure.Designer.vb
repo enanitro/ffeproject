@@ -27,7 +27,6 @@ Partial Class Form_Conf_Measure
         Dim UnitLabel As System.Windows.Forms.Label
         Dim SteptimeLabel As System.Windows.Forms.Label
         Dim NameLabel As System.Windows.Forms.Label
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.MeasureBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -72,40 +71,40 @@ Partial Class Form_Conf_Measure
         'DescriptionLabel
         '
         DescriptionLabel.AutoSize = True
-        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(400, 69)
+        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DescriptionLabel.Location = New System.Drawing.Point(490, 26)
         DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.Size = New System.Drawing.Size(91, 16)
         DescriptionLabel.TabIndex = 20
         DescriptionLabel.Text = "Description:"
         '
         'UnitLabel
         '
         UnitLabel.AutoSize = True
-        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        UnitLabel.Location = New System.Drawing.Point(450, 30)
+        UnitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        UnitLabel.Location = New System.Drawing.Point(67, 62)
         UnitLabel.Name = "UnitLabel"
-        UnitLabel.Size = New System.Drawing.Size(37, 15)
+        UnitLabel.Size = New System.Drawing.Size(39, 16)
         UnitLabel.TabIndex = 18
         UnitLabel.Text = "Unit:"
         '
         'SteptimeLabel
         '
         SteptimeLabel.AutoSize = True
-        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        SteptimeLabel.Location = New System.Drawing.Point(38, 68)
+        SteptimeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        SteptimeLabel.Location = New System.Drawing.Point(25, 99)
         SteptimeLabel.Name = "SteptimeLabel"
-        SteptimeLabel.Size = New System.Drawing.Size(74, 15)
+        SteptimeLabel.Size = New System.Drawing.Size(81, 16)
         SteptimeLabel.TabIndex = 16
         SteptimeLabel.Text = "Time step:"
         '
         'NameLabel
         '
         NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(62, 34)
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        NameLabel.Location = New System.Drawing.Point(53, 26)
         NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.Size = New System.Drawing.Size(53, 16)
         NameLabel.TabIndex = 14
         NameLabel.Text = "Name:"
         '
@@ -153,9 +152,11 @@ Partial Class Form_Conf_Measure
         Me.Panel1.Controls.Add(NameLabel)
         Me.Panel1.Controls.Add(Me.NameTextBox)
         Me.Panel1.Controls.Add(Me.MeasureDataGridView)
+        Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.MinimumSize = New System.Drawing.Size(951, 533)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(735, 364)
+        Me.Panel1.Size = New System.Drawing.Size(951, 533)
         Me.Panel1.TabIndex = 0
         '
         'MeasureBindingNavigator
@@ -167,7 +168,7 @@ Partial Class Form_Conf_Measure
         Me.MeasureBindingNavigator.DeleteItem = Nothing
         Me.MeasureBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.MeasureBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.MeasureBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
-        Me.MeasureBindingNavigator.Location = New System.Drawing.Point(115, 286)
+        Me.MeasureBindingNavigator.Location = New System.Drawing.Point(223, 465)
         Me.MeasureBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.MeasureBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.MeasureBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -291,61 +292,53 @@ Partial Class Form_Conf_Measure
         'DescriptionTextBox
         '
         Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "description", True))
-        Me.DescriptionTextBox.Location = New System.Drawing.Point(490, 68)
+        Me.DescriptionTextBox.Location = New System.Drawing.Point(587, 26)
         Me.DescriptionTextBox.MaxLength = 250
         Me.DescriptionTextBox.Multiline = True
         Me.DescriptionTextBox.Name = "DescriptionTextBox"
-        Me.DescriptionTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.DescriptionTextBox.Size = New System.Drawing.Size(345, 89)
         Me.DescriptionTextBox.TabIndex = 21
         '
         'UnitTextBox
         '
         Me.UnitTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "unit", True))
-        Me.UnitTextBox.Location = New System.Drawing.Point(490, 29)
+        Me.UnitTextBox.Location = New System.Drawing.Point(114, 62)
         Me.UnitTextBox.MaxLength = 20
         Me.UnitTextBox.Name = "UnitTextBox"
-        Me.UnitTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.UnitTextBox.Size = New System.Drawing.Size(318, 22)
         Me.UnitTextBox.TabIndex = 19
         '
         'SteptimeTextBox
         '
         Me.SteptimeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "timestep", True))
-        Me.SteptimeTextBox.Location = New System.Drawing.Point(115, 67)
+        Me.SteptimeTextBox.Location = New System.Drawing.Point(114, 98)
         Me.SteptimeTextBox.MaxLength = 20
         Me.SteptimeTextBox.Name = "SteptimeTextBox"
-        Me.SteptimeTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.SteptimeTextBox.Size = New System.Drawing.Size(318, 22)
         Me.SteptimeTextBox.TabIndex = 17
         '
         'NameTextBox
         '
         Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MeasureBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(115, 31)
+        Me.NameTextBox.Location = New System.Drawing.Point(114, 23)
         Me.NameTextBox.MaxLength = 30
         Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(203, 20)
+        Me.NameTextBox.Size = New System.Drawing.Size(318, 22)
         Me.NameTextBox.TabIndex = 15
         '
         'MeasureDataGridView
         '
         Me.MeasureDataGridView.AllowUserToAddRows = False
         Me.MeasureDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.MeasureDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.MeasureDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.MeasureDataGridView.AutoGenerateColumns = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.MeasureDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.MeasureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.MeasureDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.timestep, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.MeasureDataGridView.DataSource = Me.MeasureBindingSource
-        Me.MeasureDataGridView.Location = New System.Drawing.Point(41, 126)
+        Me.MeasureDataGridView.Location = New System.Drawing.Point(21, 133)
         Me.MeasureDataGridView.Name = "MeasureDataGridView"
-        Me.MeasureDataGridView.Size = New System.Drawing.Size(653, 136)
+        Me.MeasureDataGridView.Size = New System.Drawing.Size(911, 313)
         Me.MeasureDataGridView.TabIndex = 13
         '
         'DataGridViewTextBoxColumn1
@@ -386,8 +379,9 @@ Partial Class Form_Conf_Measure
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(759, 396)
+        Me.ClientSize = New System.Drawing.Size(975, 557)
         Me.Controls.Add(Me.Panel1)
+        Me.MinimumSize = New System.Drawing.Size(991, 593)
         Me.Name = "Form_Conf_Measure"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

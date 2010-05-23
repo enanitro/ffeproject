@@ -367,6 +367,9 @@ Public Class form_import_csv_full
             If list.SelectedIndex <> -1 Then
                 Dim form_measure As New Form_measure
                 Dim name_measure, unit, text As String
+                name_measure = ""
+                unit = ""
+                text = ""
                 Dim item As String = list.SelectedItem
                 Dim index As Integer = list.SelectedIndex
                 Dim str As String = ""
@@ -382,11 +385,14 @@ Public Class form_import_csv_full
                         form_measure.ShowDialog()
                         If form_measure.MeasureDataGridView.Rows.Count > 0 Then
                             measure(index) = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(0).Value
-                            name_measure = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(1).Value
-                            unit = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(3).Value
+                            If Not form_measure.MeasureDataGridView.CurrentRow.Cells.Item(1).Value Is DBNull.Value Then _
+                                name_measure = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(1).Value
+                            If Not form_measure.MeasureDataGridView.CurrentRow.Cells.Item(3).Value Is DBNull.Value Then _
+                                unit = form_measure.MeasureDataGridView.CurrentRow.Cells.Item(3).Value
                             list.Items.Remove(item)
                             text = (index + 1) & ". "
-                            text += " " & name_measure & " [" & unit & "]"
+                            If name_measure <> "" Then text += " " & name_measure
+                            If unit <> "" Then text += " [" & unit & "]"
                             list.Items.Insert(index, item & " -> " & text)
                             list.SetItemChecked(index, True)
                         Else

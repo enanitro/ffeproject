@@ -1,7 +1,7 @@
 ﻿Public Class Form_car_photos
     Public car As Integer
 
-    Private Sub PhotosBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PhotosBindingNavigatorSaveItem.Click
+    Private Sub PhotosBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Me.Validate()
             Me.PhotosBindingSource.EndEdit()

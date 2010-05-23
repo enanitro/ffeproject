@@ -77,52 +77,56 @@ Partial Class Form_Conf_User
         '
         'VornameLabel
         '
-        VornameLabel.Anchor = System.Windows.Forms.AnchorStyles.None
+        VornameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top
         VornameLabel.AutoSize = True
-        VornameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        VornameLabel.Location = New System.Drawing.Point(63, 35)
+        VornameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        VornameLabel.Location = New System.Drawing.Point(55, 27)
         VornameLabel.Name = "VornameLabel"
-        VornameLabel.Size = New System.Drawing.Size(49, 15)
+        VornameLabel.Size = New System.Drawing.Size(53, 16)
         VornameLabel.TabIndex = 4
         VornameLabel.Text = "Name:"
         '
         'NameLabel
         '
+        NameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top
         NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(43, 63)
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        NameLabel.Location = New System.Drawing.Point(35, 65)
         NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(69, 15)
+        NameLabel.Size = New System.Drawing.Size(73, 16)
         NameLabel.TabIndex = 5
         NameLabel.Text = "Surname:"
         '
         'EmailLabel
         '
+        EmailLabel.Anchor = System.Windows.Forms.AnchorStyles.Top
         EmailLabel.AutoSize = True
-        EmailLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        EmailLabel.Location = New System.Drawing.Point(64, 91)
+        EmailLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        EmailLabel.Location = New System.Drawing.Point(57, 103)
         EmailLabel.Name = "EmailLabel"
-        EmailLabel.Size = New System.Drawing.Size(48, 15)
+        EmailLabel.Size = New System.Drawing.Size(51, 16)
         EmailLabel.TabIndex = 11
         EmailLabel.Text = "Email:"
         '
         'LinkLabel
         '
+        LinkLabel.Anchor = System.Windows.Forms.AnchorStyles.Top
         LinkLabel.AutoSize = True
-        LinkLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        LinkLabel.Location = New System.Drawing.Point(74, 119)
+        LinkLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        LinkLabel.Location = New System.Drawing.Point(68, 141)
         LinkLabel.Name = "LinkLabel"
-        LinkLabel.Size = New System.Drawing.Size(38, 15)
+        LinkLabel.Size = New System.Drawing.Size(40, 16)
         LinkLabel.TabIndex = 12
         LinkLabel.Text = "Link:"
         '
         'Ma_artLabel
         '
+        Ma_artLabel.Anchor = System.Windows.Forms.AnchorStyles.Top
         Ma_artLabel.AutoSize = True
-        Ma_artLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Ma_artLabel.Location = New System.Drawing.Point(54, 147)
+        Ma_artLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Ma_artLabel.Location = New System.Drawing.Point(46, 179)
         Ma_artLabel.Name = "Ma_artLabel"
-        Ma_artLabel.Size = New System.Drawing.Size(58, 15)
+        Ma_artLabel.Size = New System.Drawing.Size(62, 16)
         Ma_artLabel.TabIndex = 13
         Ma_artLabel.Text = "Partner:"
         '
@@ -142,18 +146,20 @@ Partial Class Form_Conf_User
         Me.Panel1.Controls.Add(VornameLabel)
         Me.Panel1.Controls.Add(Me.VornameTextBox)
         Me.Panel1.Controls.Add(Me.UserBindingNavigator)
-        Me.Panel1.Location = New System.Drawing.Point(15, 12)
+        Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.Location = New System.Drawing.Point(20, 22)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(660, 518)
+        Me.Panel1.Size = New System.Drawing.Size(919, 651)
         Me.Panel1.TabIndex = 0
         '
         'Ma_artTextBox
         '
+        Me.Ma_artTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Ma_artTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.UserBindingSource, "ma_art", True))
-        Me.Ma_artTextBox.Location = New System.Drawing.Point(113, 145)
+        Me.Ma_artTextBox.Location = New System.Drawing.Point(112, 175)
         Me.Ma_artTextBox.MaxLength = 45
         Me.Ma_artTextBox.Name = "Ma_artTextBox"
-        Me.Ma_artTextBox.Size = New System.Drawing.Size(249, 20)
+        Me.Ma_artTextBox.Size = New System.Drawing.Size(511, 22)
         Me.Ma_artTextBox.TabIndex = 9
         '
         'UserBindingSource
@@ -169,20 +175,22 @@ Partial Class Form_Conf_User
         '
         'LinkTextBox
         '
+        Me.LinkTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LinkTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.UserBindingSource, "link", True))
-        Me.LinkTextBox.Location = New System.Drawing.Point(113, 117)
+        Me.LinkTextBox.Location = New System.Drawing.Point(112, 137)
         Me.LinkTextBox.MaxLength = 45
         Me.LinkTextBox.Name = "LinkTextBox"
-        Me.LinkTextBox.Size = New System.Drawing.Size(348, 20)
+        Me.LinkTextBox.Size = New System.Drawing.Size(511, 22)
         Me.LinkTextBox.TabIndex = 8
         '
         'EmailTextBox
         '
+        Me.EmailTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.EmailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.UserBindingSource, "email", True))
-        Me.EmailTextBox.Location = New System.Drawing.Point(113, 89)
+        Me.EmailTextBox.Location = New System.Drawing.Point(112, 99)
         Me.EmailTextBox.MaxLength = 45
         Me.EmailTextBox.Name = "EmailTextBox"
-        Me.EmailTextBox.Size = New System.Drawing.Size(249, 20)
+        Me.EmailTextBox.Size = New System.Drawing.Size(511, 22)
         Me.EmailTextBox.TabIndex = 7
         '
         'UserDataGridView
@@ -193,9 +201,9 @@ Partial Class Form_Conf_User
         Me.UserDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.UserDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
         Me.UserDataGridView.DataSource = Me.UserBindingSource
-        Me.UserDataGridView.Location = New System.Drawing.Point(25, 208)
+        Me.UserDataGridView.Location = New System.Drawing.Point(25, 291)
         Me.UserDataGridView.Name = "UserDataGridView"
-        Me.UserDataGridView.Size = New System.Drawing.Size(613, 220)
+        Me.UserDataGridView.Size = New System.Drawing.Size(872, 269)
         Me.UserDataGridView.TabIndex = 11
         '
         'DataGridViewTextBoxColumn1
@@ -236,34 +244,36 @@ Partial Class Form_Conf_User
         '
         'PhotoPictureBox
         '
-        Me.PhotoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PhotoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.PhotoPictureBox.BackgroundImage = CType(resources.GetObject("PhotoPictureBox.BackgroundImage"), System.Drawing.Image)
+        Me.PhotoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PhotoPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PhotoPictureBox.DataBindings.Add(New System.Windows.Forms.Binding("Image", Me.UserBindingSource, "photo", True))
-        Me.PhotoPictureBox.Location = New System.Drawing.Point(496, 22)
+        Me.PhotoPictureBox.Location = New System.Drawing.Point(701, 17)
         Me.PhotoPictureBox.Name = "PhotoPictureBox"
-        Me.PhotoPictureBox.Size = New System.Drawing.Size(142, 169)
-        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PhotoPictureBox.Size = New System.Drawing.Size(196, 245)
+        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PhotoPictureBox.TabIndex = 11
         Me.PhotoPictureBox.TabStop = False
         '
         'NameTextBox
         '
+        Me.NameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.UserBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(113, 61)
+        Me.NameTextBox.Location = New System.Drawing.Point(112, 61)
         Me.NameTextBox.MaxLength = 50
         Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(348, 20)
+        Me.NameTextBox.Size = New System.Drawing.Size(511, 22)
         Me.NameTextBox.TabIndex = 6
         '
         'VornameTextBox
         '
-        Me.VornameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.VornameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.VornameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.UserBindingSource, "vorname", True))
-        Me.VornameTextBox.Location = New System.Drawing.Point(113, 33)
+        Me.VornameTextBox.Location = New System.Drawing.Point(112, 23)
         Me.VornameTextBox.MaxLength = 30
         Me.VornameTextBox.Name = "VornameTextBox"
-        Me.VornameTextBox.Size = New System.Drawing.Size(249, 20)
+        Me.VornameTextBox.Size = New System.Drawing.Size(511, 22)
         Me.VornameTextBox.TabIndex = 5
         '
         'UserBindingNavigator
@@ -276,7 +286,7 @@ Partial Class Form_Conf_User
         Me.UserBindingNavigator.DeleteItem = Nothing
         Me.UserBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.UserBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.UserBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
-        Me.UserBindingNavigator.Location = New System.Drawing.Point(22, 446)
+        Me.UserBindingNavigator.Location = New System.Drawing.Point(155, 587)
         Me.UserBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.UserBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.UserBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -417,15 +427,16 @@ Partial Class Form_Conf_User
         Me.TableAdapterManager.usage_typeTableAdapter = Nothing
         Me.TableAdapterManager.userTableAdapter = Me.UserTableAdapter
         '
-        'From_Conf_User
+        'Form_Conf_User
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(690, 564)
+        Me.ClientSize = New System.Drawing.Size(951, 683)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "From_Conf_User"
+        Me.MinimumSize = New System.Drawing.Size(967, 719)
+        Me.Name = "Form_Conf_User"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "User configuration"
         Me.Panel1.ResumeLayout(False)
