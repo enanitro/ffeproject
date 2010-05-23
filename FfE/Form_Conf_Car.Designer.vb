@@ -50,14 +50,14 @@ Partial Class Form_Conf_Car
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.PhotoPictureBox = New System.Windows.Forms.PictureBox
         Me.CarDataGridView = New System.Windows.Forms.DataGridView
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
+        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         NameLabel = New System.Windows.Forms.Label
         TypeLabel = New System.Windows.Forms.Label
         License_plateLabel = New System.Windows.Forms.Label
@@ -74,40 +74,40 @@ Partial Class Form_Conf_Car
         'NameLabel
         '
         NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(22, 44)
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        NameLabel.Location = New System.Drawing.Point(50, 44)
         NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(73, 15)
+        NameLabel.Size = New System.Drawing.Size(78, 16)
         NameLabel.TabIndex = 1
         NameLabel.Text = "Car name:"
         '
         'TypeLabel
         '
         TypeLabel.AutoSize = True
-        TypeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        TypeLabel.Location = New System.Drawing.Point(54, 165)
+        TypeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TypeLabel.Location = New System.Drawing.Point(82, 165)
         TypeLabel.Name = "TypeLabel"
-        TypeLabel.Size = New System.Drawing.Size(41, 15)
+        TypeLabel.Size = New System.Drawing.Size(48, 16)
         TypeLabel.TabIndex = 3
         TypeLabel.Text = "Type:"
         '
         'License_plateLabel
         '
         License_plateLabel.AutoSize = True
-        License_plateLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        License_plateLabel.Location = New System.Drawing.Point(378, 165)
+        License_plateLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        License_plateLabel.Location = New System.Drawing.Point(25, 220)
         License_plateLabel.Name = "License_plateLabel"
-        License_plateLabel.Size = New System.Drawing.Size(97, 15)
+        License_plateLabel.Size = New System.Drawing.Size(105, 16)
         License_plateLabel.TabIndex = 5
         License_plateLabel.Text = "License plate:"
         '
         'OwnerLabel
         '
         OwnerLabel.AutoSize = True
-        OwnerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        OwnerLabel.Location = New System.Drawing.Point(43, 107)
+        OwnerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        OwnerLabel.Location = New System.Drawing.Point(71, 107)
         OwnerLabel.Name = "OwnerLabel"
-        OwnerLabel.Size = New System.Drawing.Size(52, 15)
+        OwnerLabel.Size = New System.Drawing.Size(55, 16)
         OwnerLabel.TabIndex = 7
         OwnerLabel.Text = "Owner:"
         '
@@ -115,13 +115,13 @@ Partial Class Form_Conf_Car
         '
         Me.CarBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
         Me.CarBindingNavigator.AutoSize = False
-        Me.CarBindingNavigator.BackColor = System.Drawing.Color.Transparent
+        Me.CarBindingNavigator.BackColor = System.Drawing.Color.White
         Me.CarBindingNavigator.BindingSource = Me.CarBindingSource
         Me.CarBindingNavigator.CountItem = Me.BindingNavigatorCountItem
         Me.CarBindingNavigator.DeleteItem = Nothing
         Me.CarBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.CarBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.CarBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
-        Me.CarBindingNavigator.Location = New System.Drawing.Point(28, 397)
+        Me.CarBindingNavigator.Location = New System.Drawing.Point(190, 591)
         Me.CarBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.CarBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.CarBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -257,19 +257,19 @@ Partial Class Form_Conf_Car
         'NameTextBox
         '
         Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CarBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(95, 42)
+        Me.NameTextBox.Location = New System.Drawing.Point(133, 42)
         Me.NameTextBox.MaxLength = 50
         Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(331, 20)
+        Me.NameTextBox.Size = New System.Drawing.Size(380, 22)
         Me.NameTextBox.TabIndex = 0
         '
         'TypeTextBox
         '
         Me.TypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CarBindingSource, "type", True))
-        Me.TypeTextBox.Location = New System.Drawing.Point(95, 162)
+        Me.TypeTextBox.Location = New System.Drawing.Point(135, 162)
         Me.TypeTextBox.MaxLength = 30
         Me.TypeTextBox.Name = "TypeTextBox"
-        Me.TypeTextBox.Size = New System.Drawing.Size(258, 20)
+        Me.TypeTextBox.Size = New System.Drawing.Size(378, 22)
         Me.TypeTextBox.TabIndex = 2
         '
         'License_plateTextBox
@@ -277,7 +277,7 @@ Partial Class Form_Conf_Car
         Me.License_plateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CarBindingSource, "license_plate", True))
         Me.License_plateTextBox.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.License_plateTextBox.ForeColor = System.Drawing.Color.Navy
-        Me.License_plateTextBox.Location = New System.Drawing.Point(481, 154)
+        Me.License_plateTextBox.Location = New System.Drawing.Point(136, 210)
         Me.License_plateTextBox.MaxLength = 30
         Me.License_plateTextBox.Name = "License_plateTextBox"
         Me.License_plateTextBox.Size = New System.Drawing.Size(108, 33)
@@ -286,10 +286,10 @@ Partial Class Form_Conf_Car
         'OwnerTextBox
         '
         Me.OwnerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.CarBindingSource, "owner", True))
-        Me.OwnerTextBox.Location = New System.Drawing.Point(95, 104)
+        Me.OwnerTextBox.Location = New System.Drawing.Point(134, 104)
         Me.OwnerTextBox.MaxLength = 80
         Me.OwnerTextBox.Name = "OwnerTextBox"
-        Me.OwnerTextBox.Size = New System.Drawing.Size(331, 20)
+        Me.OwnerTextBox.Size = New System.Drawing.Size(379, 22)
         Me.OwnerTextBox.TabIndex = 1
         '
         'Panel1
@@ -306,21 +306,22 @@ Partial Class Form_Conf_Car
         Me.Panel1.Controls.Add(Me.TypeTextBox)
         Me.Panel1.Controls.Add(Me.License_plateTextBox)
         Me.Panel1.Controls.Add(TypeLabel)
-        Me.Panel1.Location = New System.Drawing.Point(20, 12)
+        Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(662, 469)
+        Me.Panel1.Size = New System.Drawing.Size(927, 659)
         Me.Panel1.TabIndex = 0
         '
         'PhotoPictureBox
         '
         Me.PhotoPictureBox.BackgroundImage = CType(resources.GetObject("PhotoPictureBox.BackgroundImage"), System.Drawing.Image)
-        Me.PhotoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.PhotoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PhotoPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PhotoPictureBox.DataBindings.Add(New System.Windows.Forms.Binding("Image", Me.CarBindingSource, "photo", True))
-        Me.PhotoPictureBox.Location = New System.Drawing.Point(450, 22)
+        Me.PhotoPictureBox.Location = New System.Drawing.Point(543, 25)
         Me.PhotoPictureBox.Name = "PhotoPictureBox"
-        Me.PhotoPictureBox.Size = New System.Drawing.Size(175, 121)
-        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PhotoPictureBox.Size = New System.Drawing.Size(362, 220)
+        Me.PhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PhotoPictureBox.TabIndex = 11
         Me.PhotoPictureBox.TabStop = False
         '
@@ -332,45 +333,10 @@ Partial Class Form_Conf_Car
         Me.CarDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.CarDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.CarDataGridView.DataSource = Me.CarBindingSource
-        Me.CarDataGridView.Location = New System.Drawing.Point(28, 215)
+        Me.CarDataGridView.Location = New System.Drawing.Point(28, 279)
         Me.CarDataGridView.Name = "CarDataGridView"
-        Me.CarDataGridView.Size = New System.Drawing.Size(597, 160)
+        Me.CarDataGridView.Size = New System.Drawing.Size(877, 285)
         Me.CarDataGridView.TabIndex = 9
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "car_id"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Car Id"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 58
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "name"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 200
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "type"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Type"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Width = 85
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "license_plate"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "License Plate"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "owner"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Owner"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.Width = 150
         '
         'OpenFileDialog
         '
@@ -396,14 +362,53 @@ Partial Class Form_Conf_Car
         Me.TableAdapterManager.usage_typeTableAdapter = Nothing
         Me.TableAdapterManager.userTableAdapter = Nothing
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "car_id"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Car Id"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 68
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "name"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 200
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "type"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Type"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Width = 85
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "license_plate"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "License Plate"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.Width = 114
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "owner"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Owner"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Width = 150
+        '
         'Form_Conf_Car
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(702, 496)
+        Me.ClientSize = New System.Drawing.Size(951, 683)
         Me.Controls.Add(Me.Panel1)
+        Me.MinimumSize = New System.Drawing.Size(967, 719)
         Me.Name = "Form_Conf_Car"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Car configuration"
@@ -443,11 +448,11 @@ Partial Class Form_Conf_Car
     Friend WithEvents CarDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents PhotoPictureBox As System.Windows.Forms.PictureBox
     Friend WithEvents OpenFileDialog As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Delete As System.Windows.Forms.ToolStripButton
 
 End Class

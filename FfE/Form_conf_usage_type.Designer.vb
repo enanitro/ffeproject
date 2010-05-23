@@ -46,13 +46,13 @@ Partial Class Form_conf_usage_type
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Usage_typeDataGridView = New System.Windows.Forms.DataGridView
+        Me.Usage_in_projectTextBox = New System.Windows.Forms.TextBox
+        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
+        Me.NameTextBox = New System.Windows.Forms.TextBox
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Usage_in_projectTextBox = New System.Windows.Forms.TextBox
-        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
-        Me.NameTextBox = New System.Windows.Forms.TextBox
         Usage_in_projectLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         NameLabel = New System.Windows.Forms.Label
@@ -67,30 +67,30 @@ Partial Class Form_conf_usage_type
         'Usage_in_projectLabel
         '
         Usage_in_projectLabel.AutoSize = True
-        Usage_in_projectLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Usage_in_projectLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Usage_in_projectLabel.Location = New System.Drawing.Point(19, 68)
         Usage_in_projectLabel.Name = "Usage_in_projectLabel"
-        Usage_in_projectLabel.Size = New System.Drawing.Size(116, 15)
+        Usage_in_projectLabel.Size = New System.Drawing.Size(126, 16)
         Usage_in_projectLabel.TabIndex = 15
         Usage_in_projectLabel.Text = "Usage in project:"
         '
         'DescriptionLabel
         '
         DescriptionLabel.AutoSize = True
-        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(294, 33)
+        DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DescriptionLabel.Location = New System.Drawing.Point(471, 32)
         DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.Size = New System.Drawing.Size(91, 16)
         DescriptionLabel.TabIndex = 13
         DescriptionLabel.Text = "Description:"
         '
         'NameLabel
         '
         NameLabel.AutoSize = True
-        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        NameLabel.Location = New System.Drawing.Point(86, 32)
+        NameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        NameLabel.Location = New System.Drawing.Point(92, 32)
         NameLabel.Name = "NameLabel"
-        NameLabel.Size = New System.Drawing.Size(49, 15)
+        NameLabel.Size = New System.Drawing.Size(53, 16)
         NameLabel.TabIndex = 11
         NameLabel.Text = "Name:"
         '
@@ -135,9 +135,10 @@ Partial Class Form_conf_usage_type
         Me.Panel1.Controls.Add(Me.DescriptionTextBox)
         Me.Panel1.Controls.Add(NameLabel)
         Me.Panel1.Controls.Add(Me.NameTextBox)
-        Me.Panel1.Location = New System.Drawing.Point(21, 22)
+        Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(590, 368)
+        Me.Panel1.Size = New System.Drawing.Size(951, 533)
         Me.Panel1.TabIndex = 0
         '
         'Usage_typeBindingNavigator
@@ -150,7 +151,7 @@ Partial Class Form_conf_usage_type
         Me.Usage_typeBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
         Me.Usage_typeBindingNavigator.Dock = System.Windows.Forms.DockStyle.None
         Me.Usage_typeBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorAddNewItem, Me.Usage_typeBindingNavigatorSaveItem, Me.Delete, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem})
-        Me.Usage_typeBindingNavigator.Location = New System.Drawing.Point(42, 297)
+        Me.Usage_typeBindingNavigator.Location = New System.Drawing.Point(236, 466)
         Me.Usage_typeBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.Usage_typeBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.Usage_typeBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -289,17 +290,47 @@ Partial Class Form_conf_usage_type
         Me.Usage_typeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Usage_typeDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn3})
         Me.Usage_typeDataGridView.DataSource = Me.Usage_typeBindingSource
-        Me.Usage_typeDataGridView.Location = New System.Drawing.Point(22, 117)
+        Me.Usage_typeDataGridView.Location = New System.Drawing.Point(22, 115)
         Me.Usage_typeDataGridView.Name = "Usage_typeDataGridView"
-        Me.Usage_typeDataGridView.Size = New System.Drawing.Size(538, 158)
+        Me.Usage_typeDataGridView.Size = New System.Drawing.Size(913, 339)
         Me.Usage_typeDataGridView.TabIndex = 17
+        '
+        'Usage_in_projectTextBox
+        '
+        Me.Usage_in_projectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "usage_in_project", True))
+        Me.Usage_in_projectTextBox.Location = New System.Drawing.Point(154, 68)
+        Me.Usage_in_projectTextBox.MaxLength = 50
+        Me.Usage_in_projectTextBox.Name = "Usage_in_projectTextBox"
+        Me.Usage_in_projectTextBox.Size = New System.Drawing.Size(266, 22)
+        Me.Usage_in_projectTextBox.TabIndex = 16
+        '
+        'DescriptionTextBox
+        '
+        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "description", True))
+        Me.DescriptionTextBox.Location = New System.Drawing.Point(568, 33)
+        Me.DescriptionTextBox.MaxLength = 250
+        Me.DescriptionTextBox.Multiline = True
+        Me.DescriptionTextBox.Name = "DescriptionTextBox"
+        Me.DescriptionTextBox.Size = New System.Drawing.Size(367, 57)
+        Me.DescriptionTextBox.TabIndex = 14
+        '
+        'NameTextBox
+        '
+        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "name", True))
+        Me.NameTextBox.Location = New System.Drawing.Point(154, 32)
+        Me.NameTextBox.MaxLength = 50
+        Me.NameTextBox.Name = "NameTextBox"
+        Me.NameTextBox.Size = New System.Drawing.Size(266, 22)
+        Me.NameTextBox.TabIndex = 12
         '
         'DataGridViewTextBoxColumn1
         '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "usage_type_id"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Usage type id"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Usage type ID"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 119
         '
         'DataGridViewTextBoxColumn2
         '
@@ -309,10 +340,11 @@ Partial Class Form_conf_usage_type
         '
         'DataGridViewTextBoxColumn4
         '
+        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "usage_in_project"
         Me.DataGridViewTextBoxColumn4.HeaderText = "Usage in project"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.Width = 125
+        Me.DataGridViewTextBoxColumn4.Width = 120
         '
         'DataGridViewTextBoxColumn3
         '
@@ -321,42 +353,15 @@ Partial Class Form_conf_usage_type
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.Width = 175
         '
-        'Usage_in_projectTextBox
-        '
-        Me.Usage_in_projectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "usage_in_project", True))
-        Me.Usage_in_projectTextBox.Location = New System.Drawing.Point(141, 68)
-        Me.Usage_in_projectTextBox.MaxLength = 50
-        Me.Usage_in_projectTextBox.Name = "Usage_in_projectTextBox"
-        Me.Usage_in_projectTextBox.Size = New System.Drawing.Size(123, 20)
-        Me.Usage_in_projectTextBox.TabIndex = 16
-        '
-        'DescriptionTextBox
-        '
-        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "description", True))
-        Me.DescriptionTextBox.Location = New System.Drawing.Point(384, 31)
-        Me.DescriptionTextBox.MaxLength = 250
-        Me.DescriptionTextBox.Multiline = True
-        Me.DescriptionTextBox.Name = "DescriptionTextBox"
-        Me.DescriptionTextBox.Size = New System.Drawing.Size(176, 56)
-        Me.DescriptionTextBox.TabIndex = 14
-        '
-        'NameTextBox
-        '
-        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(141, 32)
-        Me.NameTextBox.MaxLength = 50
-        Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(123, 20)
-        Me.NameTextBox.TabIndex = 12
-        '
         'Form_conf_usage_type
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(623, 401)
+        Me.ClientSize = New System.Drawing.Size(975, 557)
         Me.Controls.Add(Me.Panel1)
+        Me.MinimumSize = New System.Drawing.Size(991, 593)
         Me.Name = "Form_conf_usage_type"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Usage type configuration"
@@ -391,11 +396,11 @@ Partial Class Form_conf_usage_type
     Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Usage_typeDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents Usage_in_projectTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents DescriptionTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents NameTextBox As System.Windows.Forms.TextBox
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Usage_in_projectTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents DescriptionTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents NameTextBox As System.Windows.Forms.TextBox
 End Class

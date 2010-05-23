@@ -150,8 +150,8 @@ Public Class Form_export_full
             data_points_channels(points, channels, logger_id)
             head_csv_file(text)
             res = ""
-            sql = "select timestep from data_full where drive_id = " & drive_id.Text & _
-                  " and logger_id = " & logger_id
+            sql = "select if(timestep is null,'no defined',timestep) from data_full where drive_id = " & _
+                    drive_id.Text & " and logger_id = " & logger_id
             execute_query(sql, res)
             If res <> "" Then
                 text += logger & vbCrLf & _
@@ -197,6 +197,8 @@ Public Class Form_export_full
                 MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
             abort = True
+        Finally
+            procesing.Close()
         End Try
     End Sub
 
