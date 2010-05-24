@@ -263,4 +263,41 @@ Public Class Form_backup_DB
         Application.DoEvents()
     End Sub
 
+    Private Sub execute_query()
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim text As String = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            ' Pasar la consulta sql y la conexión al Sql Command
+            'He añadido esto: por defecto commandTimeOut vale 30, pero si le pones cero espera indefinidamente, supongo que con esto funcionará
+            cmd.CommandTimeout = 1000
+            cmd.Connection = cn
+            cmd.CommandText = "desc data"
+            query = cmd.ExecuteReader()
+            If query.HasRows() Then
+                While query.Read
+                    MsgBox(query.GetString(0))
+                End While
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        execute_query()
+    End Sub
 End Class

@@ -132,7 +132,7 @@ Public Class Form_export_full
                            "USAGE TYPE: " & usage_type.Text & vbCrLf & _
                            "DRIVER: " & driver.Text & vbCrLf & _
                            "IMPORTER: " & importer.Text & vbCrLf & _
-                           "DATE: " & driver.Text & vbCrLf & _
+                           "DATE: " & datef.Text & vbCrLf & _
                            "DESCRIPTION: " & description.Text & vbCrLf & vbCrLf
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
