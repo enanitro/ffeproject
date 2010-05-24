@@ -65,10 +65,9 @@ Public Class FfE_Main
 
 
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
-        Dim form_conn As New Form_Connection
-
-        form_conn.MdiParent = Me
-        form_conn.ShowDialog()
+        Form_Connection.MdiParent = Me
+        Form_Connection.Show()
+        Form_Connection.Focus()
     End Sub
 
     Private Sub ChannelsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChannelsToolStripMenuItem.Click
@@ -84,9 +83,9 @@ Public Class FfE_Main
     End Sub
 
     Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
-        'Form_backup_DB.MdiParent = Me
-        'Form_backup_DB.Show()
-        'Form_backup_DB.Focus()
+        Form_backup_DB.MdiParent = Me
+        Form_backup_DB.Show()
+        Form_backup_DB.Focus()
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
