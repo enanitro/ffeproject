@@ -263,29 +263,38 @@ Public Class Form_backup_DB
         Application.DoEvents()
     End Sub
 
-    Private Sub execute_query()
+    Private Sub execute_query(ByVal table As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
-        Dim text As String = ""
+        Dim res, value, text, head As String
 
         Try
-
-            ' Abrir la conexión a Sql  
             cn.Open()
-
-            ' Pasar la consulta sql y la conexión al Sql Command
-            'He añadido esto: por defecto commandTimeOut vale 30, pero si le pones cero espera indefinidamente, supongo que con esto funcionará
             cmd.CommandTimeout = 1000
             cmd.Connection = cn
-            cmd.CommandText = "desc data"
+            cmd.CommandText = "desc " & table
             query = cmd.ExecuteReader()
             If query.HasRows() Then
+                text = "select concat('(',"
+                head = "insert into " & table & "("
                 While query.Read
-                    MsgBox(query.GetString(0))
+                    res = query.GetString(1).Substring(0, 3)
+                    value = query.GetString(0)
+                    head += value & ","
+                    Select Case res
+                        Case "int", "dec"
+                            text += "if (" & value & " is null,'NULL'," & value & "),',',"
+                        Case "var", "tim", "dat"
+                            text += "if (" & value & " is null,'NULL',concat(''''," & value & ",'''')),',',"
+                        Case "med"
+                            text += "'NULL',"
+                    End Select
                 End While
+                text = text.Substring(0, text.Length - 4) & "')')"
+                head = head.TrimEnd(",") & ") values"
             End If
 
         Catch ex As Exception
@@ -298,6 +307,6 @@ Public Class Form_backup_DB
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        execute_query()
+        execute_query("data")
     End Sub
 End Class
