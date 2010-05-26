@@ -821,8 +821,12 @@ Public Class logger
         Dim DecNum As Double = 0
         Dim s As String = 0
         If sign = True Then
-            s = BinStr(0)
-            BinStr = BinStr.Substring(1, BinStr.Length - 1)
+            If BinStr(0) = "1" Then
+                s = "-"
+                BinStr = complement_plusone(BinStr)
+            Else
+                s = ""
+            End If
         End If
 
         For i = Len(BinStr) To 1 Step -1
@@ -833,6 +837,25 @@ Public Class logger
         Next i
         s = s & DecNum
         bin_to_dec = s
+    End Function
+
+    Private Function complement_plusone(ByVal binstr As String) As String
+        Dim res As String = ""
+        For i = 0 To binstr.Length - 1
+            If binstr(i) = "0" Then
+                res += "1"
+            Else
+                res += "0"
+            End If
+        Next
+
+        If res(res.Length - 1) = "0" Then
+            res = res.Remove(res.Length - 1) & "1"
+        Else
+            res = res.Remove(res.Length - 2) & "10"
+        End If
+
+        complement_plusone = res
     End Function
 
     Private Function dec_to_bin(ByVal value As String) As String

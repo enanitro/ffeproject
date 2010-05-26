@@ -28,7 +28,7 @@ Public Class Form_restore_DB
                 cmd.Transaction = trs
                 Dim file As New System.IO.StreamReader(Label1.Text)
                 text = file.ReadLine()
-                While text <> "exit;"
+                While text <> "exit"
                     If text = "" Then
                         While text = ""
                             text = file.ReadLine

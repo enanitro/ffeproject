@@ -31,7 +31,6 @@ Partial Class Form_backup_DB
         Me.Label4 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.Button3 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -77,7 +76,6 @@ Partial Class Form_backup_DB
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.ProgressBar1)
@@ -118,16 +116,6 @@ Partial Class Form_backup_DB
         Me.ProgressBar1.Size = New System.Drawing.Size(526, 23)
         Me.ProgressBar1.TabIndex = 4
         '
-        'Button3
-        '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(391, 39)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(130, 31)
-        Me.Button3.TabIndex = 7
-        Me.Button3.Text = "Start backup"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'Form_backup_DB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -152,5 +140,4 @@ Partial Class Form_backup_DB
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
