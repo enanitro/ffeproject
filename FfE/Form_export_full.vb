@@ -413,7 +413,7 @@ Public Class Form_export_full
                 sqls(count) = "select concat(time,',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
                 " and data_id like '" & query.GetString(0) & "'"
-                res += "INDEX,TIME," & query.GetString(0) & ","
+                res += "TIME," & query.GetString(0) & ","
                 count += 1
             End While
             cn.Close()
@@ -449,7 +449,7 @@ Public Class Form_export_full
             For i = 0 To grid.Rows.Count - 1
                 For j = 0 To grid.Columns.Count - 1
                     If grid(j, i).Value = "" Then
-                        res += ",,,"
+                        res += ",,"
                     Else
                         res += grid(j, i).Value
                         progressbar(i, percent.Text, bar)
