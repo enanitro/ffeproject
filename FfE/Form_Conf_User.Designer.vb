@@ -202,6 +202,7 @@ Partial Class Form_Conf_User
         Me.UserDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
         Me.UserDataGridView.DataSource = Me.UserBindingSource
         Me.UserDataGridView.Location = New System.Drawing.Point(25, 291)
+        Me.UserDataGridView.MultiSelect = False
         Me.UserDataGridView.Name = "UserDataGridView"
         Me.UserDataGridView.Size = New System.Drawing.Size(872, 269)
         Me.UserDataGridView.TabIndex = 11

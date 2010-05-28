@@ -1159,10 +1159,13 @@ Partial Class Form_drive
         Me.DriveDataGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.DriveDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DriveDataGridView.Location = New System.Drawing.Point(3, 17)
+        Me.DriveDataGridView.MultiSelect = False
         Me.DriveDataGridView.Name = "DriveDataGridView"
         Me.DriveDataGridView.ReadOnly = True
+        Me.DriveDataGridView.RowHeadersVisible = False
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
         Me.DriveDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.DriveDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DriveDataGridView.Size = New System.Drawing.Size(779, 455)
         Me.DriveDataGridView.TabIndex = 3
         '

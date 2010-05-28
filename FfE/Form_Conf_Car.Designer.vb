@@ -50,14 +50,14 @@ Partial Class Form_Conf_Car
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.PhotoPictureBox = New System.Windows.Forms.PictureBox
         Me.CarDataGridView = New System.Windows.Forms.DataGridView
-        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog
+        Me.CarTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.carTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         NameLabel = New System.Windows.Forms.Label
         TypeLabel = New System.Windows.Forms.Label
         License_plateLabel = New System.Windows.Forms.Label
@@ -334,33 +334,10 @@ Partial Class Form_Conf_Car
         Me.CarDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.CarDataGridView.DataSource = Me.CarBindingSource
         Me.CarDataGridView.Location = New System.Drawing.Point(28, 279)
+        Me.CarDataGridView.MultiSelect = False
         Me.CarDataGridView.Name = "CarDataGridView"
         Me.CarDataGridView.Size = New System.Drawing.Size(877, 285)
         Me.CarDataGridView.TabIndex = 9
-        '
-        'OpenFileDialog
-        '
-        Me.OpenFileDialog.FileName = "OpenFileDialog"
-        '
-        'CarTableAdapter
-        '
-        Me.CarTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.carTableAdapter = Me.CarTableAdapter
-        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
-        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager.dataTableAdapter = Nothing
-        Me.TableAdapterManager.driveTableAdapter = Nothing
-        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
-        Me.TableAdapterManager.loggerTableAdapter = Nothing
-        Me.TableAdapterManager.measureTableAdapter = Nothing
-        Me.TableAdapterManager.photosTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
-        Me.TableAdapterManager.userTableAdapter = Nothing
         '
         'DataGridViewTextBoxColumn1
         '
@@ -399,6 +376,30 @@ Partial Class Form_Conf_Car
         Me.DataGridViewTextBoxColumn5.HeaderText = "Owner"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.Width = 150
+        '
+        'OpenFileDialog
+        '
+        Me.OpenFileDialog.FileName = "OpenFileDialog"
+        '
+        'CarTableAdapter
+        '
+        Me.CarTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.carTableAdapter = Me.CarTableAdapter
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager.dataTableAdapter = Nothing
+        Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Nothing
+        Me.TableAdapterManager.loggerTableAdapter = Nothing
+        Me.TableAdapterManager.measureTableAdapter = Nothing
+        Me.TableAdapterManager.photosTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
+        Me.TableAdapterManager.userTableAdapter = Nothing
         '
         'Form_Conf_Car
         '

@@ -3,6 +3,8 @@
 
     Private Sub MeasureBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MeasureBindingNavigatorSaveItem.Click
         Try
+            procesing.Show()
+            procesing.Focus()
             Me.Validate()
             Me.MeasureBindingSource.EndEdit()
             Me.MeasureTableAdapter.Update(Me.Ffe_databaseDataSet.measure)
@@ -12,6 +14,8 @@
             rows = MeasureDataGridView.Rows.Count
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            procesing.Close()
         End Try
     End Sub
 
@@ -19,6 +23,8 @@
         Try
             If Me.Ffe_databaseDataSet.HasChanges() Or rows <> MeasureDataGridView.Rows.Count Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    procesing.Show()
+                    procesing.Focus()
                     Me.Validate()
                     Me.MeasureBindingSource.EndEdit()
                     Me.MeasureTableAdapter.Update(Me.Ffe_databaseDataSet.measure)
@@ -26,6 +32,8 @@
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            procesing.Close()
         End Try
     End Sub
 

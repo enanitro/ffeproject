@@ -411,6 +411,7 @@ Partial Class Form_fahrprofil
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.select_id, Me.drive_id, Me.Colour, Me.failure, Me.Km, Me.speed, Me.Time, Me.start_gps, Me.end_gps, Me.speed_canbus, Me.start_canbus, Me.end_canbus, Me.final})
         Me.DataGridView1.Location = New System.Drawing.Point(15, 13)
+        Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(517, 291)
@@ -545,14 +546,14 @@ Partial Class Form_fahrprofil
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Label5"
         '
-        'Form_fharprofil
+        'Form_fahrprofil
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1264, 646)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "Form_fharprofil"
+        Me.Name = "Form_fahrprofil"
         Me.Text = "Fahrprofil"
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)

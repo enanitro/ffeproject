@@ -59,8 +59,6 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Ids_canbusDataGridView = New System.Windows.Forms.DataGridView
-        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -72,6 +70,8 @@ Partial Class form_canbus_ids
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.average = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         OffsetLabel = New System.Windows.Forms.Label
         FactorLabel = New System.Windows.Forms.Label
         SignedLabel = New System.Windows.Forms.Label
@@ -433,30 +433,11 @@ Partial Class form_canbus_ids
         Me.Ids_canbusDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.average})
         Me.Ids_canbusDataGridView.DataSource = Me.Ids_canbusBindingSource
         Me.Ids_canbusDataGridView.Location = New System.Drawing.Point(22, 124)
+        Me.Ids_canbusDataGridView.MultiSelect = False
         Me.Ids_canbusDataGridView.Name = "Ids_canbusDataGridView"
         Me.Ids_canbusDataGridView.ReadOnly = True
         Me.Ids_canbusDataGridView.Size = New System.Drawing.Size(1214, 358)
         Me.Ids_canbusDataGridView.TabIndex = 21
-        '
-        'Ids_canbusTableAdapter
-        '
-        Me.Ids_canbusTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.carTableAdapter = Nothing
-        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
-        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager.dataTableAdapter = Nothing
-        Me.TableAdapterManager.driveTableAdapter = Nothing
-        Me.TableAdapterManager.ids_canbusTableAdapter = Me.Ids_canbusTableAdapter
-        Me.TableAdapterManager.loggerTableAdapter = Nothing
-        Me.TableAdapterManager.measureTableAdapter = Nothing
-        Me.TableAdapterManager.photosTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
-        Me.TableAdapterManager.userTableAdapter = Nothing
         '
         'DataGridViewTextBoxColumn1
         '
@@ -536,6 +517,26 @@ Partial Class form_canbus_ids
         Me.average.ReadOnly = True
         Me.average.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.average.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'Ids_canbusTableAdapter
+        '
+        Me.Ids_canbusTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager.dataTableAdapter = Nothing
+        Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Me.Ids_canbusTableAdapter
+        Me.TableAdapterManager.loggerTableAdapter = Nothing
+        Me.TableAdapterManager.measureTableAdapter = Nothing
+        Me.TableAdapterManager.photosTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
+        Me.TableAdapterManager.userTableAdapter = Nothing
         '
         'form_canbus_ids
         '
