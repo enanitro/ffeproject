@@ -297,13 +297,14 @@ Partial Class Form_find_drive
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Drive_fullDataGridView.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Drive_fullDataGridView.Location = New System.Drawing.Point(0, 163)
+        Me.Drive_fullDataGridView.Location = New System.Drawing.Point(12, 163)
+        Me.Drive_fullDataGridView.MultiSelect = False
         Me.Drive_fullDataGridView.Name = "Drive_fullDataGridView"
         Me.Drive_fullDataGridView.ReadOnly = True
         Me.Drive_fullDataGridView.RowHeadersVisible = False
         Me.Drive_fullDataGridView.RowTemplate.ReadOnly = True
         Me.Drive_fullDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Drive_fullDataGridView.Size = New System.Drawing.Size(1100, 342)
+        Me.Drive_fullDataGridView.Size = New System.Drawing.Size(1072, 342)
         Me.Drive_fullDataGridView.TabIndex = 47
         '
         'DataGridViewTextBoxColumn1

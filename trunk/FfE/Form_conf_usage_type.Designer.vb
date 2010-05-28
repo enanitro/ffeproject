@@ -46,13 +46,13 @@ Partial Class Form_conf_usage_type
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Usage_typeDataGridView = New System.Windows.Forms.DataGridView
-        Me.Usage_in_projectTextBox = New System.Windows.Forms.TextBox
-        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
-        Me.NameTextBox = New System.Windows.Forms.TextBox
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Usage_in_projectTextBox = New System.Windows.Forms.TextBox
+        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
+        Me.NameTextBox = New System.Windows.Forms.TextBox
         Usage_in_projectLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         NameLabel = New System.Windows.Forms.Label
@@ -291,37 +291,10 @@ Partial Class Form_conf_usage_type
         Me.Usage_typeDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn3})
         Me.Usage_typeDataGridView.DataSource = Me.Usage_typeBindingSource
         Me.Usage_typeDataGridView.Location = New System.Drawing.Point(22, 115)
+        Me.Usage_typeDataGridView.MultiSelect = False
         Me.Usage_typeDataGridView.Name = "Usage_typeDataGridView"
         Me.Usage_typeDataGridView.Size = New System.Drawing.Size(913, 339)
         Me.Usage_typeDataGridView.TabIndex = 17
-        '
-        'Usage_in_projectTextBox
-        '
-        Me.Usage_in_projectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "usage_in_project", True))
-        Me.Usage_in_projectTextBox.Location = New System.Drawing.Point(154, 68)
-        Me.Usage_in_projectTextBox.MaxLength = 50
-        Me.Usage_in_projectTextBox.Name = "Usage_in_projectTextBox"
-        Me.Usage_in_projectTextBox.Size = New System.Drawing.Size(266, 22)
-        Me.Usage_in_projectTextBox.TabIndex = 16
-        '
-        'DescriptionTextBox
-        '
-        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "description", True))
-        Me.DescriptionTextBox.Location = New System.Drawing.Point(568, 33)
-        Me.DescriptionTextBox.MaxLength = 250
-        Me.DescriptionTextBox.Multiline = True
-        Me.DescriptionTextBox.Name = "DescriptionTextBox"
-        Me.DescriptionTextBox.Size = New System.Drawing.Size(367, 57)
-        Me.DescriptionTextBox.TabIndex = 14
-        '
-        'NameTextBox
-        '
-        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "name", True))
-        Me.NameTextBox.Location = New System.Drawing.Point(154, 32)
-        Me.NameTextBox.MaxLength = 50
-        Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(266, 22)
-        Me.NameTextBox.TabIndex = 12
         '
         'DataGridViewTextBoxColumn1
         '
@@ -351,6 +324,34 @@ Partial Class Form_conf_usage_type
         Me.DataGridViewTextBoxColumn3.HeaderText = "Description"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.Width = 300
+        '
+        'Usage_in_projectTextBox
+        '
+        Me.Usage_in_projectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "usage_in_project", True))
+        Me.Usage_in_projectTextBox.Location = New System.Drawing.Point(154, 68)
+        Me.Usage_in_projectTextBox.MaxLength = 50
+        Me.Usage_in_projectTextBox.Name = "Usage_in_projectTextBox"
+        Me.Usage_in_projectTextBox.Size = New System.Drawing.Size(266, 22)
+        Me.Usage_in_projectTextBox.TabIndex = 16
+        '
+        'DescriptionTextBox
+        '
+        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "description", True))
+        Me.DescriptionTextBox.Location = New System.Drawing.Point(568, 33)
+        Me.DescriptionTextBox.MaxLength = 250
+        Me.DescriptionTextBox.Multiline = True
+        Me.DescriptionTextBox.Name = "DescriptionTextBox"
+        Me.DescriptionTextBox.Size = New System.Drawing.Size(367, 57)
+        Me.DescriptionTextBox.TabIndex = 14
+        '
+        'NameTextBox
+        '
+        Me.NameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Usage_typeBindingSource, "name", True))
+        Me.NameTextBox.Location = New System.Drawing.Point(154, 32)
+        Me.NameTextBox.MaxLength = 50
+        Me.NameTextBox.Name = "NameTextBox"
+        Me.NameTextBox.Size = New System.Drawing.Size(266, 22)
+        Me.NameTextBox.TabIndex = 12
         '
         'Form_conf_usage_type
         '
