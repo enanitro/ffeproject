@@ -428,7 +428,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux As String
+        Dim linea, aux, val As String
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
@@ -465,7 +465,7 @@ Public Class logger
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
-                            & datos(list.CheckedIndices.Item(i) + 2) & ")"
+                            & "NULL," & datos(list.CheckedIndices.Item(i) + 2) & ")"
                             ins.set_string(aux)
                         End If
                         progressbar(num_lines, bar, percent)
@@ -551,7 +551,7 @@ Public Class logger
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                             & "'" & FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime) & "'" & "," _
-                            & val & ")"
+                            & "NULL," & val & ")"
                             ins.set_string(aux)
                         End If
                         progressbar(num_lines, bar, percent)
@@ -579,7 +579,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val, tm As String
+        Dim linea, aux, val, tm, milsec As String
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
@@ -619,8 +619,8 @@ Public Class logger
                             val = datos(list.CheckedIndices.Item(i) + 1)
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & format_time2(format_number(datos(0)), 1, tm) & "'" & "," _
-                            & val & ")"
+                            & "'" & format_time2(format_number(datos(0)), 1, tm, milsec) & "'" & ",'" _
+                            & "NULL," & val & ")"
                             ins.set_string(aux)
                         End If
                         progressbar(num_lines, bar, percent)
@@ -649,7 +649,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, time, tm, val, avg As String
+        Dim linea, aux, time, tm, val, avg, milsec As String
         Dim datos() As String
         Dim div As Int64 = 0
         Dim num_lines As Integer = 0
@@ -713,7 +713,7 @@ Public Class logger
                                     val = CType(res, String)
                                     val = val.Replace(",", ".")
                                     t = CType(datos(0), Double)
-                                    tm = format_time2(t, div, time)
+                                    tm = format_time2(t, div, time, milsec)
                                     If table_canbus(x).average = True Then
                                         'inicializamos por primera vez los datos
                                         If table_canbus(x).time = "" Then
@@ -730,10 +730,10 @@ Public Class logger
                                             res = table_canbus(x).value / table_canbus(x).count
                                             avg = CType(res, String)
                                             avg = avg.Replace(",", ".")
-                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                            & "," & id_logger & "," & measure(x) & "," _
-                                            & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                            & val & ")"
+                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                                & "," & id_logger & "," & measure(x) & "," _
+                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                                & "NULL," & val & ")"
                                             ins.set_string(aux)
                                             'inicializamos el valor para el siguiente segundo
                                             table_canbus(x).time = tm
@@ -744,8 +744,8 @@ Public Class logger
                                     Else
                                         aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
                                         & "," & id_logger & "," & measure(x) & "," _
-                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & "," _
-                                        & val & ")"
+                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
+                                        & milsec & "'," & val & ")"
                                         ins.set_string(aux)
                                     End If
 
@@ -774,7 +774,7 @@ Public Class logger
                     aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
                     & "," & id_logger & "," & measure(x) & "," _
                     & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                    & avg & ")"
+                    & "NULL," & avg & ")"
                     ins.set_string(aux)
                 End If
             Next
@@ -950,7 +950,8 @@ Public Class logger
         format_time = CType(FormatDateTime(res, DateFormat.LongTime), String)
     End Function
 
-    Private Function format_time2(ByVal time As Double, ByVal unit As Integer, ByRef ini As String) As String
+    Private Function format_time2(ByVal time As Double, ByVal unit As Integer, _
+                                  ByVal ini As String, ByRef milsec As String) As String
         Dim res As String
         Dim h, m, s, ss As Double
         Dim format() As String
@@ -961,6 +962,7 @@ Public Class logger
         s = format(2)
 
         time = time / unit
+        milsec = CType(time, String).Split(",")(1)
         ss = Math.Truncate(time)
         ss = ss + s
 
