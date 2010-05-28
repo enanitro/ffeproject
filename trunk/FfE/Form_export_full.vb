@@ -230,7 +230,7 @@ Public Class Form_export_full
             res = "INDEX,TIME"
 
             While query.Read()
-                res += "," & query.GetString(0)
+                res += "," & query.GetString(0).Replace(",", ".")
                 sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             End While
 
@@ -318,7 +318,7 @@ Public Class Form_export_full
             res = "INDEX,TIME"
 
             While query.Read()
-                res += "," & query.GetString(0)
+                res += "," & query.GetString(0).Replace(",", ".")
                 sql += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query.GetString(0) & "'),1,0)))))"
             End While
 
@@ -386,8 +386,9 @@ Public Class Form_export_full
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sw As New System.IO.StreamWriter(path, True)
-        Dim sql, res As String
-        Dim i, j, max, count, num As Integer
+        Dim sql, res, time, aux As String
+        Dim i, j, max, count, num, index As Integer
+        Dim avg, total As Double
         res = ""
 
         Try
@@ -410,10 +411,10 @@ Public Class Form_export_full
             While query.Read
                 grid.Columns.Add(query.GetString(0), query.GetString(0))
                 Array.Resize(sqls, count + 1)
-                sqls(count) = "select concat(time,',',value) from data" & _
+                sqls(count) = "select concat(time,if(milsec is null,'',concat('.',milsec)),',',value) from data" & _
                 " where drive_id = " & drive_id.Text & " and logger_id = " & logger_id & _
                 " and data_id like '" & query.GetString(0) & "'"
-                res += "TIME," & query.GetString(0) & ","
+                res += "TIME," & query.GetString(0).Replace(",", ".") & ","
                 count += 1
             End While
             cn.Close()
@@ -442,7 +443,7 @@ Public Class Form_export_full
 
             bar.Visible = True
             percent.Visible = True
-            config_progressbar(grid.rows.count, bar)
+            config_progressbar(grid.Rows.Count, bar)
 
             procesing.Close()
             num = 0

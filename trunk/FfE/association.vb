@@ -97,7 +97,6 @@ Public Class association
     End Sub
 
     Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
-
         Dim name() As String
         Dim str, s1, s2 As String
         Dim msg As String = "The following associations already exist:"
