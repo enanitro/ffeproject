@@ -619,7 +619,7 @@ Public Class logger
                             val = datos(list.CheckedIndices.Item(i) + 1)
                             aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                             & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & format_time2(format_number(datos(0)), 1, tm, milsec) & "'" & ",'" _
+                            & "'" & format_time2(format_number(datos(0)), 1, tm, milsec) & "'" & "," _
                             & "NULL," & val & ")"
                             ins.set_string(aux)
                         End If
@@ -954,7 +954,7 @@ Public Class logger
                                   ByVal ini As String, ByRef milsec As String) As String
         Dim res As String
         Dim h, m, s, ss As Double
-        Dim format() As String
+        Dim format(), aux As String
         ss = 0
         format = ini.Split(":")
         h = format(0)
@@ -962,6 +962,8 @@ Public Class logger
         s = format(2)
 
         time = time / unit
+        'aux = time & ",0"
+        'milsec = aux.Split(",")(1)
         milsec = CType(time, String).Split(",")(1)
         ss = Math.Truncate(time)
         ss = ss + s

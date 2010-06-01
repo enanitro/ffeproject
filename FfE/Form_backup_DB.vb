@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class Form_backup_DB
+    Dim db As String
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         FolderBrowserDialog1.ShowDialog()
@@ -9,7 +10,16 @@ Public Class Form_backup_DB
     End Sub
 
     Private Sub Form_backup_DB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        write_database()
         clean_labels()
+    End Sub
+
+    Private Sub write_database()
+        Dim cadena As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim fields() As String
+        fields = cadena.Split(";")
+        db = fields(5).Split("=")(1)
+        GroupBox1.Text = db
     End Sub
 
     Private Sub clean_labels()
@@ -45,23 +55,27 @@ Public Class Form_backup_DB
 
         Try
             Dim lock_tables As String = "lock tables car write, user write, measure write, usage_type write, " & _
-                          "drive write, data write, copy_data write, photos write, " & _
+                          "drive write, data write, photos write, " & _
                           "channel_name write, ids_canbus write, logger write;"
 
             sw.WriteLine("-- " & path)
-            sw.WriteLine(vbCrLf)
+            sw.WriteLine()
             sw.Close()
 
-            create_query("logger", path)
-            create_query("car", path)
-            create_query("usage_type", path)
-            create_query("user", path)
-            create_query("measure", path)
-            create_query("drive", path)
-            create_query("data", path)
-            create_query("photos", path)
-            create_query("channel_name", path)
-            create_query("ids_canbus", path)
+            If CheckBox0.Checked = True Then create_query("logger", path)
+            If CheckBox1.Checked = True Then create_query("user", path)
+            If CheckBox2.Checked = True Then
+                create_query("car", path)
+                create_query("photos", path)
+            End If
+            If CheckBox3.Checked = True Then create_query("measure", path)
+            If CheckBox4.Checked = True Then create_query("usage_type", path)
+            If CheckBox5.Checked = True Then create_query("drive", path)
+            If CheckBox6.Checked = True Then
+                create_query("data", path)
+                create_query("channel_name", path)
+                create_query("ids_canbus", path)
+            End If
 
             Dim sr As New System.IO.StreamWriter(path, True)
             sr.WriteLine("exit")
@@ -94,13 +108,13 @@ Public Class Form_backup_DB
         If query.HasRows() Then
             text = "select concat('(',"
             head2 = "insert into " & table & "("
-            head1 = "-- ffe_database." & table & vbCrLf & "delete from ffe_database." & table & ";" & vbCrLf
+            head1 = "-- " & db & "." & table & vbCrLf & "delete from " & db & "." & table & ";"
             While query.Read
                 res = query.GetString(1).Substring(0, 3)
                 value = query.GetString(0)
                 head2 += value & ","
                 Select Case res
-                    Case "int", "dec"
+                    Case "int", "dec", "bol", "tin"
                         text += "if (" & value & " is null,'NULL'," & value & "),',',"
                     Case "var", "tim", "dat"
                         text += "if (" & value & " is null,'NULL',concat(''''," & value & ",'''')),',',"
@@ -109,7 +123,7 @@ Public Class Form_backup_DB
                 End Select
             End While
             text = text.Substring(0, text.Length - 4) & "')') from " & table
-            head2 = head2.TrimEnd(",") & ") values"
+            head2 = head2.TrimEnd(",") & ") values "
             execute_query_backup(text, path, table, head1, head2)
         End If
         cn.Close()
@@ -125,7 +139,7 @@ Public Class Form_backup_DB
         Dim sw As New System.IO.StreamWriter(path, True)
         Dim res As String = ""
         Dim lock_tables As String = "lock tables car write, user write, measure write, usage_type write, " & _
-                          "drive write, data write, copy_data write, photos write, " & _
+                          "drive write, data write, photos write, " & _
                           "channel_name write, ids_canbus write, logger write;"
         Dim i As Integer = 0
 
@@ -156,26 +170,24 @@ Public Class Form_backup_DB
             If query.HasRows Then
                 sw.WriteLine(head1)
                 While query.Read()
-                    res += query.GetString(0) & "," & vbCrLf
+                    res += query.GetString(0) & ","
                     i += 1
                     count += 1
                     progressbar(count, ProgressBar1, Label4.Text)
                     If i >= 1000 Then
-                        sw.WriteLine(head2)
-                        res = res.Remove(res.Length - 3) & ";" & vbCrLf
-                        sw.Write(res)
+                        res = res.Remove(res.Length - 1) & ";" & vbCrLf
+                        sw.Write(head2 & res)
                         res = ""
                         i = 0
                     End If
                     Application.DoEvents()
                 End While
                 If res <> "" Then
-                    sw.WriteLine(head2)
-                    res = res.Remove(res.Length - 3) & ";" & vbCrLf
-                    sw.Write(res)
+                    res = res.Remove(res.Length - 1) & ";" & vbCrLf
+                    sw.Write(head2 & res)
                 End If
+                sw.WriteLine()
             End If
-            sw.WriteLine(vbCrLf)
         End If
 
         query.Close()
@@ -215,7 +227,7 @@ Public Class Form_backup_DB
 
         Try
             Dim lock_tables As String = "lock tables car write, user write, measure write, usage_type write, " & _
-                          "drive write, data write, copy_data write, photos write, " & _
+                          "drive write, data write, photos write, " & _
                           "channel_name write, ids_canbus write, logger write;"
 
             sw.WriteLine("-- " & path)
