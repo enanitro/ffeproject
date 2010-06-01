@@ -306,7 +306,7 @@ Partial Class Form_Conf_Measure
         Me.UnitTextBox.MaxLength = 20
         Me.UnitTextBox.Name = "UnitTextBox"
         Me.UnitTextBox.Size = New System.Drawing.Size(318, 22)
-        Me.UnitTextBox.TabIndex = 19
+        Me.UnitTextBox.TabIndex = 16
         '
         'SteptimeTextBox
         '
