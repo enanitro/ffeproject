@@ -953,8 +953,8 @@ Public Class logger
     Private Function format_time2(ByVal time As Double, ByVal unit As Integer, _
                                   ByVal ini As String, ByRef milsec As String) As String
         Dim res As String
-        Dim h, m, s, ss As Double
-        Dim format(), aux As String
+        Dim h, m, s, ss, rest As Double
+        Dim format() As String
         ss = 0
         format = ini.Split(":")
         h = format(0)
@@ -962,8 +962,7 @@ Public Class logger
         s = format(2)
 
         time = time / unit
-        'aux = time & ",0"
-        'milsec = aux.Split(",")(1)
+        'rest = time Mod Math.Truncate(time)
         milsec = CType(time, String).Split(",")(1)
         ss = Math.Truncate(time)
         ss = ss + s

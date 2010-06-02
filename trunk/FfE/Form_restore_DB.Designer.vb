@@ -47,7 +47,7 @@ Partial Class Form_restore_DB
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(721, 300)
+        Me.Panel1.Size = New System.Drawing.Size(1103, 307)
         Me.Panel1.TabIndex = 3
         '
         'GroupBox1
@@ -60,16 +60,16 @@ Partial Class Form_restore_DB
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 18)
+        Me.GroupBox1.Location = New System.Drawing.Point(21, 26)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(697, 260)
+        Me.GroupBox1.Size = New System.Drawing.Size(1056, 260)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         '
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(356, 180)
+        Me.Label4.Location = New System.Drawing.Point(560, 184)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(217, 23)
         Me.Label4.TabIndex = 13
@@ -79,7 +79,7 @@ Partial Class Form_restore_DB
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 180)
+        Me.Label3.Location = New System.Drawing.Point(221, 184)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(333, 23)
         Me.Label3.TabIndex = 12
@@ -90,7 +90,7 @@ Partial Class Form_restore_DB
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(17, 210)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(661, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(1018, 23)
         Me.ProgressBar1.TabIndex = 11
         '
         'Button1
@@ -138,9 +138,10 @@ Partial Class Form_restore_DB
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(721, 300)
+        Me.ClientSize = New System.Drawing.Size(1103, 307)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1119, 343)
         Me.MinimizeBox = False
         Me.Name = "Form_restore_DB"
         Me.Text = "Restore DB"
