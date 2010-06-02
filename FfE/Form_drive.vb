@@ -230,12 +230,8 @@ Public Class Form_drive
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
         Try
-            Me.Validate()
-            Me.DriveBindingSource.EndEdit()
-            Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet)
-            DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
-                                      System.ComponentModel.ListSortDirection.Ascending)
-
+            position = DriveBindingSource.Position
+            field_control(position)
             rows = DriveDataGridView.Rows.Count
             Drive_idLabel1.Visible = True
         Catch ex As Exception
@@ -367,6 +363,8 @@ Public Class Form_drive
 
     Private Sub btn_find_drive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_find_drive.Click
         Try
+            position = DriveBindingSource.Position
+            field_control(position)
             Dim find_drive As New Form_find_drive
             find_drive.ShowDialog()
             Me.DriveBindingSource.Position = Me.DriveBindingSource.Find("drive_id", find_drive.Drive_fullDataGridView.CurrentRow.Cells.Item(0).Value)
@@ -536,30 +534,6 @@ Public Class Form_drive
         procesing.Close()
     End Sub
 
-    Private Sub ToolStripButton5_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton5.MouseDown
-        position = DriveBindingSource.Position
-        field_control(position)
-        DriveBindingSource.MoveNext()
-    End Sub
-
-    Private Sub ToolStripButton4_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton4.MouseDown
-        position = DriveBindingSource.Position
-        field_control(position)
-        DriveBindingSource.MovePrevious()
-    End Sub
-
-    Private Sub ToolStripButton6_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton6.MouseDown
-        position = DriveBindingSource.Position
-        field_control(position)
-        DriveBindingSource.MoveLast()
-    End Sub
-
-    Private Sub ToolStripButton3_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton3.MouseDown
-        position = DriveBindingSource.Position
-        field_control(position)
-        DriveBindingSource.MoveFirst()
-    End Sub
-
     Private Sub DriveDataGridView_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DriveDataGridView.MouseDown
         position = DriveBindingSource.Position
         field_control(position)
@@ -571,11 +545,15 @@ Public Class Form_drive
                 Me.Validate()
                 Me.DriveBindingSource.EndEdit()
                 Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                Ffe_databaseDataSet.drive.AcceptChanges()
+                DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
+                                          System.ComponentModel.ListSortDirection.Ascending)
             Else
                 DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
             End If
-            DriveBindingSource.Position = pos
+            combo = False
         End If
+        DriveBindingSource.Position = pos
     End Sub
 
 
@@ -605,4 +583,31 @@ Public Class Form_drive
         End Try
     End Function
 
+    Private Sub txt_description_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_description.TextChanged
+        combo = True
+    End Sub
+
+    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveFirst()
+    End Sub
+
+    Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MovePrevious()
+    End Sub
+
+    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveNext()
+    End Sub
+
+    Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
+        position = DriveBindingSource.Position
+        field_control(position)
+        DriveBindingSource.MoveLast()
+    End Sub
 End Class
