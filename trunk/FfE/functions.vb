@@ -4,6 +4,7 @@ Imports MySql.Data.MySqlClient
 Public Class functions
 
     Public Function function_kms(ByVal drive As Integer) As Double
+        'variables
         Dim sql, res, measure As String
         Dim avg, kms As Double
         Dim time1, time2 As DateTime
@@ -57,6 +58,7 @@ Public Class functions
         function_kms = kms
     End Function
 
+    'execute a query (to get only one result)
     Private Function execute_query(ByVal sql As String) As String
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
