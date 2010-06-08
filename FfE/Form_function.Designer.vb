@@ -23,10 +23,10 @@ Partial Class Form_function
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.Button1 = New System.Windows.Forms.Button
         Me.Label2 = New System.Windows.Forms.Label
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.TextBox1 = New System.Windows.Forms.TextBox
+        Me.Label1 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,32 +43,6 @@ Partial Class Form_function
         Me.Panel1.Size = New System.Drawing.Size(358, 125)
         Me.Panel1.TabIndex = 0
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 26)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 16)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Drive ID: "
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(96, 23)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(49, 22)
-        Me.TextBox1.TabIndex = 1
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(188, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 31)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Calculate"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -79,6 +53,32 @@ Partial Class Form_function
         Me.Label2.Size = New System.Drawing.Size(54, 20)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "result"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(188, 19)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(113, 31)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Calculate"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(96, 23)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(49, 22)
+        Me.TextBox1.TabIndex = 1
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 26)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 16)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Drive ID: "
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Form_function
         '
