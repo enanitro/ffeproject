@@ -140,6 +140,12 @@
     <Compile Include="Form_fahrprofil.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_function.Designer.vb">
+      <DependentUpon>Form_function.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_function.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_restore_DB.Designer.vb">
       <DependentUpon>Form_restore_DB.vb</DependentUpon>
     </Compile>
@@ -225,6 +231,7 @@
     <Compile Include="Form_Conf_User.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="functions.vb" />
     <Compile Include="insert_data.vb" />
     <Compile Include="logger.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -309,6 +316,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_find_drive.resx">
       <DependentUpon>Form_find_drive.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_function.resx">
+      <DependentUpon>Form_function.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form_import_csv_full.resx">
