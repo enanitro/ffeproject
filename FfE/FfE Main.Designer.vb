@@ -38,11 +38,13 @@ Partial Class FfE_Main
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.CANBUSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ChannelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.FunctionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.DatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ConnectionToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.BackupDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.RestoreDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.KmsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -64,7 +66,7 @@ Partial Class FfE_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.DatabaseToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DriveToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FunctionsToolStripMenuItem, Me.DatabaseToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(632, 24)
@@ -81,7 +83,7 @@ Partial Class FfE_Main
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.NewToolStripMenuItem.Text = "View"
         '
         'OptionsToolStripMenuItem
@@ -133,6 +135,13 @@ Partial Class FfE_Main
         Me.ChannelsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.ChannelsToolStripMenuItem.Text = "Channels"
         '
+        'FunctionsToolStripMenuItem
+        '
+        Me.FunctionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KmsToolStripMenuItem})
+        Me.FunctionsToolStripMenuItem.Name = "FunctionsToolStripMenuItem"
+        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
+        Me.FunctionsToolStripMenuItem.Text = "Functions"
+        '
         'DatabaseToolStripMenuItem
         '
         Me.DatabaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectionToolStripMenuItem2, Me.BackupDBToolStripMenuItem, Me.RestoreDBToolStripMenuItem})
@@ -163,6 +172,12 @@ Partial Class FfE_Main
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'KmsToolStripMenuItem
+        '
+        Me.KmsToolStripMenuItem.Name = "KmsToolStripMenuItem"
+        Me.KmsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.KmsToolStripMenuItem.Text = "Kms"
         '
         'FfE_Main
         '
@@ -202,5 +217,7 @@ Partial Class FfE_Main
     Friend WithEvents CANBUSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChannelsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FunctionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents KmsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

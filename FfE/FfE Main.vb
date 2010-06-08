@@ -91,4 +91,16 @@ Public Class FfE_Main
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
+
+    Private Sub KmsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KmsToolStripMenuItem.Click
+        If Form_drive.Drive_idLabel1.Text <> "" Then
+            Form_function.TextBox1.Text = Form_drive.Drive_idLabel1.Text
+        End If
+        Form_function.Label2.Text = ""
+        Form_function.Text = "Kms"
+        Form_function.MdiParent = Me
+        Form_function.StartPosition = FormStartPosition.CenterParent
+        Form_function.Focus()
+        Form_function.WindowState = FormWindowState.Normal
+    End Sub
 End Class
