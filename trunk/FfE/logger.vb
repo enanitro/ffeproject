@@ -97,7 +97,7 @@ Public Class logger
 
     Public Function logger_dialog(ByVal filedialog As OpenFileDialog, ByRef list As CheckedListBox, ByVal id As Integer, _
                              ByRef text As TextBox, ByRef long_file As Integer, ByRef measure() As Integer, _
-                             ByVal n_file As Integer) As String
+                             ByVal n_file As Integer, ByRef check As CheckBox) As String
         filedialog.FileName = ""
         filedialog.ShowDialog()
         If My.Computer.FileSystem.FileExists(filedialog.FileName) Then
@@ -106,6 +106,7 @@ Public Class logger
         If list.Items.Count <> 0 Then
             list.Visible = True
             text.Visible = True
+            check.Visible = True
             logger_dialog = filedialog.FileName
         Else
             logger_dialog = ""
@@ -875,7 +876,8 @@ Public Class logger
     End Function
 
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
-                            ByRef path() As String, ByRef long_file() As Integer, ByRef length As Integer)
+                            ByRef path() As String, ByRef long_file() As Integer, ByRef length As Integer, _
+                            ByRef check As CheckBox)
         panel.Visible = False
         list.Items.Clear()
         list.Visible = False
@@ -883,6 +885,7 @@ Public Class logger
         text.Visible = False
         path = Nothing
         long_file = Nothing
+        check.Visible = False
         length = 0
     End Sub
 
