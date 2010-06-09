@@ -28,7 +28,8 @@ Public Class form_import_csv_full
             ReDim long_graphtec(0)
             length_graphtec = 1
             path_graphtec(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox1, FfE_Main.id_graphtec, _
-                                             TextBox1, long_graphtec(0), id_measure_graphtec, length_graphtec - 1)
+                                             TextBox1, long_graphtec(0), id_measure_graphtec, length_graphtec - 1, _
+                                             CheckBox1)
             If path_graphtec(path_graphtec.Length - 1) = "" Then
                 Array.Resize(path_graphtec, path_graphtec.Length - 1)
                 Array.Resize(long_graphtec, long_graphtec.Length - 1)
@@ -43,7 +44,7 @@ Public Class form_import_csv_full
             length_graphtec += 1
             path_graphtec(path_graphtec.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox1, _
                                                     FfE_Main.id_graphtec, TextBox1, long_graphtec(length_graphtec - 1), _
-                                                    id_measure_graphtec, length_graphtec - 1)
+                                                    id_measure_graphtec, length_graphtec - 1, CheckBox1)
             If path_graphtec(path_graphtec.Length - 1) = "" Then
                 Array.Resize(path_graphtec, path_graphtec.Length - 1)
                 Array.Resize(long_graphtec, long_graphtec.Length - 1)
@@ -61,7 +62,7 @@ Public Class form_import_csv_full
             ReDim long_gps(0)
             length_gps = 1
             path_gps(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox2, FfE_Main.id_gps, _
-                                            TextBox2, long_gps(0), id_measure_gps, length_gps - 1)
+                                            TextBox2, long_gps(0), id_measure_gps, length_gps - 1, CheckBox2)
             If path_gps(path_gps.Length - 1) = "" Then
                 Array.Resize(path_gps, path_gps.Length - 1)
                 Array.Resize(long_gps, long_gps.Length - 1)
@@ -76,7 +77,7 @@ Public Class form_import_csv_full
             length_gps += 1
             path_gps(path_gps.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox2, _
                                                     FfE_Main.id_gps, TextBox2, long_gps(length_gps - 1), _
-                                                    id_measure_gps, length_gps - 1)
+                                                    id_measure_gps, length_gps - 1, CheckBox2)
             If path_gps(path_gps.Length - 1) = "" Then
                 Array.Resize(path_gps, path_gps.Length - 1)
                 Array.Resize(long_gps, long_gps.Length - 1)
@@ -94,7 +95,7 @@ Public Class form_import_csv_full
             ReDim long_lmg(0)
             length_lmg = 1
             path_lmg(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox3, FfE_Main.id_lmg, _
-                                              TextBox3, long_lmg(0), id_measure_lmg, length_lmg - 1)
+                                              TextBox3, long_lmg(0), id_measure_lmg, length_lmg - 1, CheckBox3)
             If path_lmg(path_lmg.Length - 1) = "" Then
                 Array.Resize(path_lmg, path_lmg.Length - 1)
                 Array.Resize(long_lmg, long_lmg.Length - 1)
@@ -109,7 +110,7 @@ Public Class form_import_csv_full
             length_lmg += 1
             path_lmg(path_lmg.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox3, _
                                                     FfE_Main.id_lmg, TextBox3, long_lmg(length_lmg - 1), _
-                                                    id_measure_lmg, length_lmg - 1)
+                                                    id_measure_lmg, length_lmg - 1, CheckBox3)
             If path_lmg(path_lmg.Length - 1) = "" Then
                 Array.Resize(path_lmg, path_lmg.Length - 1)
                 Array.Resize(long_lmg, long_lmg.Length - 1)
@@ -127,7 +128,7 @@ Public Class form_import_csv_full
             ReDim long_canbus(0)
             length_canbus = 1
             path_canbus(0) = logger.logger_dialog(OpenFileDialog, CheckedListBox4, FfE_Main.id_canbus, _
-                                               TextBox4, long_canbus(0), id_measure_canbus, length_canbus - 1)
+                                               TextBox4, long_canbus(0), id_measure_canbus, length_canbus - 1, CheckBox4)
             If path_canbus(path_canbus.Length - 1) = "" Then
                 Array.Resize(path_canbus, path_canbus.Length - 1)
                 Array.Resize(long_canbus, long_canbus.Length - 1)
@@ -142,7 +143,7 @@ Public Class form_import_csv_full
             length_canbus += 1
             path_canbus(path_canbus.Length - 1) = logger.logger_dialog(OpenFileDialog, CheckedListBox4, _
                                                     FfE_Main.id_canbus, TextBox4, long_canbus(length_canbus - 1), _
-                                                    id_measure_canbus, length_canbus - 1)
+                                                    id_measure_canbus, length_canbus - 1, CheckBox4)
             If path_canbus(path_canbus.Length - 1) = "" Then
                 Array.Resize(path_canbus, path_canbus.Length - 1)
                 Array.Resize(long_canbus, long_canbus.Length - 1)
@@ -153,25 +154,25 @@ Public Class form_import_csv_full
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus)
+        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus, CheckBox4)
         length_canbus = 0
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec)
+        logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec, CheckBox1)
         length_graphtec = 0
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps)
+        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox3)
         length_gps = 0
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg)
+        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox4)
         length_lmg = 0
     End Sub
 
@@ -248,10 +249,10 @@ Public Class form_import_csv_full
             Else
                 If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
             End If
-            logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec)
-            logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps)
-            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg)
-            logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus)
+            logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec, CheckBox1)
+            logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox2)
+            logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox3)
+            logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus, CheckBox4)
             length_graphtec = 0
             length_gps = 0
             length_lmg = 0
@@ -262,18 +263,22 @@ Public Class form_import_csv_full
 
     Private Sub CheckedListBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox1.SelectedIndexChanged
         select_measure(CheckedListBox1, id_measure_graphtec, FfE_Main.id_graphtec, name_measure_graphtec)
+        is_select(CheckedListBox1, CheckBox1)
     End Sub
 
     Private Sub CheckedListBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox2.SelectedIndexChanged
         select_measure(CheckedListBox2, id_measure_gps, FfE_Main.id_gps, name_measure_gps)
+        is_select(CheckedListBox2, CheckBox2)
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
         select_measure(CheckedListBox3, id_measure_lmg, FfE_Main.id_lmg, name_measure_lmg)
+        is_select(CheckedListBox3, CheckBox3)
     End Sub
 
     Private Sub CheckedListBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox4.SelectedIndexChanged
         select_measure(CheckedListBox4, id_measure_canbus, FfE_Main.id_canbus, name_measure_canbus)
+        is_select(CheckedListBox4, CheckBox4)
     End Sub
 
     Private Function search_measure(ByVal logger_id As Integer, ByVal sel As String, _
@@ -358,6 +363,49 @@ Public Class form_import_csv_full
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    'seleccionar todos
+    Private Sub select_all(ByRef list As CheckedListBox, ByRef measure() As Integer, _
+                           ByVal logger As Integer, ByVal list_ch() As String, ByVal check As CheckBox)
+        Try
+            Dim str As String = ""
+            Dim ind As Integer
+            If check.CheckState = CheckState.Checked Then
+                For i = 0 To list.Items.Count - 1
+                    str = search_measure(logger, "name", list.Items.Item(i), "channel", ind)
+                    If str <> "" Then
+                        list.Items.Remove(list.Items.Item(i))
+                        list.Items.Insert(i, str)
+                        list.SetItemChecked(i, True)
+                        measure(i) = ind
+                    End If
+                Next
+                is_select(list, check)
+            Else
+                For i = 0 To list.Items.Count - 1
+                    list.Items.Remove(list.Items.Item(i))
+                    list.Items.Insert(i, list_ch(i))
+                    list.SetItemChecked(i, False)
+                    check.CheckState = CheckState.Unchecked
+                Next
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'is select all?
+    Private Sub is_select(ByRef list As CheckedListBox, ByVal check As CheckBox)
+        If list.CheckedItems.Count = list.Items.Count Then
+            check.CheckState = CheckState.Checked
+        Else
+            If list.CheckedItems.Count > 0 Then
+                check.CheckState = CheckState.Indeterminate
+            Else
+                check.CheckState = CheckState.Unchecked
+            End If
+        End If
     End Sub
 
     'seleccionar que medida se ajusta a la del canal
@@ -523,9 +571,30 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub form_import_csv_full_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim logger As New logger
+        logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec, CheckBox1)
+        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox2)
+        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox3)
+        logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus, CheckBox4)
         length_graphtec = 0
         length_gps = 0
         length_lmg = 0
         length_canbus = 0
+    End Sub
+
+    Private Sub CheckBox1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBox1.Click
+        select_all(CheckedListBox1, id_measure_graphtec, FfE_Main.id_graphtec, name_measure_graphtec, CheckBox1)
+    End Sub
+
+    Private Sub CheckBox2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBox2.Click
+        select_all(CheckedListBox2, id_measure_gps, FfE_Main.id_gps, name_measure_gps, CheckBox2)
+    End Sub
+
+    Private Sub CheckBox3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBox3.Click
+        select_all(CheckedListBox3, id_measure_lmg, FfE_Main.id_lmg, name_measure_lmg, CheckBox3)
+    End Sub
+
+    Private Sub CheckBox4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBox4.Click
+        select_all(CheckedListBox4, id_measure_canbus, FfE_Main.id_canbus, name_measure_canbus, CheckBox4)
     End Sub
 End Class
