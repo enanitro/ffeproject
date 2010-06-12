@@ -435,14 +435,48 @@ Public Class logger
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
+        Dim ch39 As Integer = 1
         Dim value As Double
 
         Try
             index = find_last_index(id_logger, id_drive)
-            'sumo el numero de canales + 14 lineas de datos que contiene la cabecera del logger graphtec gl800
-            For i = 1 To list.Items.Count + 14
+
+            'For i = 1 To list.Items.Count + 14
+            'linea = fichero.ReadLine
+            'Next
+
+            'leemos hasta la declaracion de los canales
+            Do
                 linea = fichero.ReadLine
-            Next
+                datos = linea.Split(",")
+            Loop Until datos(0) = "CH"
+
+            'buscamos en que posicion esta el ch39(batterie spannung)
+            Do
+                linea = fichero.ReadLine
+                datos = linea.Split(",")
+                ch39 += 1
+            Loop Until datos(0) = "CH39" Or datos(0) = "Logic/Pulse"
+
+            'si no se ha encontrado ch39, no lo tendremos en cuenta
+            If datos(0) = "Logic/Pulse" Then ch39 = -1
+
+            'leemos las lines que que faltan hasta llegar a los datos
+            Do
+                linea = fichero.ReadLine
+                datos = linea.Split(",")
+            Loop Until datos(0) = "NO."
+
+            'descartamos las filas que no deben almacenarse porque ch39=0 
+            If index = 0 And ch39 <> -1 Then
+                Do
+                    linea = fichero.ReadLine
+                    datos = linea.Split(",")
+                    val = datos(ch39)
+                    num_lines += 1
+                Loop Until val > 0
+                num_lines = (num_lines - 1) * list.CheckedItems.Count
+            End If
 
             config_progressbar(bar, long_file, list, n_data)
 
@@ -450,7 +484,6 @@ Public Class logger
             ins.init_string()
 
             Do
-                linea = fichero.ReadLine
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
@@ -477,6 +510,7 @@ Public Class logger
                         clock = 1
                     End If
                 End If
+                linea = fichero.ReadLine
             Loop Until linea Is Nothing
             If Not ins.is_empty Then
                 ins.insert_into_string()
@@ -513,10 +547,24 @@ Public Class logger
             Dim ins As New insert_Data
             ins.init_string()
 
+            If index = 0 Then
+                Do
+                    linea = fichero.ReadLine
+                    datos = linea.Split(",")
+                    val = datos(7)
+                    If val(val.Count - 1) = Nothing Then
+                        Do
+                            val = val.Remove(val.Count - 1)
+                        Loop Until val(val.Count - 1) <> Nothing
+                    End If
+                    num_lines += 1
+                Loop Until val > 0
+                num_lines = (num_lines - 1) * list.CheckedItems.Count
+            End If
+
             config_progressbar(bar, long_file, list, n_data)
 
             Do
-                linea = fichero.ReadLine
                 If s_w_time = "" Then
                     datos = linea.Split(",")
                     s_w_time = make_date(datos(2))
@@ -563,6 +611,7 @@ Public Class logger
                         clock = 1
                     End If
                 End If
+                linea = fichero.ReadLine
             Loop Until linea Is Nothing
             If Not ins.is_empty Then
                 ins.insert_into_string()
@@ -601,13 +650,22 @@ Public Class logger
                 datos = linea.Split(",")
             End While
 
+            If index = 0 Then
+                Do
+                    linea = fichero.ReadLine
+                    datos = linea.Split(",")
+                    val = datos(18)
+                    num_lines += 1
+                Loop Until val > 0
+                num_lines = (num_lines - 1) * list.CheckedItems.Count
+            End If
+
             Dim ins As New insert_Data
             ins.init_string()
 
             config_progressbar(bar, long_file, list, n_data)
 
             Do
-                linea = fichero.ReadLine
                 If linea <> Nothing Then
                     Application.DoEvents()
                     datos = linea.Split(",")
@@ -632,6 +690,7 @@ Public Class logger
                         clock = 1
                     End If
                 End If
+                linea = fichero.ReadLine
             Loop Until linea Is Nothing
             If Not ins.is_empty Then
                 ins.insert_into_string()

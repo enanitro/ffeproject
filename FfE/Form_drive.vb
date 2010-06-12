@@ -49,6 +49,11 @@ Public Class Form_drive
             'TODO: esta línea de código carga datos en la tabla 'Ffe_databaseDataSet.drive' Puede moverla o quitarla según sea necesario.
             Me.DriveTableAdapter.Fill(Me.Ffe_databaseDataSet.drive)
 
+            Me.Drive_fullTableAdapter.Fill(Me.Ffe_databaseDataSet.drive_full)
+
+            DriveSort.Sort(DriveSort.Columns.Item(0), _
+                                      System.ComponentModel.ListSortDirection.Ascending)
+
             DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
                                       System.ComponentModel.ListSortDirection.Ascending)
 
@@ -232,7 +237,18 @@ Public Class Form_drive
         Try
             position = DriveBindingSource.Position
             field_control(position)
-            rows = DriveDataGridView.Rows.Count
+            DriveBindingSource.AddNew()
+            sort_index()
+
+            'sincronizo la tabla
+            DrivefullBindingSource.AddNew()
+            DriveDataGridView.Item(0, DriveDataGridView.Rows.Count - 1).Value = Drive_idLabel1.Text
+            DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
+                                      System.ComponentModel.ListSortDirection.Ascending)
+            DrivefullBindingSource.Position = DriveBindingSource.Position
+            Ffe_databaseDataSet.drive_full.AcceptChanges()
+
+            'rows = DriveDataGridView.Rows.Count
             Drive_idLabel1.Visible = True
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -266,20 +282,25 @@ Public Class Form_drive
         End If
     End Sub
 
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+    Private Sub update_drive()
         Try
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
             Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
             Ffe_databaseDataSet.drive.AcceptChanges()
+            Me.Drive_fullTableAdapter.Fill(Me.Ffe_databaseDataSet.drive_full)
             DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
-                                      System.ComponentModel.ListSortDirection.Ascending)
-
+                                   System.ComponentModel.ListSortDirection.Ascending)
             rows = DriveDataGridView.Rows.Count
             combo = False
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+        Update()
+        DrivefullBindingSource.Position = DriveBindingSource.Position
     End Sub
 
     'Este procedimiento cambia el valor de los combos sincronizando con el valor de los datos 
@@ -330,15 +351,29 @@ Public Class Form_drive
     Private Sub DriveBindingSource_PositionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DriveBindingSource.PositionChanged
         'Mostrar datos en combo
         data_2_combo()
+        DrivefullBindingSource.Position = DriveBindingSource.Position
         combo = False
     End Sub
 
 
     Private Sub btn_import_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_import.Click
         Try
-            Me.Validate()
-            Me.DriveBindingSource.EndEdit()
-            Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+            If combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Update()
+                    DrivefullBindingSource.Position = DriveBindingSource.Position
+                End If
+            End If
+            If rows <> DriveSort.Rows.Count Then
+                If MsgBox("Drive must be saved before" & vbCrLf & "Do you want to save Drive?", _
+                          MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Update()
+                    DrivefullBindingSource.Position = DriveBindingSource.Position
+                Else
+                    Exit Sub
+                End If
+            End If
+
             If import_full Is Nothing Then
                 import_full = New form_import_csv_full
             Else
@@ -378,8 +413,12 @@ Public Class Form_drive
         Try
             If MsgBox("Are you sure you want to delete this information?", _
                       MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                DrivefullBindingSource.Position = DriveBindingSource.Position
+                DrivefullBindingSource.RemoveCurrent()
+                Ffe_databaseDataSet.drive_full.AcceptChanges()
                 DriveBindingSource.RemoveCurrent()
                 rows = Ffe_databaseDataSet.drive.Count
+                combo = False
                 If rows = 0 Then Drive_idLabel1.Visible = False
             End If
         Catch ex As Exception
@@ -387,27 +426,19 @@ Public Class Form_drive
         End Try
     End Sub
 
-    Private Sub ToolStripButton1_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ToolStripButton1.MouseUp
-        sort_index()
-    End Sub
-
     Private Sub sort_index()
         Try
             Dim current As Integer = 1
-            For i = 1 To DriveDataGridView.Rows.Count
-                If DriveDataGridView.Rows.Item(i - 1).Cells.Item(0).Value <> i Then
-                    DriveDataGridView.Rows.Item(DriveDataGridView.Rows.Count - 1) _
-                    .Cells.Item(0).Value = i
+            For i = 1 To DriveSort.Rows.Count
+                If DriveSort.Rows.Item(i - 1).Cells.Item(0).Value <> i Then
+                    DriveSort.Rows.Item(DriveSort.Rows.Count - 1).Cells.Item(0).Value = i
                     current = i
-                    DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
-                                          System.ComponentModel.ListSortDirection.Ascending)
-                    DriveDataGridView.CurrentCell = _
-                    DriveDataGridView.Rows.Item(current - 1).Cells.Item(1)
-                    DriveDataGridView.ClearSelection()
-                    i = DriveDataGridView.Rows.Count
+                    DriveSort.Sort(DriveSort.Columns.Item(0), System.ComponentModel.ListSortDirection.Ascending)
+                    DriveSort.CurrentCell = DriveSort.Rows.Item(current - 1).Cells.Item(0)
+                    DriveSort.ClearSelection()
+                    i = DriveSort.Rows.Count
                 End If
             Next
-
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -416,6 +447,13 @@ Public Class Form_drive
 
     Private Sub btn_export_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_export.Click
         Try
+            If combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Update()
+                    DrivefullBindingSource.Position = DriveBindingSource.Position
+                End If
+            End If
+
             Dim res As String
             res = execute_simple("select count(distinct(logger_id)) from data where drive_id = " & Drive_idLabel1.Text)
             If res <> "" And res <> "0" Then
@@ -437,9 +475,17 @@ Public Class Form_drive
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        procesing.Show()
-        Application.DoEvents()
         Try
+            If combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Update()
+                    DrivefullBindingSource.Position = DriveBindingSource.Position
+                End If
+            End If
+
+            procesing.Show()
+            Application.DoEvents()
+
             If Drive_idLabel1.Text <> "" Then
                 Dim res As String
                 res = execute_simple("select count(distinct(logger_id)) from data where drive_id = " & Drive_idLabel1.Text)
@@ -460,8 +506,9 @@ Public Class Form_drive
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            procesing.Close()
         End Try
-        procesing.Close()
     End Sub
 
     Private Sub showData()
@@ -516,9 +563,16 @@ Public Class Form_drive
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        procesing.Show()
-        Application.DoEvents()
         Try
+            procesing.Show()
+            Application.DoEvents()
+            If combo = True Then
+                If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Update()
+                    DrivefullBindingSource.Position = DriveBindingSource.Position
+                End If
+            End If
+
             If view_fahrprofil Is Nothing Then
                 showFahrprofil()
             Else
@@ -530,24 +584,23 @@ Public Class Form_drive
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            procesing.Close()
         End Try
-        procesing.Close()
-    End Sub
-
-    Private Sub DriveDataGridView_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DriveDataGridView.MouseDown
-        position = DriveBindingSource.Position
-        field_control(position)
     End Sub
 
     Private Sub field_control(ByVal pos As Integer)
         If combo = True Then
             If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Me.Validate()
-                Me.DriveBindingSource.EndEdit()
-                Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
-                Ffe_databaseDataSet.drive.AcceptChanges()
-                DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
-                                          System.ComponentModel.ListSortDirection.Ascending)
+                'Me.Validate()
+                'Me.DriveBindingSource.EndEdit()
+                'Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
+                'Ffe_databaseDataSet.drive.AcceptChanges()
+
+                'Me.Drive_fullTableAdapter.Fill(Me.Ffe_databaseDataSet.drive_full)
+                'DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
+                '                          System.ComponentModel.ListSortDirection.Ascending)
+                Update()
             Else
                 DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
             End If
@@ -610,4 +663,13 @@ Public Class Form_drive
         field_control(position)
         DriveBindingSource.MoveLast()
     End Sub
+
+    Private Sub DriveDataGridView_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles DriveDataGridView.Click
+        If DriveBindingSource.Position <> DrivefullBindingSource.Position Then
+            position = DriveBindingSource.Position
+            field_control(position)
+            DriveBindingSource.Position = DrivefullBindingSource.Position
+        End If
+    End Sub
+
 End Class
