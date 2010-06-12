@@ -106,7 +106,7 @@ Public Class Form_fahrprofil
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String
-        Dim i As Integer
+        Dim i, j As Integer
         Dim km_avg, speed_avg As Double
         Dim sec, sec_avg As Int64
         Dim t1, t2 As DateTime
@@ -134,13 +134,9 @@ Public Class Form_fahrprofil
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
                         t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
-                        't1 = query.GetString(2)
-                        't2 = query.GetString(3)
                         grid(7, i).Value = t2.ToLongTimeString
                         grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
-                        'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
-                        'interval.Seconds.ToString()
                         grid(6, i).Value = interval.ToString.Trim("-")
                         sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
                         grid(2, i).Style.BackColor = colores.getNexColor
@@ -156,39 +152,40 @@ Public Class Form_fahrprofil
                     sec_avg = 0
                     speed_avg = 0
                     While query.Read
-                        grid.Rows.Add()
+                        'grid.Rows.Add()
                         i = grid.Rows.Count - 1
-                        grid(0, i).Value = True
-                        grid(1, i).Value = query.GetString(0)
-                        grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
-                        t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
-                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
-                        t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
-                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
-                        't1 = query.GetString(2)
-                        't2 = query.GetString(3)
-                        grid(7, i).Value = t2.ToLongTimeString
-                        grid(8, i).Value = t1.ToLongTimeString
-                        interval = t1 - t2
-                        'grid(6, i).Value = interval.Hours.ToString & ":" & interval.Minutes.ToString & ":" & _
-                        'interval.Seconds.ToString()
-                        grid(6, i).Value = interval.ToString.Trim("-")
-                        sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
-                        grid(2, i).Style.BackColor = Color.Green
-                        grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
-                        grid(12, i).Value = True
+                        'grid(0, i).Value = True
+                        'grid(1, i).Value = query.GetString(0)
+                        'grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
+                        't1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                        '               " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
+                        't2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                        '               " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
+                        'grid(7, i).Value = t2.ToLongTimeString
+                        'grid(8, i).Value = t1.ToLongTimeString
+                        'interval = t1 - t2
+                        'grid(6, i).Value = interval.ToString.Trim("-")
+                        'sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
+                        'grid(2, i).Style.BackColor = Color.Green
+                        'grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
+                        'grid(12, i).Value = True
                         speed_avg += Math.Round((query.GetDouble(1)), 4)
-                        't1 = query.GetString(2)
-                        't2 = query.GetString(3)
-                        'sec = DateDiff(DateInterval.Second, t2, t1)
                         sec_avg += sec
                         km_avg = Math.Round((query.GetDouble(1) / 3600) * sec_avg, 4)
-                        grid.Rows.Item(i).Visible = False
+                        'grid.Rows.Item(i).Visible = False
                         i += 1
                     End While
-                    Label1.Text = km_avg / i
-                    Label2.Text = speed_avg / i
-                    Label3.Text = sec_to_time(sec_avg / i)
+                    Label1.Text = km_avg / i & " km"
+                    Label2.Text = speed_avg / i & " Km/h"
+                    Label3.Text = sec_to_time(sec_avg / i) & " h"
+                    grid.Rows.Add()
+                    j = grid.Rows.Count - 1
+                    grid(0, j).Value = True
+                    grid(1, j).Value = ""
+                    grid(4, i).Value = km_avg / i
+                    grid(5, j).Value = speed_avg / i
+                    grid(6, i).Value = sec_to_time(sec_avg / i)
+                    grid(12, i).Value = True
                 End If
             End If
         Catch ex As Exception

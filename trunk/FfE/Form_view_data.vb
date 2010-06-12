@@ -258,13 +258,14 @@ Public Class Form_view_data
         End Try
     End Sub
 
-    Private Sub delete_channel(ByVal logger_id As Integer, ByVal list As CheckedListBox)
+    Private Function delete_channel(ByVal logger_id As Integer, ByVal list As CheckedListBox) As Boolean
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
         Dim cn As New MySqlConnection(connection)
         Dim cmd As New MySqlCommand
         Dim i As Integer
         Dim sql As String = ""
+        Dim res As Boolean = False
 
         Try
             If list.Items.Count <> 0 And list.CheckedItems.Count <> 0 Then
@@ -285,6 +286,7 @@ Public Class Form_view_data
 
                     cn.Close()
                     procesing.Close()
+                    res = True
                 End If
             End If
 
@@ -298,8 +300,10 @@ Public Class Form_view_data
             If cn.State = ConnectionState.Open Then
                 cn.Close()
             End If
+            procesing.Close()
+            delete_channel = res
         End Try
-    End Sub
+    End Function
 
     Private Sub Form_view_data_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         isClosed = True
@@ -338,21 +342,23 @@ Public Class Form_view_data
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        delete_channel(FfE_Main.id_graphtec, CheckedListBox1)
-        procesing.Show()
-        Application.DoEvents()
-        show_data(DataGridView, FfE_Main.id_graphtec)
-        execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1, CheckBox9)
-        procesing.Close()
+        If delete_channel(FfE_Main.id_graphtec, CheckedListBox1) Then
+            procesing.Show()
+            Application.DoEvents()
+            show_data(DataGridView, FfE_Main.id_graphtec)
+            execute_list_channels(FfE_Main.id_graphtec, CheckedListBox1, CheckBox9)
+            procesing.Close()
+        End If
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        delete_channel(FfE_Main.id_gps, CheckedListBox2)
-        procesing.Show()
-        Application.DoEvents()
-        show_data(DataGridView1, FfE_Main.id_gps)
-        execute_list_channels(FfE_Main.id_gps, CheckedListBox2, CheckBox1)
-        procesing.Close()
+        If delete_channel(FfE_Main.id_gps, CheckedListBox2) Then
+            procesing.Show()
+            Application.DoEvents()
+            show_data(DataGridView1, FfE_Main.id_gps)
+            execute_list_channels(FfE_Main.id_gps, CheckedListBox2, CheckBox1)
+            procesing.Close()
+        End If
     End Sub
 
     Private Sub CheckBox9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox9.CheckedChanged
@@ -372,12 +378,13 @@ Public Class Form_view_data
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        delete_channel(FfE_Main.id_lmg, CheckedListBox3)
-        procesing.Show()
-        Application.DoEvents()
-        show_data(DataGridView2, FfE_Main.id_lmg)
-        execute_list_channels(FfE_Main.id_lmg, CheckedListBox3, CheckBox2)
-        procesing.Close()
+        If delete_channel(FfE_Main.id_lmg, CheckedListBox3) Then
+            procesing.Show()
+            Application.DoEvents()
+            show_data(DataGridView2, FfE_Main.id_lmg)
+            execute_list_channels(FfE_Main.id_lmg, CheckedListBox3, CheckBox2)
+            procesing.Close()
+        End If
     End Sub
 
     Private Sub CheckedListBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox3.SelectedIndexChanged
@@ -389,12 +396,13 @@ Public Class Form_view_data
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        delete_channel(FfE_Main.id_canbus, CheckedListBox4)
-        procesing.Show()
-        Application.DoEvents()
-        show_data_canbus(DataGridView3, FfE_Main.id_canbus)
-        execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
-        procesing.Close()
+        If delete_channel(FfE_Main.id_canbus, CheckedListBox4) Then
+            procesing.Show()
+            Application.DoEvents()
+            show_data_canbus(DataGridView3, FfE_Main.id_canbus)
+            execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
+            procesing.Close()
+        End If
     End Sub
 
     Private Sub CheckedListBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckedListBox4.SelectedIndexChanged
