@@ -14,7 +14,7 @@ Public Class Form_fahrprofil
 
     Private Sub Form_fharprofil_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Dim pos As Integer = Form_drive.DriveBindingSource.Position
-        Form_drive.DriveTableAdapter.Fill(Form_drive.Ffe_databaseDataSet.drive)
+        Form_drive.update_drive()
         Form_drive.DriveBindingSource.Position = pos
     End Sub
 
@@ -118,7 +118,8 @@ Public Class Form_fahrprofil
             cmd.CommandTimeout = 1000
             sql = "select drive_id,avg(value),max(data_index),min(data_index) from data" & _
                       " where (measure_id = " & sp_gps & " or data_id like '%speed%')" & _
-                      " and logger_id = " & logger_id & " group by drive_id having drive_id in " & _
+                      " and logger_id = " & logger_id & _
+                      " group by drive_id having drive_id in " & _
                       " (select drive_id from drive where usage_type_id = " & id_usage_type & _
                       " and status like " & status & ")"
             cmd.CommandText = sql
@@ -153,19 +154,19 @@ Public Class Form_fahrprofil
                     speed_avg = 0
                     While query.Read
                         'grid.Rows.Add()
-                        i = grid.Rows.Count - 1
+                        'i = grid.Rows.Count - 1
                         'grid(0, i).Value = True
                         'grid(1, i).Value = query.GetString(0)
                         'grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
-                        't1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
-                        '               " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
-                        't2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
-                        '               " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
+                        t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
+                        t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
+                                       " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
                         'grid(7, i).Value = t2.ToLongTimeString
                         'grid(8, i).Value = t1.ToLongTimeString
-                        'interval = t1 - t2
+                        interval = t1 - t2
                         'grid(6, i).Value = interval.ToString.Trim("-")
-                        'sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
+                        sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
                         'grid(2, i).Style.BackColor = Color.Green
                         'grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         'grid(12, i).Value = True
@@ -175,17 +176,18 @@ Public Class Form_fahrprofil
                         'grid.Rows.Item(i).Visible = False
                         i += 1
                     End While
-                    Label1.Text = km_avg / i & " km"
-                    Label2.Text = speed_avg / i & " Km/h"
-                    Label3.Text = sec_to_time(sec_avg / i) & " h"
                     grid.Rows.Add()
                     j = grid.Rows.Count - 1
+                    grid.Rows.Item(j).Visible = False
                     grid(0, j).Value = True
                     grid(1, j).Value = ""
-                    grid(4, i).Value = km_avg / i
-                    grid(5, j).Value = speed_avg / i
-                    grid(6, i).Value = sec_to_time(sec_avg / i)
-                    grid(12, i).Value = True
+                    grid(4, j).Value = Math.Round(km_avg / i, 4)
+                    grid(5, j).Value = Math.Round(speed_avg / i, 4)
+                    grid(6, j).Value = sec_to_time(sec_avg / i)
+                    grid(12, j).Value = True
+                    Label1.Text = grid(4, j).Value & " km"
+                    Label2.Text = grid(5, j).Value & " km/h"
+                    Label3.Text = grid(6, j).Value & " h"
                 End If
             End If
         Catch ex As Exception
@@ -201,26 +203,40 @@ Public Class Form_fahrprofil
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String
+        Dim start As String = ""
         Dim find As Boolean = False
         Try
             cn.Open()
             cmd.Connection = cn
-            sql = "select avg(value),max(data_index),min(data_index) from data where drive_id = " & drive_id & _
-            " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")"
+            sql = "select if(min(data_index) is null,'',min(data_index)) from data where drive_id = " & drive_id & _
+            " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ") and value >=5 "
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader
-            If query.Read Then
-                If query.IsDBNull(0) = False Then
-                    grid(9, index).Value = Math.Round(query.GetDouble(0), 4)
-                    grid(10, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
-                                " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(2))
-                    grid(11, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
-                                " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(1))
-                    find = True
+            If query.Read Then start = query.GetString(0)
+            cn.Close()
+
+            If start <> "" Then
+                cn.Open()
+                cmd.Connection = cn
+                sql = "select avg(value),max(data_index),min(data_index) from data where drive_id = " & drive_id & _
+                " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")" & _
+                "and data_index >= " & start
+                cmd.CommandTimeout = 1000
+                cmd.CommandText = sql
+                query = cmd.ExecuteReader
+                If query.Read Then
+                    If query.IsDBNull(0) = False Then
+                        grid(9, index).Value = Math.Round(query.GetDouble(0), 4)
+                        grid(10, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
+                                    " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(2))
+                        grid(11, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
+                                    " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(1))
+                        find = True
+                    End If
                 End If
+                query.Close()
             End If
-            query.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -231,20 +247,26 @@ Public Class Form_fahrprofil
     End Function
 
     Private Function check_drive(ByVal index As Integer, ByVal grid As DataGridView) As Boolean
-        Dim ts1, ts2, te1, te2 As DateTime
+        Dim ts1, ts2, te1, te2, d1, d2 As DateTime
         Dim interval1, interval2 As Double
+        Dim diff As Double
+        Dim sec As Long
         ts1 = grid(7, index).Value
         ts2 = grid(10, index).Value
         te1 = grid(8, index).Value
         te2 = grid(11, index).Value
         interval1 = DateDiff(DateInterval.Second, ts1, ts2)
         interval2 = DateDiff(DateInterval.Second, te1, te2)
-        If grid(5, index).Value < grid(9, index).Value * 0.95 Or _
-        grid(5, index).Value > grid(9, index).Value * 1.05 Or _
-        interval1 < interval2 * 0.95 Or interval1 > interval2 * 1.05 Then
-            check_drive = True
-        Else
+        d1 = "00:00:00"
+        d2 = grid(6, index).Value
+        sec = DateDiff(DateInterval.Second, d1, d2) * 0.05
+        diff = Math.Abs(grid(5, index).Value - grid(9, index).Value)
+
+        If diff < grid(5, index).Value * 0.05 And diff < grid(9, index).Value * 0.05 And _
+        interval1 < sec And interval2 < sec Then
             check_drive = False
+        Else
+            check_drive = True
         End If
     End Function
 

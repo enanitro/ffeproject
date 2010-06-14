@@ -166,13 +166,13 @@ Public Class form_import_csv_full
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox3)
+        logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox2)
         length_gps = 0
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim logger As New logger
-        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox4)
+        logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox3)
         length_lmg = 0
     End Sub
 
@@ -182,16 +182,18 @@ Public Class form_import_csv_full
         Dim imp As Boolean = False
         Try
             Button7.Enabled = False
-            If length_graphtec <> 0 And GroupBox_graphtec.Enabled _
-            And CheckedListBox1.CheckedItems.Count <> 0 Then
-                Panel1.Visible = True
-                For i = 0 To length_graphtec - 1
-                    Label6.Text = "Importing File " & i + 1
-                    logger.insert_logger_graphtec_gl800(path_graphtec(i), CheckedListBox1, _
-                    TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, _
-                    long_graphtec(i), id_measure_graphtec)
+
+            'este debe ser el orden en que se ejecuten las importaciones de los loggers
+            If length_canbus <> 0 And GroupBox_CANBUS.Enabled _
+            And CheckedListBox4.CheckedItems.Count <> 0 Then
+                Panel4.Visible = True
+                For i = 0 To length_canbus - 1
+                    Label12.Text = "Importing File " & i + 1
+                    logger.insert_logger_canbus(path_canbus(i), CheckedListBox4, _
+                    TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, _
+                    long_canbus(i), id_measure_canbus)
                 Next
-                'GroupBox_graphtec.Enabled = False
+                'GroupBox_CANBUS.Enabled = False
                 imp = True
             End If
 
@@ -221,34 +223,31 @@ Public Class form_import_csv_full
                 imp = True
             End If
 
-            If length_canbus <> 0 And GroupBox_CANBUS.Enabled _
-            And CheckedListBox4.CheckedItems.Count <> 0 Then
-                Panel4.Visible = True
-                For i = 0 To length_canbus - 1
-                    Label12.Text = "Importing File " & i + 1
-                    logger.insert_logger_canbus(path_canbus(i), CheckedListBox4, _
-                    TextBox4, Label11, Label12, ProgressBar4, FfE_Main.id_canbus, id_drive, _
-                    long_canbus(i), id_measure_canbus)
+            If length_graphtec <> 0 And GroupBox_graphtec.Enabled _
+            And CheckedListBox1.CheckedItems.Count <> 0 Then
+                Panel1.Visible = True
+                For i = 0 To length_graphtec - 1
+                    Label6.Text = "Importing File " & i + 1
+                    logger.insert_logger_graphtec_gl800(path_graphtec(i), CheckedListBox1, _
+                    TextBox1, Label5, Label6, ProgressBar1, FfE_Main.id_graphtec, id_drive, _
+                    long_graphtec(i), id_measure_graphtec)
                 Next
-                'GroupBox_CANBUS.Enabled = False
+                'GroupBox_graphtec.Enabled = False
                 imp = True
             End If
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            procesing.Show()
+            Application.DoEvents()
+            logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
+            logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
+            logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_lmg)
+            logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+            procesing.Close()
+            imp = False
         Finally
-            If abort = True Then
-                procesing.Show()
-                Application.DoEvents()
-                logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
-                logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
-                logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_lmg)
-                logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
-                procesing.Close()
-                abort = False
-            Else
-                If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
-            End If
+            If imp = True Then MsgBox("Files were imported successfully", MsgBoxStyle.Information)
             logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec, CheckBox1)
             logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox2)
             logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox3)

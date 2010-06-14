@@ -128,12 +128,6 @@
     <Compile Include="Form_backup_DB.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_delete_channel.Designer.vb">
-      <DependentUpon>Form_delete_channel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_delete_channel.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form_fahrprofil.Designer.vb">
       <DependentUpon>Form_fahrprofil.vb</DependentUpon>
     </Compile>
@@ -296,10 +290,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Connection.resx">
       <DependentUpon>Form_Connection.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_delete_channel.resx">
-      <DependentUpon>Form_delete_channel.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_drive.resx">
@@ -513,6 +503,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\click_here_for_abort.png" />
+    <None Include="img\fharprofil.png" />
     <Content Include="MySql.Data.dll" />
     <None Include="Resources\arrow_refresh_blue.png" />
     <Content Include="ZedGraph.dll" />
