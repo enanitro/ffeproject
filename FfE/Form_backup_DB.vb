@@ -68,14 +68,14 @@ Public Class Form_backup_DB
                 create_query("car", path)
                 create_query("photos", path)
             End If
-            If CheckBox3.Checked = True Then create_query("measure", path)
-            If CheckBox4.Checked = True Then create_query("usage_type", path)
-            If CheckBox5.Checked = True Then create_query("drive", path)
-            If CheckBox6.Checked = True Then
-                create_query("data", path)
+            If CheckBox3.Checked = True Then
+                create_query("measure", path)
                 create_query("channel_name", path)
                 create_query("ids_canbus", path)
             End If
+            If CheckBox4.Checked = True Then create_query("usage_type", path)
+            If CheckBox5.Checked = True Then create_query("drive", path)
+            If CheckBox6.Checked = True Then create_query("data", path)
 
             Dim sr As New System.IO.StreamWriter(path, True)
             sr.WriteLine("exit")

@@ -113,6 +113,8 @@ Partial Class Form_drive
         Me.btn_export = New System.Windows.Forms.Button
         Me.btn_import = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.DriveSort = New System.Windows.Forms.DataGridView
+        Me.DriveidDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DriveDataGridView = New System.Windows.Forms.DataGridView
         Me.DriveidDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -134,8 +136,6 @@ Partial Class Form_drive
         Me.TableAdapterManager1 = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         Me.Drive_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.drive_fullTableAdapter
-        Me.DriveSort = New System.Windows.Forms.DataGridView
-        Me.DriveidDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -175,10 +175,10 @@ Partial Class Form_drive
         Me.Panel3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.DriveSort, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DrivefullBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DriveSort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DateLabel
@@ -1088,7 +1088,7 @@ Partial Class Form_drive
         'Button3
         '
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button3.Image = Global.FfE.My.Resources.Resources.car_photo
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.fharprofil
         Me.Button3.Location = New System.Drawing.Point(418, 27)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(144, 105)
@@ -1138,6 +1138,26 @@ Partial Class Form_drive
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Drives"
+        '
+        'DriveSort
+        '
+        Me.DriveSort.AllowUserToAddRows = False
+        Me.DriveSort.AllowUserToDeleteRows = False
+        Me.DriveSort.AutoGenerateColumns = False
+        Me.DriveSort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DriveSort.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DriveidDataGridViewTextBoxColumn1})
+        Me.DriveSort.DataSource = Me.DriveBindingSource
+        Me.DriveSort.Location = New System.Drawing.Point(6, 314)
+        Me.DriveSort.Name = "DriveSort"
+        Me.DriveSort.Size = New System.Drawing.Size(143, 139)
+        Me.DriveSort.TabIndex = 4
+        Me.DriveSort.Visible = False
+        '
+        'DriveidDataGridViewTextBoxColumn1
+        '
+        Me.DriveidDataGridViewTextBoxColumn1.DataPropertyName = "drive_id"
+        Me.DriveidDataGridViewTextBoxColumn1.HeaderText = "drive_id"
+        Me.DriveidDataGridViewTextBoxColumn1.Name = "DriveidDataGridViewTextBoxColumn1"
         '
         'DriveDataGridView
         '
@@ -1309,26 +1329,6 @@ Partial Class Form_drive
         '
         Me.Drive_fullTableAdapter.ClearBeforeFill = True
         '
-        'DriveSort
-        '
-        Me.DriveSort.AllowUserToAddRows = False
-        Me.DriveSort.AllowUserToDeleteRows = False
-        Me.DriveSort.AutoGenerateColumns = False
-        Me.DriveSort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DriveSort.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DriveidDataGridViewTextBoxColumn1})
-        Me.DriveSort.DataSource = Me.DriveBindingSource
-        Me.DriveSort.Location = New System.Drawing.Point(6, 314)
-        Me.DriveSort.Name = "DriveSort"
-        Me.DriveSort.Size = New System.Drawing.Size(143, 139)
-        Me.DriveSort.TabIndex = 4
-        Me.DriveSort.Visible = False
-        '
-        'DriveidDataGridViewTextBoxColumn1
-        '
-        Me.DriveidDataGridViewTextBoxColumn1.DataPropertyName = "drive_id"
-        Me.DriveidDataGridViewTextBoxColumn1.HeaderText = "drive_id"
-        Me.DriveidDataGridViewTextBoxColumn1.Name = "DriveidDataGridViewTextBoxColumn1"
-        '
         'Form_drive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1368,10 +1368,10 @@ Partial Class Form_drive
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
+        CType(Me.DriveSort, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DriveDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DrivefullBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FfedatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DriveSort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

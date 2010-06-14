@@ -74,24 +74,18 @@ Public Class logger
         Dim s As String
         Dim cmd As New MySqlCommand
         Dim dr As MySqlDataReader
-        Try
 
-            For Each i In list.CheckedIndices
-                cn.Open()
-                cmd.Connection = cn
-                s = "select channel_id, dec_id, startbit, longbits, sequence, signed, factor, offset, average " & _
-                    " from ids_canbus where channel_id = " & i & ";"
-                cmd.CommandText = s
-                dr = cmd.ExecuteReader
-                dr.Read()
-                table_canbus.Add(i, New str_canbus(dr(1), dr(2), dr(3), dr(4), dr(5), dr(6), dr(7), dr(8)))
-                cn.Close()
-            Next
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If cn.State = ConnectionState.Open Then cn.Close()
-        End Try
+        For Each i In list.CheckedIndices
+            cn.Open()
+            cmd.Connection = cn
+            s = "select channel_id, dec_id, startbit, longbits, sequence, signed, factor, offset, average " & _
+                " from ids_canbus where channel_id = " & i & ";"
+            cmd.CommandText = s
+            dr = cmd.ExecuteReader
+            dr.Read()
+            table_canbus.Add(i, New str_canbus(dr(1), dr(2), dr(3), dr(4), dr(5), dr(6), dr(7), dr(8)))
+            cn.Close()
+        Next
     End Sub
 
 
@@ -423,103 +417,167 @@ Public Class logger
         find_last_index = res
     End Function
 
+    Private Function find_all_channels(ByVal id_logger As Integer, ByVal id_drive As Integer, _
+                                       ByVal list As CheckedListBox) As Boolean
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql As String = ""
+        Dim res As Boolean = True
+
+        cn.Open()
+        cmd.Connection = cn
+        sql = "select count(distinct(data_id)) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+        cmd.CommandText = sql
+        query = cmd.ExecuteReader()
+        query.Read()
+        If query.GetInt32(0) = list.CheckedItems.Count Then
+            cn.Close()
+            cn.Open()
+            cmd.Connection = cn
+            sql = "select distinct(data_id) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+            While query.Read() And res = True
+                For i = 0 To list.CheckedItems.Count - 1
+                    If query.GetString(0) = list.CheckedItems.Item(i) Then
+                        res = True
+                    Else
+                        res = False
+                    End If
+                Next
+            End While
+        Else
+            res = False
+        End If
+        cn.Close()
+
+        find_all_channels = res
+    End Function
+
     'inserta los datos del fichero en la tabla data (logger graphtec GL800)
     Public Sub insert_logger_graphtec_gl800(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val As String
+        Dim linea, aux, val, time, flag, sql As String
+        Dim time1, time2, sync As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
+        Dim sec As Long
         Dim ch39 As Integer = 1
         Dim value As Double
 
-        Try
-            index = find_last_index(id_logger, id_drive)
-
-            'For i = 1 To list.Items.Count + 14
-            'linea = fichero.ReadLine
-            'Next
-
-            'leemos hasta la declaracion de los canales
-            Do
-                linea = fichero.ReadLine
-                datos = linea.Split(",")
-            Loop Until datos(0) = "CH"
-
-            'buscamos en que posicion esta el ch39(batterie spannung)
-            Do
-                linea = fichero.ReadLine
-                datos = linea.Split(",")
-                ch39 += 1
-            Loop Until datos(0) = "CH39" Or datos(0) = "Logic/Pulse"
-
-            'si no se ha encontrado ch39, no lo tendremos en cuenta
-            If datos(0) = "Logic/Pulse" Then ch39 = -1
-
-            'leemos las lines que que faltan hasta llegar a los datos
-            Do
-                linea = fichero.ReadLine
-                datos = linea.Split(",")
-            Loop Until datos(0) = "NO."
-
-            'descartamos las filas que no deben almacenarse porque ch39=0 
-            If index = 0 And ch39 <> -1 Then
-                Do
-                    linea = fichero.ReadLine
-                    datos = linea.Split(",")
-                    val = datos(ch39)
-                    num_lines += 1
-                Loop Until val > 0
-                num_lines = (num_lines - 1) * list.CheckedItems.Count
+        index = find_last_index(id_logger, id_drive)
+        If index <> 0 Then
+            If Not find_all_channels(id_logger, id_drive, list) Then
+                index = 0
             End If
+        End If
 
-            config_progressbar(bar, long_file, list, n_data)
+        'For i = 1 To list.Items.Count + 14
+        'linea = fichero.ReadLine
+        'Next
 
-            Dim ins As New insert_Data
-            ins.init_string()
+        'leemos hasta la declaracion de los canales
+        Do
+            linea = fichero.ReadLine
+            datos = linea.Split(",")
+        Loop Until datos(0) = "CH"
 
+        'buscamos en que posicion esta el ch39(batterie spannung)
+        Do
+            linea = fichero.ReadLine
+            datos = linea.Split(",")
+            ch39 += 1
+        Loop Until datos(0) = "CH39" Or datos(0) = "Logic/Pulse"
+
+        'si no se ha encontrado ch39, no lo tendremos en cuenta
+        If datos(0) = "Logic/Pulse" Then ch39 = -1
+
+        'leemos las lines que que faltan hasta llegar a los datos
+        Do
+            linea = fichero.ReadLine
+            datos = linea.Split(",")
+        Loop Until datos(0) = "NO."
+
+        'descartamos las filas que no deben almacenarse porque ch39=0 
+        If index = 0 And ch39 <> -1 Then
             Do
-                If linea <> Nothing Then
-                    Application.DoEvents()
-                    datos = linea.Split(",")
-                    index += 1
-                    For i = 0 To list.CheckedIndices.Count - 1
-                        num_lines += 1
+                linea = fichero.ReadLine
+                datos = linea.Split(",")
+                val = datos(ch39)
+                num_lines += 1
+            Loop Until val > 0
+            num_lines = (num_lines - 1) * list.CheckedItems.Count
+            'inicializo la primera hora
+            time1 = FormatDateTime(datos(1), DateFormat.LongTime)
+        Else
+            sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+            time1 = search_time_sync(sql)
+        End If
 
-                        'En caso de que el valor sea numerico
-                        If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
-                            data_points += 1
-                            clock += 1
+        'busco la hora para sincronizar el primer valor
+        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and data_index = (select min(data_index) from data where drive_id = " & _
+              id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
+        flag = search_time_sync(sql)
+        If flag <> "" Then sync = CType(flag, DateTime)
 
-                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & FormatDateTime(datos(1), DateFormat.LongTime) & "'" & "," _
-                            & "NULL," & datos(list.CheckedIndices.Item(i) + 2) & ")"
-                            ins.set_string(aux)
-                        End If
-                        progressbar(num_lines, bar, percent)
-                    Next
-                    If clock >= 1000 Then
-                        ins.insert_into_string()
-                        ins.init_string()
-                        clock = 1
-                    End If
+        config_progressbar(bar, long_file, list, n_data)
+
+        Dim ins As New insert_Data
+        ins.init_string()
+
+        Do
+            If linea <> Nothing Then
+                Application.DoEvents()
+                datos = linea.Split(",")
+                index += 1
+                'calcular el tiempo
+                If flag <> "" Then
+                    time2 = time1
+                    time1 = FormatDateTime(datos(1), DateFormat.LongTime)
+                    sec = Math.Abs(DateDiff(DateInterval.Second, time2, time1))
+                    sync = DateAdd(DateInterval.Second, sec, sync)
+                    time = sync.ToString("HH:mm:ss")
+                Else
+                    time = FormatDateTime(datos(1), DateFormat.LongTime)
                 End If
-                linea = fichero.ReadLine
-            Loop Until linea Is Nothing
-            If Not ins.is_empty Then
-                ins.insert_into_string()
+                For i = 0 To list.CheckedIndices.Count - 1
+                    num_lines += 1
+
+                    'En caso de que el valor sea numerico
+                    If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                        data_points += 1
+                        clock += 1
+
+                        aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                        & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                        & "'" & time & "'" & "," _
+                        & "NULL," & datos(list.CheckedIndices.Item(i) + 2) & ")"
+                        ins.set_string(aux)
+                    End If
+                    progressbar(num_lines, bar, percent)
+                Next
+                If clock >= 1000 Then
+                    ins.insert_into_string()
+                    ins.init_string()
+                    clock = 1
+                End If
             End If
-            'data_summary(num_lines, n_data, data_points)
-        Catch ex As Exception
-            form_import_csv_full.abort = True
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+            linea = fichero.ReadLine
+        Loop Until linea Is Nothing
+        If Not ins.is_empty Then
+            ins.insert_into_string()
+        End If
+
     End Sub
 
     'inserta los datos del fichero en la tabla data (logger Columbus GPS)
@@ -528,99 +586,126 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val As String
+        Dim linea, aux, val, sql, flag, time As String
+        Dim sync, time1, time2 As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
+        Dim sec As Long
         Dim s_w_time As String = ""
         Dim add_hour As Integer
 
-        Try
-            index = find_last_index(id_logger, id_drive)
+        index = find_last_index(id_logger, id_drive)
+        If index <> 0 Then
+            If Not find_all_channels(id_logger, id_drive, list) Then
+                index = 0
+            End If
+        End If
 
-            'leo la primera linea que pertenece a la cabecera
+        'leo la primera linea que pertenece a la cabecera
+        linea = fichero.ReadLine
+
+        Dim ins As New insert_Data
+        ins.init_string()
+
+        If index = 0 Then
+            Do
+                linea = fichero.ReadLine
+                datos = linea.Split(",")
+                val = datos(7)
+                If val(val.Count - 1) = Nothing Then
+                    Do
+                        val = val.Remove(val.Count - 1)
+                    Loop Until val(val.Count - 1) <> Nothing
+                End If
+                num_lines += 1
+            Loop Until val >= 5
+            num_lines = (num_lines - 1) * list.CheckedItems.Count
+
+            'inicializo la primera hora
+            s_w_time = make_date(datos(2))
+            add_hour = time_gps(s_w_time)
+            time1 = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
+        Else
+            sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+            time1 = search_time_sync(sql)
             linea = fichero.ReadLine
+            datos = linea.Split(",")
+            s_w_time = make_date(datos(2))
+            add_hour = time_gps(s_w_time)
+        End If
 
-            Dim ins As New insert_Data
-            ins.init_string()
+        'busco la hora para sincronizar el primer valor
+        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and data_index = (select min(data_index) from data where drive_id = " & _
+              id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 5)"
+        flag = search_time_sync(sql)
+        If flag <> "" Then sync = CType(flag, DateTime)
 
-            If index = 0 Then
-                Do
-                    linea = fichero.ReadLine
-                    datos = linea.Split(",")
-                    val = datos(7)
+        config_progressbar(bar, long_file, list, n_data)
+
+        Do
+            If linea <> Nothing Then
+                Application.DoEvents()
+                datos = linea.Split(",")
+                index += 1
+                'calcular el tiempo
+                If flag <> "" Then
+                    time2 = time1
+                    time1 = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
+                    sec = Math.Abs(DateDiff(DateInterval.Second, time2, time1))
+                    sync = DateAdd(DateInterval.Second, sec, sync)
+                    time = sync.ToString("HH:mm:ss")
+                Else
+                    time = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
+                End If
+                For i = 0 To list.CheckedIndices.Count - 1
+                    num_lines += 1
+                    'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
+                    val = datos(list.CheckedIndices.Item(i) + 4) '.Replace(".", ",")
+                    If val.Last = "N" Or val.Last = "E" Then
+                        val = "+" & val
+                        val = val.Remove(val.Count - 1)
+                    ElseIf val.Last = "S" Or val.Last = "W" Then
+                        val = "-" & val
+                        val = val.Remove(val.Count - 1)
+                        End
+                    End If
+
+                    'quitar valores NUL
                     If val(val.Count - 1) = Nothing Then
                         Do
                             val = val.Remove(val.Count - 1)
                         Loop Until val(val.Count - 1) <> Nothing
                     End If
-                    num_lines += 1
-                Loop Until val > 0
-                num_lines = (num_lines - 1) * list.CheckedItems.Count
-            End If
+                    If val <> "" Then
+                        data_points += 1
+                        clock += 1
 
-            config_progressbar(bar, long_file, list, n_data)
-
-            Do
-                If s_w_time = "" Then
-                    datos = linea.Split(",")
-                    s_w_time = make_date(datos(2))
-                    add_hour = time_gps(s_w_time)
-                End If
-                If linea <> Nothing Then
-                    Application.DoEvents()
-                    datos = linea.Split(",")
-                    index += 1
-                    For i = 0 To list.CheckedIndices.Count - 1
-                        num_lines += 1
-                        'If IsNumeric(datos(list.CheckedIndices.Item(i) + 2)) Then
-                        val = datos(list.CheckedIndices.Item(i) + 4) '.Replace(".", ",")
-                        If val.Last = "N" Or val.Last = "E" Then
-                            val = "+" & val
-                            val = val.Remove(val.Count - 1)
-                        ElseIf val.Last = "S" Or val.Last = "W" Then
-                            val = "-" & val
-                            val = val.Remove(val.Count - 1)
-                            End
-                        End If
-
-                        'quitar valores NUL
-                        If val(val.Count - 1) = Nothing Then
-                            Do
-                                val = val.Remove(val.Count - 1)
-                            Loop Until val(val.Count - 1) <> Nothing
-                        End If
-                        If val <> "" Then
-                            data_points += 1
-                            clock += 1
-
-                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime) & "'" & "," _
-                            & "NULL," & val & ")"
-                            ins.set_string(aux)
-                        End If
-                        progressbar(num_lines, bar, percent)
-                    Next
-                    If clock >= 1000 Then
-                        ins.insert_into_string()
-                        ins.init_string()
-                        clock = 1
+                        aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                        & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                        & "'" & time & "'" & "," _
+                        & "NULL," & val & ")"
+                        ins.set_string(aux)
                     End If
+                    progressbar(num_lines, bar, percent)
+                Next
+                If clock >= 1000 Then
+                    ins.insert_into_string()
+                    ins.init_string()
+                    clock = 1
                 End If
-                linea = fichero.ReadLine
-            Loop Until linea Is Nothing
-            If Not ins.is_empty Then
-                ins.insert_into_string()
             End If
-            'data_summary(num_lines, n_data, data_points)
-        Catch ex As Exception
-            form_import_csv_full.abort = True
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+            linea = fichero.ReadLine
+        Loop Until linea Is Nothing
+        If Not ins.is_empty Then
+            ins.insert_into_string()
+        End If
+
     End Sub
 
     'inserta los datos del fichero en la tabla data (logger Fluke)
@@ -629,77 +714,103 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val, tm, milsec As String
+        Dim linea, aux, val, tm, milsec, time, sql, flag As String
+        Dim time1, time2, sync As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
+        Dim sec As Long
         Dim index As Integer = 0
         Dim clock As Integer = 0
         Dim value As Double
 
-        Try
-            index = find_last_index(id_logger, id_drive)
+        index = find_last_index(id_logger, id_drive)
+        If index <> 0 Then
+            If Not find_all_channels(id_logger, id_drive, list) Then
+                index = 0
+            End If
+        End If
 
-            linea = fichero.ReadLine
-            linea = fichero.ReadLine
-            tm = linea.TrimEnd.Substring(linea.Length - 9).TrimStart()
+        linea = fichero.ReadLine
+        linea = fichero.ReadLine
+        tm = linea.TrimEnd.Substring(linea.Length - 9).TrimStart()
+        linea = fichero.ReadLine
+        datos = linea.Split(",")
+        While datos(0) <> "dt/s"
             linea = fichero.ReadLine
             datos = linea.Split(",")
-            While datos(0) <> "dt/s"
+        End While
+
+        If index = 0 Then
+            Do
                 linea = fichero.ReadLine
                 datos = linea.Split(",")
-            End While
+                val = datos(18)
+                num_lines += 1
+            Loop Until val > 0
+            num_lines = (num_lines - 1) * list.CheckedItems.Count
+            'inicializo la primera hora
+            time1 = format_time2(format_number(datos(0)), 1, tm, milsec)
+        Else
+            sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+            time1 = search_time_sync(sql)
+        End If
 
-            If index = 0 Then
-                Do
-                    linea = fichero.ReadLine
-                    datos = linea.Split(",")
-                    val = datos(18)
-                    num_lines += 1
-                Loop Until val > 0
-                num_lines = (num_lines - 1) * list.CheckedItems.Count
-            End If
 
-            Dim ins As New insert_Data
-            ins.init_string()
+        'busco la hora para sincronizar el primer valor
+        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and data_index = (select min(data_index) from data where drive_id = " & _
+              id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+              " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
+        flag = search_time_sync(sql)
+        If flag <> "" Then sync = CType(flag, DateTime)
 
-            config_progressbar(bar, long_file, list, n_data)
+        Dim ins As New insert_Data
+        ins.init_string()
 
-            Do
-                If linea <> Nothing Then
-                    Application.DoEvents()
-                    datos = linea.Split(",")
-                    index += 1
-                    For i = 0 To list.CheckedIndices.Count - 1
-                        num_lines += 1
-                        If IsNumeric(datos(list.CheckedIndices.Item(i) + 1)) Then
-                            data_points += 1
-                            clock += 1
-                            val = datos(list.CheckedIndices.Item(i) + 1)
-                            aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                            & "'" & format_time2(format_number(datos(0)), 1, tm, milsec) & "'" & "," _
-                            & "NULL," & val & ")"
-                            ins.set_string(aux)
-                        End If
-                        progressbar(num_lines, bar, percent)
-                    Next
-                    If clock >= 1000 Then
-                        ins.insert_into_string()
-                        ins.init_string()
-                        clock = 1
-                    End If
+        config_progressbar(bar, long_file, list, n_data)
+
+        Do
+            If linea <> Nothing Then
+                Application.DoEvents()
+                datos = linea.Split(",")
+                index += 1
+                'calculo el tiempo
+                If flag <> "" Then
+                    time2 = time1
+                    time1 = format_time2(format_number(datos(0)), 1, tm, milsec)
+                    sec = Math.Abs(DateDiff(DateInterval.Second, time2, time1))
+                    sync = DateAdd(DateInterval.Second, sec, sync)
+                    time = sync.ToString("HH:mm:ss")
+                Else
+                    time = format_time2(format_number(datos(0)), 1, tm, milsec)
                 End If
-                linea = fichero.ReadLine
-            Loop Until linea Is Nothing
-            If Not ins.is_empty Then
-                ins.insert_into_string()
+                For i = 0 To list.CheckedIndices.Count - 1
+                    num_lines += 1
+                    If IsNumeric(datos(list.CheckedIndices.Item(i) + 1)) Then
+                        data_points += 1
+                        clock += 1
+                        val = datos(list.CheckedIndices.Item(i) + 1)
+                        aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                        & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                        & "'" & time & "'" & "," _
+                        & "NULL," & val & ")"
+                        ins.set_string(aux)
+                    End If
+                    progressbar(num_lines, bar, percent)
+                Next
+                If clock >= 1000 Then
+                    ins.insert_into_string()
+                    ins.init_string()
+                    clock = 1
+                End If
             End If
-            'data_summary(num_lines, n_data, data_points)
-        Catch ex As Exception
-            form_import_csv_full.abort = True
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+            linea = fichero.ReadLine
+        Loop Until linea Is Nothing
+        If Not ins.is_empty Then
+            ins.insert_into_string()
+        End If
+        
     End Sub
 
 
@@ -720,133 +831,147 @@ Public Class logger
         Dim res, res2, t As Double
         Dim str As str_canbus
 
-        Try
-            index = find_last_index(id_logger, id_drive)
-            If index = 0 Then
+        index = find_last_index(id_logger, id_drive)
+        If index <> 0 Then
+            If Not find_all_channels(id_logger, id_drive, list) Then
+                index = 0
                 Load_table_canbus(list)
                 load_ids_chs(list)
             End If
+        Else
+            Load_table_canbus(list)
+            load_ids_chs(list)
+        End If
 
+        linea = fichero.ReadLine
+        'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
+        '
+        'Else
+        'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
+        'End If
+        linea = fichero.ReadLine
+        div = 1000000000
+        datos = linea.Split(vbTab)
+        time = datos(4)
+        time = time.Split(" ")(3)
+
+        linea = fichero.ReadLine
+        Do While linea(0) = "0"
             linea = fichero.ReadLine
-            'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
-            div = 1000000000
-            'Else
-            'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
-            'End If
-            linea = fichero.ReadLine
-            datos = linea.Split(vbTab)
-            time = datos(4)
-            time = time.Split(" ")(3)
+        Loop
 
-            linea = fichero.ReadLine
-            Do While linea(0) = "0"
-                linea = fichero.ReadLine
-            Loop
-
-
-            Dim ins As New insert_Data
-            ins.init_string()
-
-
-
-            long_file = long_file / list.CheckedIndices.Count
-            config_progressbar(bar, long_file, list, n_data)
-
-
+        val = 0
+        If index = 0 Then
             Do
-                If linea <> Nothing Then
-                    Application.DoEvents()
-                    datos = linea.Split(vbTab)
-                    index += 1
+                linea = fichero.ReadLine
+                datos = linea.Split(vbTab)
+                If datos.Length = 8 Then
+                    If datos(5).Split(":")(0) = "Dlc" Then
+                        If datos(6).Trim = "id:59" Then
+                            val = datos(7).Split(" ")(3)
+                        End If
+                    End If
+                End If
+                num_lines += 1
+            Loop Until val > 0
+        End If
 
-                    num_lines += 1
-                    If datos.Length = 8 Then
-                        If datos(5).Split(":")(0) = "Dlc" Then
-                            value = datos(6).Split(":")(1)
-                            If ids_chs.TryGetValue(value, id_ch) Then
-                                data_points += 1
-                                clock += 1
-                                For Each x In id_ch
-                                    aux = hex_to_dec(datos(7).Split(":")(1))
-                                    res = read_string(aux, table_canbus(x))
-                                    res2 = res
-                                    val = CType(res, String)
-                                    val = val.Replace(",", ".")
-                                    t = CType(datos(0), Double)
-                                    tm = format_time2(t, div, time, milsec)
-                                    If table_canbus(x).average = True Then
-                                        'inicializamos por primera vez los datos
-                                        If table_canbus(x).time = "" Then
-                                            table_canbus(x).time = tm
-                                            table_canbus(x).value = res2
-                                            table_canbus(x).count = 1
+        Dim ins As New insert_Data
+        ins.init_string()
+
+        long_file = long_file / list.CheckedIndices.Count
+        config_progressbar(bar, long_file, list, n_data)
+
+        Do
+            If linea <> Nothing Then
+                Application.DoEvents()
+                datos = linea.Split(vbTab)
+                index += 1
+
+                num_lines += 1
+                If datos.Length = 8 Then
+                    If datos(5).Split(":")(0) = "Dlc" Then
+                        value = datos(6).Split(":")(1)
+                        If ids_chs.TryGetValue(value, id_ch) Then
+                            data_points += 1
+                            clock += 1
+                            For Each x In id_ch
+                                aux = hex_to_dec(datos(7).Split(":")(1))
+                                res = read_string(aux, table_canbus(x))
+                                res2 = res
+                                val = CType(res, String)
+                                val = val.Replace(",", ".")
+                                t = CType(datos(0), Double)
+                                tm = format_time2(t, div, time, milsec)
+                                If table_canbus(x).average = True Then
+                                    'inicializamos por primera vez los datos
+                                    If table_canbus(x).time = "" Then
+                                        table_canbus(x).time = tm
+                                        table_canbus(x).value = res2
+                                        table_canbus(x).count = 1
+                                    Else
+                                        'todavia estamos en la misma hora, sumamos los valores
+                                        If table_canbus(x).time = tm Then
+                                            table_canbus(x).value += res2
+                                            table_canbus(x).count += 1
                                         Else
-                                            'todavia estamos en la misma hora, sumamos los valores
-                                            If table_canbus(x).time = tm Then
-                                                table_canbus(x).value += res2
-                                                table_canbus(x).count += 1
-                                            Else
                                             'hemos cambiado de hora, guardamos la media 
                                             res = table_canbus(x).value / table_canbus(x).count
                                             avg = CType(res, String)
                                             avg = avg.Replace(",", ".")
-                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                                & "," & id_logger & "," & measure(x) & "," _
-                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                & "NULL," & val & ")"
+                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                            & "," & id_logger & "," & measure(x) & "," _
+                                            & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                            & "NULL," & val & ")"
                                             ins.set_string(aux)
                                             'inicializamos el valor para el siguiente segundo
                                             table_canbus(x).time = tm
                                             table_canbus(x).value = res2
                                             table_canbus(x).count = 1
-                                            End If
                                         End If
-                                    Else
-                                        aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                        & "," & id_logger & "," & measure(x) & "," _
-                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
-                                        & milsec & "'," & val & ")"
-                                        ins.set_string(aux)
                                     End If
+                                Else
+                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                    & "," & id_logger & "," & measure(x) & "," _
+                                    & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
+                                    & milsec & "'," & val & ")"
+                                    ins.set_string(aux)
+                                End If
 
-                                Next
-                                progressbar(num_lines, bar, percent)
-                            End If
-
+                            Next
+                            progressbar(num_lines, bar, percent)
                         End If
-                    End If
-                    If clock >= 1000 Then
-                        ins.insert_into_string()
-                        ins.init_string()
-                        clock = 1
+
                     End If
                 End If
-                linea = fichero.ReadLine
-            Loop Until linea Is Nothing
-
-            'hay que comprobar que valores quedan por ser importados porque el ultimo cambio de hora no se reconoce
-            For Each x In list.CheckedIndices
-                If table_canbus(x).average = True And table_canbus(x).time <> "" Then
-                    'guardamos la media 
-                    res = table_canbus(x).value / table_canbus(x).count
-                    avg = CType(res, String)
-                    avg = avg.Replace(",", ".")
-                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                    & "," & id_logger & "," & measure(x) & "," _
-                    & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                    & "NULL," & avg & ")"
-                    ins.set_string(aux)
+                If clock >= 1000 Then
+                    ins.insert_into_string()
+                    ins.init_string()
+                    clock = 1
                 End If
-            Next
-
-            If Not ins.is_empty Then
-                ins.insert_into_string()
             End If
-            'data_summary(num_lines, n_data, data_points)
-        Catch ex As Exception
-            form_import_csv_full.abort = True
-            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+            linea = fichero.ReadLine
+        Loop Until linea Is Nothing
+
+        'hay que comprobar que valores quedan por ser importados porque el ultimo cambio de hora no se reconoce
+        For Each x In list.CheckedIndices
+            If table_canbus(x).average = True And table_canbus(x).time <> "" Then
+                'guardamos la media 
+                res = table_canbus(x).value / table_canbus(x).count
+                avg = CType(res, String)
+                avg = avg.Replace(",", ".")
+                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                & "," & id_logger & "," & measure(x) & "," _
+                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                & "NULL," & avg & ")"
+                ins.set_string(aux)
+            End If
+        Next
+
+        If Not ins.is_empty Then
+            ins.insert_into_string()
+        End If
+
     End Sub
 
     Private Function read_string(ByVal str As String, ByVal tb As str_canbus) As Double
@@ -945,6 +1070,7 @@ Public Class logger
         path = Nothing
         long_file = Nothing
         check.Visible = False
+        check.CheckState = CheckState.Unchecked
         length = 0
     End Sub
 
@@ -1129,5 +1255,27 @@ Public Class logger
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
+    Private Function search_time_sync(ByVal sql As String) As String
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim res As String = ""
+
+        cn.Open()
+        cmd.Connection = cn
+        cmd.CommandTimeout = 1000
+        cmd.CommandText = sql
+        query = cmd.ExecuteReader()
+        If query.HasRows Then
+            query.Read()
+            res = query.GetString(0)
+        Else
+            res = ""
+        End If
+        cn.Close()
+        search_time_sync = res
+    End Function
 
 End Class

@@ -14,7 +14,6 @@ Public Class Form_drive
     Dim show_Data As Form_view_data
     Dim form_export As Form_export_full
     Dim import_full As form_import_csv_full
-    Dim del_channel As Form_delete_channel
     Dim view_fahrprofil As Form_fahrprofil
 
 
@@ -282,7 +281,7 @@ Public Class Form_drive
         End If
     End Sub
 
-    Private Sub update_drive()
+    Public Sub update_drive()
         Try
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
@@ -299,7 +298,7 @@ Public Class Form_drive
     End Sub
 
     Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
-        Update()
+        update_drive()
         DrivefullBindingSource.Position = DriveBindingSource.Position
     End Sub
 
@@ -360,14 +359,14 @@ Public Class Form_drive
         Try
             If combo = True Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Update()
+                    update_drive()
                     DrivefullBindingSource.Position = DriveBindingSource.Position
                 End If
             End If
-            If rows <> DriveSort.Rows.Count Then
+            If combo = False And rows <> DriveSort.Rows.Count Then
                 If MsgBox("Drive must be saved before" & vbCrLf & "Do you want to save Drive?", _
                           MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Update()
+                    update_drive()
                     DrivefullBindingSource.Position = DriveBindingSource.Position
                 Else
                     Exit Sub
@@ -449,7 +448,7 @@ Public Class Form_drive
         Try
             If combo = True Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Update()
+                    update_drive()
                     DrivefullBindingSource.Position = DriveBindingSource.Position
                 End If
             End If
@@ -478,7 +477,7 @@ Public Class Form_drive
         Try
             If combo = True Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Update()
+                    update_drive()
                     DrivefullBindingSource.Position = DriveBindingSource.Position
                 End If
             End If
@@ -568,7 +567,7 @@ Public Class Form_drive
             Application.DoEvents()
             If combo = True Then
                 If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Update()
+                    update_drive()
                     DrivefullBindingSource.Position = DriveBindingSource.Position
                 End If
             End If
@@ -592,15 +591,7 @@ Public Class Form_drive
     Private Sub field_control(ByVal pos As Integer)
         If combo = True Then
             If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                'Me.Validate()
-                'Me.DriveBindingSource.EndEdit()
-                'Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
-                'Ffe_databaseDataSet.drive.AcceptChanges()
-
-                'Me.Drive_fullTableAdapter.Fill(Me.Ffe_databaseDataSet.drive_full)
-                'DriveDataGridView.Sort(DriveDataGridView.Columns.Item(0), _
-                '                          System.ComponentModel.ListSortDirection.Ascending)
-                Update()
+                update_drive()
             Else
                 DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
             End If
@@ -666,9 +657,9 @@ Public Class Form_drive
 
     Private Sub DriveDataGridView_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles DriveDataGridView.Click
         If DriveBindingSource.Position <> DrivefullBindingSource.Position Then
-            position = DriveBindingSource.Position
-            field_control(position)
-            DriveBindingSource.Position = DrivefullBindingSource.Position
+            position = DrivefullBindingSource.Position
+            field_control(DriveBindingSource.Position)
+            DriveBindingSource.Position = position
         End If
     End Sub
 
