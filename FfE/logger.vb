@@ -622,7 +622,7 @@ Public Class logger
                     Loop Until val(val.Count - 1) <> Nothing
                 End If
                 num_lines += 1
-            Loop Until val >= 5
+            Loop Until val >= 10
             num_lines = (num_lines - 1) * list.CheckedItems.Count
 
             'inicializo la primera hora
@@ -642,7 +642,7 @@ Public Class logger
         sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and data_index = (select min(data_index) from data where drive_id = " & _
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
-              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 5)"
+              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 10)"
         flag = search_time_sync(sql)
         If flag <> "" Then sync = CType(flag, DateTime)
 
@@ -830,6 +830,7 @@ Public Class logger
         Dim value, id_ch() As Integer
         Dim res, res2, t As Double
         Dim str As str_canbus
+        Dim flag As Boolean = False
 
         index = find_last_index(id_logger, id_drive)
         If index <> 0 Then
@@ -837,6 +838,8 @@ Public Class logger
                 index = 0
                 Load_table_canbus(list)
                 load_ids_chs(list)
+            Else
+                flag = True
             End If
         Else
             Load_table_canbus(list)
@@ -915,15 +918,30 @@ Public Class logger
                                             table_canbus(x).value += res2
                                             table_canbus(x).count += 1
                                         Else
-                                            'hemos cambiado de hora, guardamos la media 
-                                            res = table_canbus(x).value / table_canbus(x).count
-                                            avg = CType(res, String)
-                                            avg = avg.Replace(",", ".")
-                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                            & "," & id_logger & "," & measure(x) & "," _
-                                            & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                            & "NULL," & val & ")"
-                                            ins.set_string(aux)
+                                            If value = "970" And flag = False Then
+                                                If val >= 10 Then
+                                                    'hemos cambiado de hora, guardamos la media 
+                                                    res = table_canbus(x).value / table_canbus(x).count
+                                                    avg = CType(res, String)
+                                                    avg = avg.Replace(",", ".")
+                                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                                    & "," & id_logger & "," & measure(x) & "," _
+                                                    & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                                    & "NULL," & val & ")"
+                                                    ins.set_string(aux)
+                                                    flag = True
+                                                End If
+                                            Else
+                                                'hemos cambiado de hora, guardamos la media 
+                                                res = table_canbus(x).value / table_canbus(x).count
+                                                avg = CType(res, String)
+                                                avg = avg.Replace(",", ".")
+                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                                & "," & id_logger & "," & measure(x) & "," _
+                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                                & "NULL," & val & ")"
+                                                ins.set_string(aux)
+                                            End If
                                             'inicializamos el valor para el siguiente segundo
                                             table_canbus(x).time = tm
                                             table_canbus(x).value = res2
@@ -945,9 +963,11 @@ Public Class logger
                     End If
                 End If
                 If clock >= 1000 Then
-                    ins.insert_into_string()
-                    ins.init_string()
-                    clock = 1
+                    If Not ins.is_empty Then
+                        ins.insert_into_string()
+                        ins.init_string()
+                        clock = 1
+                    End If
                 End If
             End If
             linea = fichero.ReadLine

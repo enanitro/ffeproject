@@ -165,8 +165,9 @@ Public Class association
         Dim str As String = ""
         Try
             For Each ch In CheckedListBox1.CheckedItems
-                name = ch.split("->")
-                name(0) = name(0).TrimEnd
+                name = ch.split(">")
+                'name = ch.split("->")
+                name(0) = name(0).TrimEnd("-").TrimEnd
                 name(1) = name(1).Trim(">").TrimStart
                 str = search_measure(logger, "name", name(0), "channel")
                 If str <> "" Then

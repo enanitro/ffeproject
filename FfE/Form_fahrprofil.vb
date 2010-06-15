@@ -106,7 +106,7 @@ Public Class Form_fahrprofil
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String
-        Dim i, j As Integer
+        Dim i, j, sum As Integer
         Dim km_avg, speed_avg As Double
         Dim sec, sec_avg As Int64
         Dim t1, t2 As DateTime
@@ -148,42 +148,43 @@ Public Class Form_fahrprofil
                         End If
                     End While
                 Else ' status = 'final'
-                    i = 0
+                    sum = 0
                     km_avg = 0
                     sec_avg = 0
                     speed_avg = 0
+                    grid.Rows.Add()
+                    j = grid.Rows.Count - 1
                     While query.Read
-                        'grid.Rows.Add()
-                        'i = grid.Rows.Count - 1
-                        'grid(0, i).Value = True
-                        'grid(1, i).Value = query.GetString(0)
-                        'grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
+                        grid.Rows.Add()
+                        i = grid.Rows.Count - 1
+                        grid(1, i).Value = query.GetString(0) & " (final)"
+                        grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
                         t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
                         t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(3))
-                        'grid(7, i).Value = t2.ToLongTimeString
-                        'grid(8, i).Value = t1.ToLongTimeString
+                        grid(7, i).Value = t2.ToLongTimeString
+                        grid(8, i).Value = t1.ToLongTimeString
                         interval = t1 - t2
-                        'grid(6, i).Value = interval.ToString.Trim("-")
+                        grid(6, i).Value = interval.ToString.Trim("-")
                         sec = Math.Abs(DateDiff(DateInterval.Second, t2, t1))
-                        'grid(2, i).Style.BackColor = Color.Green
-                        'grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
-                        'grid(12, i).Value = True
+                        grid(2, i).Style.BackColor = colores.getNexColor
+                        grid(4, i).Value = Math.Round((query.GetDouble(1) / 3600) * sec, 4)
+                        grid(12, i).Value = True
                         speed_avg += Math.Round((query.GetDouble(1)), 4)
                         sec_avg += sec
-                        km_avg = Math.Round((query.GetDouble(1) / 3600) * sec_avg, 4)
+                        km_avg += Math.Round((query.GetDouble(1) / 3600) * sec, 4)
                         'grid.Rows.Item(i).Visible = False
-                        i += 1
+                        sum += 1
                     End While
-                    grid.Rows.Add()
-                    j = grid.Rows.Count - 1
                     grid.Rows.Item(j).Visible = False
                     grid(0, j).Value = True
+                    grid(2, j).Style.BackColor = Color.Green
                     grid(1, j).Value = ""
-                    grid(4, j).Value = Math.Round(km_avg / i, 4)
-                    grid(5, j).Value = Math.Round(speed_avg / i, 4)
-                    grid(6, j).Value = sec_to_time(sec_avg / i)
+                    grid(1, j).Value = "Average final drives"
+                    grid(4, j).Value = Math.Round(km_avg / sum, 4)
+                    grid(5, j).Value = Math.Round(speed_avg / sum, 4)
+                    grid(6, j).Value = sec_to_time(sec_avg / sum)
                     grid(12, j).Value = True
                     Label1.Text = grid(4, j).Value & " km"
                     Label2.Text = grid(5, j).Value & " km/h"
@@ -331,24 +332,35 @@ Public Class Form_fahrprofil
 
     Private Function calculate_range_km(ByVal grid As DataGridView) As Double()
         Dim max, min As Double
+
         Dim count As Integer = 0
-        min = grid(4, 0).Value
-        max = grid(4, 0).Value
+        Dim flag As Boolean = False
         For i = 0 To grid.Rows.Count - 1
             If grid(0, i).Value = True Then
-                If max < grid(4, i).Value Then
+                If flag = False Then
+                    min = grid(4, i).Value
                     max = grid(4, i).Value
+                    flag = True
                 Else
-                    If min > grid(4, i).Value Then
-                        min = grid(4, i).Value
+                    If max < grid(4, i).Value Then
+                        max = grid(4, i).Value
+                    Else
+                        If min > grid(4, i).Value Then
+                            min = grid(4, i).Value
+                        End If
                     End If
                 End If
             End If
         Next
-        max = Math.Truncate(max) + 1
-        min = Math.Truncate(min)
+        max = Math.Truncate(max) + 6
+        min = Math.Truncate(min) - 5
         Dim value As String = CType(CType(min, Integer), String)
-        value = value.Remove(value.Length - 1) & "0"
+
+        If CType(CType(value(value.Length - 1), String), Integer) >= 5 Then
+            value = value.Remove(value.Length - 1) & "5"
+        Else
+            value = value.Remove(value.Length - 1) & "0"
+        End If
 
         count = Math.Truncate((max - value) / 5) '5 km
 
@@ -364,21 +376,26 @@ Public Class Form_fahrprofil
     Private Function calculate_range_speed(ByVal grid As DataGridView) As Double()
         Dim max, min As Double
         Dim count As Integer = 0
-        min = grid(5, 0).Value
-        max = grid(5, 0).Value
+        Dim flag As Boolean = False
         For i = 0 To grid.Rows.Count - 1
             If grid(0, i).Value = True Then
-                If max < grid(5, i).Value Then
+                If flag = False Then
+                    min = grid(5, i).Value
                     max = grid(5, i).Value
+                    flag = True
                 Else
-                    If min > grid(5, i).Value Then
-                        min = grid(5, i).Value
+                    If max < grid(5, i).Value Then
+                        max = grid(5, i).Value
+                    Else
+                        If min > grid(5, i).Value Then
+                            min = grid(5, i).Value
+                        End If
                     End If
                 End If
             End If
         Next
-        max = Math.Truncate(max) + 1
-        min = Math.Truncate(min)
+        max = Math.Truncate(max) + 11
+        min = Math.Truncate(min) - 10
         Dim value As String = CType(CType(min, Integer), String)
         value = value.Remove(value.Length - 1) & "0"
 
@@ -421,34 +438,45 @@ Public Class Form_fahrprofil
     Private Function calculate_range_time(ByVal grid As DataGridView) As DateTime()
         Dim max, min As DateTime
         Dim count As Integer = 0
-        min = grid(6, 0).Value
-        max = grid(6, 0).Value
+        Dim flag As Boolean = False
         For i = 0 To grid.Rows.Count - 1
             If grid(0, i).Value = True Then
-                If max < grid(6, i).Value Then
+                If flag = False Then
+                    min = grid(6, i).Value
                     max = grid(6, i).Value
+                    flag = True
                 Else
-                    If min > grid(6, i).Value Then
-                        min = grid(6, i).Value
+                    If max < grid(6, i).Value Then
+                        max = grid(6, i).Value
+                    Else
+                        If min > grid(6, i).Value Then
+                            min = grid(6, i).Value
+                        End If
                     End If
                 End If
             End If
         Next
 
-        max = max.ToString.Remove(max.ToString.Length - 3)
         max = max.AddMinutes(1)
-        min = min.ToString.Remove(min.ToString.Length - 4) & "0"
+        min = min.AddMinutes(-5)
+        Dim value As String = CType(min, String)
 
-        count = DateDiff(DateInterval.Minute, min, max) / 5 '5 min
-        count = Math.Truncate(count)
+        If CType(CType(value(value.Length - 4), String), Integer) >= 5 Then
+            min = value.Remove(value.Length - 4) & "5:00"
+        Else
+            min = value.Remove(value.Length - 4) & "0:00"
+        End If
 
-        Dim intervals(count) As DateTime
-        intervals(0) = min.AddMinutes(5)
-        For i = 1 To count
-            intervals(i) = intervals(i - 1).AddMinutes(5)
-        Next
+            count = DateDiff(DateInterval.Minute, min, max) / 5 '5 min
+            count = Math.Truncate(count)
 
-        calculate_range_time = intervals
+            Dim intervals(count) As DateTime
+            intervals(0) = min.AddMinutes(5)
+            For i = 1 To count
+                intervals(i) = intervals(i - 1).AddMinutes(5)
+            Next
+
+            calculate_range_time = intervals
     End Function
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click

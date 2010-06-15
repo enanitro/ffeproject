@@ -27,7 +27,6 @@ Partial Class Form_Conf_Measure
         Dim UnitLabel As System.Windows.Forms.Label
         Dim SteptimeLabel As System.Windows.Forms.Label
         Dim NameLabel As System.Windows.Forms.Label
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.MeasureBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MeasureTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.measureTableAdapter
@@ -330,8 +329,6 @@ Partial Class Form_Conf_Measure
         '
         Me.MeasureDataGridView.AllowUserToAddRows = False
         Me.MeasureDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.MeasureDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.MeasureDataGridView.AutoGenerateColumns = False
         Me.MeasureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.MeasureDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.timestep, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})

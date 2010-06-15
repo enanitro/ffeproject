@@ -138,10 +138,6 @@ Public Class fharprofilGraphic
         End If
     End Function
 
-    Public Function XScaleFormatEvent(ByVal pane As GraphPane, ByVal axis As Axis, ByVal val As String, ByVal index As Int32) As String
-
-    End Function
-
     Private Sub show_histogram()
 
         AddHandler myPane.GraphPane.YAxis.ScaleFormatEvent, AddressOf YScaleFormatEvent

@@ -13,12 +13,7 @@
         Me.value = value
         Me.isfinal = isfinal
         Me.colour = colour
-        Dim c As New ColorConverter
-        If isfinal Then
-            Me.colour = Color.Green
-            Me.id = id & "(final)"
-        End If
-
+        Me.id = id
     End Sub
 
 
