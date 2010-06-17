@@ -154,14 +154,11 @@
   <data name="clean" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\clean.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete_person" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\delete_person.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="del_rule" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\del_rule.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="barra" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\barra.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fharprofil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\fharprofil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="img_last" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\last.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,11 +226,17 @@
   <data name="NetByte Design Studio - 00071" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NetByte Design Studio - 00071.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="delete_person" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\delete_person.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="del_channel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\del_channel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="delete_drive" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\delete_drive.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\save2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="find_excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\find_excel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,8 +247,8 @@
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="save2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\save2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="barra" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\barra.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="save_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\save_img.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -262,7 +265,7 @@
   <data name="img_first" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\first.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fharprofil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\fharprofil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="graphic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\graphic.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

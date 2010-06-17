@@ -16,6 +16,7 @@ Public Class Form_fahrprofil
         Dim pos As Integer = Form_drive.DriveBindingSource.Position
         Form_drive.update_drive()
         Form_drive.DriveBindingSource.Position = pos
+        Form_drive.DrivefullBindingSource.Position = pos
     End Sub
 
     Private Sub Form_fharprofil_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -99,6 +100,27 @@ Public Class Form_fahrprofil
         End Try
     End Function
 
+    Private Sub execute_inst(ByVal sql As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim res As String = ""
+
+        Try
+            cn.Open()
+            cmd.Connection = cn
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            cn.Close()
+        End Try
+    End Sub
+
     Private Sub execute_status(ByVal grid As DataGridView, _
                               ByVal logger_id As Integer, ByVal status As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
@@ -131,6 +153,7 @@ Public Class Form_fahrprofil
                         i = grid.Rows.Count - 1
                         grid(1, i).Value = query.GetString(0)
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
+                        'problema?
                         t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
                         t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
@@ -159,6 +182,7 @@ Public Class Form_fahrprofil
                         i = grid.Rows.Count - 1
                         grid(1, i).Value = query.GetString(0) & " (final)"
                         grid(5, i).Value = Math.Round((query.GetDouble(1)), 4)
+                        'problema?
                         t1 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
                                        " and logger_id = " & logger_id & " and data_index = " & query.GetString(2))
                         t2 = execute_simple("select time from data where drive_id = " & query.GetString(0) & _
@@ -210,7 +234,8 @@ Public Class Form_fahrprofil
             cn.Open()
             cmd.Connection = cn
             sql = "select if(min(data_index) is null,'',min(data_index)) from data where drive_id = " & drive_id & _
-            " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ") and value >=5 "
+                  " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")" & _
+                  " and value >=10 and logger_id = " & FfE_Main.id_canbus
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader
@@ -273,10 +298,12 @@ Public Class Form_fahrprofil
 
     Private Function sec_to_time(ByVal sec As Double) As String
         Dim h, m, s As Integer
+        Dim time As DateTime
         h = Math.Truncate(sec / 3600)
         m = (sec / 60) Mod 60
         s = sec Mod 60
-        sec_to_time = h & ":" & m & ":" & s
+        time = h & ":" & m & ":" & s
+        sec_to_time = time.ToString("HH:mm:ss")
     End Function
 
     Private Sub load_failure(ByVal grid As DataGridView)
@@ -296,7 +323,7 @@ Public Class Form_fahrprofil
             Application.DoEvents()
             For i = 0 To grid.Rows.Count - 1
                 If grid.Rows.Item(i).Visible = True And grid(0, i).Value = True Then
-                    execute_simple("update drive set status = " & status & _
+                    execute_inst("update drive set status = " & status & _
                                    " where drive_id = " & grid(1, i).Value)
                 End If
             Next
@@ -457,8 +484,8 @@ Public Class Form_fahrprofil
             End If
         Next
 
-        max = max.AddMinutes(1)
-        min = min.AddMinutes(-5)
+        max = max.AddMinutes(6)
+        If DateDiff(DateInterval.Minute, CType("00:00:00", DateTime), min) >= 5 Then min = min.AddMinutes(-5)
         Dim value As String = CType(min, String)
 
         If CType(CType(value(value.Length - 4), String), Integer) >= 5 Then
@@ -512,7 +539,7 @@ Public Class Form_fahrprofil
         Dim fharprofiles As New List(Of fahrprofile)
         Dim labels() As String
         load_fahrprofiles_time(DataGridView1, fharprofiles, labels, calculate_range_time(DataGridView1))
-        Dim fg As New fharprofilGraphic(fharprofiles, "Time", labels)
+        Dim fg As New fharprofilGraphic(fharprofiles, "Time (hh:mm)", labels)
         pn_graphics.Controls.Clear()
         pn_graphics.Controls.Add(fg)
         pn_graphics.Controls(0).Dock = DockStyle.Fill

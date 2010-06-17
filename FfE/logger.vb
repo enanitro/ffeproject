@@ -506,24 +506,33 @@ Public Class logger
             datos = linea.Split(",")
         Loop Until datos(0) = "NO."
 
-        'descartamos las filas que no deben almacenarse porque ch39=0 
-        If index = 0 And ch39 <> -1 Then
-            Do
+        'descartamos las filas que no deben almacenarse porque ch39=0
+        val = 0
+        If index = 0 Then
+            If ch39 <> -1 Then
+                Do
+                    linea = fichero.ReadLine
+                    If linea <> Nothing Or linea <> "" Then
+                        datos = linea.Split(",")
+                        val = datos(ch39)
+                    End If
+                    num_lines += 1
+                Loop Until val > 0 Or num_lines > long_file
+                num_lines = (num_lines - 1) * list.CheckedItems.Count
+                'inicializo la primera hora
+                time1 = FormatDateTime(datos(1), DateFormat.LongTime)
+            Else
                 linea = fichero.ReadLine
-                datos = linea.Split(",")
-                val = datos(ch39)
-                num_lines += 1
-            Loop Until val > 0
-            num_lines = (num_lines - 1) * list.CheckedItems.Count
-            'inicializo la primera hora
-            time1 = FormatDateTime(datos(1), DateFormat.LongTime)
+            End If
         Else
-            sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
-            time1 = search_time_sync(sql)
+            sql = "select if(max(time) is null,'',max(time)) from data where drive_id = " & _
+                  id_drive & " and logger_id = " & id_logger
+            If sql <> "" Then time1 = search_time_sync(sql)
         End If
 
         'busco la hora para sincronizar el primer valor
-        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+        sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
+              " and logger_id = " & FfE_Main.id_canbus & _
               " and data_index = (select min(data_index) from data where drive_id = " & _
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
@@ -611,18 +620,21 @@ Public Class logger
         Dim ins As New insert_Data
         ins.init_string()
 
+        val = 0
         If index = 0 Then
             Do
                 linea = fichero.ReadLine
-                datos = linea.Split(",")
-                val = datos(7)
-                If val(val.Count - 1) = Nothing Then
-                    Do
-                        val = val.Remove(val.Count - 1)
-                    Loop Until val(val.Count - 1) <> Nothing
+                If linea <> Nothing Or linea <> "" Then
+                    datos = linea.Split(",")
+                    val = datos(7)
+                    If val(val.Count - 1) = Nothing Then
+                        Do
+                            val = val.Remove(val.Count - 1)
+                        Loop Until val(val.Count - 1) <> Nothing
+                    End If
                 End If
                 num_lines += 1
-            Loop Until val >= 10
+            Loop Until val >= 10 Or num_lines > long_file
             num_lines = (num_lines - 1) * list.CheckedItems.Count
 
             'inicializo la primera hora
@@ -630,7 +642,8 @@ Public Class logger
             add_hour = time_gps(s_w_time)
             time1 = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
         Else
-            sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
+            sql = "select if(max(time) is null,'',max(time)) from data where drive_id = " & _
+                  id_drive & " and logger_id = " & id_logger
             time1 = search_time_sync(sql)
             linea = fichero.ReadLine
             datos = linea.Split(",")
@@ -639,7 +652,8 @@ Public Class logger
         End If
 
         'busco la hora para sincronizar el primer valor
-        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+        sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
+              " and logger_id = " & FfE_Main.id_canbus & _
               " and data_index = (select min(data_index) from data where drive_id = " & _
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 10)"
@@ -741,13 +755,16 @@ Public Class logger
             datos = linea.Split(",")
         End While
 
+        val = 0
         If index = 0 Then
             Do
                 linea = fichero.ReadLine
-                datos = linea.Split(",")
-                val = datos(18)
+                If linea <> Nothing Or linea <> "" Then
+                    datos = linea.Split(",")
+                    val = datos(18)
+                End If
                 num_lines += 1
-            Loop Until val > 0
+            Loop Until val > 0 Or num_lines > long_file
             num_lines = (num_lines - 1) * list.CheckedItems.Count
             'inicializo la primera hora
             time1 = format_time2(format_number(datos(0)), 1, tm, milsec)
@@ -758,7 +775,8 @@ Public Class logger
 
 
         'busco la hora para sincronizar el primer valor
-        sql = "select time from data where drive_id = " & id_drive & " and logger_id = " & FfE_Main.id_canbus & _
+        sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
+              " and logger_id = " & FfE_Main.id_canbus & _
               " and data_index = (select min(data_index) from data where drive_id = " & _
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
@@ -810,7 +828,6 @@ Public Class logger
         If Not ins.is_empty Then
             ins.insert_into_string()
         End If
-        
     End Sub
 
 
@@ -867,16 +884,18 @@ Public Class logger
         If index = 0 Then
             Do
                 linea = fichero.ReadLine
-                datos = linea.Split(vbTab)
-                If datos.Length = 8 Then
-                    If datos(5).Split(":")(0) = "Dlc" Then
-                        If datos(6).Trim = "id:59" Then
-                            val = datos(7).Split(" ")(3)
+                If linea <> Nothing Or linea <> "" Then
+                    datos = linea.Split(vbTab)
+                    If datos.Length = 8 Then
+                        If datos(5).Split(":")(0) = "Dlc" Then
+                            If datos(6).Trim = "id:59" Then
+                                val = datos(7).Split(" ")(3)
+                            End If
                         End If
                     End If
                 End If
                 num_lines += 1
-            Loop Until val > 0
+            Loop Until val > 0 Or num_lines > long_file
         End If
 
         Dim ins As New insert_Data
@@ -949,13 +968,23 @@ Public Class logger
                                         End If
                                     End If
                                 Else
-                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                    & "," & id_logger & "," & measure(x) & "," _
-                                    & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
-                                    & milsec & "'," & val & ")"
-                                    ins.set_string(aux)
+                                    If value = "970" And flag = False Then
+                                        If val >= 10 Then
+                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                            & "," & id_logger & "," & measure(x) & "," _
+                                            & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
+                                            & milsec & "'," & val & ")"
+                                            ins.set_string(aux)
+                                            flag = True
+                                        End If
+                                    Else
+                                        aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                        & "," & id_logger & "," & measure(x) & "," _
+                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
+                                        & milsec & "'," & val & ")"
+                                        ins.set_string(aux)
+                                    End If
                                 End If
-
                             Next
                             progressbar(num_lines, bar, percent)
                         End If
@@ -1170,8 +1199,13 @@ Public Class logger
         s = format(2)
 
         time = time / unit
-        'rest = time Mod Math.Truncate(time)
-        milsec = CType(time, String).Split(",")(1)
+        'milsec = time Mod Math.Truncate(time)
+        If CType(time, String).Replace(".", ",").Split(",").Length < 2 Then
+            milsec = 0
+        Else
+            milsec = CType(time, String).Replace(".", ",").Split(",")(1)
+        End If
+
         ss = Math.Truncate(time)
         ss = ss + s
 

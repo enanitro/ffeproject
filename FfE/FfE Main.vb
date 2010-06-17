@@ -11,7 +11,6 @@ Public Class FfE_Main
         Form_Conf_Car.MdiParent = Me
         Form_Conf_Car.Show()
         Form_Conf_Car.Focus()
-
     End Sub
 
     Private Sub UserToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserToolStripMenuItem.Click
@@ -65,6 +64,7 @@ Public Class FfE_Main
 
 
     Private Sub ConnectionToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConnectionToolStripMenuItem2.Click
+        close_all_forms()
         Form_Connection.MdiParent = Me
         Form_Connection.Show()
         Form_Connection.Focus()
@@ -77,12 +77,14 @@ Public Class FfE_Main
     End Sub
 
     Private Sub RestoreDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestoreDBToolStripMenuItem.Click
+        close_all_forms()
         Form_restore_DB.MdiParent = Me
         Form_restore_DB.Show()
         Form_restore_DB.Focus()
     End Sub
 
     Private Sub BackupDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupDBToolStripMenuItem.Click
+        close_all_forms()
         Form_backup_DB.MdiParent = Me
         Form_backup_DB.Show()
         Form_backup_DB.Focus()
@@ -90,6 +92,12 @@ Public Class FfE_Main
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
+    End Sub
+
+    Private Sub close_all_forms()
+        For Each x In Me.MdiChildren
+            x.Close()
+        Next
     End Sub
 
     'load Form_function

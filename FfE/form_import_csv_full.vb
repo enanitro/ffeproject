@@ -10,6 +10,7 @@ Public Class form_import_csv_full
     Public abort As Boolean = False
     Public isClosed As Boolean = False
     Public id_drive As Integer
+    Public line As Integer
 
     Private Sub all_channels(ByRef channels() As String, ByVal list As CheckedListBox)
         Array.Resize(channels, list.Items.Count)
@@ -240,10 +241,10 @@ Public Class form_import_csv_full
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             procesing.Show()
             Application.DoEvents()
-            logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
+            logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
             logger.delete_rows(CheckedListBox2, id_drive, FfE_Main.id_gps)
             logger.delete_rows(CheckedListBox3, id_drive, FfE_Main.id_lmg)
-            logger.delete_rows(CheckedListBox4, id_drive, FfE_Main.id_canbus)
+            logger.delete_rows(CheckedListBox1, id_drive, FfE_Main.id_graphtec)
             procesing.Close()
             imp = False
         Finally
@@ -511,10 +512,6 @@ Public Class form_import_csv_full
         End If
     End Sub
 
-    Private Sub TextBox3_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox3.TextChanged
-
-    End Sub
-
     Private Sub associations(ByRef list As CheckedListBox, ByVal logger_id As Integer, ByVal measure() As Integer)
         Try
             If list.Items.Count <> 0 And list.CheckedItems.Count <> 0 Then
@@ -531,12 +528,14 @@ Public Class form_import_csv_full
 
     Private Sub put_ch_list(ByVal list As CheckedListBox, ByVal logger_id As Integer, ByVal ch() As String)
         Dim str As String = ""
+        Dim name As String
         Dim x As Integer
         For Each i In list.CheckedIndices
             str = search_measure(logger_id, "name", ch(i), "channel", x)
             If str = "" Then
-                If list.Items(i).ToString.Split("-")(0).Trim <> ch(i) Then
-                    str = ch(i) & " -> " & list.Items(i).ToString.Split("-")(0).Trim
+                name = list.Items(i).ToString.Split(">")(0).TrimEnd("-")
+                If name <> ch(i) Then
+                    str = ch(i) & " -> " & name
                 Else
                     str = list.Items(i)
                 End If
