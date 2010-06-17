@@ -48,7 +48,7 @@ Public Class association
         Try
             For Each i In list.CheckedIndices
                 ch = list.Items(i)
-                name = ch.split("->")
+                name = ch.Split(">")
                 str = ch
                 If name.Length <= 1 Then
                     ch = search_measure(logger, "channel", ch, "name") & " -> " & ch

@@ -52,9 +52,6 @@ Partial Class Form_fahrprofil
         Me.Button1 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
         Me.select_id = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.drive_id = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Colour = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -68,6 +65,9 @@ Partial Class Form_fahrprofil
         Me.start_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.end_canbus = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.final = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.Label6 = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -326,7 +326,7 @@ Partial Class Form_fahrprofil
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(52, 310)
+        Me.Label4.Location = New System.Drawing.Point(52, 298)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(151, 22)
         Me.Label4.TabIndex = 9
@@ -339,7 +339,7 @@ Partial Class Form_fahrprofil
         Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(435, 310)
+        Me.Label3.Location = New System.Drawing.Point(435, 298)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(97, 24)
         Me.Label3.TabIndex = 8
@@ -349,9 +349,10 @@ Partial Class Form_fahrprofil
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(435, 346)
+        Me.Button3.Image = Global.FfE.My.Resources.Resources.graphic
+        Me.Button3.Location = New System.Drawing.Point(435, 327)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(97, 45)
+        Me.Button3.Size = New System.Drawing.Size(97, 64)
         Me.Button3.TabIndex = 7
         Me.Button3.Text = "Graphic Time"
         Me.Button3.UseVisualStyleBackColor = True
@@ -359,9 +360,10 @@ Partial Class Form_fahrprofil
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(321, 347)
+        Me.Button2.Image = Global.FfE.My.Resources.Resources.graphic
+        Me.Button2.Location = New System.Drawing.Point(321, 327)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(108, 45)
+        Me.Button2.Size = New System.Drawing.Size(108, 65)
         Me.Button2.TabIndex = 6
         Me.Button2.Text = "Graphic Speed"
         Me.Button2.UseVisualStyleBackColor = True
@@ -372,7 +374,7 @@ Partial Class Form_fahrprofil
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(321, 309)
+        Me.Label2.Location = New System.Drawing.Point(321, 298)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(108, 24)
         Me.Label2.TabIndex = 7
@@ -382,9 +384,10 @@ Partial Class Form_fahrprofil
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(209, 347)
+        Me.Button1.Image = Global.FfE.My.Resources.Resources.graphic
+        Me.Button1.Location = New System.Drawing.Point(209, 327)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(106, 45)
+        Me.Button1.Size = New System.Drawing.Size(106, 65)
         Me.Button1.TabIndex = 5
         Me.Button1.Text = "Graphic Distance" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.Button1.UseVisualStyleBackColor = True
@@ -395,11 +398,11 @@ Partial Class Form_fahrprofil
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(209, 310)
+        Me.Label1.Location = New System.Drawing.Point(209, 298)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(106, 24)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Km"
+        Me.Label1.Text = "Distance"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DataGridView1
@@ -414,37 +417,8 @@ Partial Class Form_fahrprofil
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(517, 291)
+        Me.DataGridView1.Size = New System.Drawing.Size(517, 281)
         Me.DataGridView1.TabIndex = 5
-        '
-        'Panel3
-        '
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(548, 77)
-        Me.Panel3.TabIndex = 8
-        '
-        'Label6
-        '
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(7, 34)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(504, 35)
-        Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Label6"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(7, 7)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(51, 15)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Label5"
         '
         'select_id
         '
@@ -461,7 +435,7 @@ Partial Class Form_fahrprofil
         Me.drive_id.Name = "drive_id"
         Me.drive_id.ReadOnly = True
         Me.drive_id.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.drive_id.Width = 83
+        Me.drive_id.Width = 77
         '
         'Colour
         '
@@ -545,6 +519,35 @@ Partial Class Form_fahrprofil
         Me.final.Name = "final"
         Me.final.ReadOnly = True
         Me.final.Visible = False
+        '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(548, 77)
+        Me.Panel3.TabIndex = 8
+        '
+        'Label6
+        '
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(7, 34)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(504, 35)
+        Me.Label6.TabIndex = 11
+        Me.Label6.Text = "Label6"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(7, 7)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 15)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Label5"
         '
         'Form_fahrprofil
         '

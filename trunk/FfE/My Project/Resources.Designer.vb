@@ -291,6 +291,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property graphic() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("graphic", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property img_back() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("img_back", resourceCulture)

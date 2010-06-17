@@ -236,6 +236,7 @@ Public Class Form_drive
         Try
             position = DriveBindingSource.Position
             field_control(position)
+
             DriveBindingSource.AddNew()
             sort_index()
 
@@ -588,17 +589,22 @@ Public Class Form_drive
         End Try
     End Sub
 
-    Private Sub field_control(ByVal pos As Integer)
+    Private Function field_control(ByVal pos As Integer) As Boolean
+        Dim res As Boolean = False
         If combo = True Then
             If MsgBox("Do you want to save changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 update_drive()
+                res = True
             Else
                 DriveTableAdapter.Fill(Ffe_databaseDataSet.drive)
+                Drive_fullTableAdapter.Fill(Ffe_databaseDataSet.drive_full)
+                res = False
             End If
             combo = False
         End If
         DriveBindingSource.Position = pos
-    End Sub
+        field_control = res
+    End Function
 
 
     Private Function execute_simple(ByVal sql As String) As String
