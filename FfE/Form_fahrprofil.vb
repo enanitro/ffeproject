@@ -281,11 +281,11 @@ Public Class Form_fahrprofil
         ts2 = grid(10, index).Value
         te1 = grid(8, index).Value
         te2 = grid(11, index).Value
-        interval1 = DateDiff(DateInterval.Second, ts1, ts2)
-        interval2 = DateDiff(DateInterval.Second, te1, te2)
+        interval1 = Math.Abs(DateDiff(DateInterval.Second, ts1, ts2))
+        interval2 = Math.Abs(DateDiff(DateInterval.Second, te1, te2))
         d1 = "00:00:00"
         d2 = grid(6, index).Value
-        sec = DateDiff(DateInterval.Second, d1, d2) * 0.05
+        sec = Math.Abs(DateDiff(DateInterval.Second, d1, d2)) * 0.05
         diff = Math.Abs(grid(5, index).Value - grid(9, index).Value)
 
         If diff < grid(5, index).Value * 0.05 And diff < grid(9, index).Value * 0.05 And _
