@@ -634,7 +634,7 @@ Public Class logger
                     End If
                 End If
                 num_lines += 1
-            Loop Until val >= 10 Or num_lines > long_file
+            Loop Until val >= 14 Or num_lines > long_file
             num_lines = (num_lines - 1) * list.CheckedItems.Count
 
             'inicializo la primera hora
@@ -656,7 +656,7 @@ Public Class logger
               " and logger_id = " & FfE_Main.id_canbus & _
               " and data_index = (select min(data_index) from data where drive_id = " & _
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
-              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 10)"
+              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 12)"
         flag = search_time_sync(sql)
         If flag <> "" Then sync = CType(flag, DateTime)
 
@@ -938,7 +938,7 @@ Public Class logger
                                             table_canbus(x).count += 1
                                         Else
                                             If value = "970" And flag = False Then
-                                                If val >= 10 Then
+                                                If val >= 14 Then
                                                     'hemos cambiado de hora, guardamos la media 
                                                     res = table_canbus(x).value / table_canbus(x).count
                                                     avg = CType(res, String)
@@ -969,7 +969,7 @@ Public Class logger
                                     End If
                                 Else
                                     If value = "970" And flag = False Then
-                                        If val >= 10 Then
+                                        If val >= 14 Then
                                             aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
                                             & "," & id_logger & "," & measure(x) & "," _
                                             & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
