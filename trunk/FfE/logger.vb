@@ -537,12 +537,25 @@ Public Class logger
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
         flag = search_time_sync(sql)
-        If flag <> "" Then sync = CType(flag, DateTime)
-
-        config_progressbar(bar, long_file, list, n_data)
 
         Dim ins As New insert_Data
         ins.init_string()
+
+        If flag <> "" Then
+            sync = CType(flag, DateTime)
+
+            'retrasamos un segundo
+            time = DateAdd(DateInterval.Second, -1, CType(sync, DateTime)).ToString("HH:mm:ss")
+            aux = "(" & 1 & ",'" & list.Items.Item(17) & "'," & id_drive _
+            & "," & id_logger & "," & measure(17) & "," _
+            & "'" & time & "'" & "," _
+            & "NULL," & 0 & ")"
+            ins.set_string(aux)
+
+            index = 1
+        End If
+
+        config_progressbar(bar, long_file, list, n_data)
 
         Do
             If linea <> Nothing Then
@@ -595,17 +608,19 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val, sql, flag, time As String
+        Dim linea, aux, val, sql, last(), flag, time, tm, tm_aux As String
         Dim sync, time1, time2 As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value As Double
+        Dim value, avg As Double
         Dim sec As Long
         Dim s_w_time As String = ""
         Dim add_hour As Integer
+
+        ReDim last(list.Items.Count)
 
         index = find_last_index(id_logger, id_drive)
         If index <> 0 Then
@@ -650,6 +665,7 @@ Public Class logger
             s_w_time = make_date(datos(2))
             add_hour = time_gps(s_w_time)
         End If
+        tm = time1
 
         'busco la hora para sincronizar el primer valor
         sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
@@ -658,7 +674,10 @@ Public Class logger
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 12)"
         flag = search_time_sync(sql)
-        If flag <> "" Then sync = CType(flag, DateTime)
+        If flag <> "" Then
+            sync = CType(flag, DateTime)
+            tm = sync
+        End If
 
         config_progressbar(bar, long_file, list, n_data)
 
@@ -690,7 +709,7 @@ Public Class logger
                         End
                     End If
 
-                    'quitar valores NUL
+                    'quitar valores NULL
                     If val(val.Count - 1) = Nothing Then
                         Do
                             val = val.Remove(val.Count - 1)
@@ -700,11 +719,30 @@ Public Class logger
                         data_points += 1
                         clock += 1
 
+                        sec = DateDiff(DateInterval.Second, CType(tm, DateTime), CType(time, DateTime))
+                        If sec > 1 Then
+                            'avg = (CType(last(i), Double) + CType(val, Double)) / 2
+                            'avg = val
+                            For k = 1 To sec - 1
+                                tm_aux = DateAdd(DateInterval.Second, k, CType(tm, DateTime)).ToString("HH:mm:ss")
+                                aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                                & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                                & "'" & tm_aux & "'" & "," _
+                                & "NULL," & val & ")"
+                                ins.set_string(aux)
+                            Next
+                        End If
+
                         aux = "(" & index & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                         & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                         & "'" & time & "'" & "," _
                         & "NULL," & val & ")"
                         ins.set_string(aux)
+                        'ha llegado al ultimo canal
+                        If i = list.CheckedIndices.Count - 1 Then
+                            tm = time
+                        End If
+                        last(i) = val
                     End If
                     progressbar(num_lines, bar, percent)
                 Next
@@ -768,11 +806,14 @@ Public Class logger
             num_lines = (num_lines - 1) * list.CheckedItems.Count
             'inicializo la primera hora
             time1 = format_time2(format_number(datos(0)), 1, tm, milsec)
+
         Else
             sql = "select max(time) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
             time1 = search_time_sync(sql)
         End If
 
+        Dim ins As New insert_Data
+        ins.init_string()
 
         'busco la hora para sincronizar el primer valor
         sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
@@ -781,10 +822,28 @@ Public Class logger
               id_drive & " and logger_id = " & FfE_Main.id_canbus & _
               " and (data_id like '2.%' or data_id like '%-> 2.%') and value > 0)"
         flag = search_time_sync(sql)
-        If flag <> "" Then sync = CType(flag, DateTime)
 
-        Dim ins As New insert_Data
-        ins.init_string()
+        If flag <> "" Then
+            sync = CType(flag, DateTime)
+
+            'retrasamos dos segundos
+            time = DateAdd(DateInterval.Second, -2, CType(sync, DateTime)).ToString("HH:mm:ss")
+            aux = "(" & 1 & ",'" & list.Items.Item(17) & "'," & id_drive _
+            & "," & id_logger & "," & measure(17) & "," _
+            & "'" & time & "'" & "," _
+            & "NULL," & 0 & ")"
+            ins.set_string(aux)
+
+            time = DateAdd(DateInterval.Second, -1, CType(sync, DateTime)).ToString("HH:mm:ss")
+            aux = "(" & 2 & ",'" & list.Items.Item(17) & "'," & id_drive _
+            & "," & id_logger & "," & measure(17) & "," _
+            & "'" & time & "'" & "," _
+            & "NULL," & 0 & ")"
+            ins.set_string(aux)
+
+            index = 2
+        End If
+
 
         config_progressbar(bar, long_file, list, n_data)
 
@@ -830,21 +889,20 @@ Public Class logger
         End If
     End Sub
 
-
     'inserta los datos del fichero en la tabla data (logger CANBUS)
     Public Sub insert_logger_canbus(ByVal path As String, ByRef list As CheckedListBox, ByRef text As TextBox, _
                                     ByRef percent As Label, ByRef n_data As Label, ByRef bar As ProgressBar, _
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, time, tm, val, avg, milsec As String
+        Dim linea, aux, time, tm, tm_aux, val, avg, milsec As String
         Dim datos() As String
         Dim div As Int64 = 0
         Dim num_lines As Integer = 0
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value, id_ch() As Integer
+        Dim value, id_ch(), sec As Integer
         Dim res, res2, t As Double
         Dim str As str_canbus
         Dim flag As Boolean = False
@@ -904,6 +962,7 @@ Public Class logger
         long_file = long_file / list.CheckedIndices.Count
         config_progressbar(bar, long_file, list, n_data)
 
+        linea = fichero.ReadLine
         Do
             If linea <> Nothing Then
                 Application.DoEvents()
@@ -937,29 +996,30 @@ Public Class logger
                                             table_canbus(x).value += res2
                                             table_canbus(x).count += 1
                                         Else
-                                            If value = "970" And flag = False Then
-                                                If val >= 14 Then
-                                                    'hemos cambiado de hora, guardamos la media 
-                                                    res = table_canbus(x).value / table_canbus(x).count
-                                                    avg = CType(res, String)
-                                                    avg = avg.Replace(",", ".")
+                                            '''''''''''''''''''''''''''''''''''''''''''
+                                            'hemos cambiado de hora, guardamos la media 
+                                            res = table_canbus(x).value / table_canbus(x).count
+                                            avg = CType(res, String)
+                                            avg = avg.Replace(",", ".")
+                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                            & "," & id_logger & "," & measure(x) & "," _
+                                            & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                            & "NULL," & val & ")"
+                                            ins.set_string(aux)
+                                            '''''' introducir un datediff(table_canbus(x).time,tm) 
+                                            '''''' si es mayor de 1seg, introducimos un valor 0 en esa hora
+                                            '''''' sino la funcion continua inicializando los valores
+                                            sec = DateDiff(DateInterval.Second, CType(table_canbus(x).time, DateTime), _
+                                                           CType(tm, DateTime))
+                                            If sec > 1 Then
+                                                For i = 1 To sec - 1
+                                                    tm_aux = DateAdd(DateInterval.Second, i, CType(table_canbus(x).time, DateTime)).ToString("HH:mm:ss")
                                                     aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
                                                     & "," & id_logger & "," & measure(x) & "," _
-                                                    & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                    & "NULL," & val & ")"
+                                                    & "'" & tm_aux & "'" & "," _
+                                                    & "NULL," & "0" & ")"
                                                     ins.set_string(aux)
-                                                    flag = True
-                                                End If
-                                            Else
-                                                'hemos cambiado de hora, guardamos la media 
-                                                res = table_canbus(x).value / table_canbus(x).count
-                                                avg = CType(res, String)
-                                                avg = avg.Replace(",", ".")
-                                                aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                                & "," & id_logger & "," & measure(x) & "," _
-                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                & "NULL," & val & ")"
-                                                ins.set_string(aux)
+                                                Next
                                             End If
                                             'inicializamos el valor para el siguiente segundo
                                             table_canbus(x).time = tm
@@ -968,22 +1028,12 @@ Public Class logger
                                         End If
                                     End If
                                 Else
-                                    If value = "970" And flag = False Then
-                                        If val >= 14 Then
-                                            aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                            & "," & id_logger & "," & measure(x) & "," _
-                                            & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
-                                            & milsec & "'," & val & ")"
-                                            ins.set_string(aux)
-                                            flag = True
-                                        End If
-                                    Else
-                                        aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
-                                        & "," & id_logger & "," & measure(x) & "," _
-                                        & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
-                                        & milsec & "'," & val & ")"
-                                        ins.set_string(aux)
-                                    End If
+                                    aux = "(" & num_lines & ",'" & list.Items(x) & "'," & id_drive _
+                                    & "," & id_logger & "," & measure(x) & "," _
+                                    & "'" & FormatDateTime(tm, DateFormat.LongTime) & "'" & ",'" _
+                                    & milsec & "'," & val & ")"
+                                    ins.set_string(aux)
+                                    'End If
                                 End If
                             Next
                             progressbar(num_lines, bar, percent)
