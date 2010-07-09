@@ -21,8 +21,8 @@ Public Class Form_view_data
         show_data(DataGridView, FfE_Main.id_graphtec)
         show_data(DataGridView1, FfE_Main.id_gps)
         show_data(DataGridView2, FfE_Main.id_lmg)
-        show_data_canbus(DataGridView3, FfE_Main.id_canbus)
-        'show_data(DataGridView3, FfE_Main.id_canbus)
+        'show_data_canbus(DataGridView3, FfE_Main.id_canbus)
+        show_data(DataGridView3, FfE_Main.id_canbus)
 
     End Sub
 
@@ -399,7 +399,8 @@ Public Class Form_view_data
         If delete_channel(FfE_Main.id_canbus, CheckedListBox4) Then
             procesing.Show()
             Application.DoEvents()
-            show_data_canbus(DataGridView3, FfE_Main.id_canbus)
+            'show_data_canbus(DataGridView3, FfE_Main.id_canbus)
+            show_data(DataGridView3, FfE_Main.id_canbus)
             execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
             procesing.Close()
         End If
