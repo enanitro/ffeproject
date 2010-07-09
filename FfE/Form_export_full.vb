@@ -168,7 +168,8 @@ Public Class Form_export_full
                     Case FfE_Main.id_lmg
                         execute_query_logger_lmg(logger_id, logger, ProgressBar3, percent_lmg500, TextBox3, path)
                     Case FfE_Main.id_canbus
-                        execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        'execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        execute_query_loggers(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
 
             End If
@@ -788,7 +789,8 @@ Public Class Form_export_full
     Private Sub CheckBox4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox4.CheckedChanged
         If CheckBox4.CheckState = CheckState.Checked Then
             If TextBox4.Text = "" Then
-                SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+                'SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+                SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
             End If
             TextBox4.Visible = True
         Else
@@ -800,6 +802,7 @@ Public Class Form_export_full
         SQL_syntax(FfE_Main.id_graphtec, "GRAPHTEC GL800", TextBox1)
         SQL_syntax(FfE_Main.id_gps, "COLUMBUS GPS", TextBox2)
         SQL_syntax(FfE_Main.id_lmg, "LMG 500", TextBox3)
-        SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+        'SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
+        SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
     End Sub
 End Class
