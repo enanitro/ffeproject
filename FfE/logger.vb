@@ -56,6 +56,7 @@ Public Class logger
     Dim table_canbus As New Dictionary(Of Integer, str_canbus)
     Dim ids_chs As New Dictionary(Of Integer, Integer())
 
+
     Private Sub load_ids_chs(ByVal list As CheckedListBox)
         Dim v() As Integer
         For Each i In list.CheckedIndices
@@ -70,6 +71,7 @@ Public Class logger
             End If
         Next
     End Sub
+
 
     Private Sub Load_table_canbus(ByVal list As CheckedListBox)
         Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
@@ -108,7 +110,6 @@ Public Class logger
             logger_dialog = ""
         End If
     End Function
-
 
     'analiza la cabecera del archivo
     Public Sub analizar_CVS(ByVal path As String, ByVal id As String, ByRef text As TextBox, ByVal n_file As Integer, _
@@ -211,7 +212,6 @@ Public Class logger
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     'analisis del archivo cvs del logger columbus GPS
     Public Sub analyze_logger_columbus_gps(ByVal path As String, ByRef list As CheckedListBox, _
@@ -371,6 +371,7 @@ Public Class logger
         End Try
     End Sub
 
+
     Private Sub load_channels_canbus(ByRef list As CheckedListBox)
         Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
         Try
@@ -396,6 +397,7 @@ Public Class logger
         End Try
     End Sub
 
+
     Private Function find_last_index(ByVal id_logger As Integer, ByVal id_drive As Integer) As Integer
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         Dim cn As New MySqlConnection(connection)
@@ -418,6 +420,7 @@ Public Class logger
 
         find_last_index = res
     End Function
+
 
     Private Function find_all_channels(ByVal id_logger As Integer, ByVal id_drive As Integer, _
                                        ByVal list As CheckedListBox) As Boolean
@@ -624,7 +627,7 @@ Public Class logger
         Dim value, avg As Double
         Dim sec As Long
         Dim s_w_time As String = ""
-        Dim add_hour As Integer
+        Dim add_hour, init, init_gps As Integer
 
         ReDim last_value(list.Items.Count)
         ReDim last_index(list.Items.Count)
@@ -640,62 +643,48 @@ Public Class logger
             last_index(ind) = index
         Next
 
-        'leo la primera linea que pertenece a la cabecera
-        linea = fichero.ReadLine
-
         Dim ins As New insert_Data
         ins.init_string()
 
-        val = 0
-        If index = 0 Then
-            Do
-                linea = fichero.ReadLine
-                If linea <> Nothing Or linea <> "" Then
-                    datos = linea.Split(",")
-                    val = datos(7)
-                    If val(val.Count - 1) = Nothing Then
-                        Do
-                            val = val.Remove(val.Count - 1)
-                        Loop Until val(val.Count - 1) <> Nothing
-                    End If
-                End If
-                num_lines += 1
-            Loop Until val >= 0 Or num_lines > long_file
-            num_lines = (num_lines - 1) * list.CheckedItems.Count
-
-            'inicializo la primera hora
-            s_w_time = make_date(datos(2))
-            add_hour = time_gps(s_w_time)
-            time1 = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
-        Else
-            sql = "select if(max(time) is null,'',max(time)) from data where drive_id = " & _
-                  id_drive & " and logger_id = " & id_logger
-            time1 = search_time_sync(sql)
-            linea = fichero.ReadLine
-            datos = linea.Split(",")
-            s_w_time = make_date(datos(2))
-            add_hour = time_gps(s_w_time)
-        End If
-        tm = time1
+        'leo la primera linea que pertenece a la cabecera
+        linea = fichero.ReadLine
 
         'busco la hora para sincronizar el primer valor
         sql = "select if(time is null,'',time) from data where drive_id = " & id_drive & _
               " and logger_id = " & FfE_Main.id_canbus & _
-              " and data_index = (select min(data_index) from data where drive_id = " & _
-              id_drive & " and logger_id = " & FfE_Main.id_canbus & _
-              " and (data_id like '6.%' or data_id like '%-> 6.%') and value >= 12)"
+              " and data_index = " & index + 1
         flag = search_time_sync(sql)
         If flag <> "" Then
             sync = CType(flag, DateTime)
             tm = sync
+            init_gps = 0
+            While Not canbus_gps_sync(path, 10, id_drive, index, init_gps, init)
+                init_gps = init
+            End While
+
+            'empezamos contando en ind=1 hasta init-1 que es el primer valor que debemos introducir
+            For ind = 0 To init
+                linea = fichero.ReadLine
+            Next
+            long_file -= (init - 1)
+
+            'busco la zona horaria
+            datos = linea.Split(",")
+            s_w_time = make_date(datos(2))
+            add_hour = time_gps(s_w_time)
+            time1 = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
         Else
+            'inicializo la primera hora
+            linea = fichero.ReadLine
+            'busco la zona horaria
+            datos = linea.Split(",")
+            s_w_time = make_date(datos(2))
+            add_hour = time_gps(s_w_time)
             tm = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
         End If
-        '''''''''''prueba''''''''''''''''
-        flag = ""
-        tm = FormatDateTime(make_time(datos(3), add_hour), DateFormat.LongTime)
 
         config_progressbar(bar, long_file, list, n_data)
+        val = 0
 
         Do
             If linea <> Nothing Then
@@ -746,7 +735,7 @@ Public Class logger
                                 & "'" & tm_aux & "'" & "," _
                                 & "NULL," & CType(avg, String).Replace(",", ".") & ")"
                                 ins.set_string(aux)
-                                'index debe estar aqui, en ultime posicion
+                                'index debe estar aqui, en ultima posicion
                                 last_index(i) += 1
                             Next
                         End If
@@ -758,11 +747,11 @@ Public Class logger
                         ins.set_string(aux)
                         last_value(i) = val
                     End If
-                    'ha llegado al ultimo canal, cambiamos la hora y el indice
-                    tm = time
-                    index = last_index(0)
                     progressbar(num_lines, bar, percent)
                 Next
+                'ha llegado al ultimo canal, cambiamos la hora y el indice
+                tm = time
+                index = last_index(0)
                 If clock >= 1000 Then
                     ins.insert_into_string()
                     ins.init_string()
@@ -1108,6 +1097,84 @@ Public Class logger
 
     End Sub
 
+    'sincroniza los datos del gps respecto al canbus
+    Public Function canbus_gps_sync(ByVal path As String, ByVal threshold As Integer, ByVal id_drive As Integer, _
+                                    ByVal init_canbus As Integer, ByVal init_gps As Integer, ByRef index As Integer) As Boolean
+        Dim file As New System.IO.StreamReader(path)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim line As String
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql As String = ""
+        Dim index_canbus As Integer = 0
+        Dim index_gps As Integer = 0
+        Dim count As Integer = 0
+        Dim found As Boolean = False
+
+        cn.Open()
+        cmd.Connection = cn
+        sql = "select data_index, value from data where drive_id = " & id_drive & _
+              " and logger_id = " & FfE_Main.id_canbus & " and (data_id like '6.%' or data_id like '%-> 6.%')" & _
+              " and data_index > " & init_canbus & " order by data_index"
+        cmd.CommandText = sql
+        query = cmd.ExecuteReader()
+
+        'buscamos referencia en el canbus
+        While query.Read() And found = False
+            If query.GetDouble(1) >= threshold Then
+                found = True
+                index_canbus = query.GetInt32(0)
+                Exit While
+            End If
+        End While
+
+        found = False
+        'buscamos referencia en el gps
+        line = file.ReadLine 'cabecera
+        For i = 0 To init_gps - 1
+            line = file.ReadLine
+        Next
+        While Not line Is Nothing And found = False
+            line = file.ReadLine
+            index_gps += 1
+            If CType(line.Split(",")(7), Double) >= threshold Then
+                found = True
+                Exit While
+            End If
+        End While
+
+        found = False
+        'comprobamos la sincronizacion durante 20 segundos
+        While count < 20 And found = False
+            If CType(line.Split(",")(7), Double) = 0 Then
+                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 7 Then
+                    found = True
+                End If
+            Else
+                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 5 Then
+                    found = True
+                End If
+            End If
+            query.Read()
+            line = file.ReadLine
+            count += 1
+        End While
+
+        If found = False Then
+            'devolvemos donde se debe comenzar a leer el archivo del gps
+            index = index_gps - index_canbus
+        Else
+            ' devolvemos por donde debemos empezar la proxima lectura del archivo del gps
+            index = index_gps + count
+        End If
+
+        cn.Close()
+
+        Return Not found
+    End Function
+
+
     Private Function read_string(ByVal str As String, ByVal tb As str_canbus) As Double
         Dim i As Integer
         Dim res As Double
@@ -1125,6 +1192,7 @@ Public Class logger
 
     End Function
 
+
     Private Function hex_to_dec(ByVal data As String) As String
         Dim res As String = ""
         For Each values In data.Split(" ")
@@ -1134,6 +1202,7 @@ Public Class logger
         Next
         hex_to_dec = res
     End Function
+
 
     Private Function bin_to_dec(ByVal BinStr As String, ByVal sign As Boolean) As Double
         Dim mult As Double = 1
@@ -1158,6 +1227,7 @@ Public Class logger
         bin_to_dec = s
     End Function
 
+
     Private Function complement_plusone(ByVal binstr As String) As String
         Dim res As String = ""
         For i = 0 To binstr.Length - 1
@@ -1177,6 +1247,7 @@ Public Class logger
         complement_plusone = res
     End Function
 
+
     Private Function dec_to_bin(ByVal value As String) As String
         Dim BinStr As String
         BinStr = ""
@@ -1193,6 +1264,7 @@ Public Class logger
         dec_to_bin = BinStr
     End Function
 
+
     Public Sub clean_logger(ByRef list As CheckedListBox, ByRef text As TextBox, ByRef panel As Panel, _
                             ByRef path() As String, ByRef long_file() As Integer, ByRef length As Integer, _
                             ByRef check As CheckBox)
@@ -1208,6 +1280,7 @@ Public Class logger
         length = 0
     End Sub
 
+
     Private Function time_gps(ByVal val As String) As Integer
         Dim localtime As System.TimeZoneInfo
         Dim d As DateTime
@@ -1217,6 +1290,7 @@ Public Class logger
         Return d.Hour
     End Function
 
+
     Private Function make_date(ByVal day As String) As String
         Dim yyyy, mm, dd As String
         yyyy = "20" & day(0) & day(1)
@@ -1224,6 +1298,7 @@ Public Class logger
         dd = day(4) & day(5)
         make_date = yyyy & "-" & mm & "-" & dd
     End Function
+
 
     Private Function make_time(ByVal time As String, ByVal h As Integer) As String
         Dim hh, mm, ss As String
@@ -1237,6 +1312,7 @@ Public Class logger
         hh = h
         make_time = hh & ":" & mm & ":" & ss
     End Function
+
 
     Private Function format_time(ByVal time As Double, ByVal unit As Integer, ByRef ini As String) As String
         Dim res As String
@@ -1271,6 +1347,7 @@ Public Class logger
 
         format_time = CType(FormatDateTime(res, DateFormat.LongTime), String)
     End Function
+
 
     Private Function format_time2(ByVal time As Double, ByVal unit As Integer, _
                                   ByVal ini As String, ByRef milsec As String) As String
@@ -1308,6 +1385,7 @@ Public Class logger
         format_time2 = CType(FormatDateTime(res, DateFormat.LongTime), String)
     End Function
 
+
     Private Function format_number(ByVal value As String) As Double
         Dim res As Double
         Dim exp, point As Integer
@@ -1322,6 +1400,7 @@ Public Class logger
 
         format_number = res
     End Function
+
 
     Private Function str_to_double(ByVal values As String) As Double
         Dim res, int, dec As Double
@@ -1338,6 +1417,7 @@ Public Class logger
         End If
         str_to_double = res
     End Function
+
 
     Private Function avg_values(ByVal v1 As Double, ByVal v2 As Double, ByVal count As Double) As Double
         Dim res As Double = 0
@@ -1362,10 +1442,12 @@ Public Class logger
         Application.DoEvents()
     End Sub
 
+
     Private Sub data_summary(ByVal val As Integer, ByRef n_data As Label, ByVal data_points As Integer)
         n_data.Text = val & " data points were read" & vbCrLf & vbCrLf
         n_data.Text += data_points & " data points were imported"
     End Sub
+
 
     Function get_logger_id(ByVal logger_name As String) As Integer
         Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
@@ -1390,6 +1472,7 @@ Public Class logger
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Function
+
 
     Public Sub delete_rows(ByVal list As CheckedListBox, ByVal drive_id As Integer, ByVal logger_id As Integer)
         Dim cn As New MySqlConnection(Global.FfE.My.MySettings.Default.ffe_databaseConnectionString)
@@ -1416,6 +1499,7 @@ Public Class logger
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
 
     Private Function search_time_sync(ByVal sql As String) As String
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
