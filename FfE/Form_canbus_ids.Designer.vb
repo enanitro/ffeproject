@@ -31,9 +31,7 @@ Partial Class form_canbus_ids
         Dim StartbitLabel As System.Windows.Forms.Label
         Dim NameLabel As System.Windows.Forms.Label
         Dim Hex_idLabel As System.Windows.Forms.Label
-        Dim AverageLabel As System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.AverageCheckBox = New System.Windows.Forms.CheckBox
         Me.Ids_canbusBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.OffsetTextBox = New System.Windows.Forms.TextBox
@@ -59,6 +57,8 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Ids_canbusDataGridView = New System.Windows.Forms.DataGridView
+        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -69,9 +69,6 @@ Partial Class form_canbus_ids
         Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.average = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         OffsetLabel = New System.Windows.Forms.Label
         FactorLabel = New System.Windows.Forms.Label
         SignedLabel = New System.Windows.Forms.Label
@@ -80,7 +77,6 @@ Partial Class form_canbus_ids
         StartbitLabel = New System.Windows.Forms.Label
         NameLabel = New System.Windows.Forms.Label
         Hex_idLabel = New System.Windows.Forms.Label
-        AverageLabel = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         CType(Me.Ids_canbusBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -169,21 +165,9 @@ Partial Class form_canbus_ids
         Hex_idLabel.TabIndex = 22
         Hex_idLabel.Text = "Hex id:"
         '
-        'AverageLabel
-        '
-        AverageLabel.AutoSize = True
-        AverageLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        AverageLabel.Location = New System.Drawing.Point(1047, 52)
-        AverageLabel.Name = "AverageLabel"
-        AverageLabel.Size = New System.Drawing.Size(71, 16)
-        AverageLabel.TabIndex = 38
-        AverageLabel.Text = "Average:"
-        '
         'Panel1
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Panel1.Controls.Add(AverageLabel)
-        Me.Panel1.Controls.Add(Me.AverageCheckBox)
         Me.Panel1.Controls.Add(OffsetLabel)
         Me.Panel1.Controls.Add(Me.OffsetTextBox)
         Me.Panel1.Controls.Add(FactorLabel)
@@ -204,20 +188,11 @@ Partial Class form_canbus_ids
         Me.Panel1.Controls.Add(Me.Ids_canbusBindingNavigator)
         Me.Panel1.Controls.Add(Me.Ids_canbusDataGridView)
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Location = New System.Drawing.Point(8, 12)
         Me.Panel1.MinimumSize = New System.Drawing.Size(1260, 583)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1260, 583)
         Me.Panel1.TabIndex = 0
-        '
-        'AverageCheckBox
-        '
-        Me.AverageCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.Ids_canbusBindingSource, "average", True))
-        Me.AverageCheckBox.Location = New System.Drawing.Point(1120, 49)
-        Me.AverageCheckBox.Name = "AverageCheckBox"
-        Me.AverageCheckBox.Size = New System.Drawing.Size(14, 24)
-        Me.AverageCheckBox.TabIndex = 39
-        Me.AverageCheckBox.UseVisualStyleBackColor = True
         '
         'Ids_canbusBindingSource
         '
@@ -430,93 +405,13 @@ Partial Class form_canbus_ids
         Me.Ids_canbusDataGridView.AllowUserToDeleteRows = False
         Me.Ids_canbusDataGridView.AutoGenerateColumns = False
         Me.Ids_canbusDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Ids_canbusDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.average})
+        Me.Ids_canbusDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
         Me.Ids_canbusDataGridView.DataSource = Me.Ids_canbusBindingSource
         Me.Ids_canbusDataGridView.Location = New System.Drawing.Point(22, 124)
         Me.Ids_canbusDataGridView.MultiSelect = False
         Me.Ids_canbusDataGridView.Name = "Ids_canbusDataGridView"
-        Me.Ids_canbusDataGridView.ReadOnly = True
         Me.Ids_canbusDataGridView.Size = New System.Drawing.Size(1214, 358)
         Me.Ids_canbusDataGridView.TabIndex = 21
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "channel_id"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Channel ID"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "name"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Name"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "hex_id"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Hex ID"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "dec_id"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Dec ID"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "startbit"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Startbit"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "longbits"
-        Me.DataGridViewTextBoxColumn6.HeaderText = "Long"
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn7
-        '
-        Me.DataGridViewTextBoxColumn7.DataPropertyName = "sequence"
-        Me.DataGridViewTextBoxColumn7.HeaderText = "Sequence"
-        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        Me.DataGridViewTextBoxColumn7.ReadOnly = True
-        '
-        'DataGridViewCheckBoxColumn1
-        '
-        Me.DataGridViewCheckBoxColumn1.DataPropertyName = "signed"
-        Me.DataGridViewCheckBoxColumn1.HeaderText = "Signed"
-        Me.DataGridViewCheckBoxColumn1.Name = "DataGridViewCheckBoxColumn1"
-        Me.DataGridViewCheckBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn8
-        '
-        Me.DataGridViewTextBoxColumn8.DataPropertyName = "factor"
-        Me.DataGridViewTextBoxColumn8.HeaderText = "Factor"
-        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-        Me.DataGridViewTextBoxColumn8.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn9
-        '
-        Me.DataGridViewTextBoxColumn9.DataPropertyName = "offset"
-        Me.DataGridViewTextBoxColumn9.HeaderText = "Offset"
-        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
-        Me.DataGridViewTextBoxColumn9.ReadOnly = True
-        '
-        'average
-        '
-        Me.average.DataPropertyName = "average"
-        Me.average.HeaderText = "Average"
-        Me.average.Name = "average"
-        Me.average.ReadOnly = True
-        Me.average.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.average.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Ids_canbusTableAdapter
         '
@@ -538,12 +433,72 @@ Partial Class form_canbus_ids
         Me.TableAdapterManager.usage_typeTableAdapter = Nothing
         Me.TableAdapterManager.userTableAdapter = Nothing
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "channel_id"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Channel ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "name"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "hex_id"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Hex ID"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "dec_id"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Dec ID"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "startbit"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Startbit"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "longbits"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "Long"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "sequence"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Sequence"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        '
+        'DataGridViewCheckBoxColumn1
+        '
+        Me.DataGridViewCheckBoxColumn1.DataPropertyName = "signed"
+        Me.DataGridViewCheckBoxColumn1.HeaderText = "Signed"
+        Me.DataGridViewCheckBoxColumn1.Name = "DataGridViewCheckBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "factor"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "Factor"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.DataPropertyName = "offset"
+        Me.DataGridViewTextBoxColumn9.HeaderText = "Offset"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        '
         'form_canbus_ids
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1284, 597)
+        Me.ClientSize = New System.Drawing.Size(1276, 597)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "form_canbus_ids"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -587,7 +542,6 @@ Partial Class form_canbus_ids
     Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Ids_canbusDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents AverageCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -598,5 +552,4 @@ Partial Class form_canbus_ids
     Friend WithEvents DataGridViewCheckBoxColumn1 As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents average As System.Windows.Forms.DataGridViewCheckBoxColumn
 End Class
