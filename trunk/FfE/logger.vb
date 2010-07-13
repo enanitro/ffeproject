@@ -772,7 +772,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val, tm, milsec, time, sql, flag As String
+        Dim linea, aux, val, tm, milsec, time, sql, flag, last As String
         Dim time1, time2, sync As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
@@ -788,6 +788,8 @@ Public Class logger
                 index = 0
             End If
         End If
+
+        last = ""
 
         linea = fichero.ReadLine
         linea = fichero.ReadLine
@@ -833,7 +835,6 @@ Public Class logger
             sync = CType(flag, DateTime)
 
             'retrasamos dos segundos
-            'time = DateAdd(DateInterval.Second, -2, CType(sync, DateTime)).ToString("HH:mm:ss")
             time = CType(sync, DateTime).ToString("HH:mm:ss")
             aux = "(" & 1 & ",'" & list.Items.Item(17) & "'," & id_drive _
             & "," & id_logger & "," & measure(17) & "," _
@@ -870,6 +871,7 @@ Public Class logger
                 Else
                     time = format_time2(format_number(datos(0)), 1, tm, milsec)
                 End If
+                If time = last Then time = DateAdd(DateInterval.Second, 1, CType(time, DateTime))
                 For i = 0 To list.CheckedIndices.Count - 1
                     num_lines += 1
                     If IsNumeric(datos(list.CheckedIndices.Item(i) + 1)) Then
@@ -884,6 +886,7 @@ Public Class logger
                     End If
                     progressbar(num_lines, bar, percent)
                 Next
+                last = time
                 If clock >= 1000 Then
                     ins.insert_into_string()
                     ins.init_string()
