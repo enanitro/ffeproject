@@ -429,7 +429,8 @@ Public Class logger
         Dim cmd As New MySqlCommand
         Dim query As MySqlDataReader
         Dim sql As String = ""
-        Dim res As Boolean = True
+        Dim res As Boolean = False
+        Dim count As Integer = 0
 
         cn.Open()
         cmd.Connection = cn
@@ -444,14 +445,15 @@ Public Class logger
             sql = "select distinct(data_id) from data where drive_id = " & id_drive & " and logger_id = " & id_logger
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
-            While query.Read() And res = True
+            While query.Read()
                 For i = 0 To list.CheckedItems.Count - 1
                     If query.GetString(0) = list.CheckedItems.Item(i) Then
-                        res = True
-                    Else
-                        res = False
+                        count += 1
                     End If
                 Next
+                If count = list.CheckedIndices.Count Then
+                    res = True
+                End If
             End While
         Else
             res = False
@@ -655,18 +657,68 @@ Public Class logger
               " and data_index = " & index + 1
         flag = search_time_sync(sql)
         If flag <> "" Then
+            
             sync = CType(flag, DateTime)
-            tm = sync
             init_gps = 0
-            While Not canbus_gps_sync(path, 10, id_drive, index, init_gps, init)
+            procesing.Show()
+            Application.DoEvents()
+            While Not canbus_gps_sync(path, 10, id_drive, 5, index, init_gps, init) Or init > long_file
                 init_gps = init
+                Application.DoEvents()
             End While
+            procesing.Close()
+            If init > long_file Then
+                MsgBox("GPS synchronization failed", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
 
-            'empezamos contando en ind=1 hasta init-1 que es el primer valor que debemos introducir
-            For ind = 0 To init
+            If init < 0 Then
                 linea = fichero.ReadLine
-            Next
-            long_file -= (init - 1)
+                datos = linea.Split(",")
+                For i = 0 To list.CheckedIndices.Count - 1
+                    val = datos(list.CheckedIndices.Item(i) + 4)
+                    If val.Last = "N" Or val.Last = "E" Then
+                        val = "+" & val
+                        val = val.Remove(val.Count - 1)
+                    ElseIf val.Last = "S" Or val.Last = "W" Then
+                        val = "-" & val
+                        val = val.Remove(val.Count - 1)
+                        End
+                    End If
+
+                    'quitar valores NULL
+                    If val(val.Count - 1) = Nothing Then
+                        Do
+                            val = val.Remove(val.Count - 1)
+                        Loop Until val(val.Count - 1) <> Nothing
+                    End If
+                    If val = "" Then val = "0"
+                    last_value(i) = val
+                Next
+                'empezamos contando en ind=init hasta 0 que es el primer valor que debemos introducir
+                For ind = init To -1
+                    index += 1
+                    For i = 0 To list.CheckedIndices.Count - 1
+                        last_index(i) = index
+                        aux = "(" & last_index(i) & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                            & "'" & sync.ToString("HH:mm:ss") & "'" & "," _
+                            & "NULL," & last_value(i) & ")"
+                        ins.set_string(aux)
+                    Next
+                    sync = DateAdd(DateInterval.Second, 1, sync)
+                Next
+                'restamos para sincronizar los valores con el siguiente bucle
+                sync = DateAdd(DateInterval.Second, -1, sync)
+            Else
+                'empezamos contando en ind=0 hasta init que es el primer valor que debemos introducir
+                For ind = 0 To init
+                    linea = fichero.ReadLine
+                Next
+                long_file -= (init - 1)
+            End If
+
+            tm = sync
 
             'busco la zona horaria
             datos = linea.Split(",")
@@ -751,7 +803,7 @@ Public Class logger
                 Next
                 'ha llegado al ultimo canal, cambiamos la hora y el indice
                 tm = time
-                index = last_index(0)
+                index = last_index(list.CheckedIndices(0))
                 If clock >= 1000 Then
                     ins.insert_into_string()
                     ins.init_string()
@@ -922,15 +974,10 @@ Public Class logger
         If index <> 0 Then
             If Not find_all_channels(id_logger, id_drive, list) Then
                 index = 0
-                Load_table_canbus(list)
-                load_ids_chs(list)
-            Else
-                flag = True
             End If
-        Else
-            Load_table_canbus(list)
-            load_ids_chs(list)
         End If
+        Load_table_canbus(list)
+        load_ids_chs(list)
 
         linea = fichero.ReadLine
         'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
@@ -972,7 +1019,20 @@ Public Class logger
                 table_canbus(ch).time = tm
                 table_canbus(ch).index = index + 1
             Next
+            linea = fichero.ReadLine
+        Else
+            linea = fichero.ReadLine
+            datos = linea.Split(vbTab)
+            t = CType(datos(0), Double)
+            tm = format_time2(t, div, time, milsec)
+            For Each ch In table_canbus.Keys
+                'apuntamos a la siguiente hora que corresponde
+                table_canbus(ch).time = tm
+                table_canbus(ch).index = index + 1
+            Next
         End If
+
+        'introducir la carga de los indices aqui tambien si index > 0
 
         Dim ins As New insert_Data
         ins.init_string()
@@ -980,7 +1040,6 @@ Public Class logger
         long_file = long_file / list.CheckedIndices.Count
         config_progressbar(bar, long_file, list, n_data)
 
-        linea = fichero.ReadLine
         Do
             If linea <> Nothing Then
                 Application.DoEvents()
@@ -1007,20 +1066,12 @@ Public Class logger
                                     table_canbus(x).time = tm
                                     table_canbus(x).value = res2
                                     table_canbus(x).count = 1
-                                    'For Each ch In table_canbus.Keys
-                                    'If table_canbus(ch).global_time = "" Then
-                                    'apuntamos a la siguiente hora que corresponde
-                                    'table_canbus(ch).global_time = tm
-                                    'table_canbus(ch).index = index + 1
-                                    'End If
-                                    'Next
                                 Else
                                     'todavia estamos en la misma hora, sumamos los valores
                                     If table_canbus(x).time = tm Then
                                         table_canbus(x).value += res2
                                         table_canbus(x).count += 1
                                     Else
-                                        'flag = False
                                         '''''' introducir un datediff(table_canbus(x).time,tm) 
                                         '''''' si es mayor de 1seg, introducimos un valor 0 en esa hora
                                         '''''' sino la funcion continua inicializando los valores
@@ -1052,7 +1103,7 @@ Public Class logger
                                                 table_canbus(x).index += 1
                                             End If
                                         Next
-                                        
+
                                         'inicializamos el valor para el siguiente segundo
                                         table_canbus(x).time = tm
                                         table_canbus(x).value = res2
@@ -1101,7 +1152,7 @@ Public Class logger
     End Sub
 
     'sincroniza los datos del gps respecto al canbus
-    Public Function canbus_gps_sync(ByVal path As String, ByVal threshold As Integer, ByVal id_drive As Integer, _
+    Public Function canbus_gps_sync(ByVal path As String, ByVal threshold As Integer, ByVal id_drive As Integer, ByVal sec As Integer, _
                                     ByVal init_canbus As Integer, ByVal init_gps As Integer, ByRef index As Integer) As Boolean
         Dim file As New System.IO.StreamReader(path)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
@@ -1135,9 +1186,10 @@ Public Class logger
         found = False
         'buscamos referencia en el gps
         line = file.ReadLine 'cabecera
-        For i = 0 To init_gps - 1
+        For i = 0 To init_gps
             line = file.ReadLine
         Next
+        index_gps = init_gps
         While Not line Is Nothing And found = False
             line = file.ReadLine
             index_gps += 1
@@ -1148,14 +1200,14 @@ Public Class logger
         End While
 
         found = False
-        'comprobamos la sincronizacion durante 20 segundos
-        While count < 20 And found = False
+        'comprobamos la sincronizacion durante "sec" segundos
+        While count < sec And found = False
             If CType(line.Split(",")(7), Double) = 0 Then
-                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 7 Then
+                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 7 Then 'margen de 7km/h
                     found = True
                 End If
             Else
-                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 5 Then
+                If Math.Abs(query.GetDouble(1) - CType(line.Split(",")(7), Double)) > 7 Then 'margen de 7km/h
                     found = True
                 End If
             End If
@@ -1169,7 +1221,7 @@ Public Class logger
             index = index_gps - index_canbus
         Else
             ' devolvemos por donde debemos empezar la proxima lectura del archivo del gps
-            index = index_gps + count
+            index = index_gps + 1
         End If
 
         cn.Close()
