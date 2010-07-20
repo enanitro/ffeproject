@@ -630,6 +630,7 @@ Public Class logger
         Dim sec As Long
         Dim s_w_time As String = ""
         Dim add_hour, init, init_gps As Integer
+        Dim threshold As Double
 
         ReDim last_value(list.Items.Count)
         ReDim last_index(list.Items.Count)
@@ -660,10 +661,12 @@ Public Class logger
             
             sync = CType(flag, DateTime)
             init_gps = 0
+            threshold = 10
             procesing.Show()
             Application.DoEvents()
-            While Not canbus_gps_sync(path, 10, id_drive, 5, index, init_gps, init) Or init > long_file
-                init_gps = init
+            While Not canbus_gps_sync(path, threshold, id_drive, 5, index, init_gps, init) Or init > long_file
+                threshold += 5
+                'init_gps = init
                 Application.DoEvents()
             End While
             procesing.Close()
