@@ -524,7 +524,7 @@ Public Class logger
                         val = datos(ch39)
                     End If
                     num_lines += 1
-                Loop Until val > 0 Or num_lines > long_file
+                Loop Until val > 1 Or num_lines > long_file
                 num_lines = (num_lines - 1) * list.CheckedItems.Count
                 'inicializo la primera hora
                 time1 = FormatDateTime(datos(1), DateFormat.LongTime)
@@ -782,13 +782,16 @@ Public Class logger
 
                         sec = Math.Abs(DateDiff(DateInterval.Second, CType(tm, DateTime), CType(time, DateTime)))
                         If sec > 1 Then
-                            avg = avg_values(str_to_double(last_value(i)), str_to_double(val), 2)
+                            'avg = avg_values(str_to_double(last_value(i)), str_to_double(val), 2)
                             For k = 1 To sec - 1
                                 tm_aux = DateAdd(DateInterval.Second, k, CType(tm, DateTime)).ToString("HH:mm:ss")
                                 aux = "(" & last_index(i) & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                                 & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                                 & "'" & tm_aux & "'" & "," _
                                 & "NULL," & CType(avg, String).Replace(",", ".") & ")"
+                                '& "NULL," & "0.0" & ")"
+                                '& "NULL," & last_value(i) & ")"
+
                                 ins.set_string(aux)
                                 'index debe estar aqui, en ultima posicion
                                 last_index(i) += 1
@@ -1016,7 +1019,7 @@ Public Class logger
                 num_lines += 1
             Loop Until val > 0 Or num_lines > long_file
             t = CType(datos(0), Double)
-            tm = format_time2(t, div, time, milsec)
+            tm = format_time2(t, div, time, milsec) 'el fallo esta en format_time2
             For Each ch In table_canbus.Keys
                 'apuntamos a la siguiente hora que corresponde
                 table_canbus(ch).time = tm
@@ -1034,8 +1037,6 @@ Public Class logger
                 table_canbus(ch).index = index + 1
             Next
         End If
-
-        'introducir la carga de los indices aqui tambien si index > 0
 
         Dim ins As New insert_Data
         ins.init_string()
@@ -1412,6 +1413,7 @@ Public Class logger
         Dim res As String
         Dim h, m, s, ss, rest As Double
         Dim format() As String
+        Dim tm As DateTime
         ss = 0
         format = ini.Split(":")
         h = format(0)
@@ -1439,8 +1441,9 @@ Public Class logger
         End If
 
         res = h & ":" & m & ":" & s
+        tm = CType(res, DateTime)
 
-        format_time2 = CType(FormatDateTime(res, DateFormat.LongTime), String)
+        format_time2 = tm.ToString("HH:mm:ss")
     End Function
 
 
