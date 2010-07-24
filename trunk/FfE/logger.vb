@@ -788,7 +788,8 @@ Public Class logger
                                 aux = "(" & last_index(i) & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                                 & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                                 & "'" & tm_aux & "'" & "," _
-                                & "NULL," & CType(avg, String).Replace(",", ".") & ")"
+                                & "NULL," & "0.0" & ")"
+                                '& "NULL," & CType(avg, String).Replace(",", ".") & ")"
                                 '& "NULL," & "0.0" & ")"
                                 '& "NULL," & last_value(i) & ")"
 
