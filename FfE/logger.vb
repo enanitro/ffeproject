@@ -782,14 +782,14 @@ Public Class logger
 
                         sec = Math.Abs(DateDiff(DateInterval.Second, CType(tm, DateTime), CType(time, DateTime)))
                         If sec > 1 Then
-                            'avg = avg_values(str_to_double(last_value(i)), str_to_double(val), 2)
+                            If str_to_double(val) = 0 Then val = last_value(i)
                             For k = 1 To sec - 1
+                                avg = lineal_interpolation(0, str_to_double(last_value(i)), sec, str_to_double(val), k)
                                 tm_aux = DateAdd(DateInterval.Second, k, CType(tm, DateTime)).ToString("HH:mm:ss")
                                 aux = "(" & last_index(i) & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
                                 & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
                                 & "'" & tm_aux & "'" & "," _
-                                & "NULL," & "0.0" & ")"
-                                '& "NULL," & CType(avg, String).Replace(",", ".") & ")"
+                                & "NULL," & CType(avg, String).Replace(",", ".") & ")"
                                 '& "NULL," & "0.0" & ")"
                                 '& "NULL," & last_value(i) & ")"
 
@@ -1232,6 +1232,13 @@ Public Class logger
         cn.Close()
 
         Return Not found
+    End Function
+
+
+    Private Function lineal_interpolation(ByVal x0 As Double, ByVal fx0 As Double, ByVal x1 As Double, ByVal fx1 As Double, ByVal x As Double) As Double
+        Dim res As Double
+        res = fx0 + ((fx1 - fx0) / (x1 - x0)) * (x - x0)
+        lineal_interpolation = res
     End Function
 
 
