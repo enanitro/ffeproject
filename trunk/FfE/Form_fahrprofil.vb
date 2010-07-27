@@ -235,7 +235,7 @@ Public Class Form_fahrprofil
             cmd.Connection = cn
             sql = "select if(min(data_index) is null,'',min(data_index)) from data where drive_id = " & drive_id & _
                   " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")" & _
-                  " and value >=10 and logger_id = " & FfE_Main.id_canbus
+                  " and logger_id = " & FfE_Main.id_canbus
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader
@@ -247,7 +247,7 @@ Public Class Form_fahrprofil
                 cmd.Connection = cn
                 sql = "select avg(value),max(data_index),min(data_index) from data where drive_id = " & drive_id & _
                 " and (data_id like '%Fahrzeuggeschwindigkeit%' or measure_id = " & sp_canbus & ")" & _
-                "and data_index >= " & start
+                "and logger_id = " & FfE_Main.id_canbus & " and data_index >= " & start
                 cmd.CommandTimeout = 1000
                 cmd.CommandText = sql
                 query = cmd.ExecuteReader
@@ -256,6 +256,7 @@ Public Class Form_fahrprofil
                         grid(9, index).Value = Math.Round(query.GetDouble(0), 4)
                         grid(10, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
                                     " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(2))
+                        'aqui tb esta el fallo
                         grid(11, index).Value = execute_simple("select time from data where drive_id = " & drive_id & _
                                     " and logger_id = " & FfE_Main.id_canbus & " and data_index = " & query.GetString(1))
                         find = True
@@ -280,7 +281,7 @@ Public Class Form_fahrprofil
         ts1 = grid(7, index).Value
         ts2 = grid(10, index).Value
         te1 = grid(8, index).Value
-        te2 = grid(11, index).Value
+        te2 = grid(11, index).Value 'aqui esta el fallo
         interval1 = Math.Abs(DateDiff(DateInterval.Second, ts1, ts2))
         interval2 = Math.Abs(DateDiff(DateInterval.Second, te1, te2))
         d1 = "00:00:00"

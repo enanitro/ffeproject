@@ -32,8 +32,11 @@ Public Class Form_view_data
         grid.AllowUserToDeleteRows = False
         grid.Columns(0).Width = 60
         grid.Columns(1).Width = 60
+        Dim ch As String
         For i = 2 To grid.Columns.Count - 1
             grid.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet
+            grid.Columns(i).HeaderCell.Value = grid.Columns(i).HeaderCell.Value.ToString.Replace("Â", "") _
+            .Replace("Ã¶", "ö").Replace("Ã¼", "ü").Replace("Ã¤", "ä")
         Next
     End Sub
 
@@ -191,9 +194,13 @@ Public Class Form_view_data
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
 
-
+            Dim ch As String
             sql = "select data_index as 'Index',time as Time"
             While query.Read()
+                'ch = query.GetString(0).Replace("ö", "oe")
+                'ch = ch.Replace("ü", "ue")
+                'ch = ch.Replace("ä", "ae")
+                'ch = ch.Replace(Chr(176), "deg")
                 sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
                     query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "'"
             End While
