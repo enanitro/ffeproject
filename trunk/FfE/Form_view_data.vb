@@ -189,7 +189,7 @@ Public Class Form_view_data
             cmd.Connection = cn
 
             sql = "select distinct data_id from data where drive_id = " & drive_id & _
-             " and logger_id = " & logger_id
+             " and logger_id = " & logger_id & " order by cast(substring_index(data_id,'.',1) as unsigned) asc"
             cmd.CommandTimeout = 1000000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -197,10 +197,6 @@ Public Class Form_view_data
             Dim ch As String
             sql = "select data_index as 'Index',time as Time"
             While query.Read()
-                'ch = query.GetString(0).Replace("ö", "oe")
-                'ch = ch.Replace("ü", "ue")
-                'ch = ch.Replace("ä", "ae")
-                'ch = ch.Replace(Chr(176), "deg")
                 sql += ",sum(value*(1-abs(sign(if(strcmp(data_id,'" & _
                     query.GetString(0) & "'),1,0))))) as '" & query.GetString(0) & "'"
             End While

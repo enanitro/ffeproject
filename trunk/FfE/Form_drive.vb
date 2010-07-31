@@ -286,6 +286,7 @@ Public Class Form_drive
         Try
             Me.Validate()
             Me.DriveBindingSource.EndEdit()
+            'aqui esta el problema del 
             Me.DriveTableAdapter.Update(Me.Ffe_databaseDataSet.drive)
             Ffe_databaseDataSet.drive.AcceptChanges()
             Me.Drive_fullTableAdapter.Fill(Me.Ffe_databaseDataSet.drive_full)

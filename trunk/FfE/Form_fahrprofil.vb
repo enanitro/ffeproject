@@ -328,6 +328,9 @@ Public Class Form_fahrprofil
                                    " where drive_id = " & grid(1, i).Value)
                 End If
             Next
+            Form_drive.Ffe_databaseDataSet.drive.AcceptChanges()
+            Form_drive.DriveTableAdapter.Fill(Form_drive.Ffe_databaseDataSet.drive)
+            Form_drive.Drive_fullTableAdapter.Fill(Form_drive.Ffe_databaseDataSet.drive_full)
             clear_window(DataGridView1)
             select_value_gps()
             procesing.Close()

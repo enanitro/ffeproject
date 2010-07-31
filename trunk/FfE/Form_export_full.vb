@@ -31,6 +31,12 @@ Public Class Form_export_full
             End If
             If abort <> True And into <> False Then
                 MsgBox("Data-loggers were exported successfully", MsgBoxStyle.Information)
+            Else
+                MessageBox.Show("Export files aborted", "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If My.Computer.FileSystem.FileExists(path_canbus.Text) Then My.Computer.FileSystem.DeleteFile(path_canbus.Text)
+                If My.Computer.FileSystem.FileExists(path_gps.Text) Then My.Computer.FileSystem.DeleteFile(path_gps.Text)
+                If My.Computer.FileSystem.FileExists(path_graphtec.Text) Then My.Computer.FileSystem.DeleteFile(path_graphtec.Text)
+                If My.Computer.FileSystem.FileExists(path_lmg.Text) Then My.Computer.FileSystem.DeleteFile(path_lmg.Text)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -203,7 +209,6 @@ Public Class Form_export_full
         End Try
     End Sub
 
-
     Private Sub execute_query_loggers(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
                                       ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
@@ -221,8 +226,8 @@ Public Class Form_export_full
             cn.Open()
             cmd.Connection = cn
 
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
-             " and logger_id = " & logger_id
+            sql = "select distinct data_id from data where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by cast(substring_index(data_id,'.',1) as unsigned) asc"
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
@@ -262,6 +267,7 @@ Public Class Form_export_full
             config_progressbar(max, bar)
             i = 1
             While query.Read()
+                If abort = True Then Exit Sub
                 res += query.GetString(0)
                 i = query.GetString(0).Split(",")(0)
                 progressbar(i, percent.Text, bar)
@@ -351,6 +357,7 @@ Public Class Form_export_full
             config_progressbar(max, bar)
             i = 1
             While query.Read()
+                If abort = True Then Exit Sub
                 res += query.GetString(0)
                 i = query.GetString(0).Split(",")(0)
                 progressbar(i, percent.Text, bar)
@@ -543,7 +550,6 @@ Public Class Form_export_full
 
     End Sub
 
-
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             SaveFileDialog.Filter() = "CSV Files(*.csv)|*.csv"
@@ -597,7 +603,7 @@ Public Class Form_export_full
         If btn_export.Enabled = False Then
             If MsgBox("Do you want to abort import process?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 abort = True
-                Throw New Exception("Export process aborted")
+                'Throw New Exception("Export process aborted")
             End If
         End If
     End Sub
