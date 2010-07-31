@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class form_import_csv_full
+    Private logger As New logger
     Dim long_graphtec(), long_gps(), long_lmg(), long_canbus() As Integer
     Dim id_measure_graphtec(), id_measure_gps(), id_measure_lmg(), id_measure_canbus() As Integer
     Dim name_measure_graphtec(), name_measure_gps(), name_measure_lmg(), name_measure_canbus() As String
@@ -20,7 +21,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         Dim txt As String
         'logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec)
         'id_logger = 1
@@ -55,7 +56,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         'logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps)
         'id_logger = 2
         If length_gps = 0 Then
@@ -88,7 +89,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         'logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg)
         'id_logger = 3
         If length_lmg = 0 Then
@@ -121,7 +122,7 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         'logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus)
         'id_logger = 4
         If length_canbus = 0 Then
@@ -154,32 +155,32 @@ Public Class form_import_csv_full
     End Sub
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         logger.clean_logger(CheckedListBox4, TextBox4, Panel4, path_canbus, long_canbus, length_canbus, CheckBox4)
         length_canbus = 0
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         logger.clean_logger(CheckedListBox1, TextBox1, Panel1, path_graphtec, long_graphtec, length_graphtec, CheckBox1)
         length_graphtec = 0
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         logger.clean_logger(CheckedListBox2, TextBox2, Panel2, path_gps, long_gps, length_gps, CheckBox2)
         length_gps = 0
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         logger.clean_logger(CheckedListBox3, TextBox3, Panel3, path_lmg, long_lmg, length_lmg, CheckBox3)
         length_lmg = 0
     End Sub
 
     'import files
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
-        Dim logger As New logger
+        'Dim logger As New logger
         Dim imp As Boolean = False
         Try
             Button7.Enabled = False
@@ -258,6 +259,7 @@ Public Class form_import_csv_full
             length_lmg = 0
             length_canbus = 0
             Button7.Enabled = True
+            logger.abort = False
         End Try
     End Sub
 
@@ -507,7 +509,8 @@ Public Class form_import_csv_full
                 If CheckedListBox3.Visible = True Then path_lmg(0) = ""
                 If CheckedListBox4.Visible = True Then path_canbus(0) = ""
                 abort = True
-                Throw New Exception("Import process aborted")
+                'Throw New Exception("Import process aborted")
+                logger.abort = True
             End If
         End If
     End Sub
@@ -595,4 +598,5 @@ Public Class form_import_csv_full
     Private Sub CheckBox4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBox4.Click
         select_all(CheckedListBox4, id_measure_canbus, FfE_Main.id_canbus, name_measure_canbus, CheckBox4)
     End Sub
+
 End Class

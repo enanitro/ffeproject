@@ -52,13 +52,19 @@ Public Class logger
 
     End Class
 
+    Public abort As String = False
     Public unit As String
     Dim table_canbus As New Dictionary(Of Integer, str_canbus)
     Dim ids_chs As New Dictionary(Of Integer, Integer())
 
+    Public Sub throw_exception()
+        Throw New Exception("Import process aborted")
+    End Sub
+
 
     Private Sub load_ids_chs(ByVal list As CheckedListBox)
         Dim v() As Integer
+        ids_chs.Clear()
         For Each i In list.CheckedIndices
             If ids_chs.TryGetValue(table_canbus(i).id, v) Then
                 Array.Resize(v, v.Length + 1)
@@ -78,7 +84,7 @@ Public Class logger
         Dim s As String
         Dim cmd As New MySqlCommand
         Dim dr As MySqlDataReader
-
+        table_canbus.Clear()
         For Each i In list.CheckedIndices
             cn.Open()
             cmd.Connection = cn
@@ -569,6 +575,7 @@ Public Class logger
 
         Do
             If linea <> Nothing Then
+                If abort = True Then Me.throw_exception()
                 Application.DoEvents()
                 datos = linea.Split(",")
                 index += 1
@@ -618,7 +625,7 @@ Public Class logger
                                     ByVal id_logger As Integer, ByVal id_drive As Integer, ByRef long_file As String, _
                                     ByVal measure() As Integer)
         Dim fichero As New System.IO.StreamReader(path)
-        Dim linea, aux, val, sql, last_value(), flag, time, tm, tm_aux As String
+        Dim linea, aux, val, sql, last_value(), flag, time, tm, tm_aux, last_tm() As String
         Dim sync, time1, time2 As Date
         Dim datos() As String
         Dim num_lines As Integer = 0
@@ -631,9 +638,11 @@ Public Class logger
         Dim s_w_time As String = ""
         Dim add_hour, init, init_gps As Integer
         Dim threshold As Double
+        Dim check As Boolean = True
 
         ReDim last_value(list.Items.Count)
         ReDim last_index(list.Items.Count)
+        ReDim last_tm(list.Items.Count)
 
         index = find_last_index(id_logger, id_drive)
         If index <> 0 Then
@@ -658,7 +667,7 @@ Public Class logger
               " and data_index = " & index + 1
         flag = search_time_sync(sql)
         If flag <> "" Then
-            
+
             sync = CType(flag, DateTime)
             init_gps = 0
             threshold = 10
@@ -743,6 +752,7 @@ Public Class logger
 
         Do
             If linea <> Nothing Then
+                If abort = True Then Me.throw_exception()
                 Application.DoEvents()
                 datos = linea.Split(",")
                 index += 1
@@ -779,10 +789,8 @@ Public Class logger
                     If val <> "" Then
                         data_points += 1
                         clock += 1
-
                         sec = Math.Abs(DateDiff(DateInterval.Second, CType(tm, DateTime), CType(time, DateTime)))
                         If sec > 1 Then
-                            If str_to_double(val) = 0 Then val = last_value(i)
                             For k = 1 To sec - 1
                                 avg = lineal_interpolation(0, str_to_double(last_value(i)), sec, str_to_double(val), k)
                                 tm_aux = DateAdd(DateInterval.Second, k, CType(tm, DateTime)).ToString("HH:mm:ss")
@@ -800,9 +808,9 @@ Public Class logger
                         End If
 
                         aux = "(" & last_index(i) & ",'" & list.CheckedItems.Item(i) & "'," & id_drive _
-                        & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
-                        & "'" & time & "'" & "," _
-                        & "NULL," & val & ")"
+                            & "," & id_logger & "," & measure(list.CheckedIndices.Item(i)) & "," _
+                            & "'" & time & "'" & "," _
+                            & "NULL," & val & ")"
                         ins.set_string(aux)
                         last_value(i) = val
                     End If
@@ -917,6 +925,7 @@ Public Class logger
 
         Do
             If linea <> Nothing Then
+                If abort = True Then Me.throw_exception()
                 Application.DoEvents()
                 datos = linea.Split(",")
                 index += 1
@@ -1047,6 +1056,7 @@ Public Class logger
 
         Do
             If linea <> Nothing Then
+                If abort = True Then Me.throw_exception()
                 Application.DoEvents()
                 datos = linea.Split(vbTab)
                 'index += 1
