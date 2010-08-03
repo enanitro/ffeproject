@@ -314,8 +314,9 @@ Public Class Form_export_full
             cn.Open()
             cmd.Connection = cn
 
-            sql = "select distinct data_id from data_full where drive_id = " & drive_id.Text & _
-             " and logger_id = " & logger_id
+            sql = "select distinct data_id from data where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by cast(substring_index(data_id,'.',1) as unsigned) asc"
+
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
             query = cmd.ExecuteReader()
