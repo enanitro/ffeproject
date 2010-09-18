@@ -24,7 +24,7 @@ Public Class Form_view_data
         'show_data_canbus(DataGridView3, FfE_Main.id_canbus)
         show_data(DataGridView3, FfE_Main.id_canbus)
         show_einspritzung_channel(DataGridView4, FfE_Main.id_canbus)
-
+        check_grid_canbus()
         check_grids_canbus_same_index()
 
     End Sub
@@ -269,6 +269,16 @@ Public Class Form_view_data
                 cn.Close()
             End If
         End Try
+    End Sub
+
+    Private Sub check_grid_canbus()
+
+        For i = 0 To DataGridView3.ColumnCount - 1
+            If DataGridView3.Columns(i).HeaderCell.Value Like "*Einspritzung*" Then
+                DataGridView3.Columns(i).Visible = False
+            End If
+        Next
+
     End Sub
 
     Private Sub check_grids_canbus_same_index()
