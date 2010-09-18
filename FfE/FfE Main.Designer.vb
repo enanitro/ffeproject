@@ -39,12 +39,12 @@ Partial Class FfE_Main
         Me.CANBUSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ChannelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.FunctionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.KmsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.DatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ConnectionToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.BackupDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.RestoreDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.KmsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -96,37 +96,37 @@ Partial Class FfE_Main
         'UserToolStripMenuItem
         '
         Me.UserToolStripMenuItem.Name = "UserToolStripMenuItem"
-        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.UserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UserToolStripMenuItem.Text = "User"
         '
         'CarToolStripMenuItem
         '
         Me.CarToolStripMenuItem.Name = "CarToolStripMenuItem"
-        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.CarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CarToolStripMenuItem.Text = "Car"
         '
         'FahrprofileToolStripMenuItem
         '
         Me.FahrprofileToolStripMenuItem.Name = "FahrprofileToolStripMenuItem"
-        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
-        Me.FahrprofileToolStripMenuItem.Text = "Usage type"
+        Me.FahrprofileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FahrprofileToolStripMenuItem.Text = "Track type"
         '
         'MeasureToolStripMenuItem
         '
         Me.MeasureToolStripMenuItem.Name = "MeasureToolStripMenuItem"
-        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.MeasureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MeasureToolStripMenuItem.Text = "Measure"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(129, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
         '
         'CANBUSToolStripMenuItem
         '
         Me.CANBUSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChannelsToolStripMenuItem})
         Me.CANBUSToolStripMenuItem.Name = "CANBUSToolStripMenuItem"
-        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.CANBUSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CANBUSToolStripMenuItem.Text = "CAN-BUS"
         '
         'ChannelsToolStripMenuItem
@@ -141,6 +141,12 @@ Partial Class FfE_Main
         Me.FunctionsToolStripMenuItem.Name = "FunctionsToolStripMenuItem"
         Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
         Me.FunctionsToolStripMenuItem.Text = "Functions"
+        '
+        'KmsToolStripMenuItem
+        '
+        Me.KmsToolStripMenuItem.Name = "KmsToolStripMenuItem"
+        Me.KmsToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.KmsToolStripMenuItem.Text = "Kms"
         '
         'DatabaseToolStripMenuItem
         '
@@ -172,12 +178,6 @@ Partial Class FfE_Main
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'KmsToolStripMenuItem
-        '
-        Me.KmsToolStripMenuItem.Name = "KmsToolStripMenuItem"
-        Me.KmsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.KmsToolStripMenuItem.Text = "Kms"
         '
         'FfE_Main
         '

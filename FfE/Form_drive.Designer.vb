@@ -116,16 +116,6 @@ Partial Class Form_drive
         Me.DriveSort = New System.Windows.Forms.DataGridView
         Me.DriveidDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DriveDataGridView = New System.Windows.Forms.DataGridView
-        Me.DriveidDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.StatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ClimateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DrivetypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.UsagetypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DriverDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ImporterDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.CarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DrivefullBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FfedatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DriveTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.driveTableAdapter
@@ -136,6 +126,16 @@ Partial Class Form_drive
         Me.TableAdapterManager1 = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog
         Me.Drive_fullTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.drive_fullTableAdapter
+        Me.DriveidDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.StatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ClimateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DrivetypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.UsagetypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DriverDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ImporterDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         DateLabel = New System.Windows.Forms.Label
         DescriptionLabel = New System.Windows.Forms.Label
         StatusLabel = New System.Windows.Forms.Label
@@ -195,11 +195,11 @@ Partial Class Form_drive
         '
         DescriptionLabel.AutoSize = True
         DescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        DescriptionLabel.Location = New System.Drawing.Point(33, 232)
+        DescriptionLabel.Location = New System.Drawing.Point(22, 233)
         DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(84, 15)
+        DescriptionLabel.Size = New System.Drawing.Size(95, 15)
         DescriptionLabel.TabIndex = 15
-        DescriptionLabel.Text = "Description:"
+        DescriptionLabel.Text = "Consumption:"
         '
         'StatusLabel
         '
@@ -225,11 +225,11 @@ Partial Class Form_drive
         '
         Label1.AutoSize = True
         Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Label1.Location = New System.Drawing.Point(31, 272)
+        Label1.Location = New System.Drawing.Point(37, 274)
         Label1.Name = "Label1"
-        Label1.Size = New System.Drawing.Size(86, 15)
+        Label1.Size = New System.Drawing.Size(80, 15)
         Label1.TabIndex = 17
-        Label1.Text = "Usage Type:"
+        Label1.Text = "Track Type:"
         '
         'Label4
         '
@@ -1196,76 +1196,6 @@ Partial Class Form_drive
         Me.DriveDataGridView.Size = New System.Drawing.Size(779, 455)
         Me.DriveDataGridView.TabIndex = 3
         '
-        'DriveidDataGridViewTextBoxColumn
-        '
-        Me.DriveidDataGridViewTextBoxColumn.DataPropertyName = "drive_id"
-        Me.DriveidDataGridViewTextBoxColumn.HeaderText = "Drive ID"
-        Me.DriveidDataGridViewTextBoxColumn.Name = "DriveidDataGridViewTextBoxColumn"
-        Me.DriveidDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'DateDataGridViewTextBoxColumn
-        '
-        Me.DateDataGridViewTextBoxColumn.DataPropertyName = "date"
-        Me.DateDataGridViewTextBoxColumn.HeaderText = "Date"
-        Me.DateDataGridViewTextBoxColumn.Name = "DateDataGridViewTextBoxColumn"
-        Me.DateDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'StatusDataGridViewTextBoxColumn
-        '
-        Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "status"
-        Me.StatusDataGridViewTextBoxColumn.HeaderText = "Status"
-        Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
-        Me.StatusDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ClimateDataGridViewTextBoxColumn
-        '
-        Me.ClimateDataGridViewTextBoxColumn.DataPropertyName = "climate"
-        Me.ClimateDataGridViewTextBoxColumn.HeaderText = "Climate"
-        Me.ClimateDataGridViewTextBoxColumn.Name = "ClimateDataGridViewTextBoxColumn"
-        Me.ClimateDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'DrivetypeDataGridViewTextBoxColumn
-        '
-        Me.DrivetypeDataGridViewTextBoxColumn.DataPropertyName = "drive_type"
-        Me.DrivetypeDataGridViewTextBoxColumn.HeaderText = "Drive type"
-        Me.DrivetypeDataGridViewTextBoxColumn.Name = "DrivetypeDataGridViewTextBoxColumn"
-        Me.DrivetypeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'UsagetypeDataGridViewTextBoxColumn
-        '
-        Me.UsagetypeDataGridViewTextBoxColumn.DataPropertyName = "usage_type"
-        Me.UsagetypeDataGridViewTextBoxColumn.HeaderText = "Usage type"
-        Me.UsagetypeDataGridViewTextBoxColumn.Name = "UsagetypeDataGridViewTextBoxColumn"
-        Me.UsagetypeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'DriverDataGridViewTextBoxColumn
-        '
-        Me.DriverDataGridViewTextBoxColumn.DataPropertyName = "driver"
-        Me.DriverDataGridViewTextBoxColumn.HeaderText = "Driver"
-        Me.DriverDataGridViewTextBoxColumn.Name = "DriverDataGridViewTextBoxColumn"
-        Me.DriverDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ImporterDataGridViewTextBoxColumn
-        '
-        Me.ImporterDataGridViewTextBoxColumn.DataPropertyName = "importer"
-        Me.ImporterDataGridViewTextBoxColumn.HeaderText = "Importer"
-        Me.ImporterDataGridViewTextBoxColumn.Name = "ImporterDataGridViewTextBoxColumn"
-        Me.ImporterDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'CarDataGridViewTextBoxColumn
-        '
-        Me.CarDataGridViewTextBoxColumn.DataPropertyName = "car"
-        Me.CarDataGridViewTextBoxColumn.HeaderText = "Car"
-        Me.CarDataGridViewTextBoxColumn.Name = "CarDataGridViewTextBoxColumn"
-        Me.CarDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
-        '
         'DrivefullBindingSource
         '
         Me.DrivefullBindingSource.DataMember = "drive_full"
@@ -1328,6 +1258,76 @@ Partial Class Form_drive
         'Drive_fullTableAdapter
         '
         Me.Drive_fullTableAdapter.ClearBeforeFill = True
+        '
+        'DriveidDataGridViewTextBoxColumn
+        '
+        Me.DriveidDataGridViewTextBoxColumn.DataPropertyName = "drive_id"
+        Me.DriveidDataGridViewTextBoxColumn.HeaderText = "Drive ID"
+        Me.DriveidDataGridViewTextBoxColumn.Name = "DriveidDataGridViewTextBoxColumn"
+        Me.DriveidDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'DateDataGridViewTextBoxColumn
+        '
+        Me.DateDataGridViewTextBoxColumn.DataPropertyName = "date"
+        Me.DateDataGridViewTextBoxColumn.HeaderText = "Date"
+        Me.DateDataGridViewTextBoxColumn.Name = "DateDataGridViewTextBoxColumn"
+        Me.DateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'StatusDataGridViewTextBoxColumn
+        '
+        Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "status"
+        Me.StatusDataGridViewTextBoxColumn.HeaderText = "Status"
+        Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
+        Me.StatusDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ClimateDataGridViewTextBoxColumn
+        '
+        Me.ClimateDataGridViewTextBoxColumn.DataPropertyName = "climate"
+        Me.ClimateDataGridViewTextBoxColumn.HeaderText = "Climate"
+        Me.ClimateDataGridViewTextBoxColumn.Name = "ClimateDataGridViewTextBoxColumn"
+        Me.ClimateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'DrivetypeDataGridViewTextBoxColumn
+        '
+        Me.DrivetypeDataGridViewTextBoxColumn.DataPropertyName = "drive_type"
+        Me.DrivetypeDataGridViewTextBoxColumn.HeaderText = "Drive type"
+        Me.DrivetypeDataGridViewTextBoxColumn.Name = "DrivetypeDataGridViewTextBoxColumn"
+        Me.DrivetypeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'UsagetypeDataGridViewTextBoxColumn
+        '
+        Me.UsagetypeDataGridViewTextBoxColumn.DataPropertyName = "usage_type"
+        Me.UsagetypeDataGridViewTextBoxColumn.HeaderText = "Track type"
+        Me.UsagetypeDataGridViewTextBoxColumn.Name = "UsagetypeDataGridViewTextBoxColumn"
+        Me.UsagetypeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'DriverDataGridViewTextBoxColumn
+        '
+        Me.DriverDataGridViewTextBoxColumn.DataPropertyName = "driver"
+        Me.DriverDataGridViewTextBoxColumn.HeaderText = "Driver"
+        Me.DriverDataGridViewTextBoxColumn.Name = "DriverDataGridViewTextBoxColumn"
+        Me.DriverDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ImporterDataGridViewTextBoxColumn
+        '
+        Me.ImporterDataGridViewTextBoxColumn.DataPropertyName = "importer"
+        Me.ImporterDataGridViewTextBoxColumn.HeaderText = "Importer"
+        Me.ImporterDataGridViewTextBoxColumn.Name = "ImporterDataGridViewTextBoxColumn"
+        Me.ImporterDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'CarDataGridViewTextBoxColumn
+        '
+        Me.CarDataGridViewTextBoxColumn.DataPropertyName = "car"
+        Me.CarDataGridViewTextBoxColumn.HeaderText = "Car"
+        Me.CarDataGridViewTextBoxColumn.Name = "CarDataGridViewTextBoxColumn"
+        Me.CarDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'DescriptionDataGridViewTextBoxColumn
+        '
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
         '
         'Form_drive
         '
@@ -1453,6 +1453,8 @@ Partial Class Form_drive
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents DrivefullBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Drive_fullTableAdapter As FfE.ffe_databaseDataSetTableAdapters.drive_fullTableAdapter
+    Friend WithEvents DriveSort As System.Windows.Forms.DataGridView
+    Friend WithEvents DriveidDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DriveidDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents StatusDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1463,6 +1465,4 @@ Partial Class Form_drive
     Friend WithEvents ImporterDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CarDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescriptionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DriveSort As System.Windows.Forms.DataGridView
-    Friend WithEvents DriveidDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
