@@ -996,13 +996,6 @@ Public Class logger
         load_ids_chs(list)
 
         linea = fichero.ReadLine
-
-        'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
-        '
-        'Else
-        'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
-        'End If
-
         linea = fichero.ReadLine
         div = 1000000000
         datos = linea.Split(vbTab)
@@ -1086,7 +1079,6 @@ Public Class logger
                                 ' al pasar al siguiente segundo check en la tabla y comprobamos la correspondencia de indices
                                 ' 
                                 If value = 1312 Then '1312 es el ID del canal einspritzung
-
                                     aux = "(" & index_einspritzung & ",'" & list.Items(x) & "'," & id_drive _
                                           & "," & id_logger & "," & measure(x) & "," _
                                           & "'" & tm & "'" & "," _
@@ -1094,63 +1086,60 @@ Public Class logger
                                     ins.set_string(aux)
                                     index_einspritzung -= 1
                                 Else
-
-                                End If
-
-                                'inicializamos por primera vez los datos
-                                If table_canbus(x).time = "" Then
-                                    table_canbus(x).time = tm
-                                    table_canbus(x).value = res2
-                                    table_canbus(x).count = 1
-                                Else
-                                    'todavia estamos en la misma hora, sumamos los valores
-                                    If table_canbus(x).time = tm Then
-                                        table_canbus(x).value += res2
-                                        table_canbus(x).count += 1
-                                    Else
-                                        '''''' introducir un datediff(table_canbus(x).time,tm) 
-                                        '''''' si es mayor de 1seg, introducimos un valor 0 en esa hora
-                                        '''''' sino la funcion continua inicializando los valores
-                                        sec = DateDiff(DateInterval.Second, CType(table_canbus(x).time, DateTime), _
-                                                       CType(tm, DateTime))
-                                        'If sec > 1 Then
-                                        For i = 0 To sec - 1
-                                            tm_aux = DateAdd(DateInterval.Second, i, _
-                                                             CType(table_canbus(x).time, DateTime)).ToString("HH:mm:ss")
-                                            If tm_aux = table_canbus(x).time Then
-                                                '''''''''''''''''''''''''''''''''''''''''''
-                                                'hemos cambiado de hora, guardamos la media 
-                                                If table_canbus(x).count = 0 Then
-                                                    res = table_canbus(x).value
-                                                Else
-                                                    res = table_canbus(x).value / table_canbus(x).count
-                                                End If
-                                                avg = CType(res, String)
-                                                avg = avg.Replace(",", ".")
-                                                aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
-                                                & "," & id_logger & "," & measure(x) & "," _
-                                                & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                & "0," & avg & ")"
-                                                ins.set_string(aux)
-                                                table_canbus(x).index += 1
-                                                'flag = True
-                                            Else
-                                                aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
-                                                & "," & id_logger & "," & measure(x) & "," _
-                                                & "'" & tm_aux & "'" & "," _
-                                                & "0," & "0" & ")"
-                                                ins.set_string(aux)
-                                                table_canbus(x).index += 1
-                                            End If
-                                        Next
-
-                                        'inicializamos el valor para el siguiente segundo
+                                    'inicializamos por primera vez los datos
+                                    If table_canbus(x).time = "" Then
                                         table_canbus(x).time = tm
                                         table_canbus(x).value = res2
                                         table_canbus(x).count = 1
+                                    Else
+                                        'todavia estamos en la misma hora, sumamos los valores
+                                        If table_canbus(x).time = tm Then
+                                            table_canbus(x).value += res2
+                                            table_canbus(x).count += 1
+                                        Else
+                                            '''''' introducir un datediff(table_canbus(x).time,tm) 
+                                            '''''' si es mayor de 1seg, introducimos un valor 0 en esa hora
+                                            '''''' sino la funcion continua inicializando los valores
+                                            sec = DateDiff(DateInterval.Second, CType(table_canbus(x).time, DateTime), _
+                                                           CType(tm, DateTime))
+                                            'If sec > 1 Then
+                                            For i = 0 To sec - 1
+                                                tm_aux = DateAdd(DateInterval.Second, i, _
+                                                                 CType(table_canbus(x).time, DateTime)).ToString("HH:mm:ss")
+                                                If tm_aux = table_canbus(x).time Then
+                                                    '''''''''''''''''''''''''''''''''''''''''''
+                                                    'hemos cambiado de hora, guardamos la media 
+                                                    If table_canbus(x).count = 0 Then
+                                                        res = table_canbus(x).value
+                                                    Else
+                                                        res = table_canbus(x).value / table_canbus(x).count
+                                                    End If
+                                                    avg = CType(res, String)
+                                                    avg = avg.Replace(",", ".")
+                                                    aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
+                                                    & "," & id_logger & "," & measure(x) & "," _
+                                                    & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
+                                                    & "0," & avg & ")"
+                                                    ins.set_string(aux)
+                                                    table_canbus(x).index += 1
+                                                    'flag = True
+                                                Else
+                                                    aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
+                                                    & "," & id_logger & "," & measure(x) & "," _
+                                                    & "'" & tm_aux & "'" & "," _
+                                                    & "0," & "0" & ")"
+                                                    ins.set_string(aux)
+                                                    table_canbus(x).index += 1
+                                                End If
+                                            Next
+
+                                            'inicializamos el valor para el siguiente segundo
+                                            table_canbus(x).time = tm
+                                            table_canbus(x).value = res2
+                                            table_canbus(x).count = 1
+                                        End If
                                     End If
                                 End If
-
                             Next
                             progressbar(num_lines, bar, percent)
                         End If
@@ -1170,7 +1159,7 @@ Public Class logger
 
         'hay que comprobar que valores quedan por ser importados porque el ultimo cambio de hora no se reconoce
         For Each x In list.CheckedIndices
-            If table_canbus(x).average = True And table_canbus(x).time <> "" Then
+            If table_canbus(x).average = True And table_canbus(x).time <> "" And table_canbus(x).id <> 1312 Then ' 1312 id einspritzung
                 'guardamos la media 
                 res = table_canbus(x).value / table_canbus(x).count
                 avg = CType(res, String)

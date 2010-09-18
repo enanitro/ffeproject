@@ -175,8 +175,9 @@ Public Class Form_export_full
                         execute_query_logger_lmg(logger_id, logger, ProgressBar3, percent_lmg500, TextBox3, path)
                     Case FfE_Main.id_canbus
                         'execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
-                        execute_query_loggers(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
-                        execute_query_einspritzung_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        'execute_query_loggers(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        'execute_query_einspritzung_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        execute_query_logger_canbus_einspritzung(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
 
             End If
@@ -316,7 +317,7 @@ Public Class Form_export_full
             cn.Open()
             cmd.Connection = cn
 
-            sql = "select concat(data_index*(-1),',',time,',',value) from data where drive_id = " & _
+            sql = "select concat(data_index*(-1),',',time,'.',milsec,',',value) from data where drive_id = " & _
                   drive_id.Text & " and logger_id = " & logger_id & " and data_index < 0 order by data_index*(-1)"
             cmd.CommandTimeout = 1000
             cmd.CommandText = sql
@@ -361,6 +362,148 @@ Public Class Form_export_full
         Finally
             sw.Close()
             cn.Close()
+        End Try
+    End Sub
+
+    Private Sub execute_query_logger_canbus_einspritzung(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
+                                      ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim sw As New System.IO.StreamWriter(path, True)
+        Dim cn1, cn2 As New MySqlConnection(connection)
+        Dim cmd1, cmd2 As New MySqlCommand
+        Dim query1, query2 As MySqlDataReader
+        Dim sql1, sql2, res1, res2, linea_vacia As String
+        Dim i, max, min As Integer
+        Dim final1, final2 As Boolean
+        Dim contador_canales As Integer
+        res1 = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn1.Open()
+            cmd1.Connection = cn1
+
+            sql1 = "select distinct data_id from data where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by cast(substring_index(data_id,'.',1) as unsigned) asc"
+            cmd1.CommandTimeout = 1000
+            cmd1.CommandText = sql1
+            query1 = cmd1.ExecuteReader()
+
+            sql1 = "select concat(data_index,',',time"
+            res1 = "INDEX,TIME"
+
+            contador_canales = 0
+            While query1.Read()
+                If Not query1.GetString(0) Like "*Einspritzun*" Then
+                    res1 += "," & query1.GetString(0).Replace(",", ".")
+                    sql1 += ",','" & vbCrLf & ",sum(value*(1-abs(sign(IF(STRCMP(data_id,'" & query1.GetString(0) & "'),1,0)))))"
+                End If
+                contador_canales += 1
+            End While
+
+            sql1 += ") as format_row from data" & _
+                " where drive_id = " & drive_id.Text & _
+                " and logger_id = " & logger_id & _
+                " group by data_index " & _
+                " having data_index > 0"
+            cn1.Close()
+
+            tb.Text = sql1
+            tb.Visible = True
+
+            linea_vacia = ""
+            'preparo una linea vacia de valores por si tenemos que introducirla como linea CSV, mas dos canales, index y time
+            For i = 1 To contador_canales + 2
+                linea_vacia += "0,"
+            Next
+            linea_vacia += ","
+
+            res2 = ",,INDEX, TIME, Einspritzung"
+            sw.Write(res1)
+            sw.WriteLine(res2)
+            res1 = ""
+
+            'obtenemos los datos de los canales
+            cn1.Open()
+            cmd1.CommandTimeout = 1000
+            cmd1.CommandText = sql1
+            query1 = cmd1.ExecuteReader()
+
+            'otenemos los datos del canal einspritzung, que tiene indices negativos
+            cn2.Open()
+            cmd2.Connection = cn2
+            sql2 = "select concat(data_index*(-1),',',time,'.',milsec,',',value) from data where drive_id = " & _
+                  drive_id.Text & " and logger_id = " & logger_id & " and data_index < 0 order by data_index*(-1)"
+            cmd2.CommandTimeout = 1000
+            cmd2.CommandText = sql2
+            query2 = cmd2.ExecuteReader()
+
+            'obtenemos el maximo indice
+            sql1 = "select max(data_index) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql1, max)
+
+            'obtenemos el minimo indice
+            sql1 = "select min(data_index) from data_full where drive_id = " & drive_id.Text & _
+            " and logger_id = " & logger_id & " order by data_index, time"
+            execute_query(sql1, min)
+
+            'obtenemos cual tiene mas filas
+            max = Math.Max(max, Math.Abs(min))
+
+            bar.Visible = True
+            percent.Visible = True
+            procesing.Close()
+            config_progressbar(max, bar)
+            i = 1
+            final1 = False
+            final2 = False
+            While Not final1 Or Not final2
+                If abort = True Then Exit Sub
+
+                If query1.Read() Then
+                    res1 += query1.GetString(0) & ",,"
+                    i = query1.GetString(0).Split(",")(0)
+                Else
+                    final1 = True
+                    If final2 = False Then res1 += linea_vacia
+                End If
+
+                If query2.Read() Then
+                    res1 += query2.GetString(0)
+                    i = query2.GetString(0).Split(",")(0)
+                Else
+                    final2 = True
+                    If final1 = False Then res1 += "0,0,0"
+                End If
+
+                If Not final1 Or Not final2 Then
+                    progressbar(i, percent.Text, bar)
+                    If (i Mod 1001) >= 1000 Then
+                        sw.Write(res1)
+                        res1 = ""
+                    End If
+                    i += 1
+                    res1 += vbCrLf
+                    Application.DoEvents()
+                End If
+            End While
+
+            res1 += vbCrLf
+            sw.WriteLine(res1)
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            abort = True
+        Finally
+            sw.Close()
+            cn1.Close()
+            cn2.Close()
         End Try
     End Sub
 
@@ -879,4 +1022,5 @@ Public Class Form_export_full
         'SQL_syntax_canbus(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
         SQL_syntax(FfE_Main.id_canbus, "CAN-BUS", TextBox4)
     End Sub
+
 End Class
