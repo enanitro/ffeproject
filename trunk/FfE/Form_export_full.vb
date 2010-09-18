@@ -176,6 +176,7 @@ Public Class Form_export_full
                     Case FfE_Main.id_canbus
                         'execute_query_logger_canbus(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                         execute_query_loggers(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
+                        execute_query_einspritzung_channel(logger_id, logger, ProgressBar4, percent_canbus, TextBox4, path)
                 End Select
 
             End If
@@ -243,7 +244,8 @@ Public Class Form_export_full
             sql += ") as format_row from data" & _
                 " where drive_id = " & drive_id.Text & _
                 " and logger_id = " & logger_id & _
-                " group by data_index"
+                " group by data_index " & _
+                " having data_index > 0"
             cn.Close()
 
             tb.Text = sql
@@ -280,6 +282,71 @@ Public Class Form_export_full
 
                 Application.DoEvents()
             End While
+
+            res += vbCrLf
+            sw.WriteLine(res)
+
+        Catch ex As Exception
+            If ex.Message = "Export process aborted" Then
+                Throw New Exception("Export process aborted")
+            Else
+                MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            abort = True
+        Finally
+            sw.Close()
+            cn.Close()
+        End Try
+    End Sub
+
+    Private Sub execute_query_einspritzung_channel(ByVal logger_id As Integer, ByVal logger As String, ByRef bar As ProgressBar, _
+                                      ByRef percent As Label, ByRef tb As TextBox, ByVal path As String)
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        Dim sw As New System.IO.StreamWriter(path, True)
+        Dim cn As New MySqlConnection(connection)
+        Dim cmd As New MySqlCommand
+        Dim query As MySqlDataReader
+        Dim sql, res As String
+        Dim i, max As Integer
+        res = ""
+
+        Try
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+            cmd.Connection = cn
+
+            sql = "select concat(data_index*(-1),',',time,',',value) from data where drive_id = " & _
+                  drive_id.Text & " and logger_id = " & logger_id & " and data_index < 0 order by data_index*(-1)"
+            cmd.CommandTimeout = 1000
+            cmd.CommandText = sql
+            query = cmd.ExecuteReader()
+
+            tb.Text += vbCrLf & sql
+            tb.Visible = True
+
+            res = "INDEX,TIME,Einspritzung"
+            sw.Write(vbCrLf & vbCrLf)
+            sw.WriteLine(res)
+            res = ""
+
+            bar.Visible = True
+            percent.Visible = True
+            i = 1
+            While query.Read()
+                If abort = True Then Exit Sub
+                res += query.GetString(0)
+                i = query.GetString(0).Split(",")(0)
+                If (i Mod 1001) >= 1000 Then
+                    sw.Write(res)
+                    res = ""
+                End If
+                i += 1
+                res += vbCrLf
+
+                Application.DoEvents()
+            End While
+            procesing.Close()
 
             res += vbCrLf
             sw.WriteLine(res)

@@ -23,6 +23,9 @@ Public Class Form_view_data
         show_data(DataGridView2, FfE_Main.id_lmg)
         'show_data_canbus(DataGridView3, FfE_Main.id_canbus)
         show_data(DataGridView3, FfE_Main.id_canbus)
+        show_einspritzung_channel(DataGridView4, FfE_Main.id_canbus)
+
+        check_grids_canbus_same_index()
 
     End Sub
 
@@ -49,7 +52,7 @@ Public Class Form_view_data
         Try
 
             grid.DataSource = ""
-            execute_query_loggers(sql, logger_id)
+            sql = execute_query_loggers(sql, logger_id)
 
             ' Abrir la conexión a Sql  
             cn.Open()
@@ -173,7 +176,7 @@ Public Class Form_view_data
         End Try
     End Sub
 
-    Private Sub execute_query_loggers(ByRef sql As String, ByVal logger_id As Integer)
+    Private Function execute_query_loggers(ByRef sql As String, ByVal logger_id As Integer) As String
 
         Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
         ' nueva conexión indicando al SqlConnection la cadena de conexión  
@@ -203,7 +206,8 @@ Public Class Form_view_data
             sql += " from data_full" & _
                 " where drive_id = " & drive_id & _
                 " and logger_id = " & logger_id & _
-                " group by data_index,time;"
+                " group by data_index,time" & _
+                " having data_index > 0"
 
             cn.Close()
 
@@ -217,7 +221,96 @@ Public Class Form_view_data
             If cn.State = ConnectionState.Open Then
                 cn.Close()
             End If
+            execute_query_loggers = sql
         End Try
+    End Function
+
+    Private Sub show_einspritzung_channel(ByRef grid As DataGridView, ByVal logger_id As Integer)
+
+        Dim connection As String = Global.FfE.My.MySettings.Default.ffe_databaseConnectionString
+        ' nueva conexión indicando al SqlConnection la cadena de conexión  
+        Dim cn As New MySqlConnection(connection)
+        Dim sql As String = ""
+
+        Try
+
+            grid.DataSource = ""
+            sql = "select data_index*(-1) as 'Index', cast(concat(time,'.',milsec) as char) as 'Time', value as 'Einspritzung'" & _
+                  " from data where drive_id = " & drive_id & _
+                  " and logger_id = " & logger_id & " and data_index < 0 order by data_index*(-1)"
+
+            ' Abrir la conexión a Sql  
+            cn.Open()
+
+            ' Pasar la consulta sql y la conexión al Sql Command   
+            Dim cmd As New MySqlCommand(sql, cn)
+            cmd.CommandTimeout = 1000
+
+            ' Inicializar un nuevo SqlDataAdapter   
+            Dim da As New MySqlDataAdapter(cmd)
+
+            'Crear y Llenar un Dataset  
+            Dim ds As New DataSet
+
+            da.Fill(ds)
+
+            Dim tbl As DataTable = ds.Tables(0) ' data table prepara la estructura de la tabla
+            If tbl.Rows.Count > 0 Then
+                grid.DataSource = tbl
+                format_grid(grid)
+            End If
+
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, "error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If cn.State = ConnectionState.Open Then
+                cn.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub check_grids_canbus_same_index()
+        Dim index_ini As Integer
+
+        If DataGridView3.RowCount > DataGridView4.RowCount Then
+
+            index_ini = DataGridView3.RowCount - DataGridView4.RowCount
+
+            ' Referenciamos el objeto DataTable enlazado con el control DataGridView.
+            Dim dt As DataTable = DirectCast(DataGridView4.DataSource, DataTable)
+            For i = 0 To index_ini - 1
+                ' Añadimos una nueva fila
+                Dim row As DataRow = dt.NewRow
+                ' Cumplimentamos los datos de los campos
+                For j = 0 To DataGridView4.ColumnCount - 1
+                    row.Item(j) = 0
+                Next
+                ' Añadimos la fila a la colección de filas del objeto DataTable.
+                dt.Rows.Add(row)
+            Next
+
+
+        Else
+
+            index_ini = DataGridView4.RowCount - DataGridView3.RowCount
+
+            ' Referenciamos el objeto DataTable enlazado con el control DataGridView.
+            Dim dt As DataTable = DirectCast(DataGridView3.DataSource, DataTable)
+            For i = 0 To index_ini - 1
+                ' Añadimos una nueva fila
+                Dim row As DataRow = dt.NewRow
+                ' Cumplimentamos los datos de los campos
+                For j = 0 To DataGridView3.ColumnCount - 1
+                    row.Item(j) = 0
+                Next
+                ' Añadimos la fila a la colección de filas del objeto DataTable.
+                dt.Rows.Add(row)
+            Next
+
+        End If
+
     End Sub
 
     Private Sub execute_list_channels(ByVal logger_id As Integer, ByVal list As CheckedListBox, ByVal check As CheckBox)
@@ -404,6 +497,7 @@ Public Class Form_view_data
             Application.DoEvents()
             'show_data_canbus(DataGridView3, FfE_Main.id_canbus)
             show_data(DataGridView3, FfE_Main.id_canbus)
+            show_einspritzung_channel(DataGridView4, FfE_Main.id_canbus)
             execute_list_channels(FfE_Main.id_canbus, CheckedListBox4, CheckBox3)
             procesing.Close()
         End If
@@ -420,4 +514,5 @@ Public Class Form_view_data
     Private Sub Form_delete_channel_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         isClosed = True
     End Sub
+
 End Class

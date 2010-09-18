@@ -981,7 +981,7 @@ Public Class logger
         Dim data_points As Integer = 0
         Dim index As Integer = 0
         Dim clock As Integer = 0
-        Dim value, id_ch(), sec As Integer
+        Dim value, id_ch(), sec, index_einspritzung As Integer
         Dim res, res2, t As Double
         Dim str As str_canbus
         Dim flag As Boolean = False
@@ -996,11 +996,13 @@ Public Class logger
         load_ids_chs(list)
 
         linea = fichero.ReadLine
+
         'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "ns" Then
         '
         'Else
         'If linea.Split(vbTab)(0).Split("[")(1).Trim("]") = "µs" Then div = 1000000
         'End If
+
         linea = fichero.ReadLine
         div = 1000000000
         datos = linea.Split(vbTab)
@@ -1029,7 +1031,7 @@ Public Class logger
                 num_lines += 1
             Loop Until val > 0 Or num_lines > long_file
             t = CType(datos(0), Double)
-            tm = format_time2(t, div, time, milsec) 'el fallo esta en format_time2
+            tm = format_time2(t, div, time, milsec)
             For Each ch In table_canbus.Keys
                 'apuntamos a la siguiente hora que corresponde
                 table_canbus(ch).time = tm
@@ -1054,6 +1056,7 @@ Public Class logger
         long_file = long_file / list.CheckedIndices.Count
         config_progressbar(bar, long_file, list, n_data)
 
+        index_einspritzung = -1
         Do
             If linea <> Nothing Then
                 If abort = True Then Me.throw_exception()
@@ -1076,6 +1079,24 @@ Public Class logger
                                 val = val.Replace(",", ".")
                                 t = CType(datos(0), Double)
                                 tm = format_time2(t, div, time, milsec)
+
+                                ' almacena el valor del canal einspritzung cuando lo detecta, en el instante que sea
+                                ' debo alterar el indice de todos
+                                ' creo una estructura de indices y tiempos: una para einspritzung y otra para las demas
+                                ' al pasar al siguiente segundo check en la tabla y comprobamos la correspondencia de indices
+                                ' 
+                                If value = 1312 Then '1312 es el ID del canal einspritzung
+
+                                    aux = "(" & index_einspritzung & ",'" & list.Items(x) & "'," & id_drive _
+                                          & "," & id_logger & "," & measure(x) & "," _
+                                          & "'" & tm & "'" & "," _
+                                          & milsec & "," & val & ")"
+                                    ins.set_string(aux)
+                                    index_einspritzung -= 1
+                                Else
+
+                                End If
+
                                 'inicializamos por primera vez los datos
                                 If table_canbus(x).time = "" Then
                                     table_canbus(x).time = tm
@@ -1099,13 +1120,17 @@ Public Class logger
                                             If tm_aux = table_canbus(x).time Then
                                                 '''''''''''''''''''''''''''''''''''''''''''
                                                 'hemos cambiado de hora, guardamos la media 
-                                                res = table_canbus(x).value / table_canbus(x).count
+                                                If table_canbus(x).count = 0 Then
+                                                    res = table_canbus(x).value
+                                                Else
+                                                    res = table_canbus(x).value / table_canbus(x).count
+                                                End If
                                                 avg = CType(res, String)
                                                 avg = avg.Replace(",", ".")
                                                 aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
                                                 & "," & id_logger & "," & measure(x) & "," _
                                                 & "'" & FormatDateTime(table_canbus(x).time, DateFormat.LongTime) & "'" & "," _
-                                                & "NULL," & val & ")"
+                                                & "0," & avg & ")"
                                                 ins.set_string(aux)
                                                 table_canbus(x).index += 1
                                                 'flag = True
@@ -1113,7 +1138,7 @@ Public Class logger
                                                 aux = "(" & table_canbus(x).index & ",'" & list.Items(x) & "'," & id_drive _
                                                 & "," & id_logger & "," & measure(x) & "," _
                                                 & "'" & tm_aux & "'" & "," _
-                                                & "NULL," & "0" & ")"
+                                                & "0," & "0" & ")"
                                                 ins.set_string(aux)
                                                 table_canbus(x).index += 1
                                             End If
