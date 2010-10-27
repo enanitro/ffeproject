@@ -414,7 +414,7 @@ Public Class Form_export_full
 
             linea_vacia = ""
             'preparo una linea vacia de valores por si tenemos que introducirla como linea CSV, mas dos canales, index y time
-            For i = 1 To contador_canales + 2
+            For i = 1 To contador_canales + 1
                 linea_vacia += "0,"
             Next
             linea_vacia += ","
