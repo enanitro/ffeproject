@@ -1075,9 +1075,6 @@ Public Class logger
 
                                 ' almacena el valor del canal einspritzung cuando lo detecta, en el instante que sea
                                 ' debo alterar el indice de todos
-                                ' creo una estructura de indices y tiempos: una para einspritzung y otra para las demas
-                                ' al pasar al siguiente segundo check en la tabla y comprobamos la correspondencia de indices
-                                ' 
                                 If value = 1312 Then '1312 es el ID del canal einspritzung
                                     aux = "(" & index_einspritzung & ",'" & list.Items(x) & "'," & id_drive _
                                           & "," & id_logger & "," & measure(x) & "," _

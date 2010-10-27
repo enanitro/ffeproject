@@ -1325,7 +1325,7 @@ Partial Class Form_drive
         'DescriptionDataGridViewTextBoxColumn
         '
         Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Consumption"
         Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
         Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
         '
