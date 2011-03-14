@@ -31,9 +31,10 @@ Partial Class form_canbus_ids
         Dim StartbitLabel As System.Windows.Forms.Label
         Dim NameLabel As System.Windows.Forms.Label
         Dim Hex_idLabel As System.Windows.Forms.Label
+        Dim Label1 As System.Windows.Forms.Label
+        Dim Label2 As System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Ids_canbusBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
+        Me.AverageCheckBox = New System.Windows.Forms.CheckBox
         Me.OffsetTextBox = New System.Windows.Forms.TextBox
         Me.FactorTextBox = New System.Windows.Forms.TextBox
         Me.SignedCheckBox = New System.Windows.Forms.CheckBox
@@ -57,8 +58,9 @@ Partial Class form_canbus_ids
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
         Me.Ids_canbusDataGridView = New System.Windows.Forms.DataGridView
-        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
-        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
+        Me.Average = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Ids_canbusBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Ffe_databaseDataSet = New FfE.ffe_databaseDataSet
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -69,6 +71,8 @@ Partial Class form_canbus_ids
         Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Ids_canbusTableAdapter = New FfE.ffe_databaseDataSetTableAdapters.ids_canbusTableAdapter
+        Me.TableAdapterManager = New FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager
         OffsetLabel = New System.Windows.Forms.Label
         FactorLabel = New System.Windows.Forms.Label
         SignedLabel = New System.Windows.Forms.Label
@@ -77,19 +81,21 @@ Partial Class form_canbus_ids
         StartbitLabel = New System.Windows.Forms.Label
         NameLabel = New System.Windows.Forms.Label
         Hex_idLabel = New System.Windows.Forms.Label
+        Label1 = New System.Windows.Forms.Label
+        Label2 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
-        CType(Me.Ids_canbusBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Ids_canbusBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Ids_canbusBindingNavigator.SuspendLayout()
         CType(Me.Ids_canbusDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Ids_canbusBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OffsetLabel
         '
         OffsetLabel.AutoSize = True
         OffsetLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        OffsetLabel.Location = New System.Drawing.Point(855, 52)
+        OffsetLabel.Location = New System.Drawing.Point(939, 54)
         OffsetLabel.Name = "OffsetLabel"
         OffsetLabel.Size = New System.Drawing.Size(52, 16)
         OffsetLabel.TabIndex = 37
@@ -99,7 +105,7 @@ Partial Class form_canbus_ids
         '
         FactorLabel.AutoSize = True
         FactorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        FactorLabel.Location = New System.Drawing.Point(634, 52)
+        FactorLabel.Location = New System.Drawing.Point(716, 54)
         FactorLabel.Name = "FactorLabel"
         FactorLabel.Size = New System.Drawing.Size(56, 16)
         FactorLabel.TabIndex = 35
@@ -109,7 +115,7 @@ Partial Class form_canbus_ids
         '
         SignedLabel.AutoSize = True
         SignedLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        SignedLabel.Location = New System.Drawing.Point(517, 52)
+        SignedLabel.Location = New System.Drawing.Point(610, 53)
         SignedLabel.Name = "SignedLabel"
         SignedLabel.Size = New System.Drawing.Size(61, 16)
         SignedLabel.TabIndex = 33
@@ -129,7 +135,7 @@ Partial Class form_canbus_ids
         '
         LongbitsLabel.AutoSize = True
         LongbitsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        LongbitsLabel.Location = New System.Drawing.Point(365, 52)
+        LongbitsLabel.Location = New System.Drawing.Point(479, 53)
         LongbitsLabel.Name = "LongbitsLabel"
         LongbitsLabel.Size = New System.Drawing.Size(46, 16)
         LongbitsLabel.TabIndex = 29
@@ -139,7 +145,7 @@ Partial Class form_canbus_ids
         '
         StartbitLabel.AutoSize = True
         StartbitLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        StartbitLabel.Location = New System.Drawing.Point(208, 52)
+        StartbitLabel.Location = New System.Drawing.Point(342, 53)
         StartbitLabel.Name = "StartbitLabel"
         StartbitLabel.Size = New System.Drawing.Size(61, 16)
         StartbitLabel.TabIndex = 27
@@ -168,6 +174,9 @@ Partial Class form_canbus_ids
         'Panel1
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel1.Controls.Add(Label2)
+        Me.Panel1.Controls.Add(Label1)
+        Me.Panel1.Controls.Add(Me.AverageCheckBox)
         Me.Panel1.Controls.Add(OffsetLabel)
         Me.Panel1.Controls.Add(Me.OffsetTextBox)
         Me.Panel1.Controls.Add(FactorLabel)
@@ -188,42 +197,46 @@ Partial Class form_canbus_ids
         Me.Panel1.Controls.Add(Me.Ids_canbusBindingNavigator)
         Me.Panel1.Controls.Add(Me.Ids_canbusDataGridView)
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(8, 12)
+        Me.Panel1.Location = New System.Drawing.Point(8, 14)
         Me.Panel1.MinimumSize = New System.Drawing.Size(1260, 583)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1260, 583)
+        Me.Panel1.Size = New System.Drawing.Size(1260, 587)
         Me.Panel1.TabIndex = 0
         '
-        'Ids_canbusBindingSource
+        'AverageCheckBox
         '
-        Me.Ids_canbusBindingSource.DataMember = "ids_canbus"
-        Me.Ids_canbusBindingSource.DataSource = Me.Ffe_databaseDataSet
-        '
-        'Ffe_databaseDataSet
-        '
-        Me.Ffe_databaseDataSet.DataSetName = "ffe_databaseDataSet"
-        Me.Ffe_databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.AverageCheckBox.Checked = True
+        Me.AverageCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AverageCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.Ids_canbusBindingSource, "average", True))
+        Me.AverageCheckBox.Location = New System.Drawing.Point(1217, 51)
+        Me.AverageCheckBox.Name = "AverageCheckBox"
+        Me.AverageCheckBox.Size = New System.Drawing.Size(17, 24)
+        Me.AverageCheckBox.TabIndex = 39
+        Me.AverageCheckBox.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.AverageCheckBox.UseVisualStyleBackColor = False
         '
         'OffsetTextBox
         '
         Me.OffsetTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "offset", True))
-        Me.OffsetTextBox.Location = New System.Drawing.Point(907, 50)
+        Me.OffsetTextBox.Location = New System.Drawing.Point(991, 52)
         Me.OffsetTextBox.Name = "OffsetTextBox"
         Me.OffsetTextBox.Size = New System.Drawing.Size(112, 22)
-        Me.OffsetTextBox.TabIndex = 38
+        Me.OffsetTextBox.TabIndex = 32
         '
         'FactorTextBox
         '
         Me.FactorTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "factor", True))
-        Me.FactorTextBox.Location = New System.Drawing.Point(695, 50)
+        Me.FactorTextBox.Location = New System.Drawing.Point(777, 52)
         Me.FactorTextBox.Name = "FactorTextBox"
         Me.FactorTextBox.Size = New System.Drawing.Size(129, 22)
-        Me.FactorTextBox.TabIndex = 36
+        Me.FactorTextBox.TabIndex = 31
         '
         'SignedCheckBox
         '
+        Me.SignedCheckBox.Checked = True
+        Me.SignedCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SignedCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.Ids_canbusBindingSource, "signed", True))
-        Me.SignedCheckBox.Location = New System.Drawing.Point(579, 49)
+        Me.SignedCheckBox.Location = New System.Drawing.Point(672, 50)
         Me.SignedCheckBox.Name = "SignedCheckBox"
         Me.SignedCheckBox.Size = New System.Drawing.Size(17, 24)
         Me.SignedCheckBox.TabIndex = 34
@@ -235,20 +248,20 @@ Partial Class form_canbus_ids
         Me.SequenceTextBox.Location = New System.Drawing.Point(103, 84)
         Me.SequenceTextBox.Name = "SequenceTextBox"
         Me.SequenceTextBox.Size = New System.Drawing.Size(1133, 22)
-        Me.SequenceTextBox.TabIndex = 32
+        Me.SequenceTextBox.TabIndex = 30
         '
         'LongbitsTextBox
         '
         Me.LongbitsTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "longbits", True))
-        Me.LongbitsTextBox.Location = New System.Drawing.Point(414, 50)
+        Me.LongbitsTextBox.Location = New System.Drawing.Point(528, 51)
         Me.LongbitsTextBox.Name = "LongbitsTextBox"
         Me.LongbitsTextBox.Size = New System.Drawing.Size(66, 22)
-        Me.LongbitsTextBox.TabIndex = 30
+        Me.LongbitsTextBox.TabIndex = 29
         '
         'StartbitTextBox
         '
         Me.StartbitTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "startbit", True))
-        Me.StartbitTextBox.Location = New System.Drawing.Point(272, 50)
+        Me.StartbitTextBox.Location = New System.Drawing.Point(406, 51)
         Me.StartbitTextBox.Name = "StartbitTextBox"
         Me.StartbitTextBox.Size = New System.Drawing.Size(58, 22)
         Me.StartbitTextBox.TabIndex = 28
@@ -264,19 +277,18 @@ Partial Class form_canbus_ids
         'Dec_idTextBox
         '
         Me.Dec_idTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "dec_id", True))
-        Me.Dec_idTextBox.Location = New System.Drawing.Point(205, 532)
+        Me.Dec_idTextBox.Location = New System.Drawing.Point(244, 50)
         Me.Dec_idTextBox.Name = "Dec_idTextBox"
-        Me.Dec_idTextBox.Size = New System.Drawing.Size(100, 22)
+        Me.Dec_idTextBox.Size = New System.Drawing.Size(75, 22)
         Me.Dec_idTextBox.TabIndex = 24
-        Me.Dec_idTextBox.Visible = False
         '
         'Hex_idTextBox
         '
         Me.Hex_idTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Ids_canbusBindingSource, "hex_id", True))
         Me.Hex_idTextBox.Location = New System.Drawing.Point(103, 50)
         Me.Hex_idTextBox.Name = "Hex_idTextBox"
-        Me.Hex_idTextBox.Size = New System.Drawing.Size(73, 22)
-        Me.Hex_idTextBox.TabIndex = 23
+        Me.Hex_idTextBox.Size = New System.Drawing.Size(61, 22)
+        Me.Hex_idTextBox.TabIndex = 27
         '
         'Ids_canbusBindingNavigator
         '
@@ -405,7 +417,7 @@ Partial Class form_canbus_ids
         Me.Ids_canbusDataGridView.AllowUserToDeleteRows = False
         Me.Ids_canbusDataGridView.AutoGenerateColumns = False
         Me.Ids_canbusDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Ids_canbusDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.Ids_canbusDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.Average})
         Me.Ids_canbusDataGridView.DataSource = Me.Ids_canbusBindingSource
         Me.Ids_canbusDataGridView.Location = New System.Drawing.Point(22, 124)
         Me.Ids_canbusDataGridView.MultiSelect = False
@@ -413,25 +425,41 @@ Partial Class form_canbus_ids
         Me.Ids_canbusDataGridView.Size = New System.Drawing.Size(1214, 358)
         Me.Ids_canbusDataGridView.TabIndex = 21
         '
-        'Ids_canbusTableAdapter
+        'Label1
         '
-        Me.Ids_canbusTableAdapter.ClearBeforeFill = True
+        Label1.AutoSize = True
+        Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label1.Location = New System.Drawing.Point(1140, 53)
+        Label1.Name = "Label1"
+        Label1.Size = New System.Drawing.Size(71, 16)
+        Label1.TabIndex = 40
+        Label1.Text = "Average:"
         '
-        'TableAdapterManager
+        'Average
         '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.carTableAdapter = Nothing
-        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
-        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
-        Me.TableAdapterManager.dataTableAdapter = Nothing
-        Me.TableAdapterManager.driveTableAdapter = Nothing
-        Me.TableAdapterManager.ids_canbusTableAdapter = Me.Ids_canbusTableAdapter
-        Me.TableAdapterManager.loggerTableAdapter = Nothing
-        Me.TableAdapterManager.measureTableAdapter = Nothing
-        Me.TableAdapterManager.photosTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
-        Me.TableAdapterManager.userTableAdapter = Nothing
+        Me.Average.DataPropertyName = "average"
+        Me.Average.HeaderText = "Average"
+        Me.Average.Name = "Average"
+        '
+        'Label2
+        '
+        Label2.AutoSize = True
+        Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label2.Location = New System.Drawing.Point(182, 53)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(57, 16)
+        Label2.TabIndex = 41
+        Label2.Text = "Dec id:"
+        '
+        'Ids_canbusBindingSource
+        '
+        Me.Ids_canbusBindingSource.DataMember = "ids_canbus"
+        Me.Ids_canbusBindingSource.DataSource = Me.Ffe_databaseDataSet
+        '
+        'Ffe_databaseDataSet
+        '
+        Me.Ffe_databaseDataSet.DataSetName = "ffe_databaseDataSet"
+        Me.Ffe_databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'DataGridViewTextBoxColumn1
         '
@@ -493,24 +521,44 @@ Partial Class form_canbus_ids
         Me.DataGridViewTextBoxColumn9.HeaderText = "Offset"
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         '
+        'Ids_canbusTableAdapter
+        '
+        Me.Ids_canbusTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.carTableAdapter = Nothing
+        Me.TableAdapterManager.channel_nameTableAdapter = Nothing
+        Me.TableAdapterManager.copy_dataTableAdapter = Nothing
+        Me.TableAdapterManager.dataTableAdapter = Nothing
+        Me.TableAdapterManager.driveTableAdapter = Nothing
+        Me.TableAdapterManager.ids_canbusTableAdapter = Me.Ids_canbusTableAdapter
+        Me.TableAdapterManager.loggerTableAdapter = Nothing
+        Me.TableAdapterManager.measureTableAdapter = Nothing
+        Me.TableAdapterManager.photosTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = FfE.ffe_databaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.usage_typeTableAdapter = Nothing
+        Me.TableAdapterManager.userTableAdapter = Nothing
+        '
         'form_canbus_ids
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1276, 597)
+        Me.ClientSize = New System.Drawing.Size(1276, 600)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "form_canbus_ids"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "CAN-BUS ID channels"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.Ids_canbusBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Ids_canbusBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Ids_canbusBindingNavigator.ResumeLayout(False)
         Me.Ids_canbusBindingNavigator.PerformLayout()
         CType(Me.Ids_canbusDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Ids_canbusBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Ffe_databaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -542,6 +590,7 @@ Partial Class form_canbus_ids
     Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents Ids_canbusDataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents AverageCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -552,4 +601,5 @@ Partial Class form_canbus_ids
     Friend WithEvents DataGridViewCheckBoxColumn1 As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Average As System.Windows.Forms.DataGridViewCheckBoxColumn
 End Class

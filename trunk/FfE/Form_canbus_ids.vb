@@ -58,6 +58,8 @@
     Private Sub BindingNavigatorAddNewItem_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles BindingNavigatorAddNewItem.MouseUp
         sort_index()
         NameTextBox.Focus()
+        SignedCheckBox.CheckState = CheckState.Unchecked
+        AverageCheckBox.CheckState = CheckState.Checked
     End Sub
 
     Private Sub sort_index()
@@ -81,7 +83,7 @@
         End Try
     End Sub
 
-    Private Sub Hex_idTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Hex_idTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Hex_idTextBox.TextChanged
         Dec_idTextBox.Text = HexToDec(Hex_idTextBox.Text)
     End Sub
 

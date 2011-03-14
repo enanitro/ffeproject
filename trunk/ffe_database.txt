@@ -113,12 +113,14 @@ CREATE  TABLE IF NOT EXISTS ffe_database.data (
   drive_id INT(11) NOT NULL,
   logger_id INT(11) NOT NULL REFERENCES LOGGER(logger_id),
   measure_id INT(11) NOT NULL REFERENCES MEASURE(measure_id),
-  time TIME NOT NULL ,
+  time TIME NOT NULL ,
+  milsec VARCHAR(10) NULL DEFAULT NULL,
   value DECIMAL(12,6) NULL DEFAULT NULL,
   CONSTRAINT data_drive_fk FOREIGN KEY (drive_id)
   REFERENCES drive(drive_id) ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
 
 
 -- -----------------------------------------------------
@@ -177,6 +179,7 @@ CREATE  TABLE IF NOT EXISTS ffe_database.ids_canbus (
   signed BOOL NOT NULL,
   factor DECIMAL(10,6) NOT NULL,
   offset INT(11) NOT NULL,
+  average BOOL NOT NULL,
   PRIMARY KEY (channel_id))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
@@ -188,20 +191,20 @@ DEFAULT CHARACTER SET = latin1;
 SET AUTOCOMMIT=0;
 USE ffe_database;
 INSERT INTO ids_canbus VALUES
-(0,'30',48,'Bremspedalstellung',32,8,'32-33-34-35-36-37-38-39',false,1,0),
-(1,'3B',59,'Batteriespannung',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,1,0),
-(2,'3B',59,'HV-Batterie Stromfluss',8,12,'8-9-10-11-12-13-14-15-0-1-2-3',true,0.1,0),
-(3,'244',580,'Gaspedalstellung',48,8,'48-49-50-51-52-53-54-55',false,0.5,0),
-(4,'3C8',968,'ICE Drehzahl',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,0.03125,0),
-(5,'3CA',970,'Fahrzeuggeschwindigkeit',16,8,'16-17-18-19-20-21-22-23',false,1,0),
-(6,'3CB',971,'SOC',16,16,'16-17-18-19-20-21-22-23',false,0.5,0),
-(7,'3CB',971,'max. Batterietemperatur',40,8,'40-41-42-43-44-45-46-47',false,1,0),
-(8,'3CB',971,'min. Batterietemperatur',32,8,'32-33-34-35-36-37-38-39',false,1,0),
-(9,'520',1312,'Einspritzung',16,16,'16-17-18-19-20-21-22-23-8-9-10-11-12-13-14-15',false,1,0),
-(10,'529',1321,'EV Modus',32,8,'32-33-34-35-36-37-38-39',false,1,0),
-(11,'52C',1324,'Motor-Kühlmitteltemeratur',8,8,'8-9-10-11-12-13-14-15',false,1,0),
-(12,'57F',1407,'Scheinwerfer',8,8,'8-9-10-11-12-13-14-15',false,1,0),
-(13,'5A4',1444,'Tankfüllstand',8,8,'8-9-10-11-12-13-14-15',false,2.5,0);
+(0,'30',48,'Bremspedalstellung',32,8,'32-33-34-35-36-37-38-39',false,1,0,true),
+(1,'3B',59,'Batteriespannung',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,1,0,true),
+(2,'3B',59,'HV-Batterie Stromfluss',8,12,'8-9-10-11-12-13-14-15-0-1-2-3',true,0.1,0,true),
+(3,'244',580,'Gaspedalstellung',48,8,'48-49-50-51-52-53-54-55',false,0.5,0,true),
+(4,'3C8',968,'ICE Drehzahl',16,16,'16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31',false,0.03125,0,true),
+(5,'3CA',970,'Fahrzeuggeschwindigkeit',16,8,'16-17-18-19-20-21-22-23',false,1,0,false),
+(6,'3CB',971,'SOC',16,16,'16-17-18-19-20-21-22-23',false,0.5,0,false),
+(7,'3CB',971,'max. Batterietemperatur',40,8,'40-41-42-43-44-45-46-47',false,1,0,false),
+(8,'3CB',971,'min. Batterietemperatur',32,8,'32-33-34-35-36-37-38-39',false,1,0,false),
+(9,'520',1312,'Einspritzung',16,16,'16-17-18-19-20-21-22-23-8-9-10-11-12-13-14-15',false,1,0,false),
+(10,'529',1321,'EV Modus',32,8,'32-33-34-35-36-37-38-39',false,1,0,false),
+(11,'52C',1324,'Motor-Kühlmitteltemperatur',8,8,'8-9-10-11-12-13-14-15',false,1,0,false),
+(12,'57F',1407,'Scheinwerfer',8,8,'8-9-10-11-12-13-14-15',false,1,0,false),
+(13,'5A4',1444,'Tankfüllstand',8,8,'8-9-10-11-12-13-14-15',false,2.5,0,false);
 COMMIT;
 
 
@@ -215,6 +218,21 @@ INSERT INTO logger (logger_id, name, description) VALUES (2, 'COLUMBUS GPS', NUL
 INSERT INTO logger (logger_id, name, description) VALUES (3, 'LMG 500', NULL);
 INSERT INTO logger (logger_id, name, description) VALUES (4, 'CAN-BUS', NULL);
 COMMIT;
+
+
+DELIMITER |
+CREATE TRIGGER update_channel_name_and_data AFTER UPDATE ON measure
+FOR EACH ROW BEGIN
+UPDATE channel_name
+SET name = concat(substring_index(name,'.',1),'. ',NEW.name,' [',NEW.unit,']')
+where measure_id = NEW.measure_id;
+UPDATE data
+SET data_id = concat(substring_index(data_id,'.',1),'. ',NEW.name,' [',NEW.unit,']')
+where measure_id = NEW.measure_id;
+END
+|
+DELIMITER ;
+
 
 CREATE VIEW ffe_database.drive_full AS 
 SELECT 
